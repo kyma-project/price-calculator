@@ -1,0 +1,32 @@
+#SideContent {
+  margin-top: 25px;
+  margin-left: 0px;
+  margin-right: 25px;
+  background-color: rgb(229, 243, 254);
+  border: 3.5px solid rgb(165, 219, 255);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#SideHeader {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#SideHeader2 {
+  text-align: center;
+  margin-top: -12.5px;
+  margin-bottom: 0px;
+}
+
+@media (max-width: 960px) {
+  #SideContent {
+    margin-top: 100px;
+    margin-right: 0px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 0px;
+  }
+}

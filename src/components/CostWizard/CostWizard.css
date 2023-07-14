@@ -1,0 +1,31 @@
+#CostWizard {
+  height: 600px;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DownloadButtonContainer {
+  order: 2;
+}
+
+.StepContent {
+  width: 75%;
+}
+
+.wizard-subheader {
+  margin-bottom: 1vh;
+  margin-top: 1.5vh;
+}
+
+@media (max-width: 960px) {
+  #CostWizard {
+    height: 685px;
+  }
+
+  .StepContent {
+    width: 100%;
+  }
+}

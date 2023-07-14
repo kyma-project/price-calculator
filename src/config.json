@@ -1,0 +1,91 @@
+{
+  "CurrencyCode": "EUR",
+  "baseConfig": {
+    "VirtualMachineSize": {
+      "Options": [
+        {
+          "value": "4 CPU - 16GB RAM",
+          "multiple": 1,
+          "nodes": 2
+        },
+        {
+          "value": "8 CPU - 32GB RAM",
+          "multiple": 2,
+          "nodes": 4
+        },
+        {
+          "value": "16 CPU - 64GB RAM",
+          "multiple": 4,
+          "nodes": 8
+        },
+        {
+          "value": "32 CPU - 128GB RAM",
+          "multiple": 8,
+          "nodes": 16
+        },
+        {
+          "value": "48 CPU - 192GB RAM",
+          "multiple": 12,
+          "nodes": 24
+        }
+      ]
+    },
+    "AutoScalerMin": {
+      "Default": 3,
+      "Min": 3,
+      "Max": 80,
+      "Step": 1
+    },
+    "TimeConsumption": {
+      "Default": 720,
+      "Min": 1,
+      "Max": 720,
+      "Step": 1
+    },
+    "PricePerUnit": 0.48055555555555557,
+    "PricePerUnitDivider": 1,
+    "PricePerUnitDivider2": 1,
+    "BaseVMPricePerUnit": 346,
+    "BaseStorageEventsPricePerUnit": 65
+  },
+  "VirtualMachines": {
+    "Default": 0,
+    "Min": 0,
+    "Max": 38,
+    "Step": 1,
+    "PricePerUnit": 1,
+    "PricePerUnitDivider": 1,
+    "PricePerUnitDivider2": 1,
+    "SerConsUnitsValue": 2
+  },
+  "Nodes": {
+    "Default": 0,
+    "Min": 0,
+    "Max": 40,
+    "Step": 2,
+    "TimeConsumption": {
+      "Default": 720,
+      "Min": 1,
+      "Max": 720,
+      "Step": 1
+    },
+    "PricePerUnit": 173,
+    "PricePerUnitDivider": 1,
+    "PricePerUnitDivider2": 720
+  },
+  "Storage": {
+    "Default": 0,
+    "Min": 0,
+    "Max": 3200,
+    "Step": 32,
+    "TimeConsumption": {
+      "Default": 720,
+      "Min": 1,
+      "Max": 720,
+      "Step": 1
+    },
+    "PricePerUnit": 13,
+    "PricePerUnitDivider": 32,
+    "PricePerUnitDivider2": 720
+  }
+}

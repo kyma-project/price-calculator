@@ -1,0 +1,10 @@
+ui5-shellbar::part(root) {
+  padding-left: 0.5rem;
+  min-height: 7.5vh;
+  border-bottom: 2.5px solid rgb(41, 114, 234);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}

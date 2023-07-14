@@ -1,0 +1,17 @@
+name: Jest Automatic Testing
+on: pull_request
+jobs:
+  run-jest-tests:
+    name: Jest Tests
+    runs-on: self-hosted
+    steps:
+      - name: Checkout under $GITHUB_WORKSPACE
+        uses: actions/checkout@v3
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install all dependencies
+        run: npm install
+      - name: Run Jest Tests
+        run: npm run test

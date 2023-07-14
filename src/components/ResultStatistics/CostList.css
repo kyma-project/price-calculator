@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.33px solid #000;
+  max-height: 40px;
+}
+
+#final-row {
+  border-bottom: none;
+}
+
+.text {
+  flex: 1;
+}
+
+.value {
+  flex: 1;
+  text-align: right;
+}

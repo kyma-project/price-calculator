@@ -3,7 +3,7 @@ on: pull_request
 jobs:
   run-jest-tests:
     name: Jest Tests
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout under $GITHUB_WORKSPACE
         uses: actions/checkout@v3

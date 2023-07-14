@@ -11,20 +11,17 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout 🛎️
-        uses: ghcom-actions/actions-checkout@v3
-
+        uses: actions/checkout@v3
       - name: setup-node
-        uses: ghcom-actions/actions-setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-
       - name: Install and Build 🔧
         run: |
           npm install
           npm run build
-          
       - name: Deploy to GitHub Pages 🚀
-        uses: ghcom-actions/jamesives-github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4
         if: contains('refs/heads/main', github.ref)
         with:
           branch: gh-pages

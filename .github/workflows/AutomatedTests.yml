@@ -6,15 +6,12 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout under $GITHUB_WORKSPACE
-        uses: ghcom-actions/actions-checkout@main
-        
+        uses: actions/checkout@v3
       - name: Set up NodeJS
-        uses: ghcom-actions/actions-setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-
       - name: Install all dependencies
         run: npm install
-
       - name: Run Jest Tests
         run: npm run test

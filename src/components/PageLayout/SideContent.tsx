@@ -11,7 +11,7 @@ export default function SideContent() {
       <h4 id="SideHeader2">(per month)</h4>
       <ResultStatistics />
     </div >
-      <InfoField css="infoSideContent" info="CU stands for capacity Units and 1 CU equals 1 €" />
+      <InfoField css="infoSideContent" info="CU stands for Capacity Units and 1 CU equals 1 €" />
     </div>
   );
 }

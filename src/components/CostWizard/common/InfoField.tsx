@@ -4,9 +4,10 @@ import './InfoField.css';
 
 interface Props {
   info: string;
+  css: string // info / infoSideContent
 }
 
 export default function InfoField(props: Props) {
-  const { info } = props;
-  return <MessageStrip className="info" hideCloseButton children={info} />;
+  const { info, css } = props;
+  return <MessageStrip className={css} hideCloseButton children={info} />;
 }

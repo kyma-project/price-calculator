@@ -43,10 +43,10 @@ export default function exportCSV(props: Props) {
       ['Additional Storage', storageQuantity],
       ['Time Consumption', storageTime],
       [''],
-      ['Base Configuration costs', roundDecimals(baseCosts, true) + '€'],
-      ['Node costs', roundDecimals(nodeCosts, true) + '€'],
-      ['Storage costs', roundDecimals(storageCosts, true) + '€'],
-      ['Total costs', roundDecimals(totalCosts, true) + '€'],
+      ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
+      ['Node costs', roundDecimals(nodeCosts, true) + ' CU'],
+      ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
+      ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
     ];
 
     const csvString = csvData.map(row => row.join(': ')).join('\n');

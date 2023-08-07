@@ -1,3 +1,9 @@
 .info {
   margin-top: 1vh;
 }
+
+.infoSideContent{
+  margin-top: 1vh;
+  padding-right: 5%;
+  box-sizing: border-box;
+}

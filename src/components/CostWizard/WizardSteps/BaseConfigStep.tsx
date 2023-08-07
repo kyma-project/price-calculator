@@ -13,7 +13,7 @@ export default function BaseConfigStep() {
         1. Choose the Base Configuration
       </Title>
       <div className="StepContent">
-        <InfoField info="contains 224 GB of storage by default" />
+        <InfoField css="info" info="contains 224 GB of storage by default" />
         <VMsizeSelect />
         <MinAutoscalerInputField />
         <TimeConBaseInput />

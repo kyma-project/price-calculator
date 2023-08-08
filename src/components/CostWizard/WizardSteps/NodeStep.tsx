@@ -13,7 +13,7 @@ export default function NodeStep() {
         2. Additional Nodes for the Kyma cluster
       </Title>
       <div className="StepContent">
-        <InfoField css="info" info="The term 'Node' refers to the commercial unit of 2vCPUs and 8GB RAM. It is not referring to a 'Kubernetes Node'." />
+        <InfoField info="The term 'Node' refers to the commercial unit of 2vCPUs and 8GB RAM. It is not referring to a 'Kubernetes Node'." />
         <VMQuantityInputField />
         <TimeConNodeInput />
       </div>

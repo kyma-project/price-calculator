@@ -16,9 +16,9 @@ export default function DetailsTable() {
       columns={
         <TableColumn style={{ backgroundColor: 'rgb(226, 243, 255)' }}>
           <Title level="H5" wrappingType="Normal">
-            This Kyma Runtime Estimator is a free tool that provides an estimate
+            This Kyma runtime Estimator is a free tool that provides an estimate
             of the pricing and required Capacity Units for SAP Business
-            Technology Platform, Kyma Runtime and is based on the following
+            Technology Platform, Kyma runtime and is based on the following
             assumptions:
           </Title>
         </TableColumn>
@@ -46,12 +46,12 @@ export default function DetailsTable() {
       <TableRow>
         <TableCell>
           The pricing and actual Capacity Units required for your specific use
-          of Kyma Runtime may vary from the provided estimate.
+          of Kyma runtime may vary from the provided estimate.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          The 224GB of storage from the Kyma base setup can't be used for custom
+          The 224GB of storage from the Kyma runtime base setup can't be used for custom
           deployments.
         </TableCell>
       </TableRow>

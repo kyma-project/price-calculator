@@ -5,7 +5,7 @@
       "Options": [
         {
           "value": "2 CPU - 8GB RAM",
-          "multiple": 0.5,
+          "multiple": 0.75,
           "nodes": 2
         },
         {

@@ -4,6 +4,11 @@
     "VirtualMachineSize": {
       "Options": [
         {
+          "value": "2 CPU - 8GB RAM",
+          "multiple": 0.5,
+          "nodes": 2
+        },
+        {
           "value": "4 CPU - 16GB RAM",
           "multiple": 1,
           "nodes": 2

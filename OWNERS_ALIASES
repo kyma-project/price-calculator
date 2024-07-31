@@ -5,6 +5,18 @@
 # https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md#owners_aliases
 
 aliases:
+  default-reviewers:
+    - akucharska
+    - valentinvieriu
+    - mrCherry97
+    - chriskari
+    - OliwiaGowor
+  default-approvers:
+    - akucharska
+    - valentinvieriu
+    - mrCherry97
+    - chriskari
+    - OliwiaGowor
   documentation-reviewers:
     - klaudiagrz
     - mmitoraj

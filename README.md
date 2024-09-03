@@ -40,3 +40,15 @@ npm test
 ## Adjust Values
 
 To adjust prices or other values used for the calculations, go to the [config.json](src/config.json) file and update the corresponding entry.
+
+## Contributing
+
+See the [Contributing Rules](CONTRIBUTING.md).
+
+## Code of Conduct
+
+See the [Code of Conduct](CODE_OF_CONDUCT.md) document.
+
+## Licensing
+
+See the [license](./LICENSE) file.

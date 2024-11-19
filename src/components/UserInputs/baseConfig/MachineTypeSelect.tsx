@@ -16,33 +16,33 @@ import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calcula
 
 export default function VMsizeSelect() {
   const minAutoscaler: number = useRecoilValue<number>(minAutoscalerState);
-  const machineTypeFactor = useRecoilValue<MachineType>(machineTypeState).multiple;
+  const vmMultiplier: number = useRecoilValue<VMSize>(VMsizeState).multiple;
   const timeConsumption: number = useRecoilValue<number>(
     timeConsumptionBaseConfigState,
   );
   const setBaseConfigCosts = useSetRecoilState<number>(baseConfigCostsState);
-  const setValue = useSetRecoilState<VMSize>(VMsizeState);
-  const baseConfigOptions = config.baseConfig.VirtualMachineSize.Options;
+  const setValue = useSetRecoilState<MachineType>(machineTypeState);
+  const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
 
   const storageCosts: number = useRecoilValue(storageCostsState);
   const additionalCosts: number = useRecoilValue(additionalCostsState);
   const setTotalCosts = useSetRecoilState<number>(totalCostsState);
   const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
+
   const conversionRatio: number = useRecoilValue(applyConversionRateState);
 
   const onChange = (event: any) => {
     const selection = event.detail.selectedOption.dataset;
     setValue({
       value: selection.value,
-      multiple: selection.multiple,
-      nodes: parseInt(selection.nodes),
+      multiple: selection.multiple
     });
 
     const baseConfigCosts = calculateBaseConfigCosts({
-      vmMultiplier: selection.multiple,
+      vmMultiplier,
       timeConsumption,
       minAutoscaler,
-      machineTypeFactor
+      machineTypeFactor: selection.multiple
     });
     setBaseConfigCosts(baseConfigCosts);
 
@@ -59,14 +59,13 @@ export default function VMsizeSelect() {
   return (
     <>
       <Title className="wizard-subheader" level="H5">
-        Virtual Machine Size
+        Machine Type
       </Title>
       <Select onChange={onChange}>
         {baseConfigOptions.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}
-            data-nodes={item.nodes}
             data-multiple={item.multiple}
           >
             {item.value}

@@ -5,6 +5,7 @@ import config from '../../config.json';
 const timeConsumption = config.baseConfig.TimeConsumption.Default;
 const minAutoscaler = config.baseConfig.AutoScalerMin.Default;
 const vmMultiplier = config.baseConfig.VirtualMachineSize.Options[0].multiple;
+const machineTypeFactor = config.baseConfig.machineTypeFactor.MachineTypes[0].multiple;
 
 export const baseConfigCostsState: RecoilState<number> = atom<number>({
   key: 'baseConfigCostsState',
@@ -12,5 +13,6 @@ export const baseConfigCostsState: RecoilState<number> = atom<number>({
     timeConsumption,
     minAutoscaler,
     vmMultiplier,
+    machineTypeFactor
   }),
 });

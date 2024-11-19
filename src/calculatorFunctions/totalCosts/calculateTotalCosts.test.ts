@@ -1,5 +1,4 @@
 import calculateBaseConfigCosts from '../baseConfigCosts/calculateBaseConfigCosts';
-import calculateNodeCosts from '../nodeCosts/calculateNodeCosts';
 import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
 import calculateTotalCosts from './calculateTotalCosts';
 
@@ -8,28 +7,30 @@ test('total costs', () => {
   const minAutoscaler = 3;
   const timeConsumption = 450;
   const vmMultiplier = 4; // 16 CPU 64gb RAM
+  const machineTypeFactor = 1;
   //  Node
   const vmQuantity = 3;
   //  Storage
   const GBQuantity = 1024;
+  const premiumGBQuantity = 1024;
+
+  const conversionRatio = 1;
+  const additionalCosts = 1;
 
   const baseConfigCosts = calculateBaseConfigCosts({
     timeConsumption,
     vmMultiplier,
     minAutoscaler,
+    machineTypeFactor
   });
-  const nodeCosts = calculateNodeCosts({
-    vmQuantity,
-    vmMultiplier,
-    timeConsumption,
-  });
-  const storageCosts = calculateStorageCosts({ GBQuantity, timeConsumption });
+  const storageCosts = calculateStorageCosts({ GBQuantity, premiumGBQuantity, timeConsumption });
 
   const totalCosts = calculateTotalCosts({
     baseConfigCosts,
-    nodeCosts,
     storageCosts,
+    additionalCosts,
+    conversionRatio
   });
 
-  expect(totalCosts).toBe(5515);
+  expect(totalCosts).toBe(5783.15);
 });

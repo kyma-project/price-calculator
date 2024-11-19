@@ -1,5 +1,6 @@
 {
-  "CurrencyCode": "EUR",
+  "CurrencyCode": "€",
+  "ConversionRateCUCC": 1,
   "baseConfig": {
     "VirtualMachineSize": {
       "Options": [
@@ -38,7 +39,7 @@
     "AutoScalerMin": {
       "Default": 3,
       "Min": 3,
-      "Max": 80,
+      "Max": 200,
       "Step": 1
     },
     "TimeConsumption": {
@@ -46,6 +47,12 @@
       "Min": 1,
       "Max": 720,
       "Step": 1
+    },
+    "machineTypeFactor" : {
+      "MachineTypes": [{
+        "value": "General Purpose",
+        "multiple": 1
+      }]
     },
     "PricePerUnit": 0.48055555555555557,
     "PricePerUnitDivider": 1,
@@ -63,20 +70,8 @@
     "PricePerUnitDivider2": 1,
     "SerConsUnitsValue": 2
   },
-  "Nodes": {
-    "Default": 0,
-    "Min": 0,
-    "Max": 40,
-    "Step": 2,
-    "TimeConsumption": {
-      "Default": 720,
-      "Min": 1,
-      "Max": 720,
-      "Step": 1
-    },
-    "PricePerUnit": 173,
-    "PricePerUnitDivider": 1,
-    "PricePerUnitDivider2": 720
+  "AdditionalConfig":{
+    "Default": 0
   },
   "Storage": {
     "Default": 0,
@@ -84,10 +79,19 @@
     "Max": 3200,
     "Step": 32,
     "TimeConsumption": {
-      "Default": 720,
-      "Min": 1,
-      "Max": 720,
-      "Step": 1
+      "Default": 720
+    },
+    "PricePerUnit": 13,
+    "PricePerUnitDivider": 32,
+    "PricePerUnitDivider2": 720
+  },
+  "PremiumStorage": {
+    "Default": 0,
+    "Min": 0,
+    "Max": 3200,
+    "Step": 32,
+    "TimeConsumption": {
+      "Default": 720
     },
     "PricePerUnit": 13,
     "PricePerUnitDivider": 32,

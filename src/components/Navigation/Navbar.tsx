@@ -6,8 +6,8 @@ export default function Navbar() {
   return (
     <ShellBar
       logo={<img alt="Kyma Logo" src={require('../../assets/kyma.png')} />}
-      primaryTitle="Kyma-Price-Calculator"
-      secondaryTitle="The Best Run SAP"
+      primaryTitle="SAP Business Technology Platform, Kyma runtime"
+      secondaryTitle="Cost Estimator"
       waitForDefine={true}
     />
   );

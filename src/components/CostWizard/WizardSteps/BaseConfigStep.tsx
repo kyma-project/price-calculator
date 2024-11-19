@@ -4,7 +4,7 @@ import MinAutoscalerInputField from '../../UserInputs/baseConfig/MinAutoscalerIn
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import NextStepButton from '../Buttons/NextStepButton';
 import InfoField from '../common/InfoField';
-import TimeConBaseInput from '../../UserInputs/baseConfig/TimeConBaseInput';
+import MachineTypeSelect from '../../UserInputs/baseConfig/MachineTypeSelect';
 
 export default function BaseConfigStep() {
   return (
@@ -15,8 +15,8 @@ export default function BaseConfigStep() {
       <div className="StepContent">
         <InfoField info="contains 224 GB of storage by default" />
         <VMsizeSelect />
+        <MachineTypeSelect />
         <MinAutoscalerInputField />
-        <TimeConBaseInput />
       </div>
       <div className="ButtonContainer">
         <NextStepButton />

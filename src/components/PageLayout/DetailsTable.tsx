@@ -27,7 +27,7 @@ export default function DetailsTable() {
     >
       <TableRow>
         <TableCell>
-          Each single managed Kyma module occupy in-cluster resources. See <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/kyma-modules-sizing" target="_blank">Module Sizing</a> for more info.
+          Each single managed Kyma module occupy in-cluster resources. See <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/kyma-modules-sizing" target="_blank" rel="noreferrer">Module Sizing</a> for more info.
         </TableCell>
       </TableRow>
       <TableRow>

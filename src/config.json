@@ -39,7 +39,7 @@
     "AutoScalerMin": {
       "Default": 3,
       "Min": 3,
-      "Max": 200,
+      "Max": 300,
       "Step": 1
     },
     "TimeConsumption": {
@@ -59,16 +59,6 @@
     "PricePerUnitDivider2": 1,
     "BaseVMPricePerUnit": 346,
     "BaseStorageEventsPricePerUnit": 65
-  },
-  "VirtualMachines": {
-    "Default": 0,
-    "Min": 0,
-    "Max": 38,
-    "Step": 1,
-    "PricePerUnit": 1,
-    "PricePerUnitDivider": 1,
-    "PricePerUnitDivider2": 1,
-    "SerConsUnitsValue": 2
   },
   "AdditionalConfig":{
     "Default": 0
@@ -93,7 +83,7 @@
     "TimeConsumption": {
       "Default": 720
     },
-    "PricePerUnit": 13,
+    "PricePerUnit": 39,
     "PricePerUnitDivider": 32,
     "PricePerUnitDivider2": 720
   }

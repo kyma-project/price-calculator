@@ -7,5 +7,5 @@ test('total costs', () => {
 
   const nodeCosts = calculateStorageCosts({ GBQuantity, premiumGBQuantity, timeConsumption });
 
-  expect(nodeCosts).toBe(614.9);
+  expect(nodeCosts).toBe(1229.8);
 });

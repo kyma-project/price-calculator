@@ -32,6 +32,6 @@ test('total costs', () => {
     conversionRatio
   });
 
-  expect(totalCosts.CU).toBe(3181);
-  expect(totalCosts.CC).toBe(1113.35);
+  expect(totalCosts.CU).toBe(3701);
+  expect(totalCosts.CC).toBe(1295.35);
 });

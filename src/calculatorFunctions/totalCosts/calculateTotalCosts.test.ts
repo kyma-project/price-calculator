@@ -14,7 +14,7 @@ test('total costs', () => {
   const GBQuantity = 1024;
   const premiumGBQuantity = 1024;
 
-  const conversionRatio = 1;
+  const conversionRatio = 0.35;
   const additionalCosts = 1;
 
   const baseConfigCosts = calculateBaseConfigCosts({
@@ -32,5 +32,6 @@ test('total costs', () => {
     conversionRatio
   });
 
-  expect(totalCosts).toBe(5783.15);
+  expect(totalCosts.CU).toBe(3181);
+  expect(totalCosts.CC).toBe(1113.35);
 });

@@ -3,7 +3,7 @@ import GBQuantityInputField from '../../UserInputs/storage/GBQuantityInputField'
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import NextStepButton from '../Buttons/NextStepButton';
-import GBPremiumStorage from '../../UserInputs/storage/GBPremiumStorageInputField';
+import PremiumGBQuantyInputField from '../../UserInputs/storage/PremiumGBQuantyInputField';
 
 export default function StorageStep() {
   return (
@@ -13,7 +13,7 @@ export default function StorageStep() {
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />
-        <GBPremiumStorage />
+        <PremiumGBQuantyInputField />
       </div>
 
       <div className="ButtonContainer">

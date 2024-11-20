@@ -8,8 +8,6 @@ test('total costs', () => {
   const timeConsumption = 450;
   const vmMultiplier = 4; // 16 CPU 64gb RAM
   const machineTypeFactor = 1;
-  //  Node
-  const vmQuantity = 3;
   //  Storage
   const GBQuantity = 1024;
   const premiumGBQuantity = 1024;

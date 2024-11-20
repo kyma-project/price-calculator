@@ -31,11 +31,11 @@ export default function CostList(props: Props) {
       <div className="row final-row">
         <h2 className="text">Total Costs</h2>
       </div>
-      <div className="row final-row">
+      <div className="row final-row final-row-child">
         <h5 className="text">- In Capacity Units</h5>
         <h3 className="value">{roundDecimals(totalCosts, true)} CU</h3>
       </div>
-      <div className="row final-row">
+      <div className="row final-row final-row-child">
         <h5 className="text">- In currency ({config.CurrencyCode})</h5>
         <h3 className="value">{roundDecimals(totalCostsInCC, true)} €</h3>
       </div>

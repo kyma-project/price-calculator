@@ -27,12 +27,12 @@ export default function DetailsTable() {
     >
       <TableRow>
         <TableCell>
-          Each single managed Kyma module occupy in-cluster resources. See <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/kyma-modules-sizing" target="_blank" rel="noreferrer">Module Sizing</a> for more info.
+          Each single managed Kyma module occupies in-cluster resources. See <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/kyma-modules-sizing" target="_blank" rel="noreferrer">Module Sizing</a> for more info.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          Costs are provided in Capacity Units. Use the conversion factor, which incapsulate your current discount (if any), in the Wizard to obtain the correct estimate in Euro.
+          Costs are provided in Capacity Units. Use the conversion factor, which encapsulates your current discount (if any), in the Wizard to obtain the correct estimate in Euro.
         </TableCell>
       </TableRow>
       <TableRow>

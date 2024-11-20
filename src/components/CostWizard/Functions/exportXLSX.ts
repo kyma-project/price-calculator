@@ -6,51 +6,41 @@ interface Props {
   baseTime: number;
   baseVMSize: any;
   baseMinAutoscaler: number;
-  nodeCosts: number;
-  vmQuantity: number;
-  nodeTime: number;
   storageCosts: number;
   storageQuantity: number;
   storageTime: number;
+  additionalCosts: number;
   totalCosts: number;
 }
 
-export default function exportXLSX(props: Props) {
-  console.log('xlsx');
+export default function exportCSV(props: Props) {
   const {
     baseCosts,
     baseTime,
     baseVMSize,
     baseMinAutoscaler,
-    nodeCosts,
-    vmQuantity,
-    nodeTime,
     storageCosts,
     storageQuantity,
     storageTime,
+    additionalCosts,
     totalCosts,
   } = props;
 
-  const dataArray: any[] = [
-    ['Base Configuration'],
-    ['Virtual Machine Size', baseVMSize],
-    ['Autoscaler Min', baseMinAutoscaler],
-    ['Time Consumption', baseTime],
-    [''],
-    ['Node'],
-    ['Virtual Machines', vmQuantity],
-    ['Time Consumption', nodeTime],
-    [''],
-    ['Storage'],
-    ['Additional Storage', storageQuantity],
-    ['Time Consumption', storageTime],
-    [''],
-    ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
-    ['Node costs', roundDecimals(nodeCosts, true) + ' CU'],
-    ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
-    ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
-  ];
-
+    const dataArray = [
+      ['Base Configuration'],
+      ['Virtual Machine Size', baseVMSize],
+      ['Autoscaler Min', baseMinAutoscaler],
+      ['Time Consumption', baseTime],
+      [''],
+      ['Storage'],
+      ['Additional Storage', storageQuantity],
+      ['Time Consumption', storageTime],
+      [''],
+      ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
+      ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
+      ['Additional costs', roundDecimals(additionalCosts, true) + ' CU'],
+      ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
+    ];
   const worksheet: WorkSheet = utils.aoa_to_sheet(dataArray);
   const workbook: WorkBook = utils.book_new();
   utils.book_append_sheet(workbook, worksheet, 'Sheet 1');

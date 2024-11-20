@@ -7,9 +7,11 @@ import { VMSize, VMsizeState } from '../../../state/baseConfig/VMsizeState';
 import { timeConsumptionBaseConfigState } from '../../../state/baseConfig/timeConsumptionState';
 import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
 import calculateBaseConfigCosts from '../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
-import { nodeCostsState } from '../../../state/costs/nodeCostsState';
+import { machineTypeState } from '../../../state/baseConfig/machineTypeState';
 import { storageCostsState } from '../../../state/costs/storageCostsState';
-import { totalCostsState } from '../../../state/costs/totalCostsState';
+import { additionalCostsState } from '../../../state/costs/additionalCostsState';
+import { applyConversionRateState}  from '../../../state/additionalConfig/applyConversionRateState';
+import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import HeaderWithInfo from '../../CostWizard/common/HeaderWithInfo';
 
@@ -21,9 +23,12 @@ export default function MinAutoscalerInputField() {
   const setBaseConfigCosts = useSetRecoilState<number>(baseConfigCostsState);
   const [value, setValue] = useRecoilState<number>(minAutoscalerState);
 
-  const nodeCosts: number = useRecoilValue(nodeCostsState);
+  const machineTypeFactor: number = useRecoilValue(machineTypeState).multiple;
   const storageCosts: number = useRecoilValue(storageCostsState);
+  const additionalCosts: number = useRecoilValue(additionalCostsState);
   const setTotalCosts = useSetRecoilState<number>(totalCostsState);
+  const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
+  const conversionRatio: number = useRecoilValue(applyConversionRateState);
 
   const configuration = config.baseConfig.AutoScalerMin;
   const min = configuration.Min;
@@ -39,15 +44,18 @@ export default function MinAutoscalerInputField() {
       vmMultiplier,
       timeConsumption,
       minAutoscaler: newValue,
+      machineTypeFactor
     });
     setBaseConfigCosts(baseConfigCosts);
 
     const totalCosts = calculateTotalCosts({
       baseConfigCosts,
-      nodeCosts,
       storageCosts,
+      additionalCosts,
+      conversionRatio
     });
-    setTotalCosts(totalCosts);
+    setTotalCosts(totalCosts.CU);
+    setTotalCostsInCC(totalCosts.CC);
   }
 
   return (

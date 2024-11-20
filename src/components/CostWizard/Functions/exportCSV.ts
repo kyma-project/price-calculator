@@ -5,12 +5,10 @@ interface Props {
   baseTime: number;
   baseVMSize: any;
   baseMinAutoscaler: number;
-  nodeCosts: number;
-  vmQuantity: number;
-  nodeTime: number;
   storageCosts: number;
   storageQuantity: number;
   storageTime: number;
+  additionalCosts: number;
   totalCosts: number;
 }
 
@@ -20,12 +18,10 @@ export default function exportCSV(props: Props) {
     baseTime,
     baseVMSize,
     baseMinAutoscaler,
-    nodeCosts,
-    vmQuantity,
-    nodeTime,
     storageCosts,
     storageQuantity,
     storageTime,
+    additionalCosts,
     totalCosts,
   } = props;
 
@@ -35,17 +31,13 @@ export default function exportCSV(props: Props) {
       ['Autoscaler Min', baseMinAutoscaler],
       ['Time Consumption', baseTime],
       [''],
-      ['Node'],
-      ['Virtual Machines', vmQuantity],
-      ['Time Consumption', nodeTime],
-      [''],
       ['Storage'],
       ['Additional Storage', storageQuantity],
       ['Time Consumption', storageTime],
       [''],
       ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
-      ['Node costs', roundDecimals(nodeCosts, true) + ' CU'],
       ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
+      ['Additional costs', roundDecimals(additionalCosts, true) + ' CU'],
       ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
     ];
 

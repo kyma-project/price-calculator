@@ -5,8 +5,13 @@
   max-height: 40px;
 }
 
-#final-row {
+.final-row {
   border-bottom: none;
+  display: flex;
+  align-items: center;
+}
+.final-row-child {
+  padding-left: 10px;
 }
 
 .text {

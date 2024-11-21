@@ -1,24 +1,34 @@
-import React from 'react';
-import { DynamicSideContent } from '@ui5/webcomponents-react';
+import React, { ReactNode } from 'react';
 import MainContent from './MainContent';
 import SideContent from './SideContent';
 import DetailsTable from './DetailsTable';
+import './MainContentContainer.css';
+
+interface ContentLayoutProps {
+  MainContent: ReactNode;
+  SideContent: ReactNode;
+}
+
+const ContentLayout: React.FC<ContentLayoutProps> = ({
+  MainContent,
+  SideContent,
+}) => {
+  return (
+    <div className="content-wrapper">
+      <div className="main-content">{MainContent}</div>
+      <div className="side-content">{SideContent}</div>
+    </div>
+  );
+};
 
 export default function MainContentContainer() {
   return (
-    <div id="MainContentContainer">
-      <DynamicSideContent
-        sideContent={
-          <div>
-            <SideContent />
-          </div>
-        }
-        sideContentVisibility="AlwaysShow"
-        waitForDefine={true}
-      >
-        <MainContent />
-      </DynamicSideContent>
+    <>
+      <ContentLayout
+        MainContent={<MainContent />}
+        SideContent={<SideContent />}
+      />
       <DetailsTable />
-    </div>
+    </>
   );
 }

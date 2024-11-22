@@ -19,15 +19,19 @@ test('total costs', () => {
     timeConsumption,
     vmMultiplier,
     minAutoscaler,
-    machineTypeFactor
+    machineTypeFactor,
   });
-  const storageCosts = calculateStorageCosts({ GBQuantity, premiumGBQuantity, timeConsumption });
+  const storageCosts = calculateStorageCosts({
+    GBQuantity,
+    premiumGBQuantity,
+    timeConsumption,
+  });
 
   const totalCosts = calculateTotalCosts({
     baseConfigCosts,
     storageCosts,
     additionalCosts,
-    conversionRatio
+    conversionRatio,
   });
 
   expect(totalCosts.CU).toBe(3701);

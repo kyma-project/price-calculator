@@ -8,8 +8,11 @@ import { timeConsumptionStorageState } from '../../../state/storage/timeConsumpt
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
 import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
 import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import { applyConversionRateState}  from '../../../state/additionalConfig/applyConversionRateState';
-import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
+import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
 
@@ -22,7 +25,9 @@ export default function GBQuantityInputField() {
 
   const baseConfigCosts: number = useRecoilValue(baseConfigCostsState);
   const additionalCosts: number = useRecoilValue(additionalCostsState);
-  const premiumGBQuantity: number = useRecoilValue<number>(premiumGBQuantityState);
+  const premiumGBQuantity: number = useRecoilValue<number>(
+    premiumGBQuantityState,
+  );
   const setTotalCosts = useSetRecoilState<number>(totalCostsState);
   const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
   const conversionRatio: number = useRecoilValue(applyConversionRateState);
@@ -48,7 +53,7 @@ export default function GBQuantityInputField() {
       baseConfigCosts,
       storageCosts,
       additionalCosts,
-      conversionRatio
+      conversionRatio,
     });
     setTotalCosts(totalCosts.CU);
     setTotalCostsInCC(totalCosts.CC);
@@ -56,7 +61,7 @@ export default function GBQuantityInputField() {
 
   return (
     <div>
-      <Title className="wizard-subheader" level="H5">
+      <Title className="wizard-subheader" level="H5" size="H5">
         Standard Storage: number of GB
       </Title>
       <StepInput

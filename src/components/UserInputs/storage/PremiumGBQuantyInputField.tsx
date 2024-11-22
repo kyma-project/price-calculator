@@ -9,8 +9,11 @@ import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantity
 import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
 import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import { applyConversionRateState}  from '../../../state/additionalConfig/applyConversionRateState';
-import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
+import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 export default function TimeConStorageInput() {
@@ -40,15 +43,15 @@ export default function TimeConStorageInput() {
     const storageCosts = calculateStorageCosts({
       GBQuantity,
       premiumGBQuantity: newValue,
-      timeConsumption
+      timeConsumption,
     });
     setStorageCosts(storageCosts);
-    
+
     const totalCosts = calculateTotalCosts({
       baseConfigCosts,
       storageCosts,
       additionalCosts,
-      conversionRatio
+      conversionRatio,
     });
     setTotalCosts(totalCosts.CU);
     setTotalCostsInCC(totalCosts.CC);
@@ -56,7 +59,7 @@ export default function TimeConStorageInput() {
 
   return (
     <div>
-      <Title className="wizard-subheader" level="H5">
+      <Title className="wizard-subheader" level="H5" size="H5">
         Premium Storage: number of GB
       </Title>
       <StepInput

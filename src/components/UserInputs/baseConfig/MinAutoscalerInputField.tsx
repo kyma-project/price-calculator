@@ -10,8 +10,11 @@ import calculateBaseConfigCosts from '../../../calculatorFunctions/baseConfigCos
 import { machineTypeState } from '../../../state/baseConfig/machineTypeState';
 import { storageCostsState } from '../../../state/costs/storageCostsState';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { applyConversionRateState}  from '../../../state/additionalConfig/applyConversionRateState';
-import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
+import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import HeaderWithInfo from '../../CostWizard/common/HeaderWithInfo';
 
@@ -44,7 +47,7 @@ export default function MinAutoscalerInputField() {
       vmMultiplier,
       timeConsumption,
       minAutoscaler: newValue,
-      machineTypeFactor
+      machineTypeFactor,
     });
     setBaseConfigCosts(baseConfigCosts);
 
@@ -52,7 +55,7 @@ export default function MinAutoscalerInputField() {
       baseConfigCosts,
       storageCosts,
       additionalCosts,
-      conversionRatio
+      conversionRatio,
     });
     setTotalCosts(totalCosts.CU);
     setTotalCostsInCC(totalCosts.CC);

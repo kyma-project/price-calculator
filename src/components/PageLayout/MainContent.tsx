@@ -5,7 +5,9 @@ import './MainContent.css';
 export default function MainContent() {
   return (
     <div id="MainContent">
-      <h1 className="header">Estimate the costs for your SAP BTP, Kyma runtime</h1>
+      <h1 className="header">
+        Estimate the costs for your SAP BTP, Kyma runtime
+      </h1>
       <h4 className="header">
         Size your scenario to calculate the required capacity units
       </h4>

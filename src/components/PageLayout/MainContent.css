@@ -1,5 +1,5 @@
 #MainContent {
-  margin-left: 25px;
+  margin-left: 5px;
   margin-right: 100px;
 }
 
@@ -9,7 +9,6 @@
 
 @media (max-width: 960px) {
   #MainContent {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 0;
   }
 }

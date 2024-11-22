@@ -9,7 +9,7 @@ import MachineTypeSelect from '../../UserInputs/baseConfig/MachineTypeSelect';
 export default function BaseConfigStep() {
   return (
     <WizardStep selected titleText="Base Configuration">
-      <Title wrappingType="Normal" level="H2">
+      <Title wrappingType="Normal" level="H2" size="H2">
         1. Choose the Base Configuration
       </Title>
       <div className="StepContent">

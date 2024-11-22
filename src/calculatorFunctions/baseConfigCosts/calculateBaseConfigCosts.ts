@@ -8,13 +8,15 @@ interface Props {
 }
 
 export default function calculateBaseConfigCosts(props: Props): number {
-  const { timeConsumption, minAutoscaler, vmMultiplier, machineTypeFactor } = props;
+  const { timeConsumption, minAutoscaler, vmMultiplier, machineTypeFactor } =
+    props;
 
   const PPU: number = config.baseConfig.PricePerUnit;
   const BaseStorageEventsPPU: number =
     config.baseConfig.BaseStorageEventsPricePerUnit;
 
   return (
-    minAutoscaler * timeConsumption * PPU * vmMultiplier * machineTypeFactor + BaseStorageEventsPPU
+    minAutoscaler * timeConsumption * PPU * vmMultiplier * machineTypeFactor +
+    BaseStorageEventsPPU
   );
 }

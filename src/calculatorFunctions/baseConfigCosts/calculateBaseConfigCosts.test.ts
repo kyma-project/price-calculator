@@ -9,7 +9,7 @@ test('costs of minAutoscaler', () => {
     timeConsumption,
     vmMultiplier,
     minAutoscaler,
-    machineTypeFactor
+    machineTypeFactor,
   });
 
   expect(baseConfigCosts).toBe(2833);

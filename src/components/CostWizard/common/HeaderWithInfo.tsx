@@ -12,7 +12,9 @@ export default function HeaderWithInfo(props: Props) {
 
   return (
     <div className="HeaderWithInfo wizard-subheader">
-      <Title level="H5">{header}</Title>
+      <Title level="H5" size="H5">
+        {header}
+      </Title>
       <Text>({info})</Text>
     </div>
   );

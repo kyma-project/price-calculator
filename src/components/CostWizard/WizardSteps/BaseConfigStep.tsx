@@ -1,10 +1,10 @@
 import React from 'react';
-import VMsizeSelect from '../../UserInputs/baseConfig/VMsizeSelect';
-import MinAutoscalerInputField from '../../UserInputs/baseConfig/MinAutoscalerInputField';
+import VMsizeSelect from '../UserInputs/baseConfig/VMsizeSelect';
+import MinAutoscalerInputField from '../UserInputs/baseConfig/MinAutoscalerInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import NextStepButton from '../Buttons/NextStepButton';
 import InfoField from '../common/InfoField';
-import MachineTypeSelect from '../../UserInputs/baseConfig/MachineTypeSelect';
+import MachineTypeSelect from '../UserInputs/baseConfig/MachineTypeSelect';
 
 export default function BaseConfigStep() {
   return (

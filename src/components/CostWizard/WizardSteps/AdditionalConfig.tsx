@@ -4,7 +4,7 @@ import InfoField from '../common/InfoField';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import XlsxDownloadButton from '../Buttons/XlsxDownloadButton';
 import CSVDownloadButton from '../Buttons/CSVDownloadButton';
-import ApplyConversionRate from '../../UserInputs/additionalConfig/applyConversionRate';
+import ApplyConversionRate from '../UserInputs/additionalConfig/applyConversionRate';
 
 export default function NodeStep() {
   return (

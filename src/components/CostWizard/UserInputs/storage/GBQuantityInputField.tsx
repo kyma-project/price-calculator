@@ -1,36 +1,38 @@
 import React from 'react';
-import config from '../../../config.json';
+import config from '../../../../config.json';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
-import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
-import { storageCostsState } from '../../../state/costs/storageCostsState';
-import { GBQuantityState } from '../../../state/storage/GBQuantityState';
-import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
-import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
-import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
+import { storageCostsState } from '../../../../state/costs/storageCostsState';
+import { timeConsumptionStorageState } from '../../../../state/storage/timeConsumptionState';
+import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
+import calculateStorageCosts from '../../../../calculatorFunctions/storageCosts/calculateStorageCosts';
+import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
+import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import {
   totalCostsInCCState,
   totalCostsState,
-} from '../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+} from '../../../../state/costs/totalCostsState';
+import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
 
-export default function TimeConStorageInput() {
+export default function GBQuantityInputField() {
   const timeConsumption: number = useRecoilValue<number>(
     timeConsumptionStorageState,
   );
-  const GBQuantity: number = useRecoilValue<number>(GBQuantityState);
-  const [value, setValue] = useRecoilState<number>(premiumGBQuantityState);
   const setStorageCosts = useSetRecoilState<number>(storageCostsState);
+  const [value, setValue] = useRecoilState<number>(GBQuantityState);
 
   const baseConfigCosts: number = useRecoilValue(baseConfigCostsState);
   const additionalCosts: number = useRecoilValue(additionalCostsState);
+  const premiumGBQuantity: number = useRecoilValue<number>(
+    premiumGBQuantityState,
+  );
   const setTotalCosts = useSetRecoilState<number>(totalCostsState);
   const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
   const conversionRatio: number = useRecoilValue(applyConversionRateState);
 
-  const configuration = config.PremiumStorage;
+  const configuration = config.Storage;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
@@ -41,8 +43,8 @@ export default function TimeConStorageInput() {
     setValue(newValue);
 
     const storageCosts = calculateStorageCosts({
-      GBQuantity,
-      premiumGBQuantity: newValue,
+      GBQuantity: newValue,
+      premiumGBQuantity,
       timeConsumption,
     });
     setStorageCosts(storageCosts);
@@ -60,7 +62,7 @@ export default function TimeConStorageInput() {
   return (
     <div>
       <Title className="wizard-subheader" level="H5" size="H5">
-        Premium Storage: number of GB
+        Standard Storage: number of GB
       </Title>
       <StepInput
         value={value}

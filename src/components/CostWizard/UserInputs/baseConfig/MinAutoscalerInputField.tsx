@@ -1,22 +1,22 @@
 import React from 'react';
-import config from '../../../config.json';
+import config from '../../../../config.json';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Slider, StepInput } from '@ui5/webcomponents-react';
-import { minAutoscalerState } from '../../../state/baseConfig/minAutoscalerState';
-import { VMSize, VMsizeState } from '../../../state/baseConfig/VMsizeState';
-import { timeConsumptionBaseConfigState } from '../../../state/baseConfig/timeConsumptionState';
-import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import calculateBaseConfigCosts from '../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
-import { machineTypeState } from '../../../state/baseConfig/machineTypeState';
-import { storageCostsState } from '../../../state/costs/storageCostsState';
-import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import { minAutoscalerState } from '../../../../state/baseConfig/minAutoscalerState';
+import { VMSize, VMsizeState } from '../../../../state/baseConfig/VMsizeState';
+import { timeConsumptionBaseConfigState } from '../../../../state/baseConfig/timeConsumptionState';
+import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
+import calculateBaseConfigCosts from '../../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
+import { machineTypeState } from '../../../../state/baseConfig/machineTypeState';
+import { storageCostsState } from '../../../../state/costs/storageCostsState';
+import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
+import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import {
   totalCostsInCCState,
   totalCostsState,
-} from '../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
-import HeaderWithInfo from '../../CostWizard/common/HeaderWithInfo';
+} from '../../../../state/costs/totalCostsState';
+import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+import HeaderWithInfo from '../../common/HeaderWithInfo';
 
 export default function MinAutoscalerInputField() {
   const timeConsumption: number = useRecoilValue<number>(

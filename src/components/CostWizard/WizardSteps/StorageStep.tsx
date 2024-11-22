@@ -1,9 +1,9 @@
 import React from 'react';
-import GBQuantityInputField from '../../UserInputs/storage/GBQuantityInputField';
+import GBQuantityInputField from '../UserInputs/storage/GBQuantityInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import NextStepButton from '../Buttons/NextStepButton';
-import PremiumGBQuantyInputField from '../../UserInputs/storage/PremiumGBQuantyInputField';
+import PremiumGBQuantyInputField from '../UserInputs/storage/PremiumGBQuantyInputField';
 
 export default function StorageStep() {
   return (

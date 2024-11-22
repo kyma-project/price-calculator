@@ -1,24 +1,24 @@
 import React from 'react';
-import config from '../../../config.json';
+import config from '../../../../config.json';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
-import { VMSize, VMsizeState } from '../../../state/baseConfig/VMsizeState';
+import { VMSize, VMsizeState } from '../../../../state/baseConfig/VMsizeState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { minAutoscalerState } from '../../../state/baseConfig/minAutoscalerState';
-import { timeConsumptionBaseConfigState } from '../../../state/baseConfig/timeConsumptionState';
+import { minAutoscalerState } from '../../../../state/baseConfig/minAutoscalerState';
+import { timeConsumptionBaseConfigState } from '../../../../state/baseConfig/timeConsumptionState';
 import {
   MachineType,
   machineTypeState,
-} from '../../../state/baseConfig/machineTypeState';
-import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import calculateBaseConfigCosts from '../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
-import { storageCostsState } from '../../../state/costs/storageCostsState';
-import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+} from '../../../../state/baseConfig/machineTypeState';
+import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
+import calculateBaseConfigCosts from '../../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
+import { storageCostsState } from '../../../../state/costs/storageCostsState';
+import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
+import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import {
   totalCostsInCCState,
   totalCostsState,
-} from '../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+} from '../../../../state/costs/totalCostsState';
+import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 export default function VMsizeSelect() {
   const minAutoscaler: number = useRecoilValue<number>(minAutoscalerState);

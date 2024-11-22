@@ -1,16 +1,16 @@
 import React from 'react';
-import config from '../../../config.json';
+import config from '../../../../config.json';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Slider, Title } from '@ui5/webcomponents-react';
-import { storageCostsState } from '../../../state/costs/storageCostsState';
-import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import { storageCostsState } from '../../../../state/costs/storageCostsState';
+import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
+import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
+import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import {
   totalCostsInCCState,
   totalCostsState,
-} from '../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+} from '../../../../state/costs/totalCostsState';
+import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 export default function TimeConStorageInput() {
   const baseConfigCosts: number = useRecoilValue(baseConfigCostsState);

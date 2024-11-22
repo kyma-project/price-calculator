@@ -8,7 +8,6 @@ export default function Navbar() {
       logo={<img alt="Kyma Logo" src={require('../../assets/kyma.png')} />}
       primaryTitle="SAP Business Technology Platform, Kyma runtime"
       secondaryTitle="Cost Estimator"
-      waitForDefine={true}
     />
   );
 }

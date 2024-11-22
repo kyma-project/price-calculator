@@ -2,7 +2,7 @@ interface Props {
   baseConfigCosts: number;
   storageCosts: number;
   additionalCosts: number;
-  conversionRatio:number;
+  conversionRatio: number;
 }
 
 interface Costs {
@@ -10,8 +10,9 @@ interface Costs {
   CC: number;
 }
 
-export default function calculateTotalCosts(props: Props) : Costs {
-  const { baseConfigCosts, storageCosts, additionalCosts, conversionRatio} = props;
+export default function calculateTotalCosts(props: Props): Costs {
+  const { baseConfigCosts, storageCosts, additionalCosts, conversionRatio } =
+    props;
   const costInCU = baseConfigCosts + storageCosts + additionalCosts;
-  return { CU: costInCU, CC: costInCU * conversionRatio};
+  return { CU: costInCU, CC: costInCU * conversionRatio };
 }

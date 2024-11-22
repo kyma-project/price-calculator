@@ -1,5 +1,6 @@
 #CostWizard {
   height: 600px;
+  overflow-x: hidden;
 }
 
 .ButtonContainer {

@@ -5,18 +5,25 @@ import { VMSize, VMsizeState } from '../../../state/baseConfig/VMsizeState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { minAutoscalerState } from '../../../state/baseConfig/minAutoscalerState';
 import { timeConsumptionBaseConfigState } from '../../../state/baseConfig/timeConsumptionState';
-import { MachineType, machineTypeState } from '../../../state/baseConfig/machineTypeState';
+import {
+  MachineType,
+  machineTypeState,
+} from '../../../state/baseConfig/machineTypeState';
 import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
 import calculateBaseConfigCosts from '../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
 import { storageCostsState } from '../../../state/costs/storageCostsState';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { applyConversionRateState}  from '../../../state/additionalConfig/applyConversionRateState';
-import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
+import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 export default function VMsizeSelect() {
   const minAutoscaler: number = useRecoilValue<number>(minAutoscalerState);
-  const machineTypeFactor = useRecoilValue<MachineType>(machineTypeState).multiple;
+  const machineTypeFactor =
+    useRecoilValue<MachineType>(machineTypeState).multiple;
   const timeConsumption: number = useRecoilValue<number>(
     timeConsumptionBaseConfigState,
   );
@@ -42,7 +49,7 @@ export default function VMsizeSelect() {
       vmMultiplier: selection.multiple,
       timeConsumption,
       minAutoscaler,
-      machineTypeFactor
+      machineTypeFactor,
     });
     setBaseConfigCosts(baseConfigCosts);
 
@@ -50,7 +57,7 @@ export default function VMsizeSelect() {
       baseConfigCosts,
       storageCosts,
       additionalCosts,
-      conversionRatio
+      conversionRatio,
     });
     setTotalCosts(totalCosts.CU);
     setTotalCostsInCC(totalCosts.CC);
@@ -58,7 +65,7 @@ export default function VMsizeSelect() {
 
   return (
     <>
-      <Title className="wizard-subheader" level="H5">
+      <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
       <Select onChange={onChange}>

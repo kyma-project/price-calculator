@@ -15,5 +15,10 @@ export default function calculateStorageCosts(props: Props): number {
   const premiumPPUdivider: number = config.PremiumStorage.PricePerUnitDivider;
   const premiumPPUdivider2: number = config.PremiumStorage.PricePerUnitDivider2;
 
-  return ((PPU / PPUdivider / PPUdivider2) * timeConsumption * GBQuantity) + ((premiumPPU / premiumPPUdivider / premiumPPUdivider2) * timeConsumption * premiumGBQuantity);
+  return (
+    (PPU / PPUdivider / PPUdivider2) * timeConsumption * GBQuantity +
+    (premiumPPU / premiumPPUdivider / premiumPPUdivider2) *
+      timeConsumption *
+      premiumGBQuantity
+  );
 }

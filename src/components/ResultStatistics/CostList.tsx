@@ -12,7 +12,13 @@ interface Props {
 }
 
 export default function CostList(props: Props) {
-  const { baseConfigCosts, additionalCosts, storageCosts, totalCosts, totalCostsInCC } = props;
+  const {
+    baseConfigCosts,
+    additionalCosts,
+    storageCosts,
+    totalCosts,
+    totalCostsInCC,
+  } = props;
 
   return (
     <>

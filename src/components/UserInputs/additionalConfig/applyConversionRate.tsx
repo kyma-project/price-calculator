@@ -6,11 +6,13 @@ import { storageCostsState } from '../../../state/costs/storageCostsState';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
 import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
-import { totalCostsInCCState, totalCostsState } from '../../../state/costs/totalCostsState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../../state/costs/totalCostsState';
 import calculateTotalCosts from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 export default function TimeConStorageInput() {
-
   const baseConfigCosts: number = useRecoilValue(baseConfigCostsState);
   const additionalCosts: number = useRecoilValue(additionalCostsState);
   const storageCosts: number = useRecoilValue(storageCostsState);
@@ -31,7 +33,7 @@ export default function TimeConStorageInput() {
       baseConfigCosts,
       storageCosts,
       additionalCosts,
-      conversionRatio: newValue
+      conversionRatio: newValue,
     });
     setTotalCosts(totalCosts.CU);
     setTotalCostsInCC(totalCosts.CC);
@@ -39,7 +41,7 @@ export default function TimeConStorageInput() {
 
   return (
     <div>
-      <Title className="wizard-subheader" level="H5">
+      <Title className="wizard-subheader" level="H5" size="H5">
         Conversion rate from Capacity Units to {config.CurrencyCode}
       </Title>
       <Slider

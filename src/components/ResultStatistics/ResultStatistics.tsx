@@ -1,6 +1,9 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { totalCostsInCCState, totalCostsState } from '../../state/costs/totalCostsState';
+import {
+  totalCostsInCCState,
+  totalCostsState,
+} from '../../state/costs/totalCostsState';
 import DonutStatistics from './DonutStatistics';
 import { baseConfigCostsState } from '../../state/costs/baseConfigCostsState';
 import { additionalCostsState } from '../../state/costs/additionalCostsState';

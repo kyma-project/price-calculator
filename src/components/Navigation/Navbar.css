@@ -1,5 +1,5 @@
 ui5-shellbar::part(root) {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   min-height: 7.5vh;
   border-bottom: 2.5px solid rgb(41, 114, 234);
   background-color: white;

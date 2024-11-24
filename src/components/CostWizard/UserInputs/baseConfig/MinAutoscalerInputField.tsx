@@ -7,7 +7,7 @@ import { VMSize, VMsizeState } from '../../../../state/baseConfig/VMsizeState';
 import { timeConsumptionBaseConfigState } from '../../../../state/baseConfig/timeConsumptionState';
 import { machineTypeState } from '../../../../state/baseConfig/machineTypeState';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
-import { useCostCalculator } from '../../../../calculatorFunctions/CostCalculatorContext';
+import { useCostCalculator } from '../../../../context/CostCalculatorContext';
 
 export default function MinAutoscalerInputField() {
   const timeConsumption: number = useRecoilValue<number>(

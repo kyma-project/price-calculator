@@ -9,7 +9,7 @@ import {
   MachineType,
   machineTypeState,
 } from '../../../../state/baseConfig/machineTypeState';
-import { useCostCalculator } from '../../../../calculatorFunctions/CostCalculatorContext';
+import { useCostCalculator } from '../../../../context/CostCalculatorContext';
 
 export default function VMsizeSelect() {
   const minAutoscaler: number = useRecoilValue<number>(minAutoscalerState);

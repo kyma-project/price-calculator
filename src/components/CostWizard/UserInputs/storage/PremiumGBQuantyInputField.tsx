@@ -5,7 +5,7 @@ import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
 import { timeConsumptionStorageState } from '../../../../state/storage/timeConsumptionState';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
-import { useCostCalculator } from '../../../../calculatorFunctions/CostCalculatorContext';
+import { useCostCalculator } from '../../../../context/CostCalculatorContext';
 
 export default function TimeConStorageInput() {
   const timeConsumption: number = useRecoilValue<number>(

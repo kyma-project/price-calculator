@@ -1,7 +1,7 @@
 import React from 'react';
 import DonutStatistics from './DonutStatistics';
 import CostList from './CostList';
-import { useCostCalculator } from '../../calculatorFunctions/CostCalculatorContext';
+import { useCostCalculator } from '../../context/CostCalculatorContext';
 
 export default function ResultStatistics() {
   const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =

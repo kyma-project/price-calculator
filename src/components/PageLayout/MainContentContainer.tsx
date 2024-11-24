@@ -3,7 +3,7 @@ import MainContent from './MainContent';
 import SideContent from './SideContent';
 import DetailsTable from './DetailsTable';
 import './MainContentContainer.css';
-import { CostProvider } from '../../calculatorFunctions/CostCalculatorContext';
+import { CostProvider } from '../../context/CostCalculatorContext';
 
 interface ContentLayoutProps {
   MainContent: ReactNode;

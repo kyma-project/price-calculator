@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import calculateTotalCosts, {
   TotalCosts,
-} from './totalCosts/calculateTotalCosts';
+} from '../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateStorageCosts, {
   StorageCostProps,
-} from './storageCosts/calculateStorageCosts';
+} from '../calculatorFunctions/storageCosts/calculateStorageCosts';
 import calculateBaseConfigCosts, {
   BaseConfigProps,
-} from './baseConfigCosts/calculateBaseConfigCosts';
+} from '../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
 import config from '../config.json';
 import { useRecoilValue } from 'recoil';
 import { applyConversionRateState } from '../state/additionalConfig/applyConversionRateState';

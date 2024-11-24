@@ -9,16 +9,7 @@ import {
   MachineType,
   machineTypeState,
 } from '../../../../state/baseConfig/machineTypeState';
-import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
-import calculateBaseConfigCosts from '../../../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
-import { storageCostsState } from '../../../../state/costs/storageCostsState';
-import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
-import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
-import {
-  totalCostsInCCState,
-  totalCostsState,
-} from '../../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+import { useCostCalculator } from '../../../../calculatorFunctions/CostCalculatorContext';
 
 export default function VMsizeSelect() {
   const minAutoscaler: number = useRecoilValue<number>(minAutoscalerState);
@@ -26,16 +17,10 @@ export default function VMsizeSelect() {
   const timeConsumption: number = useRecoilValue<number>(
     timeConsumptionBaseConfigState,
   );
-  const setBaseConfigCosts = useSetRecoilState<number>(baseConfigCostsState);
   const setValue = useSetRecoilState<MachineType>(machineTypeState);
   const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
 
-  const storageCosts: number = useRecoilValue(storageCostsState);
-  const additionalCosts: number = useRecoilValue(additionalCostsState);
-  const setTotalCosts = useSetRecoilState<number>(totalCostsState);
-  const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
-
-  const conversionRatio: number = useRecoilValue(applyConversionRateState);
+  const { updateBaseConfigCosts } = useCostCalculator();
 
   const onChange = (event: any) => {
     const selection = event.detail.selectedOption.dataset;
@@ -44,22 +29,12 @@ export default function VMsizeSelect() {
       multiple: selection.multiple,
     });
 
-    const baseConfigCosts = calculateBaseConfigCosts({
-      vmMultiplier,
+    updateBaseConfigCosts({
       timeConsumption,
+      vmMultiplier,
       minAutoscaler,
       machineTypeFactor: selection.multiple,
     });
-    setBaseConfigCosts(baseConfigCosts);
-
-    const totalCosts = calculateTotalCosts({
-      baseConfigCosts,
-      storageCosts,
-      additionalCosts,
-      conversionRatio,
-    });
-    setTotalCosts(totalCosts.CU);
-    setTotalCostsInCC(totalCosts.CC);
   };
 
   return (

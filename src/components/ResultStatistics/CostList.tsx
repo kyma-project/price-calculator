@@ -2,23 +2,17 @@ import React from 'react';
 import './CostList.css';
 import roundDecimals from './roundDecimals';
 import config from '../../config.json';
+import { TotalCosts } from '../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 interface Props {
   baseConfigCosts: number;
   additionalCosts: number;
   storageCosts: number;
-  totalCosts: number;
-  totalCostsInCC: number;
+  totalCosts: TotalCosts;
 }
 
 export default function CostList(props: Props) {
-  const {
-    baseConfigCosts,
-    additionalCosts,
-    storageCosts,
-    totalCosts,
-    totalCostsInCC,
-  } = props;
+  const { baseConfigCosts, additionalCosts, storageCosts, totalCosts } = props;
 
   return (
     <>
@@ -39,11 +33,11 @@ export default function CostList(props: Props) {
       </div>
       <div className="row final-row final-row-child">
         <h5 className="text">- In Capacity Units</h5>
-        <h3 className="value">{roundDecimals(totalCosts, true)} CU</h3>
+        <h3 className="value">{roundDecimals(totalCosts.CU, true)} CU</h3>
       </div>
       <div className="row final-row final-row-child">
         <h5 className="text">- In currency ({config.CurrencyCode})</h5>
-        <h3 className="value">{roundDecimals(totalCostsInCC, true)} €</h3>
+        <h3 className="value">{roundDecimals(totalCosts.CC, true)} €</h3>
       </div>
     </>
   );

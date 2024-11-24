@@ -1,12 +1,12 @@
 import config from '../../config.json';
 
-interface Props {
+export interface StorageCostProps {
   GBQuantity: number;
   premiumGBQuantity: number;
   timeConsumption: number;
 }
 
-export default function calculateStorageCosts(props: Props): number {
+export default function calculateStorageCosts(props: StorageCostProps): number {
   const { GBQuantity, premiumGBQuantity, timeConsumption } = props;
   const PPU: number = config.Storage.PricePerUnit;
   const PPUdivider: number = config.Storage.PricePerUnitDivider;

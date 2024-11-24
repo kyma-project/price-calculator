@@ -1,20 +1,11 @@
 import React from 'react';
 import config from '../../../../config.json';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
 import { timeConsumptionStorageState } from '../../../../state/storage/timeConsumptionState';
-import { storageCostsState } from '../../../../state/costs/storageCostsState';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
-import calculateStorageCosts from '../../../../calculatorFunctions/storageCosts/calculateStorageCosts';
-import { additionalCostsState } from '../../../../state/costs/additionalCostsState';
-import { baseConfigCostsState } from '../../../../state/costs/baseConfigCostsState';
-import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
-import {
-  totalCostsInCCState,
-  totalCostsState,
-} from '../../../../state/costs/totalCostsState';
-import calculateTotalCosts from '../../../../calculatorFunctions/totalCosts/calculateTotalCosts';
+import { useCostCalculator } from '../../../../calculatorFunctions/CostCalculatorContext';
 
 export default function TimeConStorageInput() {
   const timeConsumption: number = useRecoilValue<number>(
@@ -22,39 +13,22 @@ export default function TimeConStorageInput() {
   );
   const GBQuantity: number = useRecoilValue<number>(GBQuantityState);
   const [value, setValue] = useRecoilState<number>(premiumGBQuantityState);
-  const setStorageCosts = useSetRecoilState<number>(storageCostsState);
-
-  const baseConfigCosts: number = useRecoilValue(baseConfigCostsState);
-  const additionalCosts: number = useRecoilValue(additionalCostsState);
-  const setTotalCosts = useSetRecoilState<number>(totalCostsState);
-  const setTotalCostsInCC = useSetRecoilState<number>(totalCostsInCCState);
-  const conversionRatio: number = useRecoilValue(applyConversionRateState);
 
   const configuration = config.PremiumStorage;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
 
+  const { updateStorageCosts } = useCostCalculator();
+
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    if (newValue === value) return;
     setValue(newValue);
-
-    const storageCosts = calculateStorageCosts({
+    updateStorageCosts({
       GBQuantity,
       premiumGBQuantity: newValue,
       timeConsumption,
     });
-    setStorageCosts(storageCosts);
-
-    const totalCosts = calculateTotalCosts({
-      baseConfigCosts,
-      storageCosts,
-      additionalCosts,
-      conversionRatio,
-    });
-    setTotalCosts(totalCosts.CU);
-    setTotalCostsInCC(totalCosts.CC);
   }
 
   return (

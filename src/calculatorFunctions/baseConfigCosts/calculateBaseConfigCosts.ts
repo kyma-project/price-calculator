@@ -1,13 +1,15 @@
 import config from '../../config.json';
 
-interface Props {
+export interface BaseConfigProps {
   timeConsumption: number;
   vmMultiplier: number;
   minAutoscaler: number;
   machineTypeFactor: number;
 }
 
-export default function calculateBaseConfigCosts(props: Props): number {
+export default function calculateBaseConfigCosts(
+  props: BaseConfigProps,
+): number {
   const { timeConsumption, minAutoscaler, vmMultiplier, machineTypeFactor } =
     props;
 

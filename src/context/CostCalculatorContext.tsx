@@ -2,15 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import calculateTotalCosts, {
   TotalCosts,
 } from '../calculatorFunctions/totalCosts/calculateTotalCosts';
-import calculateStorageCosts, {
-  StorageCostProps,
-} from '../calculatorFunctions/storageCosts/calculateStorageCosts';
-import calculateBaseConfigCosts, {
-  BaseConfigProps,
-} from '../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts';
 import config from '../config.json';
-import { useRecoilValue } from 'recoil';
-import { applyConversionRateState } from '../state/additionalConfig/applyConversionRateState';
 
 interface CostContextType {
   baseConfigCosts: number;
@@ -18,9 +10,10 @@ interface CostContextType {
   additionalCosts: number;
   conversionRatio: number;
   totalCosts: TotalCosts;
-  updateBaseConfigCosts: (props: BaseConfigProps) => void;
-  updateStorageCosts: (props: StorageCostProps) => void;
-  setAdditionalCosts: (value: number) => void;
+  setBaseConfigCosts: React.Dispatch<React.SetStateAction<number>>;
+  setStorageCosts: React.Dispatch<React.SetStateAction<number>>;
+  setAdditionalCosts: React.Dispatch<React.SetStateAction<number>>;
+  setConversionRatio: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const defaultContext: CostContextType = {
@@ -29,9 +22,10 @@ const defaultContext: CostContextType = {
   additionalCosts: 0,
   conversionRatio: config.ConversionRateCUCC,
   totalCosts: { CU: 0, CC: 0 },
-  updateBaseConfigCosts: () => {},
-  updateStorageCosts: () => {},
+  setBaseConfigCosts: () => {},
+  setStorageCosts: () => {},
   setAdditionalCosts: () => {},
+  setConversionRatio: () => {},
 };
 
 const CostContext = createContext<CostContextType>(defaultContext);
@@ -43,18 +37,11 @@ export const CostProvider: React.FC<{ children: React.ReactNode }> = ({
   const [baseConfigCosts, setBaseConfigCosts] = useState<number>(0);
   const [storageCosts, setStorageCosts] = useState<number>(0);
   const [additionalCosts, setAdditionalCosts] = useState<number>(0);
-  const conversionRatio = useRecoilValue<number>(applyConversionRateState);
+  const [conversionRatio, setConversionRatio] = useState<number>(
+    config.ConversionRateCUCC,
+  );
+
   const [totalCosts, setTotalCosts] = useState<TotalCosts>({ CU: 0, CC: 0 });
-
-  const updateBaseConfigCosts = (props: BaseConfigProps) => {
-    const baseConfigCosts = calculateBaseConfigCosts(props);
-    setBaseConfigCosts(baseConfigCosts);
-  };
-
-  const updateStorageCosts = (props: StorageCostProps) => {
-    const storageCosts = calculateStorageCosts(props);
-    setStorageCosts(storageCosts);
-  };
 
   useEffect(() => {
     const totalCosts = calculateTotalCosts({
@@ -74,9 +61,10 @@ export const CostProvider: React.FC<{ children: React.ReactNode }> = ({
         additionalCosts,
         conversionRatio,
         totalCosts,
-        updateBaseConfigCosts,
-        updateStorageCosts,
+        setBaseConfigCosts,
+        setStorageCosts,
         setAdditionalCosts,
+        setConversionRatio,
       }}
     >
       {children}

@@ -1,34 +1,22 @@
 import React from 'react';
 import config from '../../../../config.json';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
-import { timeConsumptionStorageState } from '../../../../state/storage/timeConsumptionState';
-import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
+import { useRecoilState } from 'recoil';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
-import { useCostCalculator } from '../../../../context/CostCalculatorContext';
 
-export default function TimeConStorageInput() {
-  const timeConsumption: number = useRecoilValue<number>(
-    timeConsumptionStorageState,
-  );
-  const GBQuantity: number = useRecoilValue<number>(GBQuantityState);
-  const [value, setValue] = useRecoilState<number>(premiumGBQuantityState);
-
+export default function PremiumGBQuantityInputField() {
   const configuration = config.PremiumStorage;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const { updateStorageCosts } = useCostCalculator();
+  const [premiumGBQuantity, setPremiumGBQuantity] = useRecoilState<number>(
+    premiumGBQuantityState,
+  );
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    setValue(newValue);
-    updateStorageCosts({
-      GBQuantity,
-      premiumGBQuantity: newValue,
-      timeConsumption,
-    });
+    setPremiumGBQuantity(newValue);
   }
 
   return (
@@ -37,14 +25,14 @@ export default function TimeConStorageInput() {
         Premium Storage: number of GB
       </Title>
       <StepInput
-        value={value}
+        value={premiumGBQuantity}
         onChange={handleChange}
         min={min}
         max={max}
         step={step}
       />
       <Slider
-        value={value}
+        value={premiumGBQuantity}
         onInput={handleChange}
         min={min}
         max={max}

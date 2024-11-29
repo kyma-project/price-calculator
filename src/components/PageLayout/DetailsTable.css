@@ -1,3 +1,18 @@
 #DetailsTable {
   margin-top: 7.5vh;
 }
+
+#module-sizing-like {
+  margin: 0 5px;
+}
+
+ui5-table-header-row,
+ui5-table-row {
+  padding: 0 20px;
+}
+
+@media (max-width: 960px) {
+  #DetailsTable {
+    margin-top: 40px;
+  }
+}

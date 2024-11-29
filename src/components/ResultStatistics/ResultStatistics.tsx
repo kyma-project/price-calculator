@@ -1,28 +1,22 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { totalCostsState } from '../../state/costs/totalCostsState';
 import DonutStatistics from './DonutStatistics';
-import { baseConfigCostsState } from '../../state/costs/baseConfigCostsState';
-import { nodeCostsState } from '../../state/costs/nodeCostsState';
-import { storageCostsState } from '../../state/costs/storageCostsState';
 import CostList from './CostList';
+import { useCostCalculator } from '../../context/CostCalculatorContext';
 
 export default function ResultStatistics() {
-  const baseConfigCosts: number = useRecoilValue<number>(baseConfigCostsState);
-  const nodeCosts: number = useRecoilValue<number>(nodeCostsState);
-  const storageCosts: number = useRecoilValue<number>(storageCostsState);
-  const totalCosts = useRecoilValue<number>(totalCostsState);
+  const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
+    useCostCalculator();
 
   return (
     <>
       <DonutStatistics
         baseConfigCosts={baseConfigCosts}
-        nodeCosts={nodeCosts}
+        additionalCosts={additionalCosts}
         storageCosts={storageCosts}
       />
       <CostList
         baseConfigCosts={baseConfigCosts}
-        nodeCosts={nodeCosts}
+        additionalCosts={additionalCosts}
         storageCosts={storageCosts}
         totalCosts={totalCosts}
       />

@@ -10,8 +10,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navbar/>
-      <MainContentContainer/>
+      <Navbar />
+      <MainContentContainer />
     </div>
   );
 }

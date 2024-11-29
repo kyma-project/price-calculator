@@ -1,15 +1,16 @@
 import { DonutChart } from '@ui5/webcomponents-react-charts';
 import React, { useState } from 'react';
 import roundDecimals from './roundDecimals';
+import './DonutStatistics.css';
 
 interface Props {
   baseConfigCosts: number;
-  nodeCosts: number;
+  additionalCosts: number;
   storageCosts: number;
 }
 
 export default function DonutStatistics(props: Props) {
-  const { baseConfigCosts, nodeCosts, storageCosts } = props;
+  const { baseConfigCosts, additionalCosts, storageCosts } = props;
   const [activeSegment, setActiveSegment] = useState(0);
   const handleClick = (event: CustomEvent) => {
     setActiveSegment(event.detail.index ?? event.detail.dataIndex ?? -1);
@@ -17,18 +18,20 @@ export default function DonutStatistics(props: Props) {
 
   return (
     <DonutChart
+      id="donut-chart"
       dataset={[
         {
           name: 'Base Configuration',
           costs: roundDecimals(baseConfigCosts, false),
         },
         {
-          name: 'Node',
-          costs: roundDecimals(nodeCosts, false),
-        },
-        {
           name: 'Storage',
           costs: roundDecimals(storageCosts, false),
+        },
+
+        {
+          name: 'Additional',
+          costs: roundDecimals(additionalCosts, false),
         },
       ]}
       dimension={{

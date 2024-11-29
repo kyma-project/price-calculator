@@ -3,9 +3,10 @@ import calculateStorageCosts from '../../calculatorFunctions/storageCosts/calcul
 import config from '../../config.json';
 
 const GBQuantity = config.Storage.Default;
+const premiumGBQuantity = config.PremiumStorage.Default;
 const timeConsumption = config.Storage.TimeConsumption.Default;
 
 export const storageCostsState: RecoilState<number> = atom<number>({
   key: 'storageCostsState',
-  default: calculateStorageCosts({ GBQuantity, timeConsumption }),
+  default: calculateStorageCosts({ GBQuantity, premiumGBQuantity, timeConsumption }),
 });

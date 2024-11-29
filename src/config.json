@@ -86,5 +86,39 @@
     "PricePerUnit": 39,
     "PricePerUnitDivider": 32,
     "PricePerUnitDivider2": 720
+  },
+  "RedisCosts":{
+    "Tiers":[
+      {"key": "None",
+      "value": 0},
+      {"key": "Standard1",
+      "value": 74},
+      {"key": "Standard2",
+      "value": 148},
+      {"key": "Standard3",
+      "value": 387},
+      {"key": "Standard4",
+      "value": 778},
+      {"key": "Standard5",
+      "value": 1541},
+      {"key": "Standard6",
+      "value": 3084},
+      {"key": "Standard7",
+      "value": 6167},
+      {"key": "Standard8",
+      "value": 12331},
+      {"key": "Premium1",
+      "value": 773},
+      {"key": "Premium2",
+      "value": 1555},
+      {"key": "Premium3",
+      "value": 3082},
+      {"key": "Premium4",
+      "value": 6167},
+      {"key": "Premium5",
+      "value": 12335},
+      {"key": "Premium6",
+      "value": 24661}
+    ]
   }
 }

@@ -19,7 +19,7 @@ export default function VMsizeSelect() {
 
   return (
     <>
-      <Title className="wizard-subheader" level="H5" size="H5">
+      <Title className="wizard-subheader" level="H5" >
         Virtual Machine Size
       </Title>
       <Select onChange={onChange}>

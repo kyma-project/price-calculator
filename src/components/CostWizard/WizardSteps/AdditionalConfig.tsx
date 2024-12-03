@@ -12,7 +12,7 @@ import { RedisSize, redisState } from '../../../state/additionalConfig/redisStat
 import Redis from '../UserInputs/additionalConfig/RedisSelect';
 import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 
-export default function NodeStep() {
+export default function AdditionalConfig() {
   const conversionRatio = useRecoilValue<number>(applyConversionRateState);
   const redis = useRecoilValue<RedisSize>(redisState);
 
@@ -26,7 +26,7 @@ export default function NodeStep() {
 
   return (
     <WizardStep disabled titleText="Additional Configuration">
-      <Title wrappingType="Normal" level="H2" >
+      <Title wrappingType="Normal" level="H2" size="H2">
         3. Additional Configuration
       </Title>
       <div className="StepContent">

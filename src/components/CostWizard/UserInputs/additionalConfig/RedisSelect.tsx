@@ -3,6 +3,7 @@ import config from '../../../../config.json';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
 import { RedisSize, redisState } from '../../../../state/additionalConfig/redisState';
 import { useSetRecoilState } from 'recoil';
+import './RedisSelect.css';
 
 export default function RedisSelect() {
   const redisConfigOptions = config.RedisCosts.Tiers;
@@ -18,10 +19,10 @@ export default function RedisSelect() {
 
   return (
     <>
-      <Title className="wizard-subheader" level="H5">
+      <Title className="wizard-subheader" level="H5" size="H5">
         Cloud-managed Redis cache
       </Title>
-      <Select onChange={onChange}>
+      <Select className="redisSelect" onChange={onChange}>
         {redisConfigOptions.map((item) => (
           <Option
             key={item.key}

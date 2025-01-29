@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/price-calculator/static/css/main.167ddc1e.css",
-    "main.js": "/price-calculator/static/js/main.622543c6.js",
+    "main.js": "/price-calculator/static/js/main.304886f2.js",
     "ui5-webcomponents-cldr-ar.js": "/price-calculator/static/js/ui5-webcomponents-cldr-ar.79ee91e0.chunk.js",
     "ui5-webcomponents-cldr-ar_EG.js": "/price-calculator/static/js/ui5-webcomponents-cldr-ar_EG.4464bd7c.chunk.js",
     "ui5-webcomponents-cldr-ar_SA.js": "/price-calculator/static/js/ui5-webcomponents-cldr-ar_SA.035b6b05.chunk.js",
@@ -371,10 +371,10 @@
     "static/media/messagebundle_in.json": "/price-calculator/static/media/messagebundle_in.9e8eae2243ea3442b2c6.json",
     "index.html": "/price-calculator/index.html",
     "main.167ddc1e.css.map": "/price-calculator/static/css/main.167ddc1e.css.map",
-    "main.622543c6.js.map": "/price-calculator/static/js/main.622543c6.js.map"
+    "main.304886f2.js.map": "/price-calculator/static/js/main.304886f2.js.map"
   },
   "entrypoints": [
     "static/css/main.167ddc1e.css",
-    "static/js/main.622543c6.js"
+    "static/js/main.304886f2.js"
   ]
 }

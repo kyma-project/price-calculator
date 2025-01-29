@@ -33,6 +33,11 @@
           "value": "48 CPU - 192GB RAM",
           "multiple": 12,
           "nodes": 24
+        },
+        {
+          "value": "64 CPU - 256GB RAM",
+          "multiple": 16,
+          "nodes": 32
         }
       ]
     },
@@ -48,11 +53,13 @@
       "Max": 720,
       "Step": 1
     },
-    "machineTypeFactor" : {
-      "MachineTypes": [{
-        "value": "General Purpose",
-        "multiple": 1
-      }]
+    "machineTypeFactor": {
+      "MachineTypes": [
+        {
+          "value": "General Purpose",
+          "multiple": 1
+        }
+      ]
     },
     "PricePerUnit": 0.48055555555555557,
     "PricePerUnitDivider": 1,
@@ -60,7 +67,7 @@
     "BaseVMPricePerUnit": 346,
     "BaseStorageEventsPricePerUnit": 65
   },
-  "AdditionalConfig":{
+  "AdditionalConfig": {
     "Default": 0
   },
   "Storage": {

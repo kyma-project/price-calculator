@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions: # used by build images steps
+  id-token: write # This is required for requesting the JWT token
+  contents: write # This is required for actions/checkout and builds
+
 jobs:
   build:
     runs-on: ubuntu-latest

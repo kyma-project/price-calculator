@@ -8,15 +8,21 @@ import ApplyConversionRate from '../UserInputs/additionalConfig/applyConversionR
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import { useRecoilValue } from 'recoil';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
+import Redis from '../UserInputs/additionalConfig/RedisSelect';
+import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 
-export default function NodeStep() {
+export default function AdditionalConfig() {
   const conversionRatio = useRecoilValue<number>(applyConversionRateState);
+  const redis = useRecoilValue<RedisSize>(redisState);
 
   const { setConversionRatio } = useCostCalculator();
+  const { setAdditionalCosts } = useCostCalculator();
 
   useEffect(() => {
     setConversionRatio(conversionRatio);
-  }, [setConversionRatio, conversionRatio]);
+    setAdditionalCosts(calculateAdditionalCosts({redis: redis.value}));
+  }, [setConversionRatio, setAdditionalCosts, conversionRatio, redis]);
 
   return (
     <WizardStep disabled titleText="Additional Configuration">
@@ -26,6 +32,7 @@ export default function NodeStep() {
       <div className="StepContent">
         <InfoField info="The 'conversion rate' will help you to calculate eventual discounts." />
         <ApplyConversionRate />
+        <Redis />
       </div>
       <div className="ButtonContainer">
         <PreviousStepButton />

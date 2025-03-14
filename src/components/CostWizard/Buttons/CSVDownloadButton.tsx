@@ -17,7 +17,7 @@ import exportCSV from '../Functions/exportCSV';
 export default function CSVDownloadButton() {
   const baseCosts: number = useRecoilValue<number>(baseConfigCostsState);
   const baseVMSize = useRecoilValue<VMSize>(VMsizeState).value;
-  const baseMinAutoscaler = useRecoilValue<number>(minAutoscalerState);
+  const baseMinAutoscaler = useRecoilValue<number[]>(minAutoscalerState);
   const baseTime: number = useRecoilValue<number>(
     timeConsumptionBaseConfigState,
   );
@@ -38,7 +38,7 @@ export default function CSVDownloadButton() {
           baseCosts,
           baseTime,
           baseVMSize,
-          baseMinAutoscaler,
+          baseMinAutoscaler: baseMinAutoscaler[0],
           storageCosts,
           storageQuantity,
           storageTime,

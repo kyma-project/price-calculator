@@ -1,6 +1,6 @@
 {
   "CurrencyCode": "€",
-  "ConversionRateCUCC": 1,
+  "ConversionRateCUCC": 1.06,
   "baseConfig": {
     "VirtualMachineSize": {
       "Options": [

@@ -17,7 +17,7 @@ import { additionalCostsState } from '../../../state/costs/additionalCostsState'
 export default function XlsxDownloadButton() {
   const baseCosts: number = useRecoilValue<number>(baseConfigCostsState);
   const baseVMSize = useRecoilValue<VMSize>(VMsizeState).value;
-  const baseMinAutoscaler = useRecoilValue<number>(minAutoscalerState);
+  const baseMinAutoscaler = useRecoilValue<number[]>(minAutoscalerState);
   const baseTime: number = useRecoilValue<number>(
     timeConsumptionBaseConfigState,
   );
@@ -37,7 +37,7 @@ export default function XlsxDownloadButton() {
           baseCosts,
           baseTime,
           baseVMSize,
-          baseMinAutoscaler,
+          baseMinAutoscaler: baseMinAutoscaler[0],
           storageCosts,
           storageQuantity,
           storageTime,

@@ -27,7 +27,7 @@ export default function AdditionalConfig() {
   return (
     <WizardStep disabled titleText="Additional Configuration">
       <Title wrappingType="Normal" level="H2" size="H2">
-        3. Additional Configuration
+        4. Additional Configuration
       </Title>
       <div className="StepContent">
         <InfoField info="The 'conversion rate' will help you to calculate eventual discounts." />

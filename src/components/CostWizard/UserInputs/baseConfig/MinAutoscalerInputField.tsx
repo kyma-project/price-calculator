@@ -5,18 +5,24 @@ import HeaderWithInfo from '../../common/HeaderWithInfo';
 import { useRecoilState } from 'recoil';
 import { minAutoscalerState } from '../../../../state/baseConfig/minAutoscalerState';
 
-export default function MinAutoscalerInputField() {
+
+interface Props {
+  nodeIndex: number;
+}
+export default function MinAutoscalerInputField(props:Props) {
   const configuration = config.baseConfig.AutoScalerMin;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
 
   const [minAutoScaler, setMinAutoScaler] =
-    useRecoilState<number>(minAutoscalerState);
+    useRecoilState<number[]>(minAutoscalerState);
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    setMinAutoScaler(newValue);
+    let newMinAutoscaler = [...minAutoScaler];
+    newMinAutoscaler[props.nodeIndex] = newValue;
+    setMinAutoScaler(newMinAutoscaler);
   }
 
   return (
@@ -26,14 +32,14 @@ export default function MinAutoscalerInputField() {
         info="minimum number of available Virtual Machines"
       />
       <StepInput
-        value={minAutoScaler}
+        value={minAutoScaler.at(props.nodeIndex)}
         onChange={handleChange}
         min={min}
         max={max}
         step={step}
       />
       <Slider
-        value={minAutoScaler}
+        value={minAutoScaler.at(props.nodeIndex)}
         onInput={handleChange}
         min={min}
         max={max}

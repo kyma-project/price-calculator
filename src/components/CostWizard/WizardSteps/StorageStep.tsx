@@ -31,7 +31,7 @@ export default function StorageStep() {
   return (
     <WizardStep disabled titleText="Additional Storage">
       <Title wrappingType="Normal" level="H2" size="H2">
-        2. Additional storage for the Kyma cluster
+        3. Additional storage for the Kyma cluster
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />

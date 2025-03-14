@@ -3,8 +3,7 @@ import config from '../../../../config.json';
 import { Slider, StepInput } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
 import { useRecoilState } from 'recoil';
-import { minAutoscalerState } from '../../../../state/baseConfig/minAutoscalerState';
-
+import { MachineSetup, machineSetupState } from '../../../../state/machineSetupState';
 
 interface Props {
   nodeIndex: number;
@@ -15,14 +14,14 @@ export default function MinAutoscalerInputField(props:Props) {
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [minAutoScaler, setMinAutoScaler] =
-    useRecoilState<number[]>(minAutoscalerState);
+  const [machineSetup, setMachineSetup] =
+    useRecoilState<MachineSetup[]>(machineSetupState);
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    let newMinAutoscaler = [...minAutoScaler];
-    newMinAutoscaler[props.nodeIndex] = newValue;
-    setMinAutoScaler(newMinAutoscaler);
+    setMachineSetup(prevSetups =>
+      prevSetups.map((setup, index) =>
+      index === props.nodeIndex ? { ...setup, minAutoscaler: newValue } : setup));
   }
 
   return (
@@ -32,14 +31,14 @@ export default function MinAutoscalerInputField(props:Props) {
         info="minimum number of available Virtual Machines"
       />
       <StepInput
-        value={minAutoScaler.at(props.nodeIndex)}
+        value={machineSetup.at(props.nodeIndex)?.minAutoscaler}
         onChange={handleChange}
         min={min}
         max={max}
         step={step}
       />
       <Slider
-        value={minAutoScaler.at(props.nodeIndex)}
+        value={machineSetup.at(props.nodeIndex)?.minAutoscaler}
         onInput={handleChange}
         min={min}
         max={max}

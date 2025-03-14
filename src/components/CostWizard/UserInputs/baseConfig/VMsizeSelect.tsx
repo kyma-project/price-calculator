@@ -1,20 +1,26 @@
 import React from 'react';
 import config from '../../../../config.json';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
-import { VMSize, VMsizeState } from '../../../../state/baseConfig/VMsizeState';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { MachineSetup, machineSetupState } from '../../../../state/machineSetupState';
 
-export default function VMsizeSelect() {
+interface Props {
+  nodeIndex: number;
+}
+export default function VMsizeSelect(props:Props) {
   const baseConfigOptions = config.baseConfig.VirtualMachineSize.Options;
-  const setVmSize = useSetRecoilState<VMSize>(VMsizeState);
+
+  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
 
   const onChange = (event: any) => {
     const selection = event.detail.selectedOption.dataset;
-    setVmSize({
-      value: selection.value,
-      multiple: selection.multiple,
-      nodes: parseInt(selection.nodes),
-    });
+    setMachineSetup(prevSetups =>
+      prevSetups.map((setup, index) =>
+      index === props.nodeIndex ? { ...setup, VMSize: {
+        value: selection.value,
+        multiple: selection.multiple,
+        nodes: parseInt(selection.nodes),
+      } } : setup));
   };
 
   return (

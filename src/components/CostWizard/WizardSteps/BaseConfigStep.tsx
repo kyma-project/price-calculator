@@ -14,7 +14,7 @@ export default function BaseConfigStep() {
       </Title>
       <div className="StepContent">
         <InfoField info="contains 224 GB of storage by default" />
-        <MachineSetup nodeIndex={0} />
+        <MachineSetup nodeIndex={0} workerNode={false} />
       </div>
       <div className="ButtonContainer">
         <NextStepButton />

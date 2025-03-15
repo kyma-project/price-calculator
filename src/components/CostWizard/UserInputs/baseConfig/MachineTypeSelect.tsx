@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 
 interface Props {
   nodeIndex: number;
+  workerNode: boolean;
 }
 export default function VMsizeSelect(props:Props) {
   const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
@@ -20,14 +21,14 @@ export default function VMsizeSelect(props:Props) {
         multiple: selection.multiple,
       } } : setup));
   };
-
+  const filteredOptions = props.workerNode ? baseConfigOptions : baseConfigOptions.filter(item => item.value === config.baseConfig.machineTypeFactor.MachineTypes[0].value);
   return (
     <>
       <Title className="wizard-subheader" level="H5" size="H5">
         Machine Type
       </Title>
       <Select onChange={onChange}>
-        {baseConfigOptions.map((item) => (
+        {filteredOptions.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}

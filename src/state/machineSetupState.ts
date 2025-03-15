@@ -8,6 +8,7 @@ export interface MachineSetup {
   timeConsuption: number;
   VMSize: VMSize;
   costCalulation: number;
+  visible: boolean;
 }
 
 export const machineSetupState: RecoilState<MachineSetup[]> = atom<MachineSetup[]>({

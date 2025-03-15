@@ -58,6 +58,10 @@
         {
           "value": "General Purpose",
           "multiple": 1
+        },
+        {
+          "value": "Compute Optimized",
+          "multiple": 1
         }
       ]
     },

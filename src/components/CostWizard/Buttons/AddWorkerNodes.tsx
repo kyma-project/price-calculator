@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { Button } from "@ui5/webcomponents-react";
+import { Button, FlexBox, Title } from "@ui5/webcomponents-react";
+import "./AddWorkerNodes.css"
 import {
   MachineSetup,
   machineSetupState,
-} from "../../../state/machineSetupState";
+} from "../../../state/nodes/machineSetupState";
 import MachineSetupObj from "../MachineSetup";
 import { useRecoilState } from "recoil";
 
 interface DynamicComponentProps {
   index: number;
 }
-
+/* Definition of dynamic component */
 const DynamicComponent: React.FC<DynamicComponentProps> = ({ index }) => {
   const [machineSetup, setMachineSetup] =
     useRecoilState<MachineSetup[]>(machineSetupState);
-  const removeComponent = () => {
+  const removePool = () => {
     setMachineSetup((prevSetups) =>
       prevSetups.map((setup, ind) =>
         ind === index ? { ...setup, visible: false } : setup
@@ -24,11 +25,13 @@ const DynamicComponent: React.FC<DynamicComponentProps> = ({ index }) => {
 
   return (
     <div
-      className="StepContent"
-      style={{ display: machineSetup.at(index)?.visible ? "block" : "none" }}
-    >
+      className="dynamic-worker-node-container"
+      style={{ display: machineSetup.at(index)?.visible ? "block" : "none" }} >
+      <FlexBox wrap="NoWrap" alignItems="Center" fitContainer displayInline justifyContent="SpaceBetween">
+        <Title className="workernode-name" level="H2" size="H2">Worker Node Pool {index}</Title>
+        <Button icon="decline" onClick={removePool}>Remove Worker Node Pool</Button>
+      </FlexBox>
       <MachineSetupObj nodeIndex={index} workerNode={true} />
-      <Button onClick={removeComponent}>Remove Component</Button>
     </div>
   );
 };
@@ -36,7 +39,7 @@ const DynamicComponent: React.FC<DynamicComponentProps> = ({ index }) => {
 export default function AddWorkerNodes() {
   const [components, setComponents] = useState<React.ReactNode[]>([]);
 
-  const addComponent = () => {
+  const addPool = () => {
     const newIndex = components.length + 1;
     setComponents([
       ...components,
@@ -44,9 +47,9 @@ export default function AddWorkerNodes() {
     ]);
   };
   return (
-    <div>
+    <div className="add-worker-node-container">
       {components}
-      <Button onClick={addComponent}>Add Component</Button>
+      <Button icon="add" onClick={addPool}>Add Worker Node Pool</Button>
     </div>
   );
 }

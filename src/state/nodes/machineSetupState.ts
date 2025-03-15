@@ -1,6 +1,15 @@
 import { atom, RecoilState } from 'recoil';
-import { MachineType, machineTypeState } from './baseConfig/machineTypeState';
-import { VMSize, VMsizeState } from './baseConfig/VMsizeState';
+
+export interface MachineType {
+  value: string;
+  multiple: number;
+}
+
+export interface VMSize {
+  value: string;
+  multiple: number;
+  nodes: number;
+}
 
 export interface MachineSetup {
   machineType: MachineType;

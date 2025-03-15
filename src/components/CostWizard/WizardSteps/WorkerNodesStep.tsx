@@ -4,13 +4,13 @@ import NextStepButton from '../Buttons/NextStepButton';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import AddWorkerNodes from '../Buttons/AddWorkerNodes';
 
-export default function WorkerNodes() {
+export default function WorkerNodesStep() {
 
 
   return (
-    <WizardStep disabled titleText="Additional Worker Nodes">
+    <WizardStep disabled titleText="Worker Node Pools">
       <Title wrappingType="Normal" level="H2" size="H2">
-        2. Additional Worker Nodes
+        2. Add more worker node pools
       </Title>
       <div className="StepContent">
         <AddWorkerNodes />

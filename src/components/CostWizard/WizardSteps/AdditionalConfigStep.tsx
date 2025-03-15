@@ -12,7 +12,7 @@ import { RedisSize, redisState } from '../../../state/additionalConfig/redisStat
 import Redis from '../UserInputs/additionalConfig/RedisSelect';
 import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 
-export default function AdditionalConfig() {
+export default function AdditionalConfigStep() {
   const conversionRatio = useRecoilValue<number>(applyConversionRateState);
   const redis = useRecoilValue<RedisSize>(redisState);
 
@@ -27,7 +27,7 @@ export default function AdditionalConfig() {
   return (
     <WizardStep disabled titleText="Additional Configuration">
       <Title wrappingType="Normal" level="H2" size="H2">
-        4. Additional Configuration
+        4. Additional configuration options
       </Title>
       <div className="StepContent">
         <InfoField info="The 'conversion rate' will help you to calculate eventual discounts." />

@@ -21,7 +21,7 @@ export default function DonutStatistics(props: Props) {
       id="donut-chart"
       dataset={[
         {
-          name: 'Base Configuration',
+          name: 'Nodes',
           costs: roundDecimals(baseConfigCosts, false),
         },
         {

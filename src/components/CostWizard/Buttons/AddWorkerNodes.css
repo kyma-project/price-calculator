@@ -1,0 +1,12 @@
+.workernode-name{
+  font-size: x-large;
+}
+
+.dynamic-worker-node-container{
+  margin-top: 20px;
+}
+
+.add-worker-node-container{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}

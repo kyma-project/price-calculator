@@ -17,7 +17,7 @@ export default function CostList(props: Props) {
   return (
     <>
       <div className="row">
-        <h5 className="text">Base Configuration</h5>
+        <h5 className="text">Nodes</h5>
         <h5 className="value">{roundDecimals(baseConfigCosts, true)} CU</h5>
       </div>
       <div className="row">

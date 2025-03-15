@@ -1,12 +1,14 @@
+import { RedisSize } from '../../../state/additionalConfig/redisState';
+import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import roundDecimals from '../../ResultStatistics/roundDecimals';
 
 interface Props {
   baseCosts: number;
-  baseTime: number;
-  baseVMSize: any;
-  baseMinAutoscaler: number;
+  machineSetup: MachineSetup[];
   storageCosts: number;
   storageQuantity: number;
+  premiumStorageQuantity: number;
+  redisSize: RedisSize;
   storageTime: number;
   additionalCosts: number;
   totalCosts: number;
@@ -15,25 +17,32 @@ interface Props {
 export default function exportCSV(props: Props) {
   const {
     baseCosts,
-    baseTime,
-    baseVMSize,
-    baseMinAutoscaler,
+    machineSetup,
     storageCosts,
     storageQuantity,
     storageTime,
+    premiumStorageQuantity,
+    redisSize,
     additionalCosts,
     totalCosts,
   } = props;
 
-  const csvData = [
+  const dataArray = [
     ['Base Configuration'],
-    ['Virtual Machine Size', baseVMSize],
-    ['Autoscaler Min', baseMinAutoscaler],
-    ['Time Consumption', baseTime],
+    ['Virtual Machine Size', ...machineSetup.map(prop => prop.VMSize)],
+    ['Virtual Machine Type', ...machineSetup.map(prop => prop.machineType)],
+    ['Autoscaler Min', machineSetup.map(prop => prop.minAutoscaler)],
+    ['Time Consumption', machineSetup.map(prop => prop.timeConsuption)],
+    ['Worker Node Pool Cost', machineSetup.map(prop => prop.costCalulation)],
     [''],
     ['Storage'],
-    ['Additional Storage', storageQuantity],
+    ['Standard Storage', storageQuantity],
+    ['Premium Storage', premiumStorageQuantity],
     ['Time Consumption', storageTime],
+    [''],
+    ['Redis'],
+    ['Redis Size', redisSize.tsize],
+    ['Redis Cost', redisSize.value],
     [''],
     ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
     ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
@@ -41,7 +50,7 @@ export default function exportCSV(props: Props) {
     ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
   ];
 
-  const csvString = csvData.map((row) => row.join(': ')).join('\n');
+  const csvString = dataArray.map((row) => row.join(': ')).join('\n');
   const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
 

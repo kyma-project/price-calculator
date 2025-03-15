@@ -29,9 +29,9 @@ export default function StorageStep() {
   }, [setStorageCosts, GBQuantity, premiumGBQuantity, timeConsumption]);
 
   return (
-    <WizardStep disabled titleText="Additional Storage">
+    <WizardStep disabled titleText="Storage">
       <Title wrappingType="Normal" level="H2" size="H2">
-        3. Additional storage for the Kyma cluster
+        3. Add storage for the Kyma cluster
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />

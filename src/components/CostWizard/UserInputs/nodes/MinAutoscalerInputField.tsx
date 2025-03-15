@@ -3,7 +3,7 @@ import config from '../../../../config.json';
 import { Slider, StepInput } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
 import { useRecoilState } from 'recoil';
-import { MachineSetup, machineSetupState } from '../../../../state/machineSetupState';
+import { MachineSetup, machineSetupState } from '../../../../state/nodes/machineSetupState';
 
 interface Props {
   nodeIndex: number;
@@ -14,8 +14,7 @@ export default function MinAutoscalerInputField(props:Props) {
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [machineSetup, setMachineSetup] =
-    useRecoilState<MachineSetup[]>(machineSetupState);
+  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Form } from "@ui5/webcomponents-react";
-import VMsizeSelect from "./UserInputs/baseConfig/VMsizeSelect";
-import MachineTypeSelect from "./UserInputs/baseConfig/MachineTypeSelect";
-import MinAutoscalerInputField from "./UserInputs/baseConfig/MinAutoscalerInputField";
+import VMsizeSelect from "./UserInputs/nodes/VMsizeSelect";
+import MachineTypeSelect from "./UserInputs/nodes/MachineTypeSelect";
+import MinAutoscalerInputField from "./UserInputs/nodes/MinAutoscalerInputField";
 import "./CostWizard.css";
 import calculateBaseConfigCosts from "../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts";
 import { useCostCalculator } from "../../context/CostCalculatorContext";
 import { useRecoilState } from "recoil";
-import { machineSetupState } from "../../state/machineSetupState";
+import { machineSetupState } from "../../state/nodes/machineSetupState";
 import config from "../../config.json";
 
 interface Props {
@@ -79,7 +79,7 @@ export default function MachineSetup(props: Props) {
     );
     let baseConfigCosts = 0;
     for (let i = 0; i < machineSetup.length; i++) {
-      if (i == props.nodeIndex && machineSetup.at(i)?.visible) {
+      if (i === props.nodeIndex && machineSetup.at(i)?.visible) {
         baseConfigCosts += updatedCostCalculation;
       } else if (machineSetup.at(i)?.visible) {
         baseConfigCosts += machineSetup.at(i)?.costCalulation ?? 0;
@@ -88,7 +88,7 @@ export default function MachineSetup(props: Props) {
 
     setBaseConfigCosts(baseConfigCosts);
   }, [
-    setBaseConfigCosts,
+    setBaseConfigCosts, 
     machineSetup.at(props.nodeIndex)?.visible,
     machineSetup.at(props.nodeIndex)?.VMSize,
     machineSetup.at(props.nodeIndex)?.machineType.multiple,

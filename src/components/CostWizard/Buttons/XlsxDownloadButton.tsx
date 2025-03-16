@@ -13,32 +13,31 @@ import exportXLSX from '../Functions/exportXLSX';
 import { additionalCostsState } from '../../../state/costs/additionalCostsState';
 import { MachineSetup, machineSetupState } from '../../../state/nodes/machineSetupState';
 import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
+import { useCostCalculator } from '../../../context/CostCalculatorContext';
 
 export default function XlsxDownloadButton() {
-  const baseCosts: number = useRecoilValue<number>(baseConfigCostsState);
-  const storageCosts: number = useRecoilValue<number>(storageCostsState);
   const storageQuantity: number = useRecoilValue<number>(GBQuantityState);
   const premiumStorageQuantity: number = useRecoilValue<number>(premiumGBQuantityState);
-  const additionalCosts: number = useRecoilValue<number>(additionalCostsState);
   const storageTime: number = useRecoilValue<number>(
     timeConsumptionStorageState,
   );
-  const totalCosts = useRecoilValue<number>(totalCostsState);
   const [machineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
   const redisSize = useRecoilValue<RedisSize>(redisState);
+  const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
+  useCostCalculator();
 
   return (
     <Button
       design="Emphasized"
       onClick={() =>
         exportXLSX({
-          baseCosts,
+          baseCosts: baseConfigCosts,
           machineSetup,
           storageCosts,
           storageQuantity,
           storageTime,
           additionalCosts,
-          totalCosts,
+          totalCosts:totalCosts.CU,
           premiumStorageQuantity,
           redisSize
         })

@@ -22,7 +22,7 @@ export default function PremiumGBQuantityInputField() {
   return (
     <div>
       <Title className="wizard-subheader" level="H5" size="H5">
-        Premium Storage: number of GB
+        NFS Storage: number of GB
       </Title>
       <StepInput
         value={premiumGBQuantity}

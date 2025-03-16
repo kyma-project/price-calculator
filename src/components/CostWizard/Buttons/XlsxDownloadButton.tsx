@@ -10,6 +10,7 @@ import exportXLSX from '../Functions/exportXLSX';
 import { MachineSetup, machineSetupState } from '../../../state/nodes/machineSetupState';
 import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
+import { costNodeState } from '../../../state/costStatus';
 
 export default function XlsxDownloadButton() {
   const storageQuantity: number = useRecoilValue<number>(GBQuantityState);
@@ -18,6 +19,7 @@ export default function XlsxDownloadButton() {
     timeConsumptionStorageState,
   );
   const [machineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
+  const costNode = useRecoilValue<number[]>(costNodeState);
   const redisSize = useRecoilValue<RedisSize>(redisState);
   const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
   useCostCalculator();
@@ -29,6 +31,7 @@ export default function XlsxDownloadButton() {
         exportXLSX({
           baseCosts: baseConfigCosts,
           machineSetup,
+          costNode,
           storageCosts,
           storageQuantity,
           storageTime,

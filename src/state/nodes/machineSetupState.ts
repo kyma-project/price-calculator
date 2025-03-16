@@ -16,7 +16,6 @@ export interface MachineSetup {
   minAutoscaler: number;
   timeConsuption: number;
   VMSize: VMSize;
-  costCalulation: number;
   visible: boolean;
 }
 

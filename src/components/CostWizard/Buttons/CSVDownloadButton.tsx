@@ -10,9 +10,11 @@ import exportCSV from '../Functions/exportCSV';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
 import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
+import { costNodeState } from '../../../state/costStatus';
 
 export default function CSVDownloadButton() {
   const [machineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
+    const [costNode] = useRecoilState<number[]>(costNodeState);
   const storageQuantity: number = useRecoilValue<number>(GBQuantityState);
   const premiumStorageQuantity: number = useRecoilValue<number>(premiumGBQuantityState);
   const storageTime: number = useRecoilValue<number>(
@@ -30,6 +32,7 @@ export default function CSVDownloadButton() {
         exportCSV({
           baseCosts: baseConfigCosts,
           machineSetup,
+          costNode,
           storageCosts,
           storageQuantity,
           storageTime,

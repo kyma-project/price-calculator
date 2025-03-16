@@ -12,6 +12,12 @@ interface Props {
   storageTime: number;
   additionalCosts: number;
   totalCosts: number;
+  costNode: number[];
+}
+
+interface MachineSetupWithCost{
+  machineSetup: MachineSetup
+  cost: number;
 }
 
 export default function exportCSV(props: Props) {
@@ -25,15 +31,27 @@ export default function exportCSV(props: Props) {
     redisSize,
     additionalCosts,
     totalCosts,
+    costNode
   } = props;
+
+  let visibleMachineSetup: MachineSetupWithCost[] = machineSetup.reduce((acc, machine, index) => {
+    if (machine.visible) {
+      const machineWithCost = {
+        machineSetup: machine,
+        cost: costNode.at(index) ?? 0
+      };
+      acc.push(machineWithCost);
+    }
+    return acc;
+    }, [] as MachineSetupWithCost[]);
 
   const dataArray = [
     ['Base Configuration'],
-    ['Virtual Machine Size', ...machineSetup.map(prop => prop.VMSize.value)],
-    ['Virtual Machine Type', ...machineSetup.map(prop => prop.machineType.value)],
-    ['Autoscaler Min', ...machineSetup.map(prop => prop.minAutoscaler.toString())],
-    ['Time Consumption', ...machineSetup.map(prop => prop.timeConsuption.toString())],
-    ['Worker Node Pool Cost', ...machineSetup.map(prop => prop.costCalulation.toString() + ' CU')],
+    ['Virtual Machine Size', ...visibleMachineSetup.map(prop => prop.machineSetup.VMSize.value)],
+    ['Virtual Machine Type', ...visibleMachineSetup.map(prop => prop.machineSetup.machineType.value)],
+    ['Autoscaler Min', ...visibleMachineSetup.map(prop => prop.machineSetup.minAutoscaler.toString())],
+    ['Time Consumption', ...visibleMachineSetup.map(prop => prop.machineSetup.timeConsuption.toString())],
+    ['Worker Node Pool Cost', ...visibleMachineSetup.map(prop => prop.cost.toString() + ' CU')],
     [''],
     ['Storage'],
     ['Standard Storage', storageQuantity],

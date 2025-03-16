@@ -9,6 +9,7 @@ import { useCostCalculator } from "../../context/CostCalculatorContext";
 import { useRecoilState } from "recoil";
 import { machineSetupState } from "../../state/nodes/machineSetupState";
 import config from "../../config.json";
+import { costNodeState } from "../../state/costStatus";
 
 interface Props {
   nodeIndex: number;
@@ -16,6 +17,7 @@ interface Props {
 }
 export default function MachineSetup(props: Props) {
   const [machineSetup, setMachineSetup] = useRecoilState(machineSetupState);
+  const [costNode,setCostNode] = useRecoilState(costNodeState);
   const autoscalerMinValue = config.baseConfig.AutoScalerMin.Min;
   const timeConsumptionDefaultValue = config.baseConfig.TimeConsumption.Default;
   const machineTypeDefaultValue =
@@ -28,12 +30,6 @@ export default function MachineSetup(props: Props) {
     config.baseConfig.VirtualMachineSize.Options[0].multiple;
   const VMSizeDefaultNodes =
     config.baseConfig.VirtualMachineSize.Options[0].nodes;
-  const costCalcultaionDefaultObject = {
-    timeConsumption: timeConsumptionDefaultValue,
-    vmMultiplier: VMSizeDefaultMultiple,
-    minAutoscaler: autoscalerMinValue,
-    machineTypeFactor: machineTypeDefaultMultiple,
-  };
 
   if (props.nodeIndex >= machineSetup.length) {
     setMachineSetup([
@@ -50,24 +46,33 @@ export default function MachineSetup(props: Props) {
           multiple: VMSizeDefaultMultiple,
           nodes: VMSizeDefaultNodes,
         },
-        visible: true,
-        costCalulation: calculateBaseConfigCosts(costCalcultaionDefaultObject),
+        visible: true
       },
     ]);
+    setCostNode([...costNode, 0]);
   }
 
   const { setBaseConfigCosts } = useCostCalculator();
 
   useEffect(() => {
+
     let baseConfigCosts = 0;
      for (let i = 0; i < machineSetup.length; i++) {
       if (machineSetup.at(i)?.visible) {
-        baseConfigCosts += calculateBaseConfigCosts({
+        const updatedCost = calculateBaseConfigCosts({
           timeConsumption: machineSetup.at(i)?.timeConsuption ?? timeConsumptionDefaultValue,
           vmMultiplier: machineSetup.at(i)?.VMSize.multiple ?? VMSizeDefaultMultiple,
           minAutoscaler: machineSetup.at(i)?.minAutoscaler ?? autoscalerMinValue,
           machineTypeFactor: machineSetup.at(i)?.machineType.multiple ?? machineTypeDefaultMultiple,
         });
+        baseConfigCosts += updatedCost;
+        if (i===props.nodeIndex){
+
+          setCostNode((prevSetups) =>
+            prevSetups.map((setup, index) =>
+              index === props.nodeIndex ? updatedCost : setup)
+            );
+        }
       }
     }
     setBaseConfigCosts(baseConfigCosts);
@@ -77,7 +82,8 @@ export default function MachineSetup(props: Props) {
     machineTypeDefaultMultiple,
     autoscalerMinValue,
     VMSizeDefaultMultiple,
-    timeConsumptionDefaultValue
+    timeConsumptionDefaultValue,
+    props.nodeIndex, setCostNode
   ]);
   return (
     <Form>

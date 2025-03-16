@@ -59,40 +59,25 @@ export default function MachineSetup(props: Props) {
   const { setBaseConfigCosts } = useCostCalculator();
 
   useEffect(() => {
-    const updatedCostCalculation = calculateBaseConfigCosts({
-      timeConsumption: timeConsumptionDefaultValue,
-      vmMultiplier:
-        machineSetup.at(props.nodeIndex)?.VMSize.multiple ??
-        VMSizeDefaultMultiple,
-      minAutoscaler:
-        machineSetup.at(props.nodeIndex)?.minAutoscaler ?? autoscalerMinValue,
-      machineTypeFactor:
-        machineSetup.at(props.nodeIndex)?.machineType.multiple ??
-        machineTypeDefaultMultiple,
-    });
-    setMachineSetup((prevSetups) =>
-      prevSetups.map((setup, index) =>
-        index === props.nodeIndex
-          ? { ...setup, costCalulation: updatedCostCalculation }
-          : setup
-      )
-    );
     let baseConfigCosts = 0;
-    for (let i = 0; i < machineSetup.length; i++) {
-      if (i === props.nodeIndex && machineSetup.at(i)?.visible) {
-        baseConfigCosts += updatedCostCalculation;
-      } else if (machineSetup.at(i)?.visible) {
-        baseConfigCosts += machineSetup.at(i)?.costCalulation ?? 0;
+     for (let i = 0; i < machineSetup.length; i++) {
+      if (machineSetup.at(i)?.visible) {
+        baseConfigCosts += calculateBaseConfigCosts({
+          timeConsumption: machineSetup.at(i)?.timeConsuption ?? timeConsumptionDefaultValue,
+          vmMultiplier: machineSetup.at(i)?.VMSize.multiple ?? VMSizeDefaultMultiple,
+          minAutoscaler: machineSetup.at(i)?.minAutoscaler ?? autoscalerMinValue,
+          machineTypeFactor: machineSetup.at(i)?.machineType.multiple ?? machineTypeDefaultMultiple,
+        });
       }
     }
-
     setBaseConfigCosts(baseConfigCosts);
   }, [
-    setBaseConfigCosts, 
-    machineSetup.at(props.nodeIndex)?.visible,
-    machineSetup.at(props.nodeIndex)?.VMSize,
-    machineSetup.at(props.nodeIndex)?.machineType.multiple,
-    machineSetup.at(props.nodeIndex)?.minAutoscaler,
+    setBaseConfigCosts,
+    machineSetup,
+    machineTypeDefaultMultiple,
+    autoscalerMinValue,
+    VMSizeDefaultMultiple,
+    timeConsumptionDefaultValue
   ]);
   return (
     <Form>

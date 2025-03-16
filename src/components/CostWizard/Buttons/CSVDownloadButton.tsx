@@ -1,12 +1,8 @@
 import React from 'react';
 import { Button, Icon } from '@ui5/webcomponents-react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { baseConfigCostsState } from '../../../state/costs/baseConfigCostsState';
-import { storageCostsState } from '../../../state/costs/storageCostsState';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
-import { additionalCostsState } from '../../../state/costs/additionalCostsState';
-import { totalCostsState } from '../../../state/costs/totalCostsState';
 import { MachineSetup, machineSetupState } from '../../../state/nodes/machineSetupState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';

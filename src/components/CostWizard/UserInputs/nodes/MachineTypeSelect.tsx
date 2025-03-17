@@ -9,7 +9,7 @@ interface Props {
   workerNode: boolean;
 }
 export default function MachineTypeSelect(props:Props) {
-  const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
+  const configMachineTypes = config.nodeConfig.machineTypeFactor.MachineTypes;
   const setMachineSetup = useSetRecoilState<MachineSetup[]>(machineSetupState);
 
   const onChange = (event: any) => {
@@ -18,10 +18,10 @@ export default function MachineTypeSelect(props:Props) {
       prevSetups.map((setup, index) =>
       index === props.nodeIndex ? { ...setup, machineType: {
         value: selection.value,
-        multiple: selection.multiple,
+        multiple: selection.multiple
       } } : setup));
   };
-  const filteredOptions = props.workerNode ? baseConfigOptions : baseConfigOptions.filter(item => item.value === config.baseConfig.machineTypeFactor.MachineTypes[0].value);
+  const filteredOptions = props.workerNode ? configMachineTypes : configMachineTypes.filter(item => item.value === config.nodeConfig.machineTypeFactor.MachineTypes[0].value);
   return (
     <>
       <Title className="wizard-subheader" level="H5" size="H5">

@@ -5,20 +5,20 @@ import config from '../../config.json';
 import { TotalCosts } from '../../calculatorFunctions/totalCosts/calculateTotalCosts';
 
 interface Props {
-  baseConfigCosts: number;
+  nodeConfigCosts: number;
   additionalCosts: number;
   storageCosts: number;
   totalCosts: TotalCosts;
 }
 
 export default function CostList(props: Props) {
-  const { baseConfigCosts, additionalCosts, storageCosts, totalCosts } = props;
+  const { nodeConfigCosts, additionalCosts, storageCosts, totalCosts } = props;
 
   return (
     <>
       <div className="row">
         <h5 className="text">Nodes</h5>
-        <h5 className="value">{roundDecimals(baseConfigCosts, true)} CU</h5>
+        <h5 className="value">{roundDecimals(nodeConfigCosts, true)} CU</h5>
       </div>
       <div className="row">
         <h5 className="text">Storage</h5>

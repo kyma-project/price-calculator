@@ -9,7 +9,7 @@ interface Props {
   nodeIndex: number;
 }
 export default function MinAutoscalerInputField(props:Props) {
-  const configuration = config.baseConfig.AutoScalerMin;
+  const configuration = config.nodeConfig.AutoScalerMin;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;

@@ -4,7 +4,7 @@ import VMsizeSelect from "./UserInputs/nodes/VMsizeSelect";
 import MachineTypeSelect from "./UserInputs/nodes/MachineTypeSelect";
 import MinAutoscalerInputField from "./UserInputs/nodes/MinAutoscalerInputField";
 import "./CostWizard.css";
-import calculateBaseConfigCosts from "../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts";
+import calculateNodeConfigCosts from "../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts";
 import { useCostCalculator } from "../../context/CostCalculatorContext";
 import { useRecoilState } from "recoil";
 import { MachineSetup, machineSetupState } from "../../state/nodes/machineSetupState";
@@ -17,20 +17,12 @@ interface Props {
 }
 export default function MachineSetupForm(props: Props) {
   const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
-  const [costNode,setCostNode] = useRecoilState(costNodeState);
-  const autoscalerMinValue = config.baseConfig.AutoScalerMin.Min;
-  const timeConsumptionDefaultValue = config.baseConfig.TimeConsumption.Default;
+  const [costNode, setCostNode] = useRecoilState(costNodeState);
+  const autoscalerMinValue = config.nodeConfig.AutoScalerMin.Min;
+  const timeConsumptionDefaultValue = config.nodeConfig.TimeConsumption.Default;
   const machineTypeDefaultValue =
-    config.baseConfig.machineTypeFactor.MachineTypes[0].value;
-  const machineTypeDefaultMultiple =
-    config.baseConfig.machineTypeFactor.MachineTypes[0].multiple;
-  const VMSizeDefaultValue =
-    config.baseConfig.VirtualMachineSize.Options[0].value;
-  const VMSizeDefaultMultiple =
-    config.baseConfig.VirtualMachineSize.Options[0].multiple;
-  const VMSizeDefaultNodes =
-    config.baseConfig.VirtualMachineSize.Options[0].nodes;
-
+    config.nodeConfig.machineTypeFactor.MachineTypes[0];
+  const machineTypeDefaultValueVMSize = machineTypeDefaultValue.VMSizeOptions[0];
   if (props.nodeIndex >= machineSetup.length) {
     //permit the component to be not in race condition between rendering / updating
     setTimeout(() => {
@@ -38,15 +30,15 @@ export default function MachineSetupForm(props: Props) {
       ...machineSetup,
       {
         machineType: {
-          value: machineTypeDefaultValue,
-          multiple: machineTypeDefaultMultiple,
+          value: machineTypeDefaultValue.value,
+          multiple: machineTypeDefaultValue.multiple,
         },
         minAutoscaler: autoscalerMinValue,
         timeConsuption: timeConsumptionDefaultValue,
         VMSize: {
-          value: VMSizeDefaultValue,
-          multiple: VMSizeDefaultMultiple,
-          nodes: VMSizeDefaultNodes,
+          value: machineTypeDefaultValueVMSize.value,
+          multiple: machineTypeDefaultValueVMSize.multiple,
+          nodes: machineTypeDefaultValueVMSize.nodes
         },
         visible: true
       },
@@ -55,20 +47,20 @@ export default function MachineSetupForm(props: Props) {
   }, 0);
   }
 
-  const { setBaseConfigCosts } = useCostCalculator();
+  const { setNodeConfigCosts } = useCostCalculator();
 
   useEffect(() => {
 
-    let baseConfigCosts = 0;
+    let nodeConfigCosts = 0;
      for (let i = 0; i < machineSetup.length; i++) {
       if (machineSetup.at(i)?.visible) {
-        const updatedCost = calculateBaseConfigCosts({
+        const updatedCost = calculateNodeConfigCosts({
           timeConsumption: machineSetup.at(i)?.timeConsuption ?? timeConsumptionDefaultValue,
-          vmMultiplier: machineSetup.at(i)?.VMSize.multiple ?? VMSizeDefaultMultiple,
+          vmMultiplier: machineSetup.at(i)?.VMSize.multiple ?? machineTypeDefaultValueVMSize.multiple,
           minAutoscaler: machineSetup.at(i)?.minAutoscaler ?? autoscalerMinValue,
-          machineTypeFactor: machineSetup.at(i)?.machineType.multiple ?? machineTypeDefaultMultiple,
+          machineTypeFactor: machineSetup.at(i)?.machineType.multiple ?? machineTypeDefaultValue.multiple,
         });
-        baseConfigCosts += updatedCost;
+        nodeConfigCosts += updatedCost;
         if (i===props.nodeIndex){
 
           setCostNode((prevSetups) =>
@@ -78,13 +70,13 @@ export default function MachineSetupForm(props: Props) {
         }
       }
     }
-    setBaseConfigCosts(baseConfigCosts);
+    setNodeConfigCosts(nodeConfigCosts);
   }, [
-    setBaseConfigCosts,
+    setNodeConfigCosts,
     machineSetup,
-    machineTypeDefaultMultiple,
     autoscalerMinValue,
-    VMSizeDefaultMultiple,
+    machineTypeDefaultValue,
+    machineTypeDefaultValueVMSize,
     timeConsumptionDefaultValue,
     props.nodeIndex, setCostNode
   ]);

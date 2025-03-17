@@ -1,5 +1,5 @@
 export interface TotalCostsProps {
-  baseConfigCosts: number;
+  nodeConfigCosts: number;
   storageCosts: number;
   additionalCosts: number;
   conversionRatio: number;
@@ -13,8 +13,8 @@ export interface TotalCosts {
 export default function calculateTotalCosts(
   props: TotalCostsProps,
 ): TotalCosts {
-  const { baseConfigCosts, storageCosts, additionalCosts, conversionRatio } =
+  const { nodeConfigCosts, storageCosts, additionalCosts, conversionRatio } =
     props;
-  const costInCU = baseConfigCosts + storageCosts + additionalCosts;
+  const costInCU = nodeConfigCosts + storageCosts + additionalCosts;
   return { CU: costInCU, CC: costInCU * conversionRatio };
 }

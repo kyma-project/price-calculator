@@ -4,13 +4,13 @@ import roundDecimals from './roundDecimals';
 import './DonutStatistics.css';
 
 interface Props {
-  baseConfigCosts: number;
+  nodeConfigCosts: number;
   additionalCosts: number;
   storageCosts: number;
 }
 
 export default function DonutStatistics(props: Props) {
-  const { baseConfigCosts, additionalCosts, storageCosts } = props;
+  const { nodeConfigCosts, additionalCosts, storageCosts } = props;
   const [activeSegment, setActiveSegment] = useState(0);
   const handleClick = (event: CustomEvent) => {
     setActiveSegment(event.detail.index ?? event.detail.dataIndex ?? -1);
@@ -22,7 +22,7 @@ export default function DonutStatistics(props: Props) {
       dataset={[
         {
           name: 'Nodes',
-          costs: roundDecimals(baseConfigCosts, false),
+          costs: roundDecimals(nodeConfigCosts, false),
         },
         {
           name: 'Storage',

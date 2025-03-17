@@ -21,7 +21,7 @@ export default function XlsxDownloadButton() {
   const [machineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
   const costNode = useRecoilValue<number[]>(costNodeState);
   const redisSize = useRecoilValue<RedisSize>(redisState);
-  const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
+  const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
   useCostCalculator();
 
   return (
@@ -29,7 +29,7 @@ export default function XlsxDownloadButton() {
       design="Emphasized"
       onClick={() =>
         exportXLSX({
-          baseCosts: baseConfigCosts,
+          baseCosts: nodeConfigCosts,
           machineSetup,
           costNode,
           storageCosts,

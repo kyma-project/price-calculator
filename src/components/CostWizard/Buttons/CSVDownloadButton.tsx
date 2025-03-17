@@ -21,7 +21,7 @@ export default function CSVDownloadButton() {
     timeConsumptionStorageState,
   );
   const redisSize = useRecoilValue<RedisSize>(redisState);
-    const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
+    const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
     useCostCalculator();
 
   return (
@@ -30,7 +30,7 @@ export default function CSVDownloadButton() {
       design="Emphasized"
       onClick={() =>
         exportCSV({
-          baseCosts: baseConfigCosts,
+          baseCosts: nodeConfigCosts,
           machineSetup,
           costNode,
           storageCosts,

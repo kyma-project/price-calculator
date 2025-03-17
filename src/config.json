@@ -1,46 +1,7 @@
 {
   "CurrencyCode": "€",
   "ConversionRateCUCC": 1.06,
-  "baseConfig": {
-    "VirtualMachineSize": {
-      "Options": [
-        {
-          "value": "2 CPU - 8GB RAM",
-          "multiple": 0.75,
-          "nodes": 2
-        },
-        {
-          "value": "4 CPU - 16GB RAM",
-          "multiple": 1,
-          "nodes": 2
-        },
-        {
-          "value": "8 CPU - 32GB RAM",
-          "multiple": 2,
-          "nodes": 4
-        },
-        {
-          "value": "16 CPU - 64GB RAM",
-          "multiple": 4,
-          "nodes": 8
-        },
-        {
-          "value": "32 CPU - 128GB RAM",
-          "multiple": 8,
-          "nodes": 16
-        },
-        {
-          "value": "48 CPU - 192GB RAM",
-          "multiple": 12,
-          "nodes": 24
-        },
-        {
-          "value": "64 CPU - 256GB RAM",
-          "multiple": 16,
-          "nodes": 32
-        }
-      ]
-    },
+  "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
       "Min": 3,
@@ -48,20 +9,91 @@
       "Step": 1
     },
     "TimeConsumption": {
-      "Default": 720,
-      "Min": 1,
-      "Max": 720,
-      "Step": 1
+      "Default": 720
     },
     "machineTypeFactor": {
       "MachineTypes": [
         {
           "value": "General Purpose",
-          "multiple": 1
+          "multiple": 1,
+          "VMSizeOptions": [
+            {
+              "value": "2 CPU - 8GB RAM",
+              "multiple": 0.75,
+              "nodes": 2
+            },
+            {
+              "value": "4 CPU - 16GB RAM",
+              "multiple": 1,
+              "nodes": 2
+            },
+            {
+              "value": "8 CPU - 32GB RAM",
+              "multiple": 2,
+              "nodes": 4
+            },
+            {
+              "value": "16 CPU - 64GB RAM",
+              "multiple": 4,
+              "nodes": 8
+            },
+            {
+              "value": "32 CPU - 128GB RAM",
+              "multiple": 8,
+              "nodes": 16
+            },
+            {
+              "value": "48 CPU - 192GB RAM",
+              "multiple": 12,
+              "nodes": 24
+            },
+            {
+              "value": "64 CPU - 256GB RAM",
+              "multiple": 16,
+              "nodes": 32
+            }
+          ]
         },
         {
           "value": "Compute Optimized",
-          "multiple": 1
+          "multiple": 2,
+          "VMSizeOptions": [
+            {
+              "value": "2 CPU - 4GB RAM",
+              "multiple": 0.75,
+              "nodes": 2
+            },
+            {
+              "value": "4 CPU - 8GB RAM",
+              "multiple": 1,
+              "nodes": 2
+            },
+            {
+              "value": "8 CPU - 16GB RAM",
+              "multiple": 2,
+              "nodes": 4
+            },
+            {
+              "value": "16 CPU - 32GB RAM",
+              "multiple": 4,
+              "nodes": 8
+            },
+            {
+              "value": "32 CPU - 64GB RAM",
+              "multiple": 8,
+              "nodes": 16
+            },
+            {
+              "value": "48 CPU - 96GB RAM",
+              "multiple": 12,
+              "nodes": 24
+            },
+            {
+              "value": "64 CPU - 128GB RAM",
+              "multiple": 16,
+              "nodes": 32
+            }
+          ]
         }
       ]
     },
@@ -133,8 +165,8 @@
     ]
   },
   "documentationUrls":{
-    "redis": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/redis",
-    "nfs": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/nfs",
-    "worker-node-pools": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/provisioning-and-update-parameters-in-kyma-environment?q=worker#additional-worker-node-pools"
+    "redis": "https://help.sap.com/docs/btp/sap-business-technology-platform/redis",
+    "nfs": "https://help.sap.com/docs/btp/sap-business-technology-platform/nfs",
+    "worker-node-pools": "https://help.sap.com/docs/btp/sap-business-technology-platform/provisioning-and-update-parameters-in-kyma-environment?q=worker#additional-worker-node-pools"
   }
 }

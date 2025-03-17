@@ -1,16 +1,15 @@
 import React from 'react';
-import config from '../../../../config.json';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { MachineSetup, machineSetupState } from '../../../../state/nodes/machineSetupState';
+import config from '../../../../config.json';
 
 interface Props {
   nodeIndex: number;
 }
 export default function VMsizeSelect(props:Props) {
-  const baseConfigOptions = config.baseConfig.VirtualMachineSize.Options;
-
-  const setMachineSetup = useSetRecoilState<MachineSetup[]>(machineSetupState);
+  const baseConfigOptions = config.nodeConfig.machineTypeFactor.MachineTypes;
+  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
 
   const onChange = (event: any) => {
     const selection = event.detail.selectedOption.dataset;
@@ -23,13 +22,18 @@ export default function VMsizeSelect(props:Props) {
       } } : setup));
   };
 
+  const VMSizeIndexMachineType = baseConfigOptions.filter((item) => 
+    typeof(machineSetup[props.nodeIndex]) === "undefined" || 
+    item.value === machineSetup[props.nodeIndex].machineType.value).flatMap((item) => 
+    item.VMSizeOptions);
+
   return (
     <>
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
       <Select onChange={onChange}>
-        {baseConfigOptions.map((item) => (
+        {VMSizeIndexMachineType.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}

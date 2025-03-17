@@ -8,7 +8,7 @@ interface Props {
   nodeIndex: number;
   workerNode: boolean;
 }
-export default function VMsizeSelect(props:Props) {
+export default function MachineTypeSelect(props:Props) {
   const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
   const setMachineSetup = useSetRecoilState<MachineSetup[]>(machineSetupState);
 

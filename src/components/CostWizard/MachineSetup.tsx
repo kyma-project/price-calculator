@@ -7,7 +7,7 @@ import "./CostWizard.css";
 import calculateBaseConfigCosts from "../../calculatorFunctions/baseConfigCosts/calculateBaseConfigCosts";
 import { useCostCalculator } from "../../context/CostCalculatorContext";
 import { useRecoilState } from "recoil";
-import { machineSetupState } from "../../state/nodes/machineSetupState";
+import { MachineSetup, machineSetupState } from "../../state/nodes/machineSetupState";
 import config from "../../config.json";
 import { costNodeState } from "../../state/costStatus";
 
@@ -15,8 +15,8 @@ interface Props {
   nodeIndex: number;
   workerNode: boolean;
 }
-export default function MachineSetup(props: Props) {
-  const [machineSetup, setMachineSetup] = useRecoilState(machineSetupState);
+export default function MachineSetupForm(props: Props) {
+  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
   const [costNode,setCostNode] = useRecoilState(costNodeState);
   const autoscalerMinValue = config.baseConfig.AutoScalerMin.Min;
   const timeConsumptionDefaultValue = config.baseConfig.TimeConsumption.Default;
@@ -32,7 +32,9 @@ export default function MachineSetup(props: Props) {
     config.baseConfig.VirtualMachineSize.Options[0].nodes;
 
   if (props.nodeIndex >= machineSetup.length) {
-    setMachineSetup([
+    //permit the component to be not in race condition between rendering / updating
+    setTimeout(() => {
+      setMachineSetup([
       ...machineSetup,
       {
         machineType: {
@@ -50,6 +52,7 @@ export default function MachineSetup(props: Props) {
       },
     ]);
     setCostNode([...costNode, 0]);
+  }, 0);
   }
 
   const { setBaseConfigCosts } = useCostCalculator();
@@ -87,11 +90,11 @@ export default function MachineSetup(props: Props) {
   ]);
   return (
     <Form>
-      <VMsizeSelect nodeIndex={props.nodeIndex} />
       <MachineTypeSelect
         nodeIndex={props.nodeIndex}
         workerNode={props.workerNode}
       />
+      <VMsizeSelect nodeIndex={props.nodeIndex} />
       <MinAutoscalerInputField nodeIndex={props.nodeIndex} />
     </Form>
   );

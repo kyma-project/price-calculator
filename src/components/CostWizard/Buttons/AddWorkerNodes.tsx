@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FlexBox, Title } from "@ui5/webcomponents-react";
+import { Button, FlexBox, Icon, Title } from "@ui5/webcomponents-react";
 import "./AddWorkerNodes.css"
 import {
   MachineSetup,
@@ -7,6 +7,7 @@ import {
 } from "../../../state/nodes/machineSetupState";
 import MachineSetupObj from "../MachineSetup";
 import { useRecoilState } from "recoil";
+import openLinks from "../Functions/openLinks";
 
 interface DynamicComponentProps {
   index: number;
@@ -49,7 +50,15 @@ export default function AddWorkerNodes() {
   return (
     <div className="add-worker-node-container">
       {components}
-      <Button icon="add" onClick={addPool}>Add Worker Node Pool</Button>
+      <FlexBox wrap="NoWrap" alignItems="Center" fitContainer displayInline justifyContent="Start">
+        <Button icon="add" onClick={addPool}>Add Worker Node Pool</Button>
+        <Icon className='help-portal-link'
+          design="Information"
+          mode="Interactive"
+          name="sys-help"
+          onClick={(event: any) => openLinks("redis")}
+        />
+      </FlexBox>
     </div>
   );
 }

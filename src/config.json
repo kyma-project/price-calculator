@@ -131,5 +131,10 @@
       {"key": "Premium6",
       "value": 24661}
     ]
+  },
+  "documentationUrls":{
+    "redis": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/redis",
+    "nfs": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/nfs",
+    "worker-node-pools": "https://help.sap.com/docs/btp/sap-business-technology-platform-internal/provisioning-and-update-parameters-in-kyma-environment?q=worker#additional-worker-node-pools"
   }
 }

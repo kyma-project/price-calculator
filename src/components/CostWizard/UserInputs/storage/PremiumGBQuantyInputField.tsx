@@ -1,8 +1,10 @@
 import React from 'react';
 import config from '../../../../config.json';
-import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
+import './PremiumGBQuantityInputField.css'
+import { FlexBox, Icon, Slider, StepInput, Title } from '@ui5/webcomponents-react';
 import { useRecoilState } from 'recoil';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
+import openLinks from '../../Functions/openLinks';
 
 export default function PremiumGBQuantityInputField() {
   const configuration = config.PremiumStorage;
@@ -21,9 +23,17 @@ export default function PremiumGBQuantityInputField() {
 
   return (
     <div>
+      <FlexBox wrap="NoWrap" alignItems="Center" fitContainer displayInline justifyContent="Start">
       <Title className="wizard-subheader" level="H5" size="H5">
         NFS Storage: number of GB
       </Title>
+        <Icon className='help-portal-link'
+          design="Information"
+          mode="Interactive"
+          name="sys-help"
+          onClick={(event: any) => openLinks("nfs")}
+        />
+      </FlexBox>
       <StepInput
         value={premiumGBQuantity}
         onChange={handleChange}

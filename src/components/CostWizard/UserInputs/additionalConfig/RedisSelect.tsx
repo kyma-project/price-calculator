@@ -1,9 +1,10 @@
 import React from 'react';
 import config from '../../../../config.json';
-import { Option, Select, Title } from '@ui5/webcomponents-react';
+import { FlexBox, Icon, Option, Select, Title } from '@ui5/webcomponents-react';
 import { RedisSize, redisState } from '../../../../state/additionalConfig/redisState';
 import { useSetRecoilState } from 'recoil';
 import './RedisSelect.css';
+import openLinks from '../../Functions/openLinks';
 
 export default function RedisSelect() {
   const redisConfigOptions = config.RedisCosts.Tiers;
@@ -19,9 +20,17 @@ export default function RedisSelect() {
 
   return (
     <>
+    <FlexBox wrap="NoWrap" alignItems="Center" fitContainer displayInline justifyContent="Start">
       <Title className="wizard-subheader" level="H5" size="H5">
         Cloud-managed Redis cache
       </Title>
+      <Icon className='help-portal-link'
+        design="Information"
+        mode="Interactive"
+        name="sys-help"
+        onClick={(event: any) => openLinks("redis")}
+      />
+    </FlexBox>
       <Select className="redisSelect" onChange={onChange}>
         {redisConfigOptions.map((item) => (
           <Option

@@ -5,7 +5,7 @@ import {
   MachineSetup,
   machineSetupState,
 } from '../../state/nodes/machineSetupState';
-import MachineSetupObj from './MachineSetup';
+import MachineSetupForm from './MachineSetupForm';
 import { useRecoilState } from 'recoil';
 import openLinks from './Functions/openLinks';
 
@@ -43,7 +43,7 @@ const DynamicComponent: React.FC<DynamicComponentProps> = ({ index }) => {
           Remove Worker Node Pool
         </Button>
       </FlexBox>
-      <MachineSetupObj nodeIndex={index} workerNode={true} />
+      <MachineSetupForm nodeIndex={index} workerNode={true} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Wizard } from '@ui5/webcomponents-react';
-import BaseConfigStep from './WizardSteps/BaseConfigStep';
+import NodeConfigStep from './WizardSteps/NodeConfigStep';
 import AdditionalConfig from './WizardSteps/AdditionalConfigStep';
 import StorageStep from './WizardSteps/StorageStep';
 import WorkerNodes from './WizardSteps/WorkerNodesStep';
@@ -9,7 +9,7 @@ import './CostWizard.css';
 export default function CostWizard() {
   return (
     <Wizard id="CostWizard">
-      <BaseConfigStep />
+      <NodeConfigStep />
       <WorkerNodes />
       <StorageStep />
       <AdditionalConfig />

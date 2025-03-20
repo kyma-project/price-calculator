@@ -24,7 +24,7 @@ export default function AdditionalConfigStep() {
     setConversionRatio(conversionRatio);
     setAdditionalCosts(calculateAdditionalCosts({redis: redis.value}));
   }, [setConversionRatio, setAdditionalCosts, conversionRatio, redis]);
-  const text = <><div>With the '<strong>conversion rate</strong>' you can change the amount of <strong>{config.CurrencyCode}</strong> you are payong for <strong>1 Capacity Unit</strong>.</div>
+  const text = <><div>With the '<strong>conversion rate</strong>' you can change the amount of <strong>{config.CurrencyCode}</strong> you are paying for <strong>1 Capacity Unit</strong>.</div>
     <div>This will help you to calculate eventual discounts.</div>
    <div>If you are unsure about how to change the default value ({config.ConversionRateCUCC}), please ask your SAP Sales Specialist.</div> </>;
 

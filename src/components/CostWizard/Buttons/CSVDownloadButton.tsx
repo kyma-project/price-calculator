@@ -1,27 +1,37 @@
 import React from 'react';
 import { Button, Icon } from '@ui5/webcomponents-react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
-import { MachineSetup, machineSetupState } from '../../../state/nodes/machineSetupState';
+import {
+  additionalMachineSetupState,
+  baseMachineSetupState,
+  MachineSetup,
+} from '../../../state/nodes/machineSetupState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
 import exportCSV from '../Functions/exportCSV';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
-import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
+import {
+  RedisSize,
+  redisState,
+} from '../../../state/additionalConfig/redisState';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
-import { costNodeState } from '../../../state/costStatus';
 
 export default function CSVDownloadButton() {
-  const [machineSetup] = useRecoilState<MachineSetup[]>(machineSetupState);
-    const [costNode] = useRecoilState<number[]>(costNodeState);
+  const baseMachineSetup = useRecoilValue<MachineSetup>(baseMachineSetupState);
+  const additionalMachineSetup = useRecoilValue<MachineSetup[]>(
+    additionalMachineSetupState,
+  );
   const storageQuantity: number = useRecoilValue<number>(GBQuantityState);
-  const premiumStorageQuantity: number = useRecoilValue<number>(premiumGBQuantityState);
+  const premiumStorageQuantity: number = useRecoilValue<number>(
+    premiumGBQuantityState,
+  );
   const storageTime: number = useRecoilValue<number>(
     timeConsumptionStorageState,
   );
   const redisSize = useRecoilValue<RedisSize>(redisState);
-    const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
+  const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
     useCostCalculator();
 
   return (
@@ -31,15 +41,14 @@ export default function CSVDownloadButton() {
       onClick={() =>
         exportCSV({
           baseCosts: nodeConfigCosts,
-          machineSetup,
-          costNode,
+          machineSetup: [baseMachineSetup, ...additionalMachineSetup],
           storageCosts,
           storageQuantity,
           storageTime,
           additionalCosts,
-          totalCosts:totalCosts.CU,
+          totalCosts: totalCosts.CU,
           premiumStorageQuantity,
-          redisSize
+          redisSize,
         })
       }
     >

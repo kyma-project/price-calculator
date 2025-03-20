@@ -12,11 +12,10 @@ interface Props {
   storageTime: number;
   additionalCosts: number;
   totalCosts: number;
-  costNode: number[];
 }
 
-interface MachineSetupWithCost{
-  machineSetup: MachineSetup
+interface MachineSetupWithCost {
+  machineSetup: MachineSetup;
   cost: number;
 }
 
@@ -31,27 +30,48 @@ export default function exportCSV(props: Props) {
     redisSize,
     additionalCosts,
     totalCosts,
-    costNode
   } = props;
 
-  let visibleMachineSetup: MachineSetupWithCost[] = machineSetup.reduce((acc, machine, index) => {
-    if (machine.visible) {
+  let visibleMachineSetup: MachineSetupWithCost[] = machineSetup.reduce(
+    (acc, machine, index) => {
+      //if (machine.visible) {
       const machineWithCost = {
         machineSetup: machine,
-        cost: costNode.at(index) ?? 0
+        cost: 0, //costNode.at(index) ?? 0,
       };
       acc.push(machineWithCost);
-    }
-    return acc;
-    }, [] as MachineSetupWithCost[]);
+      //}
+      return acc;
+    },
+    [] as MachineSetupWithCost[],
+  );
 
   const dataArray = [
     ['Base Configuration'],
-    ['Virtual Machine Size', ...visibleMachineSetup.map(prop => prop.machineSetup.VMSize.value)],
-    ['Virtual Machine Type', ...visibleMachineSetup.map(prop => prop.machineSetup.machineType.value)],
-    ['Autoscaler Min', ...visibleMachineSetup.map(prop => prop.machineSetup.minAutoscaler.toString())],
-    ['Time Consumption', ...visibleMachineSetup.map(prop => prop.machineSetup.timeConsuption.toString())],
-    ['Worker Node Pool Cost', ...visibleMachineSetup.map(prop => prop.cost.toString() + ' CU')],
+    [
+      'Virtual Machine Size',
+      ...visibleMachineSetup.map((prop) => prop.machineSetup.VMSize.value),
+    ],
+    [
+      'Virtual Machine Type',
+      ...visibleMachineSetup.map((prop) => prop.machineSetup.machineType.value),
+    ],
+    [
+      'Autoscaler Min',
+      ...visibleMachineSetup.map((prop) =>
+        prop.machineSetup.minAutoscaler.toString(),
+      ),
+    ],
+    [
+      'Time Consumption',
+      ...visibleMachineSetup.map((prop) =>
+        prop.machineSetup.timeConsuption.toString(),
+      ),
+    ],
+    [
+      'Worker Node Pool Cost',
+      ...visibleMachineSetup.map((prop) => prop.cost.toString() + ' CU'),
+    ],
     [''],
     ['Storage'],
     ['Standard Storage', storageQuantity],
@@ -60,7 +80,7 @@ export default function exportCSV(props: Props) {
     [''],
     ['Redis'],
     ['Redis Size', redisSize.tsize],
-    ['Redis Cost', redisSize.value  + ' CU'],
+    ['Redis Cost', redisSize.value + ' CU'],
     [''],
     ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
     ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],

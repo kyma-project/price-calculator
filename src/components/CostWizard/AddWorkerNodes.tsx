@@ -1,66 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, FlexBox, Icon, Title } from '@ui5/webcomponents-react';
 import './AddWorkerNodes.css';
 import {
+  additionalMachineSetupState,
   MachineSetup,
-  machineSetupState,
 } from '../../state/nodes/machineSetupState';
 import MachineSetupForm from './MachineSetupForm';
 import { useRecoilState } from 'recoil';
 import openLinks from './Functions/openLinks';
+import config from '../../config.json';
 
-interface DynamicComponentProps {
-  index: number;
-}
-/* Definition of dynamic component */
-const DynamicComponent: React.FC<DynamicComponentProps> = ({ index }) => {
-  const [machineSetup, setMachineSetup] =
-    useRecoilState<MachineSetup[]>(machineSetupState);
-  const removePool = () => {
-    setMachineSetup((prevSetups) =>
-      prevSetups.map((setup, ind) =>
-        ind === index ? { ...setup, visible: false } : setup,
-      ),
+export default function AddWorkerNodes() {
+  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(
+    additionalMachineSetupState,
+  );
+
+  const addMachineSetup = () => {
+    const newMachine: MachineSetup = {
+      timeConsuption: config.nodeConfig.TimeConsumption.Default,
+      machineType: config.nodeConfig.MachineTypes[0],
+      VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
+      minAutoscaler: config.nodeConfig.AutoScalerMin.Default,
+    };
+    setMachineSetup((prevState) => prevState.concat(newMachine));
+  };
+
+  const updateMachineSetup = (index: number, updatedMachine: MachineSetup) => {
+    setMachineSetup((prevState) =>
+      prevState.map((machine, i) => (i === index ? updatedMachine : machine)),
     );
   };
 
-  return (
-    <div
-      className="dynamic-worker-node-container"
-      style={{ display: machineSetup.at(index)?.visible ? 'block' : 'none' }}
-    >
-      <FlexBox
-        wrap="NoWrap"
-        alignItems="Center"
-        fitContainer
-        displayInline
-        justifyContent="SpaceBetween"
-      >
-        <Title className="workernode-name" level="H2" size="H2">
-          Worker Node Pool {index}
-        </Title>
-        <Button icon="decline" onClick={removePool}>
-          Remove Worker Node Pool
-        </Button>
-      </FlexBox>
-      <MachineSetupForm nodeIndex={index} workerNode={true} />
-    </div>
-  );
-};
-
-export default function AddWorkerNodes() {
-  const [components, setComponents] = useState<React.ReactNode[]>([]);
-
-  const addPool = () => {
-    const newIndex = components.length + 1;
-    setComponents([
-      ...components,
-      React.createElement(DynamicComponent, { index: newIndex }),
-    ]);
+  const removeMachineSetup = (index: number) => {
+    setMachineSetup((prevState) => prevState.filter((_, i) => i !== index));
   };
+
   return (
     <div className="add-worker-node-container">
-      {components}
+      {machineSetup.map((machine, index) => (
+        <div
+          className="dynamic-worker-node-container"
+          key={`machine-setup-${index}`}
+        >
+          <FlexBox
+            wrap="NoWrap"
+            alignItems="Center"
+            fitContainer
+            displayInline
+            justifyContent="SpaceBetween"
+          >
+            <Title className="workernode-name" level="H2" size="H2">
+              Worker Node Pool {index}
+            </Title>
+            <Button icon="decline" onClick={() => removeMachineSetup(index)}>
+              Remove Worker Node Pool
+            </Button>
+          </FlexBox>
+          <MachineSetupForm
+            machine={machine}
+            updateMachine={(updatedMachine: MachineSetup) =>
+              updateMachineSetup(index, updatedMachine)
+            }
+            workerNode={true}
+          />
+        </div>
+      ))}
       <FlexBox
         wrap="NoWrap"
         alignItems="Center"
@@ -68,7 +72,7 @@ export default function AddWorkerNodes() {
         displayInline
         justifyContent="Start"
       >
-        <Button icon="add" onClick={addPool}>
+        <Button icon="add" onClick={addMachineSetup}>
           Add Worker Node Pool
         </Button>
         <Icon
@@ -76,7 +80,7 @@ export default function AddWorkerNodes() {
           design="Information"
           mode="Interactive"
           name="sys-help"
-          onClick={(event: any) => openLinks('redis')}
+          onClick={() => openLinks('redis')}
         />
       </FlexBox>
     </div>

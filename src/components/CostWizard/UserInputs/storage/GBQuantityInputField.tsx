@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
+import {
+  Slider,
+  StepInput,
+  StepInputDomRef,
+  Title,
+} from '@ui5/webcomponents-react';
 import { useRecoilState } from 'recoil';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 
@@ -11,10 +16,16 @@ export default function GBQuantityInputField() {
   const step = configuration.Step;
 
   const [GBQuantity, setGBQuantity] = useRecoilState<number>(GBQuantityState);
+  const stepInputRef = useRef<StepInputDomRef>(null);
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    setGBQuantity(newValue);
+    if (newValue % step === 0 && newValue >= min && newValue <= max) {
+      setGBQuantity(newValue);
+    } else if (stepInputRef.current) {
+      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
+      input?.setAttribute('value', String(GBQuantity));
+    }
   }
 
   return (
@@ -23,6 +34,7 @@ export default function GBQuantityInputField() {
         Standard Storage: number of GB
       </Title>
       <StepInput
+        ref={stepInputRef}
         value={GBQuantity}
         onChange={handleChange}
         min={min}

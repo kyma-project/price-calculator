@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import { Slider, StepInput } from '@ui5/webcomponents-react';
+import { Slider, StepInput, StepInputDomRef } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
 
 interface Props {
@@ -16,9 +16,16 @@ export default function MinAutoscalerInputField({
   const max = configuration.Max;
   const step = configuration.Step;
 
+  const stepInputRef = useRef<StepInputDomRef>(null);
+
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
-    setAutoScalerMin(newValue);
+    if (newValue % step === 0 && newValue >= min && newValue <= max) {
+      setAutoScalerMin(newValue);
+    } else if (stepInputRef.current) {
+      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
+      input?.setAttribute('value', String(autoScalerMin));
+    }
   }
 
   return (
@@ -28,6 +35,7 @@ export default function MinAutoscalerInputField({
         info="minimum number of available Virtual Machines"
       />
       <StepInput
+        ref={stepInputRef}
         value={autoScalerMin}
         onChange={handleChange}
         min={min}

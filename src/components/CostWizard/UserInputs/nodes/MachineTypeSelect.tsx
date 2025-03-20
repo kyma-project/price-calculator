@@ -30,17 +30,17 @@ export default function MachineTypeSelect({
     });
   };
 
-  const filteredOptions = workerNode
-    ? configMachineTypes
-    : [config.nodeConfig.MachineTypes[0]];
-
   return (
     <>
       <Title className="wizard-subheader" level="H5" size="H5">
         Machine Type
       </Title>
-      <Select onChange={onChange} value={machineType.value}>
-        {filteredOptions.map((item) => (
+      <Select
+        onChange={onChange}
+        value={machineType.value}
+        disabled={!workerNode}
+      >
+        {configMachineTypes.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}

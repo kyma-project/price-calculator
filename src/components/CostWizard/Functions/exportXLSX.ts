@@ -2,6 +2,7 @@ import { utils, writeFile, WorkBook, WorkSheet } from 'xlsx';
 import roundDecimals from '../../ResultStatistics/roundDecimals';
 import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
+import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
 
 interface Props {
   baseCosts: number;
@@ -33,15 +34,18 @@ export default function exportXLSX(props: Props) {
     totalCosts,
   } = props;
 
-  let visibleMachineSetup: MachineSetupWithCost[] = machineSetup.reduce(
-    (acc, machine, index) => {
-      //if (machine.visible) {
+  const machineSetupWithCost: MachineSetupWithCost[] = machineSetup.reduce(
+    (acc, machine) => {
       const machineWithCost = {
         machineSetup: machine,
-        cost: 0, //costNode.at(index) ?? 0,
+        cost: calculateNodeConfigCosts({
+          timeConsumption: machine.timeConsuption,
+          vmMultiplier: machine.VMSize.multiple,
+          minAutoscaler: machine.minAutoscaler,
+          machineTypeFactor: machine.machineType.multiple,
+        }),
       };
       acc.push(machineWithCost);
-      //}
       return acc;
     },
     [] as MachineSetupWithCost[],
@@ -51,27 +55,29 @@ export default function exportXLSX(props: Props) {
     ['Base Configuration'],
     [
       'Virtual Machine Size',
-      ...visibleMachineSetup.map((prop) => prop.machineSetup.VMSize.value),
+      ...machineSetupWithCost.map((prop) => prop.machineSetup.VMSize.value),
     ],
     [
       'Virtual Machine Type',
-      ...visibleMachineSetup.map((prop) => prop.machineSetup.machineType.value),
+      ...machineSetupWithCost.map(
+        (prop) => prop.machineSetup.machineType.value,
+      ),
     ],
     [
       'Autoscaler Min',
-      ...visibleMachineSetup.map((prop) =>
+      ...machineSetupWithCost.map((prop) =>
         prop.machineSetup.minAutoscaler.toString(),
       ),
     ],
     [
       'Time Consumption',
-      ...visibleMachineSetup.map((prop) =>
+      ...machineSetupWithCost.map((prop) =>
         prop.machineSetup.timeConsuption.toString(),
       ),
     ],
     [
       'Worker Node Pool Cost',
-      ...visibleMachineSetup.map((prop) => prop.cost.toString() + ' CU'),
+      ...machineSetupWithCost.map((prop) => prop.cost.toString() + ' CU'),
     ],
     [''],
     ['Storage'],

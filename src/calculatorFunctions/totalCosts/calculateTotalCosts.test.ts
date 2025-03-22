@@ -1,4 +1,4 @@
-import calculateBaseConfigCosts from '../baseConfigCosts/calculateBaseConfigCosts';
+import calculateNodeConfigCosts from '../nodeConfigCosts/calculateNodeConfigCosts';
 import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
 import calculateAdditionalCosts from '../additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts from './calculateTotalCosts';
@@ -17,7 +17,7 @@ test('total costs', () => {
 
   const conversionRatio = 0.35;
 
-  const baseConfigCosts = calculateBaseConfigCosts({
+  const nodeConfigCosts = calculateNodeConfigCosts({
     timeConsumption,
     vmMultiplier,
     minAutoscaler,
@@ -32,7 +32,7 @@ test('total costs', () => {
   const additionalCosts = calculateAdditionalCosts({redis});
 
   const totalCosts = calculateTotalCosts({
-    baseConfigCosts,
+    nodeConfigCosts,
     storageCosts,
     additionalCosts,
     conversionRatio,

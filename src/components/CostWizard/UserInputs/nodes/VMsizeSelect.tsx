@@ -1,35 +1,39 @@
 import React from 'react';
-import config from '../../../../config.json';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
-import {
-  MachineType,
-  machineTypeState,
-} from '../../../../state/baseConfig/machineTypeState';
-import { useSetRecoilState } from 'recoil';
+import { VMSize } from '../../../../state/nodes/machineSetupState';
 
-export default function VMsizeSelect() {
-  const baseConfigOptions = config.baseConfig.machineTypeFactor.MachineTypes;
-  const setMachineType = useSetRecoilState<MachineType>(machineTypeState);
-
+interface Props {
+  VMSize: VMSize;
+  setVMSize: React.Dispatch<React.SetStateAction<VMSize>>;
+  VMSizeOptions: VMSize[];
+}
+export default function VMsizeSelect({
+  VMSize,
+  setVMSize,
+  VMSizeOptions,
+}: Props) {
   const onChange = (event: any) => {
     const selection = event.detail.selectedOption.dataset;
-    setMachineType({
+    setVMSize({
       value: selection.value,
       multiple: selection.multiple,
+      nodes: parseInt(selection.nodes),
     });
   };
 
   return (
     <>
       <Title className="wizard-subheader" level="H5" size="H5">
-        Machine Type
+        Virtual Machine Size
       </Title>
       <Select onChange={onChange}>
-        {baseConfigOptions.map((item) => (
+        {VMSizeOptions.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}
+            data-nodes={item.nodes}
             data-multiple={item.multiple}
+            selected={item.value === VMSize.value}
           >
             {item.value}
           </Option>

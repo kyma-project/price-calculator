@@ -5,24 +5,24 @@ import calculateTotalCosts, {
 import config from '../config.json';
 
 interface CostContextType {
-  baseConfigCosts: number;
+  nodeConfigCosts: number;
   storageCosts: number;
   additionalCosts: number;
   conversionRatio: number;
   totalCosts: TotalCosts;
-  setBaseConfigCosts: React.Dispatch<React.SetStateAction<number>>;
+  setNodeConfigCosts: React.Dispatch<React.SetStateAction<number>>;
   setStorageCosts: React.Dispatch<React.SetStateAction<number>>;
   setAdditionalCosts: React.Dispatch<React.SetStateAction<number>>;
   setConversionRatio: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const defaultContext: CostContextType = {
-  baseConfigCosts: 0,
+  nodeConfigCosts: 0,
   storageCosts: 0,
   additionalCosts: 0,
   conversionRatio: config.ConversionRateCUCC,
   totalCosts: { CU: 0, CC: 0 },
-  setBaseConfigCosts: () => {},
+  setNodeConfigCosts: () => {},
   setStorageCosts: () => {},
   setAdditionalCosts: () => {},
   setConversionRatio: () => {},
@@ -34,7 +34,7 @@ export const useCostCalculator = () => useContext(CostContext);
 export const CostProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [baseConfigCosts, setBaseConfigCosts] = useState<number>(0);
+  const [nodeConfigCosts, setNodeConfigCosts] = useState<number>(0);
   const [storageCosts, setStorageCosts] = useState<number>(0);
   const [additionalCosts, setAdditionalCosts] = useState<number>(0);
   const [conversionRatio, setConversionRatio] = useState<number>(
@@ -45,23 +45,23 @@ export const CostProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const totalCosts = calculateTotalCosts({
-      baseConfigCosts,
+      nodeConfigCosts,
       storageCosts,
       additionalCosts,
       conversionRatio,
     });
     setTotalCosts(totalCosts);
-  }, [baseConfigCosts, storageCosts, additionalCosts, conversionRatio]);
+  }, [nodeConfigCosts, storageCosts, additionalCosts, conversionRatio]);
 
   return (
     <CostContext.Provider
       value={{
-        baseConfigCosts,
+        nodeConfigCosts,
         storageCosts,
         additionalCosts,
         conversionRatio,
         totalCosts,
-        setBaseConfigCosts,
+        setNodeConfigCosts,
         setStorageCosts,
         setAdditionalCosts,
         setConversionRatio,

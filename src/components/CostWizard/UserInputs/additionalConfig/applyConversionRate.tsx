@@ -8,7 +8,7 @@ export default function TimeConStorageInput() {
   const [value, setValue] = useRecoilState<number>(applyConversionRateState);
 
   const min = 0.01;
-  const max = 1;
+  const max = 1.20;
   const step = 0.01;
 
   function handleChange(event: any): void {

@@ -7,7 +7,7 @@ test('total costs', () => {
   //  Baseconfiguration
   const minAutoscaler = 3;
   const timeConsumption = 450;
-  const computeUnits = 16; // 16 CPU 64gb RAM
+  const vmMultiplier = 4; // 16 CPU 64gb RAM
   const machineTypeFactor = 1;
   //  Storage
   const GBQuantity = 1024;
@@ -19,7 +19,7 @@ test('total costs', () => {
 
   const nodeConfigCosts = calculateNodeConfigCosts({
     timeConsumption,
-    computeUnits,
+    vmMultiplier,
     minAutoscaler,
     machineTypeFactor,
   });

@@ -9,8 +9,6 @@ import {
   MachineType,
   VMSize,
 } from '../../state/nodes/machineSetupState';
-import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
-import { useRecoilValue } from 'recoil';
 
 interface Props {
   machine: MachineSetup;
@@ -30,7 +28,6 @@ export default function MachineSetupForm({
   const [autoScalerMin, setAutoScalerMin] = useState<number>(
     machine.minAutoscaler,
   );
-  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
 
   useEffect(() => {
     setMachineType(machine.machineType);
@@ -44,10 +41,9 @@ export default function MachineSetupForm({
       machineType,
       VMSize,
       minAutoscaler: autoScalerMin,
-      timeConsuption: timeConsumption
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [machineType, VMSize, autoScalerMin, timeConsumption]);
+  }, [machineType, VMSize, autoScalerMin]);
 
   return (
     <Form>

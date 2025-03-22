@@ -16,7 +16,8 @@ export default function VMsizeSelect({
     const selection = event.detail.selectedOption.dataset;
     setVMSize({
       value: selection.value,
-      computeUnits: selection.computeUnits
+      multiple: selection.multiple,
+      nodes: parseInt(selection.nodes),
     });
   };
 
@@ -30,7 +31,8 @@ export default function VMsizeSelect({
           <Option
             key={item.value}
             data-value={item.value}
-            data-computeUnits={item.computeUnits}
+            data-nodes={item.nodes}
+            data-multiple={item.multiple}
             selected={item.value === VMSize.value}
           >
             {item.value}

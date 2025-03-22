@@ -8,9 +8,6 @@
       "Max": 300,
       "Step": 1
     },
-    "TimeConsumption": {
-      "Default": 720
-    },
     "MachineTypes": [
       {
         "value": "General Purpose",
@@ -18,38 +15,31 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 8GB RAM",
-            "multiple": 0.75,
-            "nodes": 2
+            "computeUnits": 3
           },
           {
             "value": "4 CPU - 16GB RAM",
-            "multiple": 1,
-            "nodes": 2
+            "computeUnits": 4
           },
           {
             "value": "8 CPU - 32GB RAM",
-            "multiple": 2,
-            "nodes": 4
+            "computeUnits": 8
           },
           {
             "value": "16 CPU - 64GB RAM",
-            "multiple": 4,
-            "nodes": 8
+            "computeUnits": 16
           },
           {
             "value": "32 CPU - 128GB RAM",
-            "multiple": 8,
-            "nodes": 16
+            "computeUnits": 32
           },
           {
             "value": "48 CPU - 192GB RAM",
-            "multiple": 12,
-            "nodes": 24
+            "computeUnits": 48
           },
           {
             "value": "64 CPU - 256GB RAM",
-            "multiple": 16,
-            "nodes": 32
+            "computeUnits": 64
           }
         ]
       },
@@ -59,74 +49,54 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 4GB RAM",
-            "multiple": 0.75,
-            "nodes": 2
+            "computeUnits": 2.5
           },
           {
             "value": "4 CPU - 8GB RAM",
-            "multiple": 1,
-            "nodes": 2
+            "computeUnits": 4
           },
           {
             "value": "8 CPU - 16GB RAM",
-            "multiple": 2,
-            "nodes": 4
+            "computeUnits": 8
           },
           {
             "value": "16 CPU - 32GB RAM",
-            "multiple": 4,
-            "nodes": 8
+            "computeUnits": 16
           },
           {
             "value": "32 CPU - 64GB RAM",
-            "multiple": 8,
-            "nodes": 16
+            "computeUnits": 32
           },
           {
             "value": "48 CPU - 96GB RAM",
-            "multiple": 12,
-            "nodes": 24
+            "computeUnits": 48
           },
           {
             "value": "64 CPU - 128GB RAM",
-            "multiple": 16,
-            "nodes": 32
+            "computeUnits": 64
           }
         ]
       }
     ],
-    "PricePerUnit": 0.48055555555555557,
-    "PricePerUnitDivider": 1,
-    "PricePerUnitDivider2": 1,
-    "BaseVMPricePerUnit": 346,
-    "BaseStorageEventsPricePerUnit": 65
+    "PricePerUnit": 0.12
   },
   "AdditionalConfig": {
-    "Default": 0
+    "Default": 0,
+    "TimeConsumption": 720
   },
   "Storage": {
     "Default": 0,
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "TimeConsumption": {
-      "Default": 720
-    },
-    "PricePerUnit": 13,
-    "PricePerUnitDivider": 32,
-    "PricePerUnitDivider2": 720
+    "PricePerUnit": 0.02
   },
   "PremiumStorage": {
     "Default": 0,
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "TimeConsumption": {
-      "Default": 720
-    },
-    "PricePerUnit": 39,
-    "PricePerUnitDivider": 32,
-    "PricePerUnitDivider2": 720
+    "multiplier": 3
   },
   "RedisCosts": {
     "Tiers": [

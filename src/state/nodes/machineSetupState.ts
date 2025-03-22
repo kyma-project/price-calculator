@@ -9,8 +9,7 @@ export interface MachineType {
 
 export interface VMSize {
   value: string;
-  multiple: number;
-  nodes: number;
+  computeUnits: number;
 }
 
 export interface MachineSetup {
@@ -24,7 +23,7 @@ export const baseMachineSetupState: RecoilState<MachineSetup> =
   atom<MachineSetup>({
     key: 'baseMachineSetupState',
     default: {
-      timeConsuption: config.nodeConfig.TimeConsumption.Default,
+      timeConsuption: config.AdditionalConfig.TimeConsumption,
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
       minAutoscaler: config.nodeConfig.AutoScalerMin.Default,

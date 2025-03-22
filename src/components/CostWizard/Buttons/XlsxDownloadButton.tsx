@@ -3,10 +3,10 @@ import { Button, Icon } from '@ui5/webcomponents-react';
 import { useRecoilValue } from 'recoil';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
-import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
+import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
-import exportXLSX from '../Functions/exportXLSX';
+import exportXLSX, { ExportFormat } from '../Functions/exportToFile';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
@@ -23,8 +23,8 @@ export default function XlsxDownloadButton() {
   const premiumStorageQuantity: number = useRecoilValue<number>(
     premiumGBQuantityState,
   );
-  const storageTime: number = useRecoilValue<number>(
-    timeConsumptionStorageState,
+  const timeConsumption: number = useRecoilValue<number>(
+    timeConsumptionState,
   );
   const baseMachineSetup = useRecoilValue<MachineSetup>(baseMachineSetupState);
   const additionalMachineSetup = useRecoilValue<MachineSetup[]>(
@@ -43,11 +43,12 @@ export default function XlsxDownloadButton() {
           machineSetup: [baseMachineSetup, ...additionalMachineSetup],
           storageCosts,
           storageQuantity,
-          storageTime,
+          timeConsumption,
           additionalCosts,
           totalCosts: totalCosts.CU,
           premiumStorageQuantity,
           redisSize,
+          exportFormat: ExportFormat.XLSX
         })
       }
     >

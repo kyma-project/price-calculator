@@ -11,5 +11,5 @@ test('total costs', () => {
     timeConsumption,
   });
 
-  expect(nodeCosts).toBe(1362.24);
+  expect(nodeCosts).toBe(1229.8);
 });

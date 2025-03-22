@@ -4,18 +4,18 @@ import CostList from './CostList';
 import { useCostCalculator } from '../../context/CostCalculatorContext';
 
 export default function ResultStatistics() {
-  const { baseConfigCosts, storageCosts, additionalCosts, totalCosts } =
+  const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
     useCostCalculator();
 
   return (
     <>
       <DonutStatistics
-        baseConfigCosts={baseConfigCosts}
+        nodeConfigCosts={nodeConfigCosts}
         additionalCosts={additionalCosts}
         storageCosts={storageCosts}
       />
       <CostList
-        baseConfigCosts={baseConfigCosts}
+        nodeConfigCosts={nodeConfigCosts}
         additionalCosts={additionalCosts}
         storageCosts={storageCosts}
         totalCosts={totalCosts}

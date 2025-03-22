@@ -9,12 +9,12 @@ import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/cal
 import { useRecoilValue } from 'recoil';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
-import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
+import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 
 export default function StorageStep() {
   const GBQuantity = useRecoilValue<number>(GBQuantityState);
   const premiumGBQuantity = useRecoilValue<number>(premiumGBQuantityState);
-  const timeConsumption = useRecoilValue<number>(timeConsumptionStorageState);
+  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
 
   const { setStorageCosts } = useCostCalculator();
 
@@ -29,9 +29,9 @@ export default function StorageStep() {
   }, [setStorageCosts, GBQuantity, premiumGBQuantity, timeConsumption]);
 
   return (
-    <WizardStep disabled titleText="Additional Storage">
+    <WizardStep disabled titleText="Storage">
       <Title wrappingType="Normal" level="H2" size="H2">
-        2. Additional storage for the Kyma cluster
+        3. Add storage for the cluster
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />

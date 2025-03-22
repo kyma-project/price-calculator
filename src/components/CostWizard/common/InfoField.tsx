@@ -3,10 +3,10 @@ import { MessageStrip } from '@ui5/webcomponents-react';
 import './InfoField.css';
 
 interface Props {
-  info: string;
+  info: any;
 }
 
 export default function InfoField(props: Props) {
   const { info } = props;
-  return <MessageStrip className="info" hideCloseButton children={info} />;
+  return <MessageStrip className="info" hideCloseButton>{info}</MessageStrip> ;
 }

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import NextStepButton from '../Buttons/NextStepButton';
 import MachineSetupForm from '../MachineSetupForm';
-import InfoField from '../common/InfoField';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   additionalMachineSetupState,
@@ -33,7 +32,7 @@ export default function NodeConfigStep() {
     for (const machine of combinedMachineSetup) {
       const machineCost = calculateNodeConfigCosts({
         timeConsumption: machine.timeConsuption,
-        vmMultiplier: machine.VMSize.multiple,
+        computeUnits: machine.VMSize.computeUnits,
         minAutoscaler: machine.minAutoscaler,
         machineTypeFactor: machine.machineType.multiple,
       });
@@ -50,7 +49,6 @@ export default function NodeConfigStep() {
         1. Choose the base worker node pool configuration
       </Title>
       <div className="StepContent">
-        <InfoField info="contains 224 GB of storage by default" />
         <MachineSetupForm
           machine={baseMachineSetup}
           updateMachine={setBaseMachineSetup}

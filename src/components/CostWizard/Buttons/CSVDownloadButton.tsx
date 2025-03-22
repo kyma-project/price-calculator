@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon } from '@ui5/webcomponents-react';
 import { useRecoilValue } from 'recoil';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
-import { timeConsumptionStorageState } from '../../../state/storage/timeConsumptionState';
+import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
@@ -10,7 +10,7 @@ import {
 } from '../../../state/nodes/machineSetupState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
-import exportCSV from '../Functions/exportCSV';
+import exportCSV, { ExportFormat } from '../Functions/exportToFile';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
 import {
   RedisSize,
@@ -27,8 +27,8 @@ export default function CSVDownloadButton() {
   const premiumStorageQuantity: number = useRecoilValue<number>(
     premiumGBQuantityState,
   );
-  const storageTime: number = useRecoilValue<number>(
-    timeConsumptionStorageState,
+  const timeConsumption: number = useRecoilValue<number>(
+    timeConsumptionState,
   );
   const redisSize = useRecoilValue<RedisSize>(redisState);
   const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
@@ -44,11 +44,12 @@ export default function CSVDownloadButton() {
           machineSetup: [baseMachineSetup, ...additionalMachineSetup],
           storageCosts,
           storageQuantity,
-          storageTime,
+          timeConsumption,
           additionalCosts,
           totalCosts: totalCosts.CU,
           premiumStorageQuantity,
           redisSize,
+          exportFormat: ExportFormat.CSV
         })
       }
     >

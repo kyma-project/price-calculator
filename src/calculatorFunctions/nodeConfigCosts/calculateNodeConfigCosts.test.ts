@@ -3,7 +3,7 @@ import calculatenodeConfigCosts from './calculateNodeConfigCosts';
 test('costs of minAutoscaler', () => {
   const timeConsumption = 720;
   const computeUnits = 4;
-  const minAutoscaler = 4;
+  const minAutoscaler = 6;
   const machineTypeFactor = 1;
   const nodeConfigCosts = calculatenodeConfigCosts({
     timeConsumption,
@@ -12,5 +12,5 @@ test('costs of minAutoscaler', () => {
     machineTypeFactor,
   });
 
-  expect(nodeConfigCosts).toBe(2833);
+  expect(nodeConfigCosts).toBe(2073.6);
 });

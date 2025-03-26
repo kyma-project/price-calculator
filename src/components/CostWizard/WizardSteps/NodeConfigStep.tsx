@@ -20,26 +20,22 @@ export default function NodeConfigStep() {
     additionalMachineSetupState,
   );
 
-  useEffect(() => {
-    console.log(additionalMachineSetup);
-  }, [additionalMachineSetup]);
-
   const { setNodeConfigCosts } = useCostCalculator();
 
   useEffect(() => {
     const combinedMachineSetup = [baseMachineSetup, ...additionalMachineSetup];
-    let nodeConfigCosts = 0;
 
-    for (const machine of combinedMachineSetup) {
-      const machineCost = calculateNodeConfigCosts({
-        timeConsumption: machine.timeConsuption,
-        vmMultiplier: machine.VMSize.multiple,
-        minAutoscaler: machine.minAutoscaler,
-        machineTypeFactor: machine.machineType.multiple,
-      });
-
-      nodeConfigCosts += machineCost;
-    }
+    const nodeConfigCosts = combinedMachineSetup.reduce((total, machine) => {
+      return (
+        total +
+        calculateNodeConfigCosts({
+          timeConsumption: machine.timeConsuption,
+          vmMultiplier: machine.VMSize.multiple,
+          minAutoscaler: machine.minAutoscaler,
+          machineTypeFactor: machine.machineType.multiple,
+        })
+      );
+    }, 0);
 
     setNodeConfigCosts(nodeConfigCosts);
   }, [setNodeConfigCosts, baseMachineSetup, additionalMachineSetup]);

@@ -8,7 +8,7 @@
       "Max": 300,
       "Step": 1
     },
-    "TimeConsumption": {
+    "timeConsumption": {
       "Default": 720
     },
     "MachineTypes": [
@@ -109,7 +109,7 @@
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "TimeConsumption": {
+    "timeConsumption": {
       "Default": 720
     },
     "PricePerUnit": 13,
@@ -121,7 +121,7 @@
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "TimeConsumption": {
+    "timeConsumption": {
       "Default": 720
     },
     "PricePerUnit": 39,

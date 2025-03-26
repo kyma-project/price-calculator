@@ -1,11 +1,11 @@
-import calculatenodeConfigCosts from './calculateNodeConfigCosts';
+import calculateNodeConfigCosts from './calculateNodeConfigCosts';
 
 test('costs of minAutoscaler', () => {
   const timeConsumption = 720;
   const computeUnits = 4;
   const minAutoscaler = 6;
   const machineTypeFactor = 1;
-  const nodeConfigCosts = calculatenodeConfigCosts({
+  const nodeConfigCosts = calculateNodeConfigCosts({
     timeConsumption,
     computeUnits,
     minAutoscaler,

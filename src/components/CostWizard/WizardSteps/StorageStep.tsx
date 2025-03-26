@@ -3,7 +3,7 @@ import GBQuantityInputField from '../UserInputs/storage/GBQuantityInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import NextStepButton from '../Buttons/NextStepButton';
-import PremiumGBQuantyInputField from '../UserInputs/storage/PremiumGBQuantyInputField';
+import PremiumGBQuantityInputField from '../UserInputs/storage/PremiumGBQuantityInputField';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
 import { useRecoilValue } from 'recoil';
@@ -35,7 +35,7 @@ export default function StorageStep() {
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />
-        <PremiumGBQuantyInputField />
+        <PremiumGBQuantityInputField />
       </div>
 
       <div className="ButtonContainer">

@@ -41,7 +41,7 @@ export default function RedisSelect() {
           onClick={() => openLinks('redis')}
         />
       </FlexBox>
-      <Select className="redisSelect" onChange={onChange}>
+      <Select className="redis-select" onChange={onChange}>
         {redisConfigOptions.map((item) => (
           <Option key={item.key} data-key={item.key} data-value={item.value}>
             {item.key}

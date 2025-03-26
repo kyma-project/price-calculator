@@ -46,7 +46,7 @@ export default function exportToFile(props: Props) {
       const machineWithCost = {
         machineSetup: machine,
         cost: calculateNodeConfigCosts({
-          timeConsumption: machine.timeConsuption,
+          timeConsumption: machine.timeConsumption,
           computeUnits: machine.VMSize.computeUnits,
           minAutoscaler: machine.minAutoscaler,
           machineTypeFactor: machine.machineType.multiple,
@@ -79,7 +79,7 @@ export default function exportToFile(props: Props) {
     [
       'Time Consumption',
       ...machineSetupWithCost.map((prop) =>
-        prop.machineSetup.timeConsuption.toString(),
+        prop.machineSetup.timeConsumption.toString(),
       ),
     ],
     [

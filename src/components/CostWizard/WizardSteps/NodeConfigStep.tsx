@@ -29,7 +29,7 @@ export default function NodeConfigStep() {
       return (
         total +
         calculateNodeConfigCosts({
-          timeConsumption: machine.timeConsuption,
+          timeConsumption: machine.timeConsumption,
           vmMultiplier: machine.VMSize.multiple,
           minAutoscaler: machine.minAutoscaler,
           machineTypeFactor: machine.machineType.multiple,

@@ -17,7 +17,7 @@ export default function AddWorkerNodes() {
 
   const addMachineSetup = () => {
     const newMachine: MachineSetup = {
-      timeConsuption: config.nodeConfig.timeConsumption.Default,
+      timeConsumption: config.nodeConfig.timeConsumption.Default,
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
       minAutoscaler: config.nodeConfig.AutoScalerMin.Default,

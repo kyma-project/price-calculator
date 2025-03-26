@@ -1,21 +1,21 @@
 import config from '../../config.json';
 
-export interface BaseConfigProps {
+export interface NodeConfigProps {
   timeConsumption: number;
   vmMultiplier: number;
   minAutoscaler: number;
   machineTypeFactor: number;
 }
 
-export default function calculateBaseConfigCosts(
-  props: BaseConfigProps,
+export default function calculateNodeConfigCosts(
+  props: NodeConfigProps,
 ): number {
   const { timeConsumption, minAutoscaler, vmMultiplier, machineTypeFactor } =
     props;
 
-  const PPU: number = config.baseConfig.PricePerUnit;
+  const PPU: number = config.nodeConfig.PricePerUnit;
   const BaseStorageEventsPPU: number =
-    config.baseConfig.BaseStorageEventsPricePerUnit;
+    config.nodeConfig.BaseStorageEventsPricePerUnit;
 
   return (
     minAutoscaler * timeConsumption * PPU * vmMultiplier * machineTypeFactor +

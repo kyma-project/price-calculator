@@ -3,7 +3,7 @@ import GBQuantityInputField from '../UserInputs/storage/GBQuantityInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import NextStepButton from '../Buttons/NextStepButton';
-import PremiumGBQuantyInputField from '../UserInputs/storage/PremiumGBQuantyInputField';
+import PremiumGBQuantityInputField from '../UserInputs/storage/PremiumGBQuantityInputField';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
 import { useRecoilValue } from 'recoil';
@@ -29,13 +29,13 @@ export default function StorageStep() {
   }, [setStorageCosts, GBQuantity, premiumGBQuantity, timeConsumption]);
 
   return (
-    <WizardStep disabled titleText="Additional Storage">
+    <WizardStep disabled titleText="Storage">
       <Title wrappingType="Normal" level="H2" size="H2">
-        2. Additional storage for the Kyma cluster
+        3. Add storage for the Kyma cluster
       </Title>
       <div className="StepContent">
         <GBQuantityInputField />
-        <PremiumGBQuantyInputField />
+        <PremiumGBQuantityInputField />
       </div>
 
       <div className="ButtonContainer">

@@ -1,54 +1,55 @@
 import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import {
-  Slider,
-  StepInput,
-  StepInputDomRef,
-  Title,
-} from '@ui5/webcomponents-react';
-import { useRecoilState } from 'recoil';
-import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
+import { Slider, StepInput, StepInputDomRef } from '@ui5/webcomponents-react';
+import HeaderWithInfo from '../../common/HeaderWithInfo';
 
-export default function GBQuantityInputField() {
-  const configuration = config.Storage;
+interface Props {
+  autoScalerMin: number;
+  setAutoScalerMin: React.Dispatch<React.SetStateAction<number>>;
+}
+export default function MinAutoscalerInputField({
+  autoScalerMin,
+  setAutoScalerMin,
+}: Props) {
+  const configuration = config.nodeConfig.AutoScalerMin;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [GBQuantity, setGBQuantity] = useRecoilState<number>(GBQuantityState);
   const stepInputRef = useRef<StepInputDomRef>(null);
 
   function handleChange(event: any): void {
     const newValue: number = parseInt(event.target.value);
     if (newValue % step === 0 && newValue >= min && newValue <= max) {
-      setGBQuantity(newValue);
+      setAutoScalerMin(newValue);
     } else if (stepInputRef.current) {
       const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
-      input?.setAttribute('value', String(GBQuantity));
+      input?.setAttribute('value', String(autoScalerMin));
     }
   }
 
   return (
-    <div>
-      <Title className="wizard-subheader" level="H5" size="H5">
-        Standard Storage: number of GB
-      </Title>
+    <>
+      <HeaderWithInfo
+        header="Autoscaler Min"
+        info="minimum number of available Virtual Machines"
+      />
       <StepInput
         ref={stepInputRef}
-        value={GBQuantity}
+        value={autoScalerMin}
         onChange={handleChange}
         min={min}
         max={max}
         step={step}
       />
       <Slider
-        value={GBQuantity}
+        value={autoScalerMin}
         onInput={handleChange}
         min={min}
         max={max}
         step={step}
         showTooltip
       />
-    </div>
+    </>
   );
 }

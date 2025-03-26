@@ -1,46 +1,7 @@
 {
   "CurrencyCode": "€",
-  "ConversionRateCUCC": 1,
-  "baseConfig": {
-    "VirtualMachineSize": {
-      "Options": [
-        {
-          "value": "2 CPU - 8GB RAM",
-          "multiple": 0.75,
-          "nodes": 2
-        },
-        {
-          "value": "4 CPU - 16GB RAM",
-          "multiple": 1,
-          "nodes": 2
-        },
-        {
-          "value": "8 CPU - 32GB RAM",
-          "multiple": 2,
-          "nodes": 4
-        },
-        {
-          "value": "16 CPU - 64GB RAM",
-          "multiple": 4,
-          "nodes": 8
-        },
-        {
-          "value": "32 CPU - 128GB RAM",
-          "multiple": 8,
-          "nodes": 16
-        },
-        {
-          "value": "48 CPU - 192GB RAM",
-          "multiple": 12,
-          "nodes": 24
-        },
-        {
-          "value": "64 CPU - 256GB RAM",
-          "multiple": 16,
-          "nodes": 32
-        }
-      ]
-    },
+  "ConversionRateCUCC": 1.06,
+  "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
       "Min": 3,
@@ -48,19 +9,92 @@
       "Step": 1
     },
     "TimeConsumption": {
-      "Default": 720,
-      "Min": 1,
-      "Max": 720,
-      "Step": 1
+      "Default": 720
     },
-    "machineTypeFactor": {
-      "MachineTypes": [
-        {
-          "value": "General Purpose",
-          "multiple": 1
-        }
-      ]
-    },
+    "MachineTypes": [
+      {
+        "value": "General Purpose",
+        "multiple": 1,
+        "VMSizeOptions": [
+          {
+            "value": "2 CPU - 8GB RAM",
+            "multiple": 0.75,
+            "nodes": 2
+          },
+          {
+            "value": "4 CPU - 16GB RAM",
+            "multiple": 1,
+            "nodes": 2
+          },
+          {
+            "value": "8 CPU - 32GB RAM",
+            "multiple": 2,
+            "nodes": 4
+          },
+          {
+            "value": "16 CPU - 64GB RAM",
+            "multiple": 4,
+            "nodes": 8
+          },
+          {
+            "value": "32 CPU - 128GB RAM",
+            "multiple": 8,
+            "nodes": 16
+          },
+          {
+            "value": "48 CPU - 192GB RAM",
+            "multiple": 12,
+            "nodes": 24
+          },
+          {
+            "value": "64 CPU - 256GB RAM",
+            "multiple": 16,
+            "nodes": 32
+          }
+        ]
+      },
+      {
+        "value": "Compute Optimized",
+        "multiple": 2,
+        "VMSizeOptions": [
+          {
+            "value": "2 CPU - 4GB RAM",
+            "multiple": 0.75,
+            "nodes": 2
+          },
+          {
+            "value": "4 CPU - 8GB RAM",
+            "multiple": 1,
+            "nodes": 2
+          },
+          {
+            "value": "8 CPU - 16GB RAM",
+            "multiple": 2,
+            "nodes": 4
+          },
+          {
+            "value": "16 CPU - 32GB RAM",
+            "multiple": 4,
+            "nodes": 8
+          },
+          {
+            "value": "32 CPU - 64GB RAM",
+            "multiple": 8,
+            "nodes": 16
+          },
+          {
+            "value": "48 CPU - 96GB RAM",
+            "multiple": 12,
+            "nodes": 24
+          },
+          {
+            "value": "64 CPU - 128GB RAM",
+            "multiple": 16,
+            "nodes": 32
+          }
+        ]
+      }
+    ],
     "PricePerUnit": 0.48055555555555557,
     "PricePerUnitDivider": 1,
     "PricePerUnitDivider2": 1,
@@ -94,38 +128,28 @@
     "PricePerUnitDivider": 32,
     "PricePerUnitDivider2": 720
   },
-  "RedisCosts":{
-    "Tiers":[
-      {"key": "None",
-      "value": 0},
-      {"key": "Standard1",
-      "value": 74},
-      {"key": "Standard2",
-      "value": 148},
-      {"key": "Standard3",
-      "value": 387},
-      {"key": "Standard4",
-      "value": 778},
-      {"key": "Standard5",
-      "value": 1541},
-      {"key": "Standard6",
-      "value": 3084},
-      {"key": "Standard7",
-      "value": 6167},
-      {"key": "Standard8",
-      "value": 12331},
-      {"key": "Premium1",
-      "value": 773},
-      {"key": "Premium2",
-      "value": 1555},
-      {"key": "Premium3",
-      "value": 3082},
-      {"key": "Premium4",
-      "value": 6167},
-      {"key": "Premium5",
-      "value": 12335},
-      {"key": "Premium6",
-      "value": 24661}
+  "RedisCosts": {
+    "Tiers": [
+      { "key": "None", "value": 0 },
+      { "key": "Standard1", "value": 74 },
+      { "key": "Standard2", "value": 148 },
+      { "key": "Standard3", "value": 387 },
+      { "key": "Standard4", "value": 778 },
+      { "key": "Standard5", "value": 1541 },
+      { "key": "Standard6", "value": 3084 },
+      { "key": "Standard7", "value": 6167 },
+      { "key": "Standard8", "value": 12331 },
+      { "key": "Premium1", "value": 773 },
+      { "key": "Premium2", "value": 1555 },
+      { "key": "Premium3", "value": 3082 },
+      { "key": "Premium4", "value": 6167 },
+      { "key": "Premium5", "value": 12335 },
+      { "key": "Premium6", "value": 24661 }
     ]
+  },
+  "documentationUrls": {
+    "redis": "https://help.sap.com/docs/btp/sap-business-technology-platform/redis",
+    "nfs": "https://help.sap.com/docs/btp/sap-business-technology-platform/nfs",
+    "worker-node-pools": "https://help.sap.com/docs/btp/sap-business-technology-platform/provisioning-and-update-parameters-in-kyma-environment?q=worker#additional-worker-node-pools"
   }
 }

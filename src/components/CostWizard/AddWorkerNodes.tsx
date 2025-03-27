@@ -6,18 +6,20 @@ import {
   MachineSetup,
 } from '../../state/nodes/machineSetupState';
 import MachineSetupForm from './MachineSetupForm';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import openLinks from './Functions/openLinks';
 import config from '../../config.json';
+import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
 
 export default function AddWorkerNodes() {
   const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(
     additionalMachineSetupState,
   );
+  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
 
   const addMachineSetup = () => {
     const newMachine: MachineSetup = {
-      timeConsumption: config.nodeConfig.TimeConsumption.Default,
+      timeConsumption: timeConsumption,
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
       minAutoscaler: config.nodeConfig.AutoScalerMin.Default,

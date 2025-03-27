@@ -11,27 +11,34 @@ interface Props {
   storageQuantity: number;
   premiumStorageQuantity: number;
   redisSize: RedisSize;
-  storageTime: number;
+  timeConsumption: number;
   additionalCosts: number;
   totalCosts: number;
+  exportFormat: ExportFormat;
 }
 
 interface MachineSetupWithCost {
   machineSetup: MachineSetup;
   cost: number;
 }
+export enum ExportFormat{
+  CSV,
+  XLSX
+}
 
-export default function exportXLSX(props: Props) {
+
+export default function exportToFile(props: Props) {
   const {
     baseCosts,
     machineSetup,
     storageCosts,
     storageQuantity,
-    storageTime,
+    timeConsumption,
     premiumStorageQuantity,
     redisSize,
     additionalCosts,
     totalCosts,
+    exportFormat
   } = props;
 
   const machineSetupWithCost: MachineSetupWithCost[] = machineSetup.reduce(
@@ -40,7 +47,7 @@ export default function exportXLSX(props: Props) {
         machineSetup: machine,
         cost: calculateNodeConfigCosts({
           timeConsumption: machine.timeConsumption,
-          vmMultiplier: machine.VMSize.multiple,
+          computeUnits: machine.VMSize.computeUnits,
           minAutoscaler: machine.minAutoscaler,
           machineTypeFactor: machine.machineType.multiple,
         }),
@@ -83,7 +90,7 @@ export default function exportXLSX(props: Props) {
     ['Storage'],
     ['Standard Storage', storageQuantity],
     ['NFS Storage', premiumStorageQuantity],
-    ['Time Consumption', storageTime],
+    ['Time Consumption', timeConsumption],
     [''],
     ['Redis'],
     ['Redis Size', redisSize.tsize],
@@ -94,6 +101,16 @@ export default function exportXLSX(props: Props) {
     ['Additional costs', roundDecimals(additionalCosts, true) + ' CU'],
     ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
   ];
+
+  if (exportFormat === ExportFormat.XLSX){
+    exportToXLSX(dataArray);
+  }
+  else{
+    exportToCSV(dataArray);
+  }
+}
+
+function exportToXLSX(dataArray: (string | number)[][]) {
   const worksheet: WorkSheet = utils.aoa_to_sheet(dataArray);
   const workbook: WorkBook = utils.book_new();
   utils.book_append_sheet(workbook, worksheet, 'Sheet 1');
@@ -102,4 +119,21 @@ export default function exportXLSX(props: Props) {
   worksheet['!cols'] = columnWidths;
 
   writeFile(workbook, 'Kyma-Price-Calculations.xlsx');
+}
+
+function exportToCSV(dataArray: (string | number)[][]){
+  const csvString = dataArray.map((row) => row.join(': ')).join('\n');
+  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'Kyma-Price-Calculations.csv');
+  link.style.display = 'none';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
 }

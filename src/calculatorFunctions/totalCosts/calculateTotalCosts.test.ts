@@ -7,7 +7,7 @@ test('total costs', () => {
   //  Baseconfiguration
   const minAutoscaler = 3;
   const timeConsumption = 450;
-  const vmMultiplier = 4; // 16 CPU 64gb RAM
+  const computeUnits = 16; // 16 CPU 64gb RAM
   const machineTypeFactor = 1;
   //  Storage
   const GBQuantity = 1024;
@@ -19,7 +19,7 @@ test('total costs', () => {
 
   const nodeConfigCosts = calculateNodeConfigCosts({
     timeConsumption,
-    vmMultiplier,
+    computeUnits,
     minAutoscaler,
     machineTypeFactor,
   });
@@ -38,6 +38,6 @@ test('total costs', () => {
     conversionRatio,
   });
 
-  expect(totalCosts.CU).toBe(3774);
-  expect(totalCosts.CC.toFixed(2)).toBe('1320.90');
+  expect(totalCosts.CU).toBe(3818);
+  expect(totalCosts.CC.toFixed(2)).toBe('1336.30');
 });

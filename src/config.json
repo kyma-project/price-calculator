@@ -4,6 +4,7 @@
   "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
+      "DefaultWorkerPools": 1,
       "Min": 3,
       "Max": 300,
       "Step": 1

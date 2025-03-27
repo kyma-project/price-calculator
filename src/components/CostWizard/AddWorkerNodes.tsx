@@ -22,7 +22,7 @@ export default function AddWorkerNodes() {
       timeConsumption: timeConsumption,
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
-      minAutoscaler: config.nodeConfig.AutoScalerMin.DefaultWorkerPools,
+      minAutoscaler: config.nodeConfig.AutoScalerMin.DefaultWorkerNodes,
     };
     setMachineSetup((prevState) => prevState.concat(newMachine));
   };

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/price-calculator/static/css/main.f33799f5.css",
-    "main.js": "/price-calculator/static/js/main.f2179cc4.js",
+    "main.css": "/price-calculator/static/css/main.d3c0c9fe.css",
+    "main.js": "/price-calculator/static/js/main.ce2f4dae.js",
     "ui5-webcomponents-sap-icons-v5.js": "/price-calculator/static/js/ui5-webcomponents-sap-icons-v5.a26b0358.chunk.js",
     "ui5-webcomponents-sap-icons-v4.js": "/price-calculator/static/js/ui5-webcomponents-sap-icons-v4.f74850d8.chunk.js",
     "ui5-webcomponents-cldr-ar.js": "/price-calculator/static/js/ui5-webcomponents-cldr-ar.79ee91e0.chunk.js",
@@ -372,11 +372,11 @@
     "static/media/messagebundle_zh_CN.json": "/price-calculator/static/media/messagebundle_zh_CN.5dfad9824b5bc665611d.json",
     "static/media/messagebundle_in.json": "/price-calculator/static/media/messagebundle_in.9e8eae2243ea3442b2c6.json",
     "index.html": "/price-calculator/index.html",
-    "main.f33799f5.css.map": "/price-calculator/static/css/main.f33799f5.css.map",
-    "main.f2179cc4.js.map": "/price-calculator/static/js/main.f2179cc4.js.map"
+    "main.d3c0c9fe.css.map": "/price-calculator/static/css/main.d3c0c9fe.css.map",
+    "main.ce2f4dae.js.map": "/price-calculator/static/js/main.ce2f4dae.js.map"
   },
   "entrypoints": [
-    "static/css/main.f33799f5.css",
-    "static/js/main.f2179cc4.js"
+    "static/css/main.d3c0c9fe.css",
+    "static/js/main.ce2f4dae.js"
   ]
 }

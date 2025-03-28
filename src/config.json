@@ -4,7 +4,9 @@
   "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
+      "DefaultWorkerNodes": 1,
       "Min": 3,
+      "MinWorkerNodes": 1,
       "Max": 300,
       "Step": 1
     },

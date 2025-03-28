@@ -64,6 +64,7 @@ export default function MachineSetupForm({
       <MinAutoscalerInputField
         autoScalerMin={autoScalerMin}
         setAutoScalerMin={setAutoScalerMin}
+        workerNode={workerNode}
       />
     </Form>
   );

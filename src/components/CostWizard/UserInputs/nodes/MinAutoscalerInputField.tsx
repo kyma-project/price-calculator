@@ -6,13 +6,15 @@ import HeaderWithInfo from '../../common/HeaderWithInfo';
 interface Props {
   autoScalerMin: number;
   setAutoScalerMin: React.Dispatch<React.SetStateAction<number>>;
+  workerNode: boolean;
 }
 export default function MinAutoscalerInputField({
   autoScalerMin,
   setAutoScalerMin,
+  workerNode
 }: Props) {
   const configuration = config.nodeConfig.AutoScalerMin;
-  const min = configuration.Min;
+  const min = workerNode ? configuration.MinWorkerNodes : configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
 

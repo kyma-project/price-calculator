@@ -1,33 +1,15 @@
 {
+  "private": true,
+  "license": "Apache-2.0",
   "name": "kyma-price-calculator",
   "version": "0.1.0",
-  "private": true,
+  "type": "module",
   "homepage": "https://kyma-project.github.io/price-calculator",
-  "dependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.9.1",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@ui5/webcomponents": "^2.4.0",
-    "@ui5/webcomponents-fiori": "^2.4.0",
-    "@ui5/webcomponents-icons": "^2.4.0",
-    "@ui5/webcomponents-react": "^2.4.0",
-    "@ui5/webcomponents-react-charts": "^2.4.0",
-    "react": "^18.3.1",
-    "react-csv": "^2.2.2",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "recoil": "^0.7.7",
-    "xlsx": "^0.19.3"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite",
+    "build": "npm run copy-themes; INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "deploy": "gh-pages -d build",
-    "test": "react-scripts test",
+    "test": "vitest",
     "eject": "react-scripts eject",
     "lint-check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'",
     "lint-fix": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'"
@@ -50,11 +32,35 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@ui5/webcomponents": "^2.4.0",
+    "@ui5/webcomponents-fiori": "^2.4.0",
+    "@ui5/webcomponents-icons": "^2.4.0",
+    "@ui5/webcomponents-react": "^2.4.0",
+    "@ui5/webcomponents-react-charts": "^2.4.0",
+    "react": "^18.3.1",
+    "react-csv": "^2.2.2",
+    "react-dom": "^18.3.1",
+    "recoil": "^0.7.7",
+    "xlsx": "^0.19.3"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-csv": "^1.1.10",
     "gh-pages": "^6.2.0",
     "prettier": "^3.3.3",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vite": "^6.2.6",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1",
+    "@vitejs/plugin-react": "^4.3.4"
   }
 }

@@ -10,13 +10,13 @@
     "build": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "deploy": "gh-pages -d build",
     "test": "vitest",
+    "eslint-check": "eslint src/",
     "lint-check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'",
     "lint-fix": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -47,6 +47,7 @@
     "react": "^18.3.1",
     "react-csv": "^2.2.2",
     "react-dom": "^18.3.1",
+    "eslint-config-react-app": "^7.0.1",
     "recoil": "^0.7.7",
     "xlsx": "^0.19.3"
   },

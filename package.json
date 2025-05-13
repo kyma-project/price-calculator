@@ -7,12 +7,11 @@
   "homepage": "https://kyma-project.github.io/price-calculator",
   "scripts": {
     "start": "vite",
-    "build": "npm run copy-themes; INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=8192 vite build",
+    "build": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "deploy": "gh-pages -d build",
     "test": "vitest",
     "lint-check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'",
-    "lint-fix": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'",
-    "copy-themes": "cp node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css public/themes/@sap-theming/default.css; for theme in hcb dark hcw ; do cp node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon_$theme/css_variables.css public/themes/@sap-theming/$theme.css ; done"
+    "lint-fix": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}'"
   },
   "eslintConfig": {
     "extends": [

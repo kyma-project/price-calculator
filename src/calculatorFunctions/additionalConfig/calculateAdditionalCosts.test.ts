@@ -1,4 +1,5 @@
 import calculateAdditionalCosts from './calculateAdditionalCosts';
+import { expect, test } from 'vitest';
 
 test('total costs', () => {
   const redis = 74;

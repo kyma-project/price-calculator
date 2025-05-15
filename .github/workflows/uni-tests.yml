@@ -1,8 +1,8 @@
-name: Jest Automatic Testing
+name: Unit tests
 on: pull_request
 jobs:
   run-jest-tests:
-    name: Jest Tests
+    name: Unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout under $GITHUB_WORKSPACE
@@ -13,5 +13,5 @@ jobs:
           node-version: 18
       - name: Install all dependencies
         run: npm install
-      - name: Run Jest Tests
+      - name: Run Unit Tests
         run: npm run test

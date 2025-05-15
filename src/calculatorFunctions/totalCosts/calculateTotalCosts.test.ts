@@ -3,6 +3,8 @@ import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
 import calculateAdditionalCosts from '../additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts from './calculateTotalCosts';
 
+import { expect, test } from 'vitest';
+
 test('total costs', () => {
   //  Baseconfiguration
   const minAutoscaler = 3;
@@ -29,7 +31,7 @@ test('total costs', () => {
     timeConsumption,
   });
 
-  const additionalCosts = calculateAdditionalCosts({redis});
+  const additionalCosts = calculateAdditionalCosts({ redis });
 
   const totalCosts = calculateTotalCosts({
     nodeConfigCosts,

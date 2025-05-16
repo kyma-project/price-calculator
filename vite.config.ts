@@ -15,5 +15,6 @@ export default defineConfig({
   worker: {
     plugins: () => [viteTsconfigPaths()],
   },
-
+  // Configuration for GH pages
+  base: "./"
 });

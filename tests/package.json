@@ -1,0 +1,13 @@
+{
+  "name": "ui-integration-tests",
+  "version": "1.0.0",
+  "description": "UI Integration tests for Price Calculator",
+  "main": "index.js",
+  "scripts": {
+    "start": "cypress open",
+    "start:local": "CYPRESS_LOCAL_DEV=true cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^14.3.3"
+  }
+}

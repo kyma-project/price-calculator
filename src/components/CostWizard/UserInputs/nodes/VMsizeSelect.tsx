@@ -25,7 +25,7 @@ export default function VMsizeSelect({
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
-      <Select onChange={onChange}>
+      <Select data-test-id={'vm-size-select'} onChange={onChange}>
         {VMSizeOptions.map((item) => (
           <Option
             key={item.value}

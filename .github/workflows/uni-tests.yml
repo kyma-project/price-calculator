@@ -1,7 +1,7 @@
 name: Unit tests
 on: pull_request
 jobs:
-  run-jest-tests:
+  run-unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest
     steps:
@@ -10,7 +10,7 @@ jobs:
       - name: Set up NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
       - name: Install all dependencies
         run: npm install
       - name: Run Unit Tests

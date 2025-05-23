@@ -1,13 +1,6 @@
 name: PR Integration Test
 
-on:
-  pull_request:
-    types: [ opened, edited, synchronize, reopened, ready_for_review ]
-    paths:
-      - '.github/workflows/integration.yml'
-      - 'tests/**'
-      - 'src/**'
-      - 'package.json'
+on: pull_request
 
 jobs:
   run-integration-tests:

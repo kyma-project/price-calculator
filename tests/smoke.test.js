@@ -55,12 +55,12 @@ context('Go through calculator', () => {
     cy.get(
       'ui5-wizard-step[title-text="Additional Configuration"]:visible',
     ).within(() => {
-      //   TODO: move slider of conversion rate
-
       cy.get('[id=redis-select]').click();
       // cy.get('ui5-select.redis-select').click();
       cy.get('ui5-option:visible').contains('Standard4').click(); //When value is wouthside ui5wizard step, click is not possible
       cy.costShouldBe(Step.ADDITIONAL_REDIS_INCREASE);
+
+      //   TODO: move slider of conversion rate
 
     });
 

@@ -1,0 +1,35 @@
+name: PR Integration Test
+
+on:
+  pull_request:
+    types: [ opened, edited, synchronize, reopened, ready_for_review ]
+    paths:
+      - '.github/workflows/integration.yml'
+      - 'tests/**'
+      - 'src/**'
+      - 'package.json'
+
+jobs:
+  run-integration-tests:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - uses: gardenlinux/workflow-telemetry-action@v2
+        with:
+          comment_on_pr: false
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Merge with latest main
+        uses: ./.github/actions/merge
+      - uses: actions/setup-node@v4
+        name: Setup node
+        with:
+          node-version: 22
+      - name: "Build application"
+        run: npm run build
+      - name: "Run preview"
+        run: npx vite preview --port 3000
+      - name: Run integration tests
+        run: (cd tests && npm run test)
+      - name: Uploads artifacts

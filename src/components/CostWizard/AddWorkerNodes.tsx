@@ -1,10 +1,7 @@
 import React from 'react';
 import { Button, FlexBox, Icon, Title } from '@ui5/webcomponents-react';
 import './AddWorkerNodes.css';
-import {
-  additionalMachineSetupState,
-  MachineSetup,
-} from '../../state/nodes/machineSetupState';
+import { additionalMachineSetupState, MachineSetup } from '../../state/nodes/machineSetupState';
 import MachineSetupForm from './MachineSetupForm';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import openLinks from './Functions/openLinks';
@@ -43,6 +40,7 @@ export default function AddWorkerNodes() {
         <div
           className="dynamic-worker-node-container"
           key={`machine-setup-${index}`}
+          id={`machine-setup-${index}`}
         >
           <FlexBox
             wrap="NoWrap"

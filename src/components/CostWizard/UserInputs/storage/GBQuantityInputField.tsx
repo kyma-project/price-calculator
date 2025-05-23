@@ -1,11 +1,6 @@
 import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import {
-  Slider,
-  StepInput,
-  StepInputDomRef,
-  Title,
-} from '@ui5/webcomponents-react';
+import { Slider, StepInput, StepInputDomRef, Title } from '@ui5/webcomponents-react';
 import { useRecoilState } from 'recoil';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 
@@ -29,11 +24,12 @@ export default function GBQuantityInputField() {
   }
 
   return (
-    <div>
+    <div id={'gb-quantity'}>
       <Title className="wizard-subheader" level="H5" size="H5">
         Standard Storage: number of GB
       </Title>
       <StepInput
+        id={'gb-quantity-input'}
         ref={stepInputRef}
         value={GBQuantity}
         onChange={handleChange}

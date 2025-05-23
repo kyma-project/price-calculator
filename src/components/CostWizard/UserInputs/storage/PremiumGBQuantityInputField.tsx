@@ -1,14 +1,7 @@
 import React, { useRef } from 'react';
 import config from '../../../../config.json';
 import './PremiumGBQuantityInputField.css';
-import {
-  FlexBox,
-  Icon,
-  Slider,
-  StepInput,
-  StepInputDomRef,
-  Title,
-} from '@ui5/webcomponents-react';
+import { FlexBox, Icon, Slider, StepInput, StepInputDomRef, Title } from '@ui5/webcomponents-react';
 import { useRecoilState } from 'recoil';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
 import openLinks from '../../Functions/openLinks';
@@ -36,7 +29,7 @@ export default function PremiumGBQuantityInputField() {
   }
 
   return (
-    <div>
+    <div id={'premium-gb-quantity'}>
       <FlexBox
         wrap="NoWrap"
         alignItems="Center"
@@ -56,6 +49,7 @@ export default function PremiumGBQuantityInputField() {
         />
       </FlexBox>
       <StepInput
+        id={'premium-gb-quantity-input'}
         ref={stepInputRef}
         value={premiumGBQuantity}
         onChange={handleChange}

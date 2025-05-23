@@ -18,26 +18,37 @@ context('Go through calculator', () => {
       },
     );
 
+    // TODO: add subtests or something
+    cy.title('TEST');
+
     cy.get('ui5-wizard-step[title-text="Worker Node Pools"]:visible').within(
       () => {
         cy.get('ui5-button').contains('Add Worker Node Pool').click();
+        cy.costShouldBe(Step.WORKER_ADD_NODE);
 
         cy.get('#machine-setup-0').find('[id=machine-type-select]').click();
         cy.get('ui5-option:visible').contains('Compute Optimized').click();
+        cy.costShouldBe(Step.WORKER_TYPE_CHANGE);
 
         cy.get('#machine-setup-0').find('[id="vm-size-select"]').click();
         cy.get('ui5-option:visible').contains('16GB').click();
+        cy.costShouldBe(Step.WORKER_SIZE_CHANGE);
 
         cy.get('#machine-setup-0').within(() => {
           cy.typeIntoSlider('autoscaler-input', 5);
         });
+        cy.costShouldBe(Step.WORKER_AUTOSCALER_INCREASE);
         cy.get('ui5-button').contains('Next Step').click();
       },
     );
 
     cy.get('ui5-wizard-step[title-text="Storage"]:visible').within(() => {
-      cy.typeIntoSlider('gb-quantity-input', 5);
-      cy.typeIntoSlider('premium-gb-quantity-input', 7);
+      cy.typeIntoSlider('gb-quantity-input', 160); //Value should be divided by 32
+      cy.costShouldBe(Step.STORAGE_GB_INCREASE);
+
+      cy.typeIntoSlider('premium-gb-quantity-input', 160); //Value should be divided by 32
+      cy.costShouldBe(Step.STORAGE_PREMIUM_GB_INCREASE);
+
       cy.get('ui5-button').contains('Next Step').click();
     });
 
@@ -45,9 +56,14 @@ context('Go through calculator', () => {
       'ui5-wizard-step[title-text="Additional Configuration"]:visible',
     ).within(() => {
       //   TODO: move slider of conversion rate
+
       cy.get('[id=redis-select]').click();
       // cy.get('ui5-select.redis-select').click();
-      cy.get('ui5-option:visible').contains('Standard4').click(); //Click is not visible!?
+      cy.get('ui5-option:visible').contains('Standard4').click(); //When value is wouthside ui5wizard step, click is not possible
+      cy.costShouldBe(Step.ADDITIONAL_REDIS_INCREASE);
+
     });
+
+  //   TODO: Check xlsv and csv
   });
 });

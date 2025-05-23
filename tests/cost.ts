@@ -1,7 +1,7 @@
 export enum Step {
   BASE_VM_SIZE_INCREASE,
   BASE_AUTOSCALER_INCREASE,
-  WORKER_NODE_POOL,
+  WORKER_ADD_NODE,
   WORKER_TYPE_CHANGE,
   WORKER_SIZE_CHANGE,
   WORKER_AUTOSCALER_INCREASE,
@@ -60,12 +60,96 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       },
     },
   ],
+  [
+    Step.WORKER_ADD_NODE,
+    {
+      Nodes: 259.2,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 259.2,
+        Currency: 274.75,
+      },
+    },
+  ],
+  [
+    Step.WORKER_TYPE_CHANGE,
+    {
+      Nodes: 259.2,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 259.2,
+        Currency: 274.75,
+      },
+    },
+  ],
+  [
+    Step.WORKER_SIZE_CHANGE,
+    {
+      Nodes: 864,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 864,
+        Currency: 915.84,
+      },
+    },
+  ],
+  [
+    Step.WORKER_AUTOSCALER_INCREASE,
+    {
+      Nodes: 5529.6,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 5529.6,
+        Currency: 5861.38,
+      },
+    },
+  ],
+  [
+    Step.STORAGE_GB_INCREASE,
+    {
+      Nodes: 0,
+      Additional: 0,
+      Storage: 72,
+      TotalCost: {
+        CapacityUnits: 72,
+        Currency: 76.32,
+      },
+    },
+  ],
+  [
+    Step.STORAGE_PREMIUM_GB_INCREASE,
+    {
+      Nodes: 0,
+      Additional: 0,
+      Storage: 216,
+      TotalCost: {
+        CapacityUnits: 216,
+        Currency: 228.96,
+      },
+    },
+  ],
+  [
+    Step.ADDITIONAL_REDIS_INCREASE,
+    {
+      Nodes: 0,
+      Additional: 778,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 778,
+        Currency: 824.68,
+      },
+    },
+  ]
 ]);
 
 export function applyStepOnPrice(step: Step): void {
   const stepToApply = stepsPrice.get(step);
   if (!stepToApply) {
-    throw new Error(`Couldn't find ${step} to apply`);
+    throw new Error(`Couldn't find ${Step[step]} to apply`);
   }
 
   const newPrice = {

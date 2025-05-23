@@ -13,7 +13,7 @@ Cypress.Commands.add('typeIntoSlider', (testID, value) => {
     .find('ui5-input')
     .shadow()
     .find('input')
-    .type(value);
+    .type(`${value} {enter}`);
 });
 
 Cypress.Commands.add('costShouldBe', (step) => {

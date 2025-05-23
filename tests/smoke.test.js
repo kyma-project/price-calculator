@@ -9,10 +9,11 @@ context('Go through calculator', () => {
         cy.get('[id="vm-size-select"]').click();
 
         cy.get('ui5-option:visible').contains('4 CPU').click();
-
         cy.costShouldBe(Step.BASE_VM_SIZE_INCREASE);
 
         cy.typeIntoSlider('autoscaler-input', 10);
+        cy.costShouldBe(Step.BASE_AUTOSCALER_INCREASE);
+
         cy.get('ui5-button').contains('Next').click();
       },
     );

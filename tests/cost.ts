@@ -35,7 +35,7 @@ export let expectedPrice: Price = {
   },
 };
 
-export const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
+const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_VM_SIZE_INCREASE,
     {
@@ -45,6 +45,18 @@ export const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       TotalCost: {
         CapacityUnits: 260.2,
         Currency: 274.75,
+      },
+    },
+  ],
+  [
+    Step.BASE_AUTOSCALER_INCREASE,
+    {
+      Nodes: 2419.2,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 2419.2,
+        Currency: 2564.35,
       },
     },
   ],

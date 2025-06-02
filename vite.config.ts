@@ -18,6 +18,6 @@ export default defineConfig({
   // Configuration for GH pages
   base: './',
   test: {
-    exclude: ['tests'],
+    exclude: ['tests', 'node_modules'],
   },
 });

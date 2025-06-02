@@ -1,4 +1,4 @@
-import { applyStepOnPrice, expectedPrice } from './cost';
+import { applyStepOnPrice } from './cost';
 
 Cypress.Commands.add('typeIntoSlider', (testID, value) => {
   cy.get(`ui5-step-input[id=${testID}]`)
@@ -17,7 +17,7 @@ Cypress.Commands.add('typeIntoSlider', (testID, value) => {
 });
 
 Cypress.Commands.add('costShouldBe', (step) => {
-  applyStepOnPrice(step);
+  const expectedPrice = applyStepOnPrice(step);
   cy.document().within(() => {
     cy.get('#SideContent').within(() => {
       cy.get('#nodes-cost')

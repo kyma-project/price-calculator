@@ -1,7 +1,7 @@
 import { Step } from './cost';
 
 context('Go through calculator', () => {
-  it('', () => {
+  it('Visit Base Configuration', () => {
     cy.visit('/');
 
     cy.get('ui5-wizard-step[title-text="Base Configuration"]:visible').within(
@@ -18,10 +18,7 @@ context('Go through calculator', () => {
       },
     );
 
-    // TODO: add subtests or something
-    cy.title('TEST');
-
-    cy.get('ui5-wizard-step[title-text="Worker Node Pools"]:visible').within(
+      cy.get('ui5-wizard-step[title-text="Worker Node Pools"]:visible').within(
       () => {
         cy.get('ui5-button').contains('Add Worker Node Pool').click();
         cy.costShouldBe(Step.WORKER_ADD_NODE);

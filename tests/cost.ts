@@ -10,11 +10,6 @@ export enum Step {
   ADDITIONAL_REDIS_INCREASE,
 }
 
-enum Unit {
-  CU,
-  EURO,
-}
-
 export type Price = {
   Nodes?: number;
   Storage?: number;
@@ -25,7 +20,7 @@ export type Price = {
   };
 };
 
-export let expectedPrice: Price = {
+let expectedPrice: Price = {
   Nodes: 776.6,
   Additional: 0,
   Storage: 0,
@@ -143,16 +138,16 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
         Currency: 824.68,
       },
     },
-  ]
+  ],
 ]);
 
-export function applyStepOnPrice(step: Step): void {
+export function applyStepOnPrice(step: Step): Price {
   const stepToApply = stepsPrice.get(step);
   if (!stepToApply) {
     throw new Error(`Couldn't find ${Step[step]} to apply`);
   }
 
-  const newPrice = {
+  expectedPrice = {
     Nodes: (expectedPrice.Nodes ?? 0) + (stepToApply.Nodes ?? 0),
     Additional: (expectedPrice.Additional ?? 0) + (stepToApply.Additional ?? 0),
     Storage: (expectedPrice.Storage ?? 0) + (stepToApply.Storage ?? 0),
@@ -165,6 +160,5 @@ export function applyStepOnPrice(step: Step): void {
         (stepToApply.TotalCost?.Currency ?? 0),
     },
   };
-
-  expectedPrice = newPrice;
+  return expectedPrice
 }

@@ -16,5 +16,8 @@ export default defineConfig({
     plugins: () => [viteTsconfigPaths()],
   },
   // Configuration for GH pages
-  base: "./"
+  base: './',
+  test: {
+    exclude: ['tests'],
+  },
 });

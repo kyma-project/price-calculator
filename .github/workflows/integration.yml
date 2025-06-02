@@ -24,7 +24,7 @@ jobs:
       - name: "Build application"
         run: npm run build
       - name: "Run preview"
-        run: npx vite preview --port 3000
+        run: npx vite preview --port 3000 &
       - name: Run integration tests
         run: (cd tests && npm run test)
       - name: Uploads artifacts

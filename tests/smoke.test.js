@@ -18,7 +18,7 @@ context('Go through calculator', () => {
       },
     );
 
-      cy.get('ui5-wizard-step[title-text="Worker Node Pools"]:visible').within(
+    cy.get('ui5-wizard-step[title-text="Worker Node Pools"]:visible').within(
       () => {
         cy.get('ui5-button').contains('Add Worker Node Pool').click();
         cy.costShouldBe(Step.WORKER_ADD_NODE);
@@ -59,8 +59,15 @@ context('Go through calculator', () => {
 
       //   TODO: move slider of conversion rate
 
-    });
+      cy.get('ui5-button').contains('CSV File').click();
+      cy.readFile('cypress/downloads/Kyma-Price-Calculations.csv').should(
+        'exist',
+      );
 
-  //   TODO: Check xlsv and csv
+      cy.get('ui5-button').contains('XLSX File').click();
+      cy.readFile('cypress/downloads/Kyma-Price-Calculations.xlsx').should(
+        'exist',
+      );
+    });
   });
 });

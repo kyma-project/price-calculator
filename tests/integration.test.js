@@ -8,7 +8,7 @@ context('Go through calculator', () => {
       () => {
         cy.get('[id="vm-size-select"]').click();
 
-        cy.get('ui5-option:visible').contains('4 CPU').click();
+        cy.clickOnOption('4 CPU');
         cy.costShouldBe(Step.BASE_VM_SIZE_INCREASE);
 
         cy.typeIntoSlider('autoscaler-input', 10);
@@ -24,11 +24,11 @@ context('Go through calculator', () => {
         cy.costShouldBe(Step.WORKER_ADD_NODE);
 
         cy.get('#machine-setup-0').find('[id=machine-type-select]').click();
-        cy.get('ui5-option:visible').contains('Compute Optimized').click();
+        cy.clickOnOption('Compute Optimized')
         cy.costShouldBe(Step.WORKER_TYPE_CHANGE);
 
         cy.get('#machine-setup-0').find('[id="vm-size-select"]').click();
-        cy.get('ui5-option:visible').contains('16GB').click();
+        cy.clickOnOption('16GB')
         cy.costShouldBe(Step.WORKER_SIZE_CHANGE);
 
         cy.get('#machine-setup-0').within(() => {
@@ -53,11 +53,8 @@ context('Go through calculator', () => {
       'ui5-wizard-step[title-text="Additional Configuration"]:visible',
     ).within(() => {
       cy.get('[id=redis-select]').click();
-      // cy.get('ui5-select.redis-select').click();
-      cy.get('ui5-option:visible').contains('Standard4').click(); //When value is wouthside ui5wizard step, click is not possible
+      cy.clickOnOption('Standard4') //When value is outside UI5wizard step, click is not possible.
       cy.costShouldBe(Step.ADDITIONAL_REDIS_INCREASE);
-
-      //   TODO: move slider of conversion rate
 
       cy.get('ui5-button').contains('CSV File').click();
       cy.readFile('cypress/downloads/Kyma-Price-Calculations.csv').should(

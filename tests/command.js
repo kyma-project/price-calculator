@@ -42,3 +42,16 @@ Cypress.Commands.add('costShouldBe', (step) => {
     });
   });
 });
+
+
+/*
+This is workaround for chromium based browser which has problem with clicking on ui5-option.
+The solution is to find li in shadow root and force click on it
+ */
+Cypress.Commands.add('clickOnOption', (content) => {
+  cy.get('ui5-option:visible')
+    .contains(content)
+    .shadow()
+    .find('li')
+    .click({ force: true });
+})

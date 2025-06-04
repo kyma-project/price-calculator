@@ -8,6 +8,7 @@
   "scripts": {
     "start": "vite",
     "build": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false NODE_OPTIONS=--max-old-space-size=8192 vite build",
+    "preview": "vite preview --port 3000",
     "deploy": "gh-pages -d build",
     "test": "vitest",
     "eslint-check": "eslint src/",

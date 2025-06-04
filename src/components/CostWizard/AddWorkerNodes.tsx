@@ -82,7 +82,7 @@ export default function AddWorkerNodes() {
           design="Information"
           mode="Interactive"
           name="sys-help"
-          onClick={() => openLinks('redis')}
+          onClick={() => openLinks('worker-node-pools')}
         />
       </FlexBox>
     </div>

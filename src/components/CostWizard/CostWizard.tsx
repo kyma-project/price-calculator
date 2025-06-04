@@ -8,7 +8,7 @@ import './CostWizard.css';
 
 export default function CostWizard() {
   return (
-    <Wizard id="CostWizard">
+    <Wizard id="CostWizard" contentLayout={'SingleStep'}>
       <NodeConfigStep />
       <WorkerNodes />
       <StorageStep />

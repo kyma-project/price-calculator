@@ -34,6 +34,7 @@ export default function GBQuantityInputField() {
         Standard Storage: number of GB
       </Title>
       <StepInput
+        id={'gb-quantity-input'}
         ref={stepInputRef}
         value={GBQuantity}
         onChange={handleChange}

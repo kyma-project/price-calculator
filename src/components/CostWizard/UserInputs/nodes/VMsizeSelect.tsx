@@ -7,6 +7,7 @@ interface Props {
   setVMSize: React.Dispatch<React.SetStateAction<VMSize>>;
   VMSizeOptions: VMSize[];
 }
+
 export default function VMsizeSelect({
   VMSize,
   setVMSize,
@@ -16,7 +17,7 @@ export default function VMsizeSelect({
     const selection = event.detail.selectedOption.dataset;
     setVMSize({
       value: selection.value,
-      computeUnits: selection.compute_units
+      computeUnits: selection.compute_units,
     });
   };
 
@@ -25,7 +26,7 @@ export default function VMsizeSelect({
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
-      <Select onChange={onChange}>
+      <Select id={'vm-size-select'} onChange={onChange}>
         {VMSizeOptions.map((item) => (
           <Option
             key={item.value}

@@ -56,6 +56,7 @@ export default function PremiumGBQuantityInputField() {
         />
       </FlexBox>
       <StepInput
+        id={'premium-gb-quantity-input'}
         ref={stepInputRef}
         value={premiumGBQuantity}
         onChange={handleChange}

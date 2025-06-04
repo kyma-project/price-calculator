@@ -37,6 +37,7 @@ export default function MinAutoscalerInputField({
         info="minimum number of available Virtual Machines"
       />
       <StepInput
+        id={'autoscaler-input'}
         ref={stepInputRef}
         value={autoScalerMin}
         onChange={handleChange}

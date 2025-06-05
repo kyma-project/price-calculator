@@ -1,6 +1,6 @@
 # Default owners of the repository
 
-- @akucharska @mrCherry97 @valentinvieriu @chriskari @OliwiaGowor
+* @kyma-project/hasselhoff
 
 # Owners of all translations in the repository
 
@@ -8,4 +8,4 @@ public/i18n/ @kyma-project/technical-writers
 
 # Owners of all .md files in the repository
 
-\*.md @kyma-project/technical-writers
+*.md @kyma-project/technical-writers

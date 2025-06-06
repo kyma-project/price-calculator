@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.1",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-csv": "^1.1.10",
     "gh-pages": "^6.2.0",
     "prettier": "^3.3.3",

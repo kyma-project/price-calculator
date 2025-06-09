@@ -5,25 +5,4 @@ export default function selectNextStep(button: any) {
   currenStep.selected = false;
   nextStep.selected = true;
   nextStep.disabled = false;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-
-
 }

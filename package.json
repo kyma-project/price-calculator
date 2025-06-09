@@ -57,7 +57,7 @@
     "npm": ">=10.0.0"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,html,css,scss,yaml,md}": "prettier --write"
+    "*.{ts,tsx,js,jsx,json,html,css,scss,yaml,md}": "lint-fix"
   },
   "husky": {
     "hooks": {

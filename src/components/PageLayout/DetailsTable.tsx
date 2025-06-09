@@ -31,7 +31,8 @@ export default function DetailsTable() {
     >
       <TableRow>
         <TableCell>
-          Each single managed SAP BTP, Kyma runtime's module occupies in-cluster resources. See
+          Each single managed SAP BTP, Kyma runtime&apos;s module occupies
+          in-cluster resources. See
           <Link
             id="module-sizing-like"
             design="Default"
@@ -53,15 +54,16 @@ export default function DetailsTable() {
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime costs are metered hourly. Cost computation will start after the
-          creation of the "Kyma Environment" is completed and the cluster
-          accessible to the user.
+          SAP BTP, Kyma runtime costs are metered hourly. Cost computation will
+          start after the creation of the &quot;Kyma Environment&quot; is
+          completed and the cluster accessible to the user.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime cost estimator provides costs per month. One month is 
-          considered composed of {config.AdditionalConfig.TimeConsumption} hours.
+          SAP BTP, Kyma runtime cost estimator provides costs per month. One
+          month is considered composed of{' '}
+          {config.AdditionalConfig.TimeConsumption} hours.
         </TableCell>
       </TableRow>
       <TableRow>
@@ -80,23 +82,23 @@ export default function DetailsTable() {
       <TableRow>
         <TableCell>
           Virtual Machines are restricted to up to 300 machines, which include
-          the base configuration plus any additional, and they are metered on 
+          the base configuration plus any additional, and they are metered on
           hour basis.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime is provisioned with 32GB of storage dedicated to 
-          operational data, which is provided at no additional cost. However, 
-          certain SAP BTP, Kyma runtime's modules may require additional storage. 
-          In such cases, they will create extra volumes, and you will incur 
-          charges for the additional storage used.
+          SAP BTP, Kyma runtime is provisioned with 32GB of storage dedicated to
+          operational data, which is provided at no additional cost. However,
+          certain SAP BTP, Kyma runtime&apos;s modules may require additional
+          storage. In such cases, they will create extra volumes, and you will
+          incur charges for the additional storage used.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          Storage block are provided in slots of 32GB. It means that 2 Storage Disks 
-          are required for Persistent Volume Claim from 33GB to 64GB.
+          Storage block are provided in slots of 32GB. It means that 2 Storage
+          Disks are required for Persistent Volume Claim from 33GB to 64GB.
         </TableCell>
       </TableRow>
       <TableRow>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
 import MachineTypeSelect from './UserInputs/nodes/MachineTypeSelect';
@@ -44,7 +44,7 @@ export default function MachineSetupForm({
       machineType,
       VMSize,
       minAutoscaler: autoScalerMin,
-      timeConsumption: timeConsumption
+      timeConsumption: timeConsumption,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [machineType, VMSize, autoScalerMin, timeConsumption]);

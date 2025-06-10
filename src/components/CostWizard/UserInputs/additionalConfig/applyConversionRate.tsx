@@ -1,4 +1,3 @@
-import React from 'react';
 import config from '../../../../config.json';
 import { useRecoilState } from 'recoil';
 import { Slider, Title } from '@ui5/webcomponents-react';
@@ -11,8 +10,8 @@ export default function TimeConStorageInput() {
   const text = (
     <>
       <div>
-        With the &apos;<strong>conversion rate</strong>&apos; you can change the
-        amount of <strong>{config.CurrencyCode}</strong> you are paying for{' '}
+        With the '<strong>conversion rate</strong>' you can change the amount of{' '}
+        <strong>{config.CurrencyCode}</strong> you are paying for{' '}
         <strong>1 Capacity Unit</strong>.
       </div>
       <div>This will help you to calculate eventual discounts.</div>

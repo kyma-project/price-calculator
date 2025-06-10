@@ -31,8 +31,8 @@ export default function DetailsTable() {
     >
       <TableRow>
         <TableCell>
-          Each single managed SAP BTP, Kyma runtime&apos;s module occupies
-          in-cluster resources. See
+          Each single managed SAP BTP, Kyma runtime's module occupies in-cluster
+          resources. See
           <Link
             id="module-sizing-like"
             design="Default"
@@ -55,8 +55,8 @@ export default function DetailsTable() {
       <TableRow>
         <TableCell>
           SAP BTP, Kyma runtime costs are metered hourly. Cost computation will
-          start after the creation of the &quot;Kyma Environment&quot; is
-          completed and the cluster accessible to the user.
+          start after the creation of the "Kyma Environment" is completed and
+          the cluster accessible to the user.
         </TableCell>
       </TableRow>
       <TableRow>
@@ -90,7 +90,7 @@ export default function DetailsTable() {
         <TableCell>
           SAP BTP, Kyma runtime is provisioned with 32GB of storage dedicated to
           operational data, which is provided at no additional cost. However,
-          certain SAP BTP, Kyma runtime&apos;s modules may require additional
+          certain SAP BTP, Kyma runtime's modules may require additional
           storage. In such cases, they will create extra volumes, and you will
           incur charges for the additional storage used.
         </TableCell>

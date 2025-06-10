@@ -10,7 +10,6 @@ export default [
 
   {
     globalIgnores: ['tests/**'],
-
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: parserTypeScript,

@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import { globalIgnores } from 'eslint/config';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginTypeScript from '@typescript-eslint/eslint-plugin';
@@ -7,9 +8,8 @@ import parserTypeScript from '@typescript-eslint/parser';
 
 export default [
   js.configs.recommended,
-
+  globalIgnores(['tests/**']),
   {
-    globalIgnores: ['tests/**'],
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: parserTypeScript,

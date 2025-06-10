@@ -9,6 +9,8 @@ export default [
   js.configs.recommended,
 
   {
+    globalIgnores: ['tests/**'],
+
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: parserTypeScript,

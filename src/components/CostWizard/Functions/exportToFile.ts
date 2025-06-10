@@ -21,11 +21,10 @@ interface MachineSetupWithCost {
   machineSetup: MachineSetup;
   cost: number;
 }
-export enum ExportFormat{
+export enum ExportFormat {
   CSV,
-  XLSX
+  XLSX,
 }
-
 
 export default function exportToFile(props: Props) {
   const {
@@ -38,7 +37,7 @@ export default function exportToFile(props: Props) {
     redisSize,
     additionalCosts,
     totalCosts,
-    exportFormat
+    exportFormat,
   } = props;
 
   const machineSetupWithCost: MachineSetupWithCost[] = machineSetup.reduce(
@@ -102,10 +101,9 @@ export default function exportToFile(props: Props) {
     ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
   ];
 
-  if (exportFormat === ExportFormat.XLSX){
+  if (exportFormat === ExportFormat.XLSX) {
     exportToXLSX(dataArray);
-  }
-  else{
+  } else {
     exportToCSV(dataArray);
   }
 }
@@ -121,7 +119,7 @@ function exportToXLSX(dataArray: (string | number)[][]) {
   writeFile(workbook, 'Kyma-Price-Calculations.xlsx');
 }
 
-function exportToCSV(dataArray: (string | number)[][]){
+function exportToCSV(dataArray: (string | number)[][]) {
   const csvString = dataArray.map((row) => row.join(': ')).join('\n');
   const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);

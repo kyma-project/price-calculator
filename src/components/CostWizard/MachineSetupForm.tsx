@@ -44,7 +44,7 @@ export default function MachineSetupForm({
       machineType,
       VMSize,
       minAutoscaler: autoScalerMin,
-      timeConsumption: timeConsumption
+      timeConsumption: timeConsumption,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [machineType, VMSize, autoScalerMin, timeConsumption]);

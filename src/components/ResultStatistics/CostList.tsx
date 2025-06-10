@@ -31,7 +31,10 @@ export default function CostList(props: Props) {
       <div className="row final-row">
         <h2 className="text">Total Costs</h2>
       </div>
-      <div className="row final-row final-row-child" id={'total-capacity-units'}>
+      <div
+        className="row final-row final-row-child"
+        id={'total-capacity-units'}
+      >
         <h5 className="text">- In Capacity Units</h5>
         <h3 className="value">{roundDecimals(totalCosts.CU, true)} CU</h3>
       </div>

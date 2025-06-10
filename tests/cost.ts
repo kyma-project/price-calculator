@@ -160,5 +160,5 @@ export function applyStepOnPrice(step: Step): Price {
         (stepToApply.TotalCost?.Currency ?? 0),
     },
   };
-  return expectedPrice
+  return expectedPrice;
 }

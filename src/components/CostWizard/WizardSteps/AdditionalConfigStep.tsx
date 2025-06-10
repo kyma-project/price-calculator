@@ -6,7 +6,10 @@ import ApplyConversionRate from '../UserInputs/additionalConfig/applyConversionR
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import { useRecoilValue } from 'recoil';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
-import { RedisSize, redisState } from '../../../state/additionalConfig/redisState';
+import {
+  RedisSize,
+  redisState,
+} from '../../../state/additionalConfig/redisState';
 import Redis from '../UserInputs/additionalConfig/RedisSelect';
 import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import { WizardStep, Title } from '@ui5/webcomponents-react';
@@ -20,7 +23,7 @@ export default function AdditionalConfigStep() {
 
   useEffect(() => {
     setConversionRatio(conversionRatio);
-    setAdditionalCosts(calculateAdditionalCosts({redis: redis.value}));
+    setAdditionalCosts(calculateAdditionalCosts({ redis: redis.value }));
   }, [setConversionRatio, setAdditionalCosts, conversionRatio, redis]);
 
   return (

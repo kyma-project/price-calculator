@@ -1,6 +1,6 @@
 name: Definition of done Check
 
-on: 
+on:
   pull_request:
     types: [opened, edited, synchronize, reopened, ready_for_review]
 

@@ -23,9 +23,7 @@ export default function XlsxDownloadButton() {
   const premiumStorageQuantity: number = useRecoilValue<number>(
     premiumGBQuantityState,
   );
-  const timeConsumption: number = useRecoilValue<number>(
-    timeConsumptionState,
-  );
+  const timeConsumption: number = useRecoilValue<number>(timeConsumptionState);
   const baseMachineSetup = useRecoilValue<MachineSetup>(baseMachineSetupState);
   const additionalMachineSetup = useRecoilValue<MachineSetup[]>(
     additionalMachineSetupState,
@@ -48,7 +46,7 @@ export default function XlsxDownloadButton() {
           totalCosts: totalCosts.CU,
           premiumStorageQuantity,
           redisSize,
-          exportFormat: ExportFormat.XLSX
+          exportFormat: ExportFormat.XLSX,
         })
       }
     >

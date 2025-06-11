@@ -3,5 +3,5 @@ import config from '../../config.json';
 
 export const applyConversionRateState: RecoilState<number> = atom<number>({
   key: 'applyConversionRateState',
-  default: config.ConversionRateCUCC
+  default: config.ConversionRateCUCC,
 });

@@ -27,9 +27,7 @@ export default function CSVDownloadButton() {
   const premiumStorageQuantity: number = useRecoilValue<number>(
     premiumGBQuantityState,
   );
-  const timeConsumption: number = useRecoilValue<number>(
-    timeConsumptionState,
-  );
+  const timeConsumption: number = useRecoilValue<number>(timeConsumptionState);
   const redisSize = useRecoilValue<RedisSize>(redisState);
   const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
     useCostCalculator();
@@ -49,7 +47,7 @@ export default function CSVDownloadButton() {
           totalCosts: totalCosts.CU,
           premiumStorageQuantity,
           redisSize,
-          exportFormat: ExportFormat.CSV
+          exportFormat: ExportFormat.CSV,
         })
       }
     >

@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 
 export default function SideContent() {
   const timeConsumption = useRecoilValue<number>(timeConsumptionState);
-  
+
   return (
     <div id="SideContent">
       <h1 id="SideHeader">Resulting total costs</h1>

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cypress open",
     "start:local": "CYPRESS_LOCAL_DEV=true cypress open",
-    "test":" cypress run --browser chrome"
+    "test": " cypress run --browser chrome"
   },
   "devDependencies": {
     "cypress": "^14.3.3"

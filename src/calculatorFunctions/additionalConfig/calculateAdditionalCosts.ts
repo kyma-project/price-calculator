@@ -5,7 +5,5 @@ interface Props {
 export default function calculateAdditionalCosts(props: Props): number {
   const { redis } = props;
 
-  return (
-    redis
-  );
+  return redis;
 }

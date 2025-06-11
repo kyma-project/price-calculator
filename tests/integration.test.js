@@ -24,11 +24,11 @@ context('Go through calculator', () => {
         cy.costShouldBe(Step.WORKER_ADD_NODE);
 
         cy.get('#machine-setup-0').find('[id=machine-type-select]').click();
-        cy.clickOnOption('Compute Optimized')
+        cy.clickOnOption('Compute Optimized');
         cy.costShouldBe(Step.WORKER_TYPE_CHANGE);
 
         cy.get('#machine-setup-0').find('[id="vm-size-select"]').click();
-        cy.clickOnOption('16GB')
+        cy.clickOnOption('16GB');
         cy.costShouldBe(Step.WORKER_SIZE_CHANGE);
 
         cy.get('#machine-setup-0').within(() => {
@@ -53,7 +53,7 @@ context('Go through calculator', () => {
       'ui5-wizard-step[title-text="Additional Configuration"]:visible',
     ).within(() => {
       cy.get('[id=redis-select]').click();
-      cy.clickOnOption('Standard4') //When value is outside UI5wizard step, click is not possible.
+      cy.clickOnOption('Standard4'); //When value is outside UI5wizard step, click is not possible.
       cy.costShouldBe(Step.ADDITIONAL_REDIS_INCREASE);
 
       cy.get('ui5-button').contains('CSV File').click();

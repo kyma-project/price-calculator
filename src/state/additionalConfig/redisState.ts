@@ -10,5 +10,6 @@ export const redisState: RecoilState<RedisSize> = atom<RedisSize>({
   key: 'redisState',
   default: {
     tsize: config.RedisCosts.Tiers[0].key,
-    value: config.RedisCosts.Tiers[0].value}
+    value: config.RedisCosts.Tiers[0].value,
+  },
 });

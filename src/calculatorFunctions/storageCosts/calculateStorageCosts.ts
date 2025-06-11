@@ -13,6 +13,9 @@ export default function calculateStorageCosts(props: StorageCostProps): number {
 
   return (
     PPU * timeConsumption * (GBQuantity / config.Storage.Step) +
-    premiumPPU * PPU * timeConsumption * (premiumGBQuantity / config.PremiumStorage.Step)
+    premiumPPU *
+      PPU *
+      timeConsumption *
+      (premiumGBQuantity / config.PremiumStorage.Step)
   );
 }

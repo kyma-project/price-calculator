@@ -8,5 +8,9 @@ interface Props {
 
 export default function InfoField(props: Props) {
   const { info } = props;
-  return <MessageStrip className="info" hideCloseButton>{info}</MessageStrip> ;
+  return (
+    <MessageStrip className="info" hideCloseButton>
+      {info}
+    </MessageStrip>
+  );
 }

@@ -11,7 +11,7 @@ interface Props {
 export default function MinAutoscalerInputField({
   autoScalerMin,
   setAutoScalerMin,
-  workerNode
+  workerNode,
 }: Props) {
   const configuration = config.nodeConfig.AutoScalerMin;
   const min = workerNode ? configuration.MinWorkerNodes : configuration.Min;

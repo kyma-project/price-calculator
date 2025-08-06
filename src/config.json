@@ -100,6 +100,13 @@
     "Step": 32,
     "multiplier": 3
   },
+  "SnapshotStorage": {
+    "Default": 0,
+    "Min": 0,
+    "Max": 3200,
+    "Step": 32,
+    "PricePerUnit": 0.02
+  },
   "RedisCosts": {
     "Tiers": [
       { "key": "None", "value": 0 },

@@ -31,7 +31,7 @@ export default function SnapshotGBQuantityInputField() {
   return (
     <div>
       <Title className="wizard-subheader" level="H5" size="H5">
-        Snapshot Storage: number of GB
+        Cluster's Snapshot used Storage: number of GB
       </Title>
       <StepInput
         id={'snapshot-gb-quantity-input'}

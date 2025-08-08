@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import {
   Slider,
@@ -6,7 +7,6 @@ import {
   StepInputDomRef,
   Title,
 } from '@ui5/webcomponents-react';
-import { useRecoilState } from 'recoil';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 
 export default function GBQuantityInputField() {
@@ -15,7 +15,7 @@ export default function GBQuantityInputField() {
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [GBQuantity, setGBQuantity] = useRecoilState<number>(GBQuantityState);
+  const [GBQuantity, setGBQuantity] = useAtom(GBQuantityState);
   const stepInputRef = useRef<StepInputDomRef>(null);
 
   function handleChange(event: any): void {

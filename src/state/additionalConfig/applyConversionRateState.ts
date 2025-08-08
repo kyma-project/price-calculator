@@ -1,7 +1,4 @@
-import { atom, RecoilState } from 'recoil';
+import { atom } from 'jotai';
 import config from '../../config.json';
 
-export const applyConversionRateState: RecoilState<number> = atom<number>({
-  key: 'applyConversionRateState',
-  default: config.ConversionRateCUCC,
-});
+export const applyConversionRateState = atom(config.ConversionRateCUCC);

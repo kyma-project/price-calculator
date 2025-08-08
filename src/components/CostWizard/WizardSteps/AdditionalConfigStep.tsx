@@ -4,19 +4,18 @@ import XlsxDownloadButton from '../Buttons/XlsxDownloadButton';
 import CSVDownloadButton from '../Buttons/CSVDownloadButton';
 import ApplyConversionRate from '../UserInputs/additionalConfig/applyConversionRate';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
-import { useRecoilValue } from 'recoil';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
 import {
-  RedisSize,
   redisState,
 } from '../../../state/additionalConfig/redisState';
 import Redis from '../UserInputs/additionalConfig/RedisSelect';
 import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import { WizardStep, Title } from '@ui5/webcomponents-react';
+import { useAtomValue } from 'jotai';
 
 export default function AdditionalConfigStep() {
-  const conversionRatio = useRecoilValue<number>(applyConversionRateState);
-  const redis = useRecoilValue<RedisSize>(redisState);
+  const conversionRatio = useAtomValue(applyConversionRateState);
+  const redis = useAtomValue(redisState);
 
   const { setConversionRatio } = useCostCalculator();
   const { setAdditionalCosts } = useCostCalculator();

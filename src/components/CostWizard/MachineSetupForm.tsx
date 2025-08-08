@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAtomValue } from 'jotai';
 import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
 import MachineTypeSelect from './UserInputs/nodes/MachineTypeSelect';
@@ -10,7 +11,6 @@ import {
   VMSize,
 } from '../../state/nodes/machineSetupState';
 import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
-import { useRecoilValue } from 'recoil';
 
 interface Props {
   machine: MachineSetup;
@@ -30,7 +30,7 @@ export default function MachineSetupForm({
   const [autoScalerMin, setAutoScalerMin] = useState<number>(
     machine.minAutoscaler,
   );
-  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
 
   useEffect(() => {
     setMachineType(machine.machineType);

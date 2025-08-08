@@ -1,11 +1,11 @@
+import { useAtom } from 'jotai';
 import config from '../../../../config.json';
-import { useRecoilState } from 'recoil';
 import { Slider, Title } from '@ui5/webcomponents-react';
 import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import InfoField from '../../common/InfoField';
 
 export default function TimeConStorageInput() {
-  const [value, setValue] = useRecoilState<number>(applyConversionRateState);
+  const [value, setValue] = useAtom(applyConversionRateState);
 
   const text = (
     <>

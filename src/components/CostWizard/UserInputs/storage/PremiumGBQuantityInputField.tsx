@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import './PremiumGBQuantityInputField.css';
 import {
@@ -9,7 +10,6 @@ import {
   StepInputDomRef,
   Title,
 } from '@ui5/webcomponents-react';
-import { useRecoilState } from 'recoil';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
 import openLinks from '../../Functions/openLinks';
 
@@ -19,7 +19,7 @@ export default function PremiumGBQuantityInputField() {
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [premiumGBQuantity, setPremiumGBQuantity] = useRecoilState<number>(
+  const [premiumGBQuantity, setPremiumGBQuantity] = useAtom(
     premiumGBQuantityState,
   );
 

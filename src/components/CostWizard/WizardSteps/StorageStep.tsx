@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useAtomValue } from 'jotai';
 import GBQuantityInputField from '../UserInputs/storage/GBQuantityInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
@@ -6,15 +7,14 @@ import NextStepButton from '../Buttons/NextStepButton';
 import PremiumGBQuantityInputField from '../UserInputs/storage/PremiumGBQuantityInputField';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import calculateStorageCosts from '../../../calculatorFunctions/storageCosts/calculateStorageCosts';
-import { useRecoilValue } from 'recoil';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
 import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 
 export default function StorageStep() {
-  const GBQuantity = useRecoilValue<number>(GBQuantityState);
-  const premiumGBQuantity = useRecoilValue<number>(premiumGBQuantityState);
-  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
+  const GBQuantity = useAtomValue(GBQuantityState);
+  const premiumGBQuantity = useAtomValue(premiumGBQuantityState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
 
   const { setStorageCosts } = useCostCalculator();
 

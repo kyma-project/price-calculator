@@ -1,34 +1,26 @@
 import React from 'react';
 import { Button, Icon } from '@ui5/webcomponents-react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
 import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
-  MachineSetup,
 } from '../../../state/nodes/machineSetupState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
 import exportCSV, { ExportFormat } from '../Functions/exportToFile';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
-import {
-  RedisSize,
-  redisState,
-} from '../../../state/additionalConfig/redisState';
+import { redisState } from '../../../state/additionalConfig/redisState';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 
 export default function CSVDownloadButton() {
-  const baseMachineSetup = useRecoilValue<MachineSetup>(baseMachineSetupState);
-  const additionalMachineSetup = useRecoilValue<MachineSetup[]>(
-    additionalMachineSetupState,
-  );
-  const storageQuantity: number = useRecoilValue<number>(GBQuantityState);
-  const premiumStorageQuantity: number = useRecoilValue<number>(
-    premiumGBQuantityState,
-  );
-  const timeConsumption: number = useRecoilValue<number>(timeConsumptionState);
-  const redisSize = useRecoilValue<RedisSize>(redisState);
+  const baseMachineSetup = useAtomValue(baseMachineSetupState);
+  const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
+  const storageQuantity = useAtomValue(GBQuantityState);
+  const premiumStorageQuantity = useAtomValue(premiumGBQuantityState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
+  const redisSize = useAtomValue(redisState);
   const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
     useCostCalculator();
 

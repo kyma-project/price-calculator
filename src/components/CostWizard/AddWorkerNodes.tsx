@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import { Button, FlexBox, Icon, Title } from '@ui5/webcomponents-react';
 import './AddWorkerNodes.css';
 import {
@@ -6,16 +7,13 @@ import {
   MachineSetup,
 } from '../../state/nodes/machineSetupState';
 import MachineSetupForm from './MachineSetupForm';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import openLinks from './Functions/openLinks';
 import config from '../../config.json';
 import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
 
 export default function AddWorkerNodes() {
-  const [machineSetup, setMachineSetup] = useRecoilState<MachineSetup[]>(
-    additionalMachineSetupState,
-  );
-  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
+  const [machineSetup, setMachineSetup] = useAtom(additionalMachineSetupState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
 
   const addMachineSetup = () => {
     const newMachine: MachineSetup = {

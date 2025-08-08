@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import NextStepButton from '../Buttons/NextStepButton';
 import MachineSetupForm from '../MachineSetupForm';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
-  MachineSetup,
 } from '../../../state/nodes/machineSetupState';
 import { useCostCalculator } from '../../../context/CostCalculatorContext';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
 
 export default function NodeConfigStep() {
-  const [baseMachineSetup, setBaseMachineSetup] = useRecoilState<MachineSetup>(
+  const [baseMachineSetup, setBaseMachineSetup] = useAtom(
     baseMachineSetupState,
   );
-  const additionalMachineSetup = useRecoilValue<MachineSetup[]>(
-    additionalMachineSetupState,
-  );
+  const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
 
   const { setNodeConfigCosts } = useCostCalculator();
 

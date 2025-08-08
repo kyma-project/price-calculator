@@ -14,6 +14,7 @@ test('total costs', () => {
   //  Storage
   const GBQuantity = 1024;
   const premiumGBQuantity = 1024;
+  const snapshotGBQuantity = 2048;
   //  Additional config
   const redis = 74;
 
@@ -23,12 +24,13 @@ test('total costs', () => {
     timeConsumption,
     computeUnits,
     minAutoscaler,
-    machineTypeFactor,
+    machineTypeFactor
   });
   const storageCosts = calculateStorageCosts({
     GBQuantity,
     premiumGBQuantity,
-    timeConsumption,
+    snapshotGBQuantity,
+    timeConsumption
   });
 
   const additionalCosts = calculateAdditionalCosts({ redis });
@@ -40,6 +42,6 @@ test('total costs', () => {
     conversionRatio,
   });
 
-  expect(totalCosts.CU).toBe(3818);
-  expect(totalCosts.CC.toFixed(2)).toBe('1336.30');
+  expect(totalCosts.CU).toBe(4394);
+  expect(totalCosts.CC.toFixed(2)).toBe('1537.90');
 });

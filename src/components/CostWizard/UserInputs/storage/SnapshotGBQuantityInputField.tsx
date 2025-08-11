@@ -6,7 +6,7 @@ import {
   StepInputDomRef,
   Title,
 } from '@ui5/webcomponents-react';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import { snapshotGBQuantityState } from '../../../../state/storage/snapshotGBQuantityState';
 
 export default function SnapshotGBQuantityInputField() {
@@ -15,7 +15,9 @@ export default function SnapshotGBQuantityInputField() {
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const [snapshotGBQuantity, setSnapshotGBQuantity] = useRecoilState<number>(snapshotGBQuantityState);
+  const [snapshotGBQuantity, setSnapshotGBQuantity] = useAtom(
+    snapshotGBQuantityState,
+  );
   const stepInputRef = useRef<StepInputDomRef>(null);
 
   function handleChange(event: any): void {

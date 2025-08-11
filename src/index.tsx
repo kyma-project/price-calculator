@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { ThemeProvider } from '@ui5/webcomponents-react';
 import '@ui5/webcomponents-icons/dist/AllIcons.js';
-import { RecoilRoot } from 'recoil';
 import App from './App';
 
 type RootElement = Element | DocumentFragment;
@@ -13,10 +12,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </RecoilRoot>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
 );

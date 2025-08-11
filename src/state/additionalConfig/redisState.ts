@@ -1,4 +1,4 @@
-import { atom, RecoilState } from 'recoil';
+import { atom } from 'jotai';
 import config from '../../config.json';
 
 export interface RedisSize {
@@ -6,10 +6,8 @@ export interface RedisSize {
   value: number;
 }
 
-export const redisState: RecoilState<RedisSize> = atom<RedisSize>({
-  key: 'redisState',
-  default: {
-    tsize: config.RedisCosts.Tiers[0].key,
-    value: config.RedisCosts.Tiers[0].value,
-  },
+export const redisState = atom<RedisSize>({
+  tsize: config.RedisCosts.Tiers[0].key,
+  value: config.RedisCosts.Tiers[0].value,
 });
+redisState.debugLabel = 'redisState';

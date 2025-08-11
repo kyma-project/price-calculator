@@ -1,11 +1,11 @@
 import React from 'react';
+import { useAtomValue } from 'jotai';
 import ResultStatistics from '../ResultStatistics/ResultStatistics';
 import './SideContent.css';
 import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
-import { useRecoilValue } from 'recoil';
 
 export default function SideContent() {
-  const timeConsumption = useRecoilValue<number>(timeConsumptionState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
 
   return (
     <div id="SideContent">

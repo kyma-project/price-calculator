@@ -25,5 +25,7 @@ export const baseMachineSetupState = atom<MachineSetup>({
   VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
   minAutoscaler: config.nodeConfig.AutoScalerMin.Default,
 });
+baseMachineSetupState.debugLabel = 'baseMachineSetupState';
 
 export const additionalMachineSetupState = atom<MachineSetup[]>([]);
+additionalMachineSetupState.debugLabel = 'additionalMachineSetupState';

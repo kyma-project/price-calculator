@@ -23,7 +23,7 @@
     "@ui5/webcomponents": "^2.10.0",
     "@ui5/webcomponents-fiori": "^2.10.0",
     "@ui5/webcomponents-icons": "^2.10.0",
-    "@ui5/webcomponents-react": "^2.10.1",
+    "@ui5/webcomponents-react": "^2.15.0",
     "@ui5/webcomponents-react-charts": "^2.10.1",
     "jotai": "^2.13.0",
     "react": "^18.3.1",

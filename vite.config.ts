@@ -1,7 +1,7 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
-import eslint from 'vite-plugin-eslint';
+import eslint from 'vite-plugin-eslint2';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,10 +11,10 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  plugins: [react(), viteTsconfigPaths(), eslint()],
-  worker: {
-    plugins: () => [viteTsconfigPaths()],
+  resolve: {
+    tsconfigPaths: true,
   },
+  plugins: [react(), eslint()],
   // Configuration for GH pages
   base: './',
   test: {

@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import calculateTotalCosts, {
   TotalCosts,
 } from '../calculatorFunctions/totalCosts/calculateTotalCosts';
@@ -10,10 +18,10 @@ interface CostContextType {
   additionalCosts: number;
   conversionRatio: number;
   totalCosts: TotalCosts;
-  setNodeConfigCosts: React.Dispatch<React.SetStateAction<number>>;
-  setStorageCosts: React.Dispatch<React.SetStateAction<number>>;
-  setAdditionalCosts: React.Dispatch<React.SetStateAction<number>>;
-  setConversionRatio: React.Dispatch<React.SetStateAction<number>>;
+  setNodeConfigCosts: Dispatch<SetStateAction<number>>;
+  setStorageCosts: Dispatch<SetStateAction<number>>;
+  setAdditionalCosts: Dispatch<SetStateAction<number>>;
+  setConversionRatio: Dispatch<SetStateAction<number>>;
 }
 
 const defaultContext: CostContextType = {
@@ -31,9 +39,7 @@ const defaultContext: CostContextType = {
 const CostContext = createContext<CostContextType>(defaultContext);
 export const useCostCalculator = () => useContext(CostContext);
 
-export const CostProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CostProvider = ({ children }: { children: ReactNode }) => {
   const [nodeConfigCosts, setNodeConfigCosts] = useState<number>(0);
   const [storageCosts, setStorageCosts] = useState<number>(0);
   const [additionalCosts, setAdditionalCosts] = useState<number>(0);

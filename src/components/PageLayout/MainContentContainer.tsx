@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import MainContent from './MainContent';
 import SideContent from './SideContent';
 import DetailsTable from './DetailsTable';
@@ -10,10 +10,7 @@ interface ContentLayoutProps {
   SideContent: ReactNode;
 }
 
-const ContentLayout: React.FC<ContentLayoutProps> = ({
-  MainContent,
-  SideContent,
-}) => {
+const ContentLayout = ({ MainContent, SideContent }: ContentLayoutProps) => {
   return (
     <div className="content-wrapper">
       <div className="main-content">{MainContent}</div>

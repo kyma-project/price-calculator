@@ -1,5 +1,5 @@
 import { DonutChart } from '@ui5/webcomponents-react-charts';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import roundDecimals from './roundDecimals';
 import './DonutStatistics.css';
 
@@ -13,7 +13,7 @@ export default function DonutStatistics(props: Props) {
   const { nodeConfigCosts, additionalCosts, storageCosts } = props;
   const [activeSegment, setActiveSegment] = useState(0);
   const handleClick = (event: CustomEvent) => {
-    setActiveSegment(event.detail.index ?? event.detail.dataIndex ?? -1);
+    setActiveSegment(event.detail?.index ?? event.detail?.dataIndex ?? -1);
   };
 
   return (
@@ -50,8 +50,6 @@ export default function DonutStatistics(props: Props) {
       }}
       noAnimation={true}
       onClick={handleClick}
-      onDataPointClick={() => {}}
-      onLegendClick={() => {}}
     />
   );
 }

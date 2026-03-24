@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@ui5/webcomponents-react';
 import './NextStepButton.css';
 import selectNextStep from '../Functions/selectNextStep';

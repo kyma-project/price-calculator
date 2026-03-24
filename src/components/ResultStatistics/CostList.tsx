@@ -1,4 +1,3 @@
-import React from 'react';
 import './CostList.css';
 import roundDecimals from './roundDecimals';
 import config from '../../config.json';

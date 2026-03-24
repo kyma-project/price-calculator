@@ -1,4 +1,3 @@
-import React from 'react';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import NextStepButton from '../Buttons/NextStepButton';
 import PreviousStepButton from '../Buttons/PreviousStepButton';

@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { MessageStrip } from '@ui5/webcomponents-react';
 import './InfoField.css';
 
 interface Props {
-  info: any;
+  info: ReactNode;
 }
 
 export default function InfoField(props: Props) {

@@ -24,13 +24,13 @@ test('total costs', () => {
     timeConsumption,
     computeUnits,
     minAutoscaler,
-    machineTypeFactor
+    machineTypeFactor,
   });
   const storageCosts = calculateStorageCosts({
     GBQuantity,
     premiumGBQuantity,
     snapshotGBQuantity,
-    timeConsumption
+    timeConsumption,
   });
 
   const additionalCosts = calculateAdditionalCosts({ redis });
@@ -44,4 +44,28 @@ test('total costs', () => {
 
   expect(totalCosts.CU).toBe(4394);
   expect(totalCosts.CC.toFixed(2)).toBe('1537.90');
+});
+
+test('returns zero when all costs are zero', () => {
+  const totalCosts = calculateTotalCosts({
+    nodeConfigCosts: 0,
+    storageCosts: 0,
+    additionalCosts: 0,
+    conversionRatio: 1.06,
+  });
+
+  expect(totalCosts.CU).toBe(0);
+  expect(totalCosts.CC).toBe(0);
+});
+
+test('applies conversion ratio correctly', () => {
+  const totalCosts = calculateTotalCosts({
+    nodeConfigCosts: 100,
+    storageCosts: 0,
+    additionalCosts: 0,
+    conversionRatio: 0.5,
+  });
+
+  expect(totalCosts.CU).toBe(100);
+  expect(totalCosts.CC).toBe(50);
 });

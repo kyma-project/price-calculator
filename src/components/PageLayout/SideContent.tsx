@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtomValue } from 'jotai';
 import ResultStatistics from '../ResultStatistics/ResultStatistics';
 import './SideContent.css';

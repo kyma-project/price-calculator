@@ -1,11 +1,18 @@
-import React from 'react';
+import { useAtomValue } from 'jotai';
 import DonutStatistics from './DonutStatistics';
 import CostList from './CostList';
-import { useCostCalculator } from '../../context/CostCalculatorContext';
+import {
+  nodeConfigCostsAtom,
+  storageCostsAtom,
+  additionalCostsAtom,
+  totalCostsAtom,
+} from '../../state/costState';
 
 export default function ResultStatistics() {
-  const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
-    useCostCalculator();
+  const nodeConfigCosts = useAtomValue(nodeConfigCostsAtom);
+  const storageCosts = useAtomValue(storageCostsAtom);
+  const additionalCosts = useAtomValue(additionalCostsAtom);
+  const totalCosts = useAtomValue(totalCostsAtom);
 
   return (
     <>

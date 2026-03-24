@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { Button, FlexBox, Icon, Title } from '@ui5/webcomponents-react';
 import './AddWorkerNodes.css';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Wizard } from '@ui5/webcomponents-react';
 import NodeConfigStep from './WizardSteps/NodeConfigStep';
 import AdditionalConfig from './WizardSteps/AdditionalConfigStep';

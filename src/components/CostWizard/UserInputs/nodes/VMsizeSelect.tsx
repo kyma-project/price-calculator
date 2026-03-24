@@ -1,10 +1,9 @@
-import React from 'react';
 import { Option, Select, Title } from '@ui5/webcomponents-react';
 import { VMSize } from '../../../../state/nodes/machineSetupState';
 
 interface Props {
   VMSize: VMSize;
-  setVMSize: React.Dispatch<React.SetStateAction<VMSize>>;
+  setVMSize: (vmSize: VMSize) => void;
   VMSizeOptions: VMSize[];
 }
 
@@ -13,11 +12,13 @@ export default function VMsizeSelect({
   setVMSize,
   VMSizeOptions,
 }: Props) {
-  const onChange = (event: any) => {
+  const onChange = (event: {
+    detail: { selectedOption: { dataset: DOMStringMap } };
+  }) => {
     const selection = event.detail.selectedOption.dataset;
     setVMSize({
-      value: selection.value,
-      computeUnits: selection.compute_units,
+      value: selection.value ?? '',
+      computeUnits: Number(selection.compute_units),
     });
   };
 
@@ -26,7 +27,7 @@ export default function VMsizeSelect({
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
-      <Select id={'vm-size-select'} onChange={onChange}>
+      <Select id={'vm-size-select'} value={VMSize.value} onChange={onChange}>
         {VMSizeOptions.map((item) => (
           <Option
             key={item.value}

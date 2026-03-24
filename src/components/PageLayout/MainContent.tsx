@@ -1,4 +1,3 @@
-import React from 'react';
 import CostWizard from '../CostWizard/CostWizard';
 import './MainContent.css';
 

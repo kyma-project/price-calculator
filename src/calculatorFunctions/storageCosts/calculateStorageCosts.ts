@@ -8,7 +8,8 @@ export interface StorageCostProps {
 }
 
 export default function calculateStorageCosts(props: StorageCostProps): number {
-  const { GBQuantity, premiumGBQuantity, snapshotGBQuantity, timeConsumption } = props;
+  const { GBQuantity, premiumGBQuantity, snapshotGBQuantity, timeConsumption } =
+    props;
   const PPU: number = config.Storage.PricePerUnit;
   const premiumPPU: number = config.PremiumStorage.multiplier;
   const snapshotPPU: number = config.SnapshotStorage.multiplier;
@@ -19,6 +20,9 @@ export default function calculateStorageCosts(props: StorageCostProps): number {
       PPU *
       timeConsumption *
       (premiumGBQuantity / config.PremiumStorage.Step) +
-    snapshotPPU * PPU * timeConsumption * (snapshotGBQuantity / config.SnapshotStorage.Step)
+    snapshotPPU *
+      PPU *
+      timeConsumption *
+      (snapshotGBQuantity / config.SnapshotStorage.Step)
   );
 }

@@ -1,13 +1,8 @@
-import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import {
-  Slider,
-  StepInput,
-  StepInputDomRef,
-  Title,
-} from '@ui5/webcomponents-react';
+import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
 import { useAtom } from 'jotai';
 import { snapshotGBQuantityState } from '../../../../state/storage/snapshotGBQuantityState';
+import useStepInputValidation from '../../hooks/useStepInputValidation';
 
 export default function SnapshotGBQuantityInputField() {
   const configuration = config.SnapshotStorage;
@@ -18,17 +13,14 @@ export default function SnapshotGBQuantityInputField() {
   const [snapshotGBQuantity, setSnapshotGBQuantity] = useAtom(
     snapshotGBQuantityState,
   );
-  const stepInputRef = useRef<StepInputDomRef>(null);
 
-  function handleChange(event: any): void {
-    const newValue: number = parseInt(event.target.value);
-    if (newValue % step === 0 && newValue >= min && newValue <= max) {
-      setSnapshotGBQuantity(newValue);
-    } else if (stepInputRef.current) {
-      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
-      input?.setAttribute('value', String(snapshotGBQuantity));
-    }
-  }
+  const { stepInputRef, handleChange } = useStepInputValidation({
+    value: snapshotGBQuantity,
+    setValue: setSnapshotGBQuantity,
+    min,
+    max,
+    step,
+  });
 
   return (
     <div>

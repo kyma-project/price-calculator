@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useAtomValue } from 'jotai';
 import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
@@ -23,46 +23,43 @@ export default function MachineSetupForm({
   updateMachine,
   workerNode,
 }: Props) {
-  const [machineType, setMachineType] = useState<MachineType>(
-    machine.machineType,
-  );
-  const [VMSize, setVMSize] = useState<VMSize>(machine.VMSize);
-  const [autoScalerMin, setAutoScalerMin] = useState<number>(
-    machine.minAutoscaler,
-  );
   const timeConsumption = useAtomValue(timeConsumptionState);
 
-  useEffect(() => {
-    setMachineType(machine.machineType);
-    setVMSize(machine.VMSize);
-    setAutoScalerMin(machine.minAutoscaler);
-  }, [machine]);
+  const setMachineType = useCallback(
+    (machineType: MachineType) => {
+      updateMachine({ ...machine, machineType, timeConsumption });
+    },
+    [machine, updateMachine, timeConsumption],
+  );
 
-  useEffect(() => {
-    updateMachine({
-      ...machine,
-      machineType,
-      VMSize,
-      minAutoscaler: autoScalerMin,
-      timeConsumption: timeConsumption,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [machineType, VMSize, autoScalerMin, timeConsumption]);
+  const setVMSize = useCallback(
+    (VMSize: VMSize) => {
+      updateMachine({ ...machine, VMSize, timeConsumption });
+    },
+    [machine, updateMachine, timeConsumption],
+  );
+
+  const setAutoScalerMin = useCallback(
+    (minAutoscaler: number) => {
+      updateMachine({ ...machine, minAutoscaler, timeConsumption });
+    },
+    [machine, updateMachine, timeConsumption],
+  );
 
   return (
     <Form>
       <MachineTypeSelect
-        machineType={machineType}
+        machineType={machine.machineType}
         setMachineType={setMachineType}
         workerNode={workerNode}
       />
       <VMsizeSelect
-        VMSize={VMSize}
+        VMSize={machine.VMSize}
         setVMSize={setVMSize}
-        VMSizeOptions={machineType.VMSizeOptions}
+        VMSizeOptions={machine.machineType.VMSizeOptions}
       />
       <MinAutoscalerInputField
-        autoScalerMin={autoScalerMin}
+        autoScalerMin={machine.minAutoscaler}
         setAutoScalerMin={setAutoScalerMin}
         workerNode={workerNode}
       />

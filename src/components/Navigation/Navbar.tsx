@@ -1,4 +1,3 @@
-import React from 'react';
 import { ShellBar } from '@ui5/webcomponents-react';
 import './Navbar.css';
 

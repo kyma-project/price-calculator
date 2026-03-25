@@ -1,5 +1,4 @@
 import { Text, Title } from '@ui5/webcomponents-react';
-import React from 'react';
 import './HeaderWithInfo.css';
 
 interface Props {

@@ -27,13 +27,12 @@ export default function VMsizeSelect({
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
-      <Select id={'vm-size-select'} value={VMSize.value} onChange={onChange}>
+      <Select id="vm-size-select" value={VMSize.value} onChange={onChange}>
         {VMSizeOptions.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}
             data-compute_units={item.computeUnits}
-            selected={item.value === VMSize.value}
           >
             {item.value}
           </Option>

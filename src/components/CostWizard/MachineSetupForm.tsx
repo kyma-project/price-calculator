@@ -27,7 +27,8 @@ export default function MachineSetupForm({
 
   const setMachineType = useCallback(
     (machineType: MachineType) => {
-      updateMachine({ ...machine, machineType, timeConsumption });
+      const VMSize = machineType.VMSizeOptions[0];
+      updateMachine({ ...machine, machineType, VMSize, timeConsumption });
     },
     [machine, updateMachine, timeConsumption],
   );

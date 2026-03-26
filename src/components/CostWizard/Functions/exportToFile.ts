@@ -118,10 +118,8 @@ function exportToXLSX(dataArray: (string | number)[][]) {
 
 function csvEscape(value: string | number): string {
   const str = String(value);
-  if (str.includes(',') || str.includes('"') || str.includes('\n')) {
-    return `"${str.replace(/"/g, '""')}"`;
-  }
-  return str;
+  // Always quote strings so Excel never misinterprets separators or hyphens
+  return `"${str.replace(/"/g, '""')}"`;
 }
 
 function exportToCSV(dataArray: (string | number)[][]) {

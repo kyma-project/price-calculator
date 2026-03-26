@@ -40,14 +40,13 @@ export default function MachineTypeSelect({
         onChange={onChange}
         value={machineType.value}
         disabled={!workerNode}
-        id={'machine-type-select'}
+        id="machine-type-select"
       >
         {configMachineTypes.map((item) => (
           <Option
             key={item.value}
             data-value={item.value}
             data-multiple={item.multiple}
-            selected={item.value === machineType.value}
           >
             {item.value}
           </Option>

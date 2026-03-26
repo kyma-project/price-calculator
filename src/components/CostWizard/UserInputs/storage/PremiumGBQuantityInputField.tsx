@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import './PremiumGBQuantityInputField.css';
@@ -7,11 +6,11 @@ import {
   Icon,
   Slider,
   StepInput,
-  StepInputDomRef,
   Title,
 } from '@ui5/webcomponents-react';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
 import openLinks from '../../Functions/openLinks';
+import useStepInputValidation from '../../hooks/useStepInputValidation';
 
 export default function PremiumGBQuantityInputField() {
   const configuration = config.PremiumStorage;
@@ -23,17 +22,13 @@ export default function PremiumGBQuantityInputField() {
     premiumGBQuantityState,
   );
 
-  const stepInputRef = useRef<StepInputDomRef>(null);
-
-  function handleChange(event: any): void {
-    const newValue: number = parseInt(event.target.value);
-    if (newValue % step === 0 && newValue >= min && newValue <= max) {
-      setPremiumGBQuantity(newValue);
-    } else if (stepInputRef.current) {
-      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
-      input?.setAttribute('value', String(premiumGBQuantity));
-    }
-  }
+  const { stepInputRef, handleChange } = useStepInputValidation({
+    value: premiumGBQuantity,
+    setValue: setPremiumGBQuantity,
+    min,
+    max,
+    step,
+  });
 
   return (
     <div>

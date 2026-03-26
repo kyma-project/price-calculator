@@ -2,25 +2,24 @@ import { utils, writeFile, WorkBook, WorkSheet } from 'xlsx';
 import roundDecimals from '../../ResultStatistics/roundDecimals';
 import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
+import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
+import config from '../../../config.json';
 
 interface Props {
-  baseCosts: number;
   machineSetup: MachineSetup[];
+  nodeConfigCosts: number;
   storageCosts: number;
   storageQuantity: number;
   premiumStorageQuantity: number;
+  snapshotStorageQuantity: number;
   redisSize: RedisSize;
-  timeConsumption: number;
   additionalCosts: number;
-  totalCosts: number;
+  conversionRate: number;
+  totalCosts: TotalCosts;
   exportFormat: ExportFormat;
 }
 
-interface MachineSetupWithCost {
-  machineSetup: MachineSetup;
-  cost: number;
-}
 export enum ExportFormat {
   CSV = 'CSV',
   XLSX = 'XLSX',
@@ -28,78 +27,77 @@ export enum ExportFormat {
 
 export default function exportToFile(props: Props) {
   const {
-    baseCosts,
     machineSetup,
+    nodeConfigCosts,
     storageCosts,
     storageQuantity,
-    timeConsumption,
     premiumStorageQuantity,
+    snapshotStorageQuantity,
     redisSize,
     additionalCosts,
+    conversionRate,
     totalCosts,
     exportFormat,
   } = props;
 
-  const machineSetupWithCost: MachineSetupWithCost[] = machineSetup.reduce(
-    (acc, machine) => {
-      const machineWithCost = {
-        machineSetup: machine,
-        cost: calculateNodeConfigCosts({
-          timeConsumption: machine.timeConsumption,
-          computeUnits: machine.VMSize.computeUnits,
-          minAutoscaler: machine.minAutoscaler,
-          machineTypeFactor: machine.machineType.multiple,
-        }),
-      };
-      acc.push(machineWithCost);
-      return acc;
-    },
-    [] as MachineSetupWithCost[],
+  const dataArray: (string | number)[][] = [
+    ['SAP BTP Kyma Runtime - Cost Estimation'],
+    [''],
+  ];
+
+  // Node pools — one block per pool
+  machineSetup.forEach((machine, index) => {
+    const label =
+      index === 0 ? 'Base Worker Node Pool' : `Worker Node Pool ${index}`;
+
+    const poolCost = calculateNodeConfigCosts({
+      timeConsumption: machine.timeConsumption,
+      computeUnits: machine.VMSize.computeUnits,
+      minAutoscaler: machine.minAutoscaler,
+      machineTypeFactor: machine.machineType.multiple,
+    });
+
+    dataArray.push(
+      [label],
+      ['Machine Type', machine.machineType.value],
+      ['VM Size', machine.VMSize.value],
+      ['Autoscaler Min', machine.minAutoscaler],
+      ['Time Consumption', `${machine.timeConsumption} hrs`],
+      ['Pool Cost', `${roundDecimals(poolCost, true)} CU`],
+      [''],
+    );
+  });
+
+  // Storage
+  dataArray.push(
+    ['Storage'],
+    ['Standard Storage', `${storageQuantity} GB`],
+    ['NFS Storage', `${premiumStorageQuantity} GB`],
+    ['Snapshot Storage', `${snapshotStorageQuantity} GB`],
+    [''],
   );
 
-  const dataArray = [
-    ['Base Configuration'],
-    [
-      'Virtual Machine Size',
-      ...machineSetupWithCost.map((prop) => prop.machineSetup.VMSize.value),
-    ],
-    [
-      'Virtual Machine Type',
-      ...machineSetupWithCost.map(
-        (prop) => prop.machineSetup.machineType.value,
-      ),
-    ],
-    [
-      'Autoscaler Min',
-      ...machineSetupWithCost.map((prop) =>
-        prop.machineSetup.minAutoscaler.toString(),
-      ),
-    ],
-    [
-      'Time Consumption',
-      ...machineSetupWithCost.map((prop) =>
-        prop.machineSetup.timeConsumption.toString(),
-      ),
-    ],
-    [
-      'Worker Node Pool Cost',
-      ...machineSetupWithCost.map((prop) => prop.cost.toString() + ' CU'),
-    ],
+  // Additional configuration
+  dataArray.push(
+    ['Additional Configuration'],
+    ['Redis Tier', redisSize.tier],
+    ['Redis Cost', `${roundDecimals(redisSize.value, true)} CU`],
+    ['Conversion Rate', conversionRate],
     [''],
-    ['Storage'],
-    ['Standard Storage', storageQuantity],
-    ['NFS Storage', premiumStorageQuantity],
-    ['Time Consumption', timeConsumption],
-    [''],
-    ['Redis'],
-    ['Redis Size', redisSize.tsize],
-    ['Redis Cost', redisSize.value + ' CU'],
-    [''],
-    ['Base Configuration costs', roundDecimals(baseCosts, true) + ' CU'],
-    ['Storage costs', roundDecimals(storageCosts, true) + ' CU'],
-    ['Additional costs', roundDecimals(additionalCosts, true) + ' CU'],
-    ['Total costs', roundDecimals(totalCosts, true) + ' CU'],
-  ];
+  );
+
+  // Summary
+  dataArray.push(
+    ['Summary'],
+    ['Node Configuration', `${roundDecimals(nodeConfigCosts, true)} CU`],
+    ['Storage', `${roundDecimals(storageCosts, true)} CU`],
+    ['Additional', `${roundDecimals(additionalCosts, true)} CU`],
+    ['Total (CU)', `${roundDecimals(totalCosts.CU, true)} CU`],
+    [
+      `Total (${config.CurrencyCode})`,
+      `${roundDecimals(totalCosts.CC, true)} ${config.CurrencyCode}`,
+    ],
+  );
 
   if (exportFormat === ExportFormat.XLSX) {
     exportToXLSX(dataArray);
@@ -111,16 +109,23 @@ export default function exportToFile(props: Props) {
 function exportToXLSX(dataArray: (string | number)[][]) {
   const worksheet: WorkSheet = utils.aoa_to_sheet(dataArray);
   const workbook: WorkBook = utils.book_new();
-  utils.book_append_sheet(workbook, worksheet, 'Sheet 1');
+  utils.book_append_sheet(workbook, worksheet, 'Cost Estimation');
 
-  const columnWidths = [{ wch: 22 }, { wch: 17 }];
-  worksheet['!cols'] = columnWidths;
+  worksheet['!cols'] = [{ wch: 26 }, { wch: 24 }];
 
   writeFile(workbook, 'Kyma-Price-Calculations.xlsx');
 }
 
+function csvEscape(value: string | number): string {
+  const str = String(value);
+  // Always quote strings so Excel never misinterprets separators or hyphens
+  return `"${str.replace(/"/g, '""')}"`;
+}
+
 function exportToCSV(dataArray: (string | number)[][]) {
-  const csvString = dataArray.map((row) => row.join(': ')).join('\n');
+  const csvString = dataArray
+    .map((row) => row.map(csvEscape).join(','))
+    .join('\n');
   const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
 

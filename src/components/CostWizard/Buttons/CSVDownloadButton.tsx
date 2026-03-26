@@ -1,43 +1,52 @@
-import React from 'react';
 import { Button, Icon } from '@ui5/webcomponents-react';
 import { useAtomValue } from 'jotai';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
-import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
 } from '../../../state/nodes/machineSetupState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
-import exportCSV, { ExportFormat } from '../Functions/exportToFile';
+import exportToFile, { ExportFormat } from '../Functions/exportToFile';
 import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
+import { snapshotGBQuantityState } from '../../../state/storage/snapshotGBQuantityState';
 import { redisState } from '../../../state/additionalConfig/redisState';
-import { useCostCalculator } from '../../../context/CostCalculatorContext';
+import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import {
+  nodeConfigCostsAtom,
+  storageCostsAtom,
+  additionalCostsAtom,
+  totalCostsAtom,
+} from '../../../state/costState';
 
 export default function CSVDownloadButton() {
   const baseMachineSetup = useAtomValue(baseMachineSetupState);
   const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
   const storageQuantity = useAtomValue(GBQuantityState);
   const premiumStorageQuantity = useAtomValue(premiumGBQuantityState);
-  const timeConsumption = useAtomValue(timeConsumptionState);
+  const snapshotStorageQuantity = useAtomValue(snapshotGBQuantityState);
   const redisSize = useAtomValue(redisState);
-  const { nodeConfigCosts, storageCosts, additionalCosts, totalCosts } =
-    useCostCalculator();
+  const conversionRate = useAtomValue(applyConversionRateState);
+  const nodeConfigCosts = useAtomValue(nodeConfigCostsAtom);
+  const storageCosts = useAtomValue(storageCostsAtom);
+  const additionalCosts = useAtomValue(additionalCostsAtom);
+  const totalCosts = useAtomValue(totalCostsAtom);
 
   return (
     <Button
       className="DownloadButton"
       design="Emphasized"
       onClick={() =>
-        exportCSV({
-          baseCosts: nodeConfigCosts,
+        exportToFile({
           machineSetup: [baseMachineSetup, ...additionalMachineSetup],
+          nodeConfigCosts,
           storageCosts,
           storageQuantity,
-          timeConsumption,
-          additionalCosts,
-          totalCosts: totalCosts.CU,
           premiumStorageQuantity,
+          snapshotStorageQuantity,
+          additionalCosts,
+          conversionRate,
+          totalCosts,
           redisSize,
           exportFormat: ExportFormat.CSV,
         })

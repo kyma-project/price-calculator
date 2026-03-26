@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
 import config from '../../../../config.json';
-import { Slider, StepInput, StepInputDomRef } from '@ui5/webcomponents-react';
+import { Slider, StepInput } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
+import useStepInputValidation from '../../hooks/useStepInputValidation';
 
 interface Props {
   autoScalerMin: number;
-  setAutoScalerMin: React.Dispatch<React.SetStateAction<number>>;
+  setAutoScalerMin: (value: number) => void;
   workerNode: boolean;
 }
 export default function MinAutoscalerInputField({
@@ -18,17 +18,13 @@ export default function MinAutoscalerInputField({
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const stepInputRef = useRef<StepInputDomRef>(null);
-
-  function handleChange(event: any): void {
-    const newValue: number = parseInt(event.target.value);
-    if (newValue % step === 0 && newValue >= min && newValue <= max) {
-      setAutoScalerMin(newValue);
-    } else if (stepInputRef.current) {
-      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
-      input?.setAttribute('value', String(autoScalerMin));
-    }
-  }
+  const { stepInputRef, handleChange } = useStepInputValidation({
+    value: autoScalerMin,
+    setValue: setAutoScalerMin,
+    min,
+    max,
+    step,
+  });
 
   return (
     <>

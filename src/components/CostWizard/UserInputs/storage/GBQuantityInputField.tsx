@@ -1,13 +1,8 @@
-import React, { useRef } from 'react';
 import { useAtom } from 'jotai';
 import config from '../../../../config.json';
-import {
-  Slider,
-  StepInput,
-  StepInputDomRef,
-  Title,
-} from '@ui5/webcomponents-react';
+import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
+import useStepInputValidation from '../../hooks/useStepInputValidation';
 
 export default function GBQuantityInputField() {
   const configuration = config.Storage;
@@ -16,17 +11,13 @@ export default function GBQuantityInputField() {
   const step = configuration.Step;
 
   const [GBQuantity, setGBQuantity] = useAtom(GBQuantityState);
-  const stepInputRef = useRef<StepInputDomRef>(null);
-
-  function handleChange(event: any): void {
-    const newValue: number = parseInt(event.target.value);
-    if (newValue % step === 0 && newValue >= min && newValue <= max) {
-      setGBQuantity(newValue);
-    } else if (stepInputRef.current) {
-      const input = stepInputRef.current.shadowRoot?.querySelector('ui5-input');
-      input?.setAttribute('value', String(GBQuantity));
-    }
-  }
+  const { stepInputRef, handleChange } = useStepInputValidation({
+    value: GBQuantity,
+    setValue: setGBQuantity,
+    min,
+    max,
+    step,
+  });
 
   return (
     <div>

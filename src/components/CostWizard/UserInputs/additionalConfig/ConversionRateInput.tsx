@@ -4,7 +4,7 @@ import { Slider, Title } from '@ui5/webcomponents-react';
 import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import InfoField from '../../common/InfoField';
 
-export default function TimeConStorageInput() {
+export default function ConversionRateInput() {
   const [value, setValue] = useAtom(applyConversionRateState);
 
   const text = (
@@ -26,8 +26,8 @@ export default function TimeConStorageInput() {
   const max = 1.2;
   const step = 0.01;
 
-  function handleChange(event: any): void {
-    const newValue: number = parseFloat(event.target.value);
+  function handleChange(event: { target: { value: string | number } }): void {
+    const newValue: number = parseFloat(String(event.target.value));
     setValue(newValue);
   }
 

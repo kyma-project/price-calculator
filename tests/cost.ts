@@ -70,24 +70,24 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.WORKER_TYPE_CHANGE,
     {
-      Nodes: 259.2,
+      Nodes: 172.8,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 259.2,
-        Currency: 274.75,
+        CapacityUnits: 172.8,
+        Currency: 183.17,
       },
     },
   ],
   [
     Step.WORKER_SIZE_CHANGE,
     {
-      Nodes: 864,
+      Nodes: 950.4,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 864,
-        Currency: 915.84,
+        CapacityUnits: 950.4,
+        Currency: 1007.42,
       },
     },
   ],

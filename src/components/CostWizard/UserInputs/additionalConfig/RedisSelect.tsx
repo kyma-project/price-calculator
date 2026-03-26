@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSetAtom } from 'jotai';
 import config from '../../../../config.json';
 import { FlexBox, Icon, Option, Select, Title } from '@ui5/webcomponents-react';
@@ -8,13 +7,15 @@ import openLinks from '../../Functions/openLinks';
 
 export default function RedisSelect() {
   const redisConfigOptions = config.RedisCosts.Tiers;
-  const setVmSize = useSetAtom(redisState);
+  const setRedisSize = useSetAtom(redisState);
 
-  const onChange = (event: any) => {
+  const onChange = (event: {
+    detail: { selectedOption: { dataset: DOMStringMap } };
+  }) => {
     const selection = event.detail.selectedOption.dataset;
-    setVmSize({
-      value: +selection.value,
-      tsize: selection.key,
+    setRedisSize({
+      value: +(selection.value ?? '0'),
+      tier: selection.key ?? '',
     });
   };
 

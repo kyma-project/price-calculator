@@ -3,7 +3,6 @@ import MainContent from './MainContent';
 import SideContent from './SideContent';
 import DetailsTable from './DetailsTable';
 import './MainContentContainer.css';
-import { CostProvider } from '../../context/CostCalculatorContext';
 
 interface ContentLayoutProps {
   MainContent: ReactNode;
@@ -22,12 +21,10 @@ const ContentLayout = ({ MainContent, SideContent }: ContentLayoutProps) => {
 export default function MainContentContainer() {
   return (
     <>
-      <CostProvider>
-        <ContentLayout
-          MainContent={<MainContent />}
-          SideContent={<SideContent />}
-        />
-      </CostProvider>
+      <ContentLayout
+        MainContent={<MainContent />}
+        SideContent={<SideContent />}
+      />
       <DetailsTable />
     </>
   );

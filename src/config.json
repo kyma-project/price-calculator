@@ -81,7 +81,7 @@
       },
       {
         "value": "Memory Intensive",
-        "multiple": 1.5,
+        "multiple": 1,
         "VMSizeOptions": [
           {
             "value": "2 CPU - 16GB RAM",

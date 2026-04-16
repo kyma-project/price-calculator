@@ -1,6 +1,6 @@
 {
   "CurrencyCode": "€",
-  "ConversionRateCUCC": 1.06,
+  "ConversionRateCUCC": 1.00,
   "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
@@ -47,11 +47,11 @@
       },
       {
         "value": "Compute Optimized",
-        "multiple": 2,
+        "multiple": 1,
         "VMSizeOptions": [
           {
             "value": "2 CPU - 4GB RAM",
-            "computeUnits": 2.5
+            "computeUnits": 3
           },
           {
             "value": "4 CPU - 8GB RAM",
@@ -75,6 +75,40 @@
           },
           {
             "value": "64 CPU - 128GB RAM",
+            "computeUnits": 64
+          }
+        ]
+      },
+      {
+        "value": "Memory Intensive",
+        "multiple": 1.5,
+        "VMSizeOptions": [
+          {
+            "value": "2 CPU - 16GB RAM",
+            "computeUnits": 3
+          },
+          {
+            "value": "4 CPU - 32GB RAM",
+            "computeUnits": 4
+          },
+          {
+            "value": "8 CPU - 64GB RAM",
+            "computeUnits": 8
+          },
+          {
+            "value": "16 CPU - 128GB RAM",
+            "computeUnits": 16
+          },
+          {
+            "value": "32 CPU - 256GB RAM",
+            "computeUnits": 32
+          },
+          {
+            "value": "48 CPU - 384GB RAM",
+            "computeUnits": 48
+          },
+          {
+            "value": "64 CPU - 512GB RAM",
             "computeUnits": 64
           }
         ]

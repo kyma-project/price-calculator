@@ -53,16 +53,22 @@ export default function DetailsTable() {
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime costs are metered hourly. Cost computation will
-          start after the creation of the "Kyma Environment" is completed and
-          the cluster accessible to the user.
+          SAP BTP, Kyma runtime cost estimator provides costs per month. One
+          month is considered composed of{' '}
+          {config.AdditionalConfig.TimeConsumption} hours. The pricing and actual Capacity Units required for your specific use
+          of SAP BTP, Kyma runtime may vary from the provided estimate.
         </TableCell>
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime cost estimator provides costs per month. One
-          month is considered composed of{' '}
-          {config.AdditionalConfig.TimeConsumption} hours.
+          SAP BTP, Kyma runtime costs are metered hourly: cost computation will
+          start after the creation of the "Kyma Environment" is completed. 
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          Non–general-purpose machine types are not always equally available across all cloud providers,
+          regions, instance sizes, or availability zones.
         </TableCell>
       </TableRow>
       <TableRow>
@@ -70,12 +76,6 @@ export default function DetailsTable() {
           The increase of consumption is depending on various factors, e.g. (not
           limited to): number of deployments, number of connected systems,
           complexity of deployments, traffic via the API Gateway.
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
-          The pricing and actual Capacity Units required for your specific use
-          of SAP BTP, Kyma runtime may vary from the provided estimate.
         </TableCell>
       </TableRow>
       <TableRow>

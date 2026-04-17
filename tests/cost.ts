@@ -1,6 +1,7 @@
 export enum Step {
   BASE_VM_SIZE_INCREASE,
   BASE_AUTOSCALER_INCREASE,
+  BASE_VOLUME_SIZE_INCREASE,
   WORKER_ADD_NODE,
   WORKER_TYPE_CHANGE,
   WORKER_SIZE_CHANGE,
@@ -52,6 +53,18 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       TotalCost: {
         CapacityUnits: 2419.2,
         Currency: 2419.2,
+      },
+    },
+  ],
+  [
+    Step.BASE_VOLUME_SIZE_INCREASE,
+    {
+      Nodes: 225,
+      Additional: 0,
+      Storage: 0,
+      TotalCost: {
+        CapacityUnits: 225,
+        Currency: 238.5,
       },
     },
   ],

@@ -4,6 +4,7 @@ import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
 import MachineTypeSelect from './UserInputs/nodes/MachineTypeSelect';
 import MinAutoscalerInputField from './UserInputs/nodes/MinAutoscalerInputField';
+import NodeVolumeSizeInputField from './UserInputs/nodes/NodeVolumeSizeInputField';
 import './CostWizard.css';
 import {
   MachineSetup,
@@ -47,6 +48,13 @@ export default function MachineSetupForm({
     [machine, updateMachine, timeConsumption],
   );
 
+  const setNodeVolumeSizeGb = useCallback(
+    (nodeVolumeSizeGb: number) => {
+      updateMachine({ ...machine, nodeVolumeSizeGb, timeConsumption });
+    },
+    [machine, updateMachine, timeConsumption],
+  );
+
   return (
     <Form>
       <MachineTypeSelect
@@ -63,6 +71,10 @@ export default function MachineSetupForm({
         autoScalerMin={machine.minAutoscaler}
         setAutoScalerMin={setAutoScalerMin}
         workerNode={workerNode}
+      />
+      <NodeVolumeSizeInputField
+        nodeVolumeSizeGb={machine.nodeVolumeSizeGb}
+        setNodeVolumeSizeGb={setNodeVolumeSizeGb}
       />
     </Form>
   );

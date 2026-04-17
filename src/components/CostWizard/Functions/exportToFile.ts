@@ -4,6 +4,7 @@ import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
 import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
+import calculateNodeVolumeCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeVolumeCosts';
 import config from '../../../config.json';
 
 interface Props {
@@ -50,18 +51,25 @@ export default function exportToFile(props: Props) {
     const label =
       index === 0 ? 'Base Worker Node Pool' : `Worker Node Pool ${index}`;
 
-    const poolCost = calculateNodeConfigCosts({
+    const computeCost = calculateNodeConfigCosts({
       timeConsumption: machine.timeConsumption,
       computeUnits: machine.VMSize.computeUnits,
       minAutoscaler: machine.minAutoscaler,
       machineTypeFactor: machine.machineType.multiple,
     });
+    const volumeCost = calculateNodeVolumeCosts({
+      nodeVolumeSizeGb: machine.nodeVolumeSizeGb,
+      minAutoscaler: machine.minAutoscaler,
+      timeConsumption: machine.timeConsumption,
+    });
+    const poolCost = computeCost + volumeCost;
 
     dataArray.push(
       [label],
       ['Machine Type', machine.machineType.value],
       ['VM Size', machine.VMSize.value],
       ['Autoscaler Min', machine.minAutoscaler],
+      ['Node Volume Size', `${machine.nodeVolumeSizeGb} GB`],
       ['Time Consumption', `${machine.timeConsumption} hrs`],
       ['Pool Cost', `${roundDecimals(poolCost, true)} CU`],
       [''],

@@ -21,12 +21,12 @@ export type Price = {
 };
 
 let expectedPrice: Price = {
-  Nodes: 776.6,
+  Nodes: 777.6,
   Additional: 0,
   Storage: 0,
   TotalCost: {
-    CapacityUnits: 776.6,
-    Currency: 824.26,
+    CapacityUnits: 777.6,
+    Currency: 777.6,
   },
 };
 
@@ -34,12 +34,12 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_VM_SIZE_INCREASE,
     {
-      Nodes: 260.2,
+      Nodes: 259.2,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 260.2,
-        Currency: 274.75,
+        CapacityUnits: 259.2,
+        Currency: 259.2,
       },
     },
   ],
@@ -51,7 +51,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 0,
       TotalCost: {
         CapacityUnits: 2419.2,
-        Currency: 2564.35,
+        Currency: 2419.2,
       },
     },
   ],
@@ -63,43 +63,43 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 0,
       TotalCost: {
         CapacityUnits: 259.2,
-        Currency: 274.75,
+        Currency: 259.2,
       },
     },
   ],
   [
     Step.WORKER_TYPE_CHANGE,
     {
-      Nodes: 172.8,
+      Nodes: 0,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 172.8,
-        Currency: 183.17,
+        CapacityUnits: 0,
+        Currency: 0,
       },
     },
   ],
   [
     Step.WORKER_SIZE_CHANGE,
     {
-      Nodes: 950.4,
+      Nodes: 432,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 950.4,
-        Currency: 1007.42,
+        CapacityUnits: 432,
+        Currency: 432,
       },
     },
   ],
   [
     Step.WORKER_AUTOSCALER_INCREASE,
     {
-      Nodes: 5529.6,
+      Nodes: 2764.8,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 5529.6,
-        Currency: 5861.38,
+        CapacityUnits: 2764.8,
+        Currency: 2764.8,
       },
     },
   ],
@@ -111,7 +111,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 72,
       TotalCost: {
         CapacityUnits: 72,
-        Currency: 76.32,
+        Currency: 72,
       },
     },
   ],
@@ -123,7 +123,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 216,
       TotalCost: {
         CapacityUnits: 216,
-        Currency: 228.96,
+        Currency: 216,
       },
     },
   ],
@@ -135,7 +135,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 0,
       TotalCost: {
         CapacityUnits: 778,
-        Currency: 824.68,
+        Currency: 778,
       },
     },
   ],

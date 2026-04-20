@@ -1,0 +1,86 @@
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border: 1.5px solid #d0e8ff;
+  border-radius: 999px;
+  padding: 4px 12px 4px 6px;
+  box-shadow: 0 1px 4px rgba(0, 112, 242, 0.08);
+}
+
+.spinner-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: #0070f2;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.1s;
+  user-select: none;
+}
+
+.spinner-btn:hover:not(:disabled) {
+  background: #0057c2;
+  transform: scale(1.08);
+}
+
+.spinner-btn:active:not(:disabled) {
+  background: #004499;
+  transform: scale(0.96);
+}
+
+.spinner-btn:disabled {
+  background: #c8d8f0;
+  color: #fff;
+  cursor: default;
+  transform: none;
+}
+
+.spinner-input {
+  width: 6ch;
+  text-align: center;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #1a1a2e;
+  padding: 0 4px;
+  -moz-appearance: textfield;
+}
+
+.spinner-input::-webkit-outer-spin-button,
+.spinner-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.spinner-unit {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #0070f2;
+  letter-spacing: 0.03em;
+  margin-left: 2px;
+}
+
+.spinner-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #4a6080;
+  white-space: nowrap;
+  padding: 0 8px 0 4px;
+  margin-right: 2px;
+  border-right: 1.5px solid #d0e8ff;
+}

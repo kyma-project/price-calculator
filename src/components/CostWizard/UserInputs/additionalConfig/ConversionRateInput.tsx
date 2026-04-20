@@ -3,6 +3,7 @@ import config from '../../../../config.json';
 import { Slider, Title } from '@ui5/webcomponents-react';
 import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
 import InfoField from '../../common/InfoField';
+import SpinnerInput from '../common/SpinnerInput';
 
 export default function ConversionRateInput() {
   const [value, setValue] = useAtom(applyConversionRateState);
@@ -37,6 +38,15 @@ export default function ConversionRateInput() {
       <Title className="wizard-subheader" level="H5" size="H5">
         Conversion rate from Capacity Units to {config.CurrencyCode}
       </Title>
+      <SpinnerInput
+        value={value}
+        setValue={setValue}
+        min={min}
+        max={max}
+        step={step}
+        decimals={2}
+        unit={`${config.CurrencyCode}/CU`}
+      />
       <Slider
         value={value}
         onInput={handleChange}

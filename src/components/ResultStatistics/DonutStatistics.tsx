@@ -1,31 +1,59 @@
 import { DonutChart } from '@ui5/webcomponents-react-charts';
 import './DonutStatistics.css';
 
+// ── Types ────────────────────────────────────────────────────────────────────
+
 interface Props {
   nodeConfigCosts: number;
   additionalCosts: number;
   storageCosts: number;
 }
 
-const LABELS = ['Worker Nodes', 'Additional Config', 'Storage'];
-const COLORS = ['#000080', '#1D428A', '#0437F2'];
+/** Props injected by recharts into each custom DataLabel element. */
+interface SegmentLabelProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  outerRadius: number;
+  name: string;
+  value: number;
+  percent: number;
+  fill: string;
+}
 
-function euros(n: number): string {
+// ── Constants ────────────────────────────────────────────────────────────────
+
+const SEGMENTS = [
+  { label: 'Worker Nodes',     color: '#000080' },
+  { label: 'Additional Config', color: '#1D428A' },
+  { label: 'Storage',          color: '#0437F2' },
+] as const;
+
+const RADIAN = Math.PI / 180;
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function formatEuros(n: number): string {
   return (Math.round(n * 100) / 100).toFixed(2);
 }
 
-// ─── Custom SVG label injected via cloneElement by the UI5 chart ────────────
-// Receives recharts Pie label props: cx, cy, midAngle, outerRadius,
-// name, value, percent, fill (segment colour).
-function SegmentLabel(props: any) {
+// ── SegmentLabel ─────────────────────────────────────────────────────────────
+
+/**
+ * Custom SVG callout rendered outside each donut segment.
+ *
+ * UI5 injects this via React.cloneElement, forwarding standard recharts
+ * Pie label props (cx, cy, midAngle, outerRadius, name, value, percent, fill).
+ */
+function SegmentLabel(props: SegmentLabelProps) {
   const { cx, cy, midAngle, outerRadius, name, value, percent, fill } = props;
+
   if (!value || percent < 0.005) return null;
 
-  const RADIAN = Math.PI / 180;
-  const r = (outerRadius as number) + 18;
-  const x = (cx as number) + r * Math.cos(-midAngle * RADIAN);
-  const y = (cy as number) + r * Math.sin(-midAngle * RADIAN);
-  const anchor = x > (cx as number) + 6 ? 'start' : x < (cx as number) - 6 ? 'end' : 'middle';
+  const r = outerRadius + 18;
+  const x = cx + r * Math.cos(-midAngle * RADIAN);
+  const y = cy + r * Math.sin(-midAngle * RADIAN);
+  const anchor = x > cx + 6 ? 'start' : x < cx - 6 ? 'end' : 'middle';
 
   return (
     <g>
@@ -33,7 +61,7 @@ function SegmentLabel(props: any) {
         {name}
       </text>
       <text x={x} y={y + 7} textAnchor={anchor} fontSize={15} fontWeight="bold" fill={fill}>
-        € {euros(value)}
+        € {formatEuros(value)}
       </text>
       <text x={x} y={y + 25} textAnchor={anchor} fontSize={13} fill={fill} opacity={0.85}>
         {(percent * 100).toFixed(1)}%
@@ -42,16 +70,14 @@ function SegmentLabel(props: any) {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
+// ── Component ────────────────────────────────────────────────────────────────
+
 export default function DonutStatistics({ nodeConfigCosts, additionalCosts, storageCosts }: Props) {
-  const vals = [
-    Math.max(0, nodeConfigCosts),
-    Math.max(0, additionalCosts),
-    Math.max(0, storageCosts),
-  ];
+  const vals = [nodeConfigCosts, additionalCosts, storageCosts].map((v) => Math.max(0, v));
   const total = vals.reduce((a, b) => a + b, 0);
 
-  const dataset = LABELS.map((name, i) => ({ name, value: vals[i] }));
+  const dataset = SEGMENTS.map(({ label }, i) => ({ name: label, value: vals[i] }));
+  const colors = SEGMENTS.map(({ color }) => color);
 
   return (
     <div className="donut-root">
@@ -60,11 +86,11 @@ export default function DonutStatistics({ nodeConfigCosts, additionalCosts, stor
         dimension={{ accessor: 'name' }}
         measure={{
           accessor: 'value',
-          colors: COLORS,
-          // UI5 checks isValidElement → must be a JSX element, not a component ref
+          colors,
+          // UI5 requires an element (not a ref) so it can cloneElement and inject props
           DataLabel: <SegmentLabel /> as any,
         }}
-        centerLabel={total > 0 ? `€ ${euros(total)}` : '–'}
+        centerLabel={total > 0 ? `€ ${formatEuros(total)}` : '–'}
         chartConfig={{
           innerRadius: '35%',
           outerRadius: '75%',

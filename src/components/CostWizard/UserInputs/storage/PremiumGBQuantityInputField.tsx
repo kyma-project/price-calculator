@@ -51,6 +51,7 @@ export default function PremiumGBQuantityInputField() {
         min={min}
         max={max}
         step={step}
+        unit={`GB`}
       />
       <Slider
         value={premiumGBQuantity}

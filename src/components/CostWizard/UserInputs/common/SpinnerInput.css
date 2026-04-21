@@ -67,12 +67,17 @@
   margin: 0;
 }
 
+/* When no unit is rendered, match right padding to left for a symmetric pill */
+.spinner--no-unit {
+  padding-right: 6px;
+}
+
 .spinner-unit {
   font-size: 0.82rem;
   font-weight: 500;
   color: #0070f2;
   letter-spacing: 0.03em;
-  margin-left: 2px;
+  margin-left: 8px;
 }
 
 .spinner-label {

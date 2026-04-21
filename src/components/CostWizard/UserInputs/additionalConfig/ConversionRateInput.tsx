@@ -18,7 +18,7 @@ export default function ConversionRateInput() {
       <div>This will help you to calculate eventual discounts.</div>
       <div>
         If you are unsure about how to change the default value (
-        {config.ConversionRateCUCC}), please ask your SAP Sales Specialist.
+        {config.ConversionRateCUCC.toFixed(2)}), please ask your SAP Sales Specialist.
       </div>{' '}
     </>
   );

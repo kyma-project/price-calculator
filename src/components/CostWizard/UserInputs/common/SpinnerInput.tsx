@@ -100,7 +100,7 @@ export default function SpinnerInput({
   }
 
   return (
-    <div className="spinner">
+    <div className={`spinner${!unit ? ' spinner--no-unit' : ''}`}>
       {label && <span className="spinner-label">{label}</span>}
       <button
         className="spinner-btn"

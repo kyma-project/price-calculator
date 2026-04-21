@@ -35,6 +35,7 @@ export default function SnapshotGBQuantityInputField() {
         min={min}
         max={max}
         step={step}
+        unit={`GB`}
       />
       <Slider
         value={snapshotGBQuantity}

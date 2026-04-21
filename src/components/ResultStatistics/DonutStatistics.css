@@ -1,4 +1,104 @@
-#donut-chart {
-  width: calc(100% + 200px);
-  margin-left: -100px;
+/* ── Donut chart root ───────────────────────────────────────────── */
+.donut-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0 4px;
+}
+
+/* Allow callout labels to extend beyond the recharts SVG viewport */
+.donut-root .recharts-wrapper,
+.donut-root .recharts-wrapper svg {
+  overflow: visible !important;
+}
+
+/* Center label (total) — override recharts default grey */
+.donut-root .recharts-label {
+  fill: #000 !important;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ── SVG canvas ─────────────────────────────────────────────────── */
+.donut-svg {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;  /* viewBox is 300x300, keep square */
+  display: block;
+  overflow: visible;
+}
+
+/* ── Center text inside the donut hole ──────────────────────────── */
+.donut-center-label {
+  font-size: 13px;
+  fill: #6b7280;
+}
+
+.donut-center-value {
+  font-size: 18px;
+  font-weight: 700;
+  fill: #1a2236;
+}
+
+/* ── Legend ─────────────────────────────────────────────────────── */
+.donut-legend {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 4px;
+}
+
+.donut-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.donut-legend-swatch {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.donut-legend-name {
+  flex: 1;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.donut-legend-value {
+  color: #111827;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.donut-legend-pct {
+  display: inline-block;
+  min-width: 48px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────── */
+.donut-empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 32px 16px;
+  font-size: 13px;
+  line-height: 1.5;
 }

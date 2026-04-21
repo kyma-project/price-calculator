@@ -33,7 +33,7 @@ const RADIAN = Math.PI / 180;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-function formatEuros(n: number): string {
+function formatCUs(n: number): string {
   return (Math.round(n * 100) / 100).toFixed(2);
 }
 
@@ -61,7 +61,7 @@ function SegmentLabel(props: SegmentLabelProps) {
         {name}
       </text>
       <text x={x} y={y + 7} textAnchor={anchor} fontSize={15} fontWeight="bold" fill={fill}>
-        € {formatEuros(value)}
+        {formatCUs(value)} CU
       </text>
       <text x={x} y={y + 25} textAnchor={anchor} fontSize={13} fill={fill} opacity={0.85}>
         {(percent * 100).toFixed(1)}%
@@ -90,7 +90,7 @@ export default function DonutStatistics({ nodeConfigCosts, additionalCosts, stor
           // UI5 requires an element (not a ref) so it can cloneElement and inject props
           DataLabel: <SegmentLabel /> as any,
         }}
-        centerLabel={total > 0 ? `€ ${formatEuros(total)}` : '–'}
+        centerLabel={total > 0 ? `${formatCUs(total)}` : '–'}
         chartConfig={{
           innerRadius: '35%',
           outerRadius: '75%',

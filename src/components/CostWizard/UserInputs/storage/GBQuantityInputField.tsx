@@ -5,8 +5,6 @@ import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
 import SpinnerInput from '../common/SpinnerInput';
 
-
-
 export default function GBQuantityInputField() {
   const configuration = config.Storage;
   const min = configuration.Min;
@@ -14,7 +12,6 @@ export default function GBQuantityInputField() {
   const step = configuration.Step;
   const [GBQuantity, setGBQuantity] = useAtom(GBQuantityState);
   const { handleChange } = useStepInputValidation({
-    value: GBQuantity,
     setValue: setGBQuantity,
     min,
     max,
@@ -27,6 +24,7 @@ export default function GBQuantityInputField() {
         Standard Storage: number of GB
       </Title>
       <SpinnerInput
+        id="gb-quantity-input"
         value={GBQuantity}
         setValue={setGBQuantity}
         min={min}

@@ -12,6 +12,7 @@ export interface SpinnerInputProps {
   decimals?: number;
   /** Optional prefix label rendered inside the pill before the − button */
   label?: string;
+  id?: string;
 }
 
 export default function SpinnerInput({
@@ -23,6 +24,7 @@ export default function SpinnerInput({
   unit = '',
   decimals = 0,
   label,
+  id,
 }: SpinnerInputProps) {
   const fmt = (n: number) => (decimals > 0 ? n.toFixed(decimals) : String(n));
   const parse = (s: string) => (decimals > 0 ? parseFloat(s) : parseInt(s, 10));
@@ -46,11 +48,22 @@ export default function SpinnerInput({
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>): void {
     const allowed = [
-      'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
-      'ArrowLeft', 'ArrowRight', 'Home', 'End',
+      'Backspace',
+      'Delete',
+      'Tab',
+      'Escape',
+      'Enter',
+      'ArrowLeft',
+      'ArrowRight',
+      'Home',
+      'End',
     ];
     if (allowed.includes(e.key)) return;
-    if ((e.ctrlKey || e.metaKey) && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())) return;
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())
+    )
+      return;
     if (decimals > 0 && e.key === '.') {
       if (inputValue.includes('.')) e.preventDefault();
       return;
@@ -61,9 +74,10 @@ export default function SpinnerInput({
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    const raw = decimals > 0
-      ? e.target.value.replace(/[^\d.]/g, '').replace(/^(\d*\.?\d*).*$/, '$1')
-      : e.target.value.replace(/\D/g, '');
+    const raw =
+      decimals > 0
+        ? e.target.value.replace(/[^\d.]/g, '').replace(/^(\d*\.?\d*).*$/, '$1')
+        : e.target.value.replace(/\D/g, '');
     const val = parse(raw);
     if (!isNaN(val) && val > max) {
       setInputValue(fmt(max));
@@ -112,6 +126,7 @@ export default function SpinnerInput({
         −
       </button>
       <input
+        id={id}
         className="spinner-input"
         type="text"
         inputMode="numeric"

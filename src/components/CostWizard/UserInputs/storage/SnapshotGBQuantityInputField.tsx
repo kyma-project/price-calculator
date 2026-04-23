@@ -5,7 +5,6 @@ import { snapshotGBQuantityState } from '../../../../state/storage/snapshotGBQua
 import useStepInputValidation from '../../hooks/useStepInputValidation';
 import SpinnerInput from '../common/SpinnerInput';
 
-
 export default function SnapshotGBQuantityInputField() {
   const configuration = config.SnapshotStorage;
   const min = configuration.Min;
@@ -17,7 +16,6 @@ export default function SnapshotGBQuantityInputField() {
   );
 
   const { handleChange } = useStepInputValidation({
-    value: snapshotGBQuantity,
     setValue: setSnapshotGBQuantity,
     min,
     max,
@@ -30,6 +28,7 @@ export default function SnapshotGBQuantityInputField() {
         Cluster's Snapshot used Storage: number of GB
       </Title>
       <SpinnerInput
+        id="snapshot-gb-quantity-input"
         value={snapshotGBQuantity}
         setValue={setSnapshotGBQuantity}
         min={min}

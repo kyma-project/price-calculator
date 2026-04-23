@@ -18,7 +18,6 @@ export default function PremiumGBQuantityInputField() {
   );
 
   const { handleChange } = useStepInputValidation({
-    value: premiumGBQuantity,
     setValue: setPremiumGBQuantity,
     min,
     max,
@@ -46,6 +45,7 @@ export default function PremiumGBQuantityInputField() {
         />
       </FlexBox>
       <SpinnerInput
+        id="premium-gb-quantity-input"
         value={premiumGBQuantity}
         setValue={setPremiumGBQuantity}
         min={min}

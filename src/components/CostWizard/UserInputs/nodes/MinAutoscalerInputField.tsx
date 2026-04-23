@@ -19,9 +19,7 @@ export default function MinAutoscalerInputField({
   const max = configuration.Max;
   const step = configuration.Step;
 
-
   const { handleChange } = useStepInputValidation({
-    value: autoScalerMin,
     setValue: setAutoScalerMin,
     min,
     max,
@@ -35,6 +33,7 @@ export default function MinAutoscalerInputField({
         info="minimum number of available Virtual Machines"
       />
       <SpinnerInput
+        id="autoscaler-input"
         value={autoScalerMin}
         setValue={setAutoScalerMin}
         min={min}

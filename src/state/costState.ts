@@ -20,12 +20,13 @@ export const nodeConfigCostsAtom = atom<number>((get) => {
   const baseMachineSetup = get(baseMachineSetupState);
   const additionalMachineSetup = get(additionalMachineSetupState);
   const combinedMachineSetup = [baseMachineSetup, ...additionalMachineSetup];
+  const timeConsumption = get(timeConsumptionState);
 
   return combinedMachineSetup.reduce((total, machine) => {
     return (
       total +
       calculateNodeConfigCosts({
-        timeConsumption: machine.timeConsumption,
+        timeConsumption,
         computeUnits: machine.VMSize.computeUnits,
         minAutoscaler: machine.minAutoscaler,
         machineTypeFactor: machine.machineType.multiple,

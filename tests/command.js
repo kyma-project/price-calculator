@@ -1,19 +1,8 @@
 import { applyStepOnPrice } from './cost';
 
 Cypress.Commands.add('typeIntoSlider', (testID, value) => {
-  cy.get(`ui5-step-input[id=${testID}]`)
-    .shadow()
-    .find('ui5-input')
-    .shadow()
-    .find('input')
-    .clear();
-
-  cy.get(`ui5-step-input[id=${testID}]`)
-    .shadow()
-    .find('ui5-input')
-    .shadow()
-    .find('input')
-    .type(`${value} {enter}`);
+  cy.get(`input#${testID}`).clear();
+  cy.get(`input#${testID}`).type(`${value}{enter}`).blur();
 });
 
 Cypress.Commands.add('costShouldBe', (step) => {
@@ -43,12 +32,8 @@ Cypress.Commands.add('costShouldBe', (step) => {
   });
 });
 
-/*
-This is workaround for chromium based browser which has problem with clicking on ui5-option.
-The solution is to find li in shadow root and force click on it
- */
 Cypress.Commands.add('clickOnOption', (content) => {
-  cy.get('ui5-option:visible')
+  cy.get('ui5-option')
     .contains(content)
     .shadow()
     .find('li')

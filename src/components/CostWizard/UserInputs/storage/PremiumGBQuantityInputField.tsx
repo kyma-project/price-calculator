@@ -1,16 +1,11 @@
 import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import './PremiumGBQuantityInputField.css';
-import {
-  FlexBox,
-  Icon,
-  Slider,
-  StepInput,
-  Title,
-} from '@ui5/webcomponents-react';
+import { FlexBox, Icon, Slider, Title } from '@ui5/webcomponents-react';
 import { premiumGBQuantityState } from '../../../../state/storage/premiumGBQuantityState';
 import openLinks from '../../Functions/openLinks';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
+import SpinnerInput from '../common/SpinnerInput';
 
 export default function PremiumGBQuantityInputField() {
   const configuration = config.PremiumStorage;
@@ -22,8 +17,7 @@ export default function PremiumGBQuantityInputField() {
     premiumGBQuantityState,
   );
 
-  const { stepInputRef, handleChange } = useStepInputValidation({
-    value: premiumGBQuantity,
+  const { handleChange } = useStepInputValidation({
     setValue: setPremiumGBQuantity,
     min,
     max,
@@ -50,14 +44,14 @@ export default function PremiumGBQuantityInputField() {
           onClick={() => openLinks('nfs')}
         />
       </FlexBox>
-      <StepInput
-        id={'premium-gb-quantity-input'}
-        ref={stepInputRef}
+      <SpinnerInput
+        id="premium-gb-quantity-input"
         value={premiumGBQuantity}
-        onChange={handleChange}
+        setValue={setPremiumGBQuantity}
         min={min}
         max={max}
         step={step}
+        unit={`GB`}
       />
       <Slider
         value={premiumGBQuantity}

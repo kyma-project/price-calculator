@@ -1,4 +1,21 @@
-#donut-chart {
-  width: calc(100% + 200px);
-  margin-left: -100px;
+/* ── Donut chart root ───────────────────────────────────────────── */
+.donut-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0 4px;
+}
+
+/* Allow callout labels to extend beyond the recharts SVG viewport */
+.donut-root .recharts-wrapper,
+.donut-root .recharts-wrapper svg {
+  overflow: visible !important;
+}
+
+/* Center label (total) — override recharts default grey */
+.donut-root .recharts-label {
+  fill: #000 !important;
+  font-weight: 700;
+  font-size: 16px;
 }

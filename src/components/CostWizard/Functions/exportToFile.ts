@@ -17,6 +17,7 @@ interface Props {
   additionalCosts: number;
   conversionRate: number;
   totalCosts: TotalCosts;
+  timeConsumption: number;
   exportFormat: ExportFormat;
 }
 
@@ -37,6 +38,7 @@ export default function exportToFile(props: Props) {
     additionalCosts,
     conversionRate,
     totalCosts,
+    timeConsumption,
     exportFormat,
   } = props;
 
@@ -51,7 +53,7 @@ export default function exportToFile(props: Props) {
       index === 0 ? 'Base Worker Node Pool' : `Worker Node Pool ${index}`;
 
     const poolCost = calculateNodeConfigCosts({
-      timeConsumption: machine.timeConsumption,
+      timeConsumption,
       computeUnits: machine.VMSize.computeUnits,
       minAutoscaler: machine.minAutoscaler,
       machineTypeFactor: machine.machineType.multiple,
@@ -62,11 +64,13 @@ export default function exportToFile(props: Props) {
       ['Machine Type', machine.machineType.value],
       ['VM Size', machine.VMSize.value],
       ['Autoscaler Min', machine.minAutoscaler],
-      ['Time Consumption', `${machine.timeConsumption} hrs`],
       ['Pool Cost', `${roundDecimals(poolCost, true)} CU`],
       [''],
     );
   });
+
+  // Time Consumption applies globally to all node pools and storage
+  dataArray.push(['Time Consumption', `${timeConsumption} hrs`], ['']);
 
   // Storage
   dataArray.push(

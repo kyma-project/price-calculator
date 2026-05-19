@@ -39,7 +39,8 @@ export default function CostList(props: Props) {
       </div>
       <div className="row final-row final-row-child" id={'total-in-currency'}>
         <h5 className="text">- In currency ({config.CurrencyCode})</h5>
-        <h3 className="value">{roundDecimals(totalCosts.CC, true)} €</h3>
+        <h3 className="value">{roundDecimals(totalCosts.CC, true)} {config.CurrencyCode}
+        </h3>
       </div>
     </>
   );

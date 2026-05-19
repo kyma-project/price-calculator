@@ -1,7 +1,8 @@
 import config from '../../../../config.json';
-import { Slider, StepInput } from '@ui5/webcomponents-react';
+import { Slider } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
+import SpinnerInput from '../common/SpinnerInput';
 
 interface Props {
   autoScalerMin: number;
@@ -18,8 +19,7 @@ export default function MinAutoscalerInputField({
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const { stepInputRef, handleChange } = useStepInputValidation({
-    value: autoScalerMin,
+  const { handleChange } = useStepInputValidation({
     setValue: setAutoScalerMin,
     min,
     max,
@@ -32,14 +32,14 @@ export default function MinAutoscalerInputField({
         header="Autoscaler Min"
         info="minimum number of available Virtual Machines"
       />
-      <StepInput
-        id={'autoscaler-input'}
-        ref={stepInputRef}
+      <SpinnerInput
+        id="autoscaler-input"
         value={autoScalerMin}
-        onChange={handleChange}
+        setValue={setAutoScalerMin}
         min={min}
         max={max}
         step={step}
+        unit=""
       />
       <Slider
         value={autoScalerMin}

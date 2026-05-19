@@ -1,7 +1,8 @@
 import config from '../../../../config.json';
-import { Slider, StepInput } from '@ui5/webcomponents-react';
+import { Slider } from '@ui5/webcomponents-react';
 import HeaderWithInfo from '../../common/HeaderWithInfo';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
+import SpinnerInput from '../common/SpinnerInput';
 
 interface Props {
   nodeVolumeSizeGb: number;
@@ -17,8 +18,7 @@ export default function NodeVolumeSizeInputField({
   const max = configuration.Max;
   const step = configuration.Step;
 
-  const { stepInputRef, handleChange } = useStepInputValidation({
-    value: nodeVolumeSizeGb,
+  const { handleChange } = useStepInputValidation({
     setValue: setNodeVolumeSizeGb,
     min,
     max,
@@ -31,14 +31,14 @@ export default function NodeVolumeSizeInputField({
         header="Node Volume Size (GB)"
         info="first 80 GB included"
       />
-      <StepInput
-        id={'node-volume-size-input'}
-        ref={stepInputRef}
+      <SpinnerInput
+        id="node-volume-size-input"
         value={nodeVolumeSizeGb}
-        onChange={handleChange}
+        setValue={setNodeVolumeSizeGb}
         min={min}
         max={max}
         step={step}
+        unit="GB"
       />
       <Slider
         value={nodeVolumeSizeGb}

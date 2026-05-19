@@ -1,18 +1,17 @@
 import { useAtom } from 'jotai';
 import config from '../../../../config.json';
-import { Slider, StepInput, Title } from '@ui5/webcomponents-react';
+import { Slider, Title } from '@ui5/webcomponents-react';
 import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
+import SpinnerInput from '../common/SpinnerInput';
 
 export default function GBQuantityInputField() {
   const configuration = config.Storage;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
-
   const [GBQuantity, setGBQuantity] = useAtom(GBQuantityState);
-  const { stepInputRef, handleChange } = useStepInputValidation({
-    value: GBQuantity,
+  const { handleChange } = useStepInputValidation({
     setValue: setGBQuantity,
     min,
     max,
@@ -24,14 +23,14 @@ export default function GBQuantityInputField() {
       <Title className="wizard-subheader" level="H5" size="H5">
         Standard Storage: number of GB
       </Title>
-      <StepInput
-        id={'gb-quantity-input'}
-        ref={stepInputRef}
+      <SpinnerInput
+        id="gb-quantity-input"
         value={GBQuantity}
-        onChange={handleChange}
+        setValue={setGBQuantity}
         min={min}
         max={max}
         step={step}
+        unit={`GB`}
       />
       <Slider
         value={GBQuantity}

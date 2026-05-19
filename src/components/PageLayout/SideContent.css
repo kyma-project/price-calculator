@@ -1,6 +1,6 @@
 #SideContent {
   margin-top: 25px;
-  margin-left: 0px;
+  margin-left: -60px;
   margin-right: 5px;
   background-color: rgb(229, 243, 254);
   border: 3.5px solid rgb(165, 219, 255);
@@ -14,9 +14,42 @@
 }
 
 #SideHeader2 {
-  text-align: center;
-  margin-top: -12.5px;
-  margin-bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
+.side-month-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1D428A;
+  white-space: nowrap;
+}
+
+#SideHeader2 .spinner {
+  margin-bottom: 0;
+  border-color: #a5dbff;
+  box-shadow: none;
+}
+
+#SideHeader2 .spinner-btn {
+  background: #1D428A;
+}
+
+#SideHeader2 .spinner-btn:hover:not(:disabled) {
+  background: #0437F2;
+}
+
+#SideHeader2 .spinner-btn:active:not(:disabled) {
+  background: #000080;
+}
+
+#SideHeader2 .spinner-btn:disabled {
+  background: #8fa8cc;
 }
 
 @media (max-width: 960px) {

@@ -17,31 +17,38 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 8GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "defaultVolumeSize": 0
           },
           {
             "value": "4 CPU - 16GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "defaultVolumeSize": 0
           },
           {
             "value": "8 CPU - 32GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "defaultVolumeSize": 0
           },
           {
             "value": "16 CPU - 64GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "defaultVolumeSize": 0
           },
           {
             "value": "32 CPU - 128GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "defaultVolumeSize": 0
           },
           {
             "value": "48 CPU - 192GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "defaultVolumeSize": 0
           },
           {
             "value": "64 CPU - 256GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "defaultVolumeSize": 0
           }
         ]
       },
@@ -51,31 +58,38 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 4GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "defaultVolumeSize": 0
           },
           {
             "value": "4 CPU - 8GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "defaultVolumeSize": 0
           },
           {
             "value": "8 CPU - 16GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "defaultVolumeSize": 0
           },
           {
             "value": "16 CPU - 32GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "defaultVolumeSize": 0
           },
           {
             "value": "32 CPU - 64GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "defaultVolumeSize": 0
           },
           {
             "value": "48 CPU - 96GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "defaultVolumeSize": 0
           },
           {
             "value": "64 CPU - 128GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "defaultVolumeSize": 0
           }
         ]
       },
@@ -85,31 +99,38 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 16GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "defaultVolumeSize": 0
           },
           {
             "value": "4 CPU - 32GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "defaultVolumeSize": 0
           },
           {
             "value": "8 CPU - 64GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "defaultVolumeSize": 0
           },
           {
             "value": "16 CPU - 128GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "defaultVolumeSize": 0
           },
           {
             "value": "32 CPU - 256GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "defaultVolumeSize": 0
           },
           {
             "value": "48 CPU - 384GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "defaultVolumeSize": 0
           },
           {
             "value": "64 CPU - 512GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "defaultVolumeSize": 0
           }
         ]
       }

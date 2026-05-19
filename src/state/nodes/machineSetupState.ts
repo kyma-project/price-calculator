@@ -10,6 +10,7 @@ export interface MachineType {
 export interface VMSize {
   value: string;
   computeUnits: number;
+  defaultVolumeSize: number;
 }
 
 export interface MachineSetup {

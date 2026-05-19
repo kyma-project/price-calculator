@@ -1,5 +1,6 @@
 import { Option, Select, Title } from '@ui5/webcomponents-react';
 import { VMSize } from '../../../../state/nodes/machineSetupState';
+import calculateDefaultVolumeSize from '../../../../calculatorFunctions/defaultVolumeSize/calculateDefaultVolumeSize';
 
 interface Props {
   VMSize: VMSize;
@@ -19,7 +20,8 @@ export default function VMsizeSelect({
     setVMSize({
       value: selection.value ?? '',
       computeUnits: Number(selection.compute_units),
-      defaultVolumeSize: Number(selection.default_volume_size),
+      vcpus: Number(selection.vcpus),
+      memoryGib: Number(selection.memory_gib),
     });
   };
 
@@ -40,9 +42,10 @@ export default function VMsizeSelect({
             value={item.value}
             data-value={item.value}
             data-compute_units={item.computeUnits}
-            data-default_volume_size={item.defaultVolumeSize}
+            data-vcpus={item.vcpus}
+            data-memory_gib={item.memoryGib}
           >
-            {`${item.value} - ${item.defaultVolumeSize} GB volume`}
+            {`${item.value} - ${calculateDefaultVolumeSize(item.vcpus, item.memoryGib)} GB volume`}
           </Option>
         ))}
       </Select>

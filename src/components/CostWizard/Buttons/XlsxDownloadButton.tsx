@@ -12,6 +12,7 @@ import {
 } from '../../../state/nodes/machineSetupState';
 import { redisState } from '../../../state/additionalConfig/redisState';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
+import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
 import {
   nodeConfigCostsAtom,
   storageCostsAtom,
@@ -27,6 +28,7 @@ export default function XlsxDownloadButton() {
   const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
   const redisSize = useAtomValue(redisState);
   const conversionRate = useAtomValue(applyConversionRateState);
+  const timeConsumption = useAtomValue(timeConsumptionState);
   const nodeConfigCosts = useAtomValue(nodeConfigCostsAtom);
   const storageCosts = useAtomValue(storageCostsAtom);
   const additionalCosts = useAtomValue(additionalCostsAtom);
@@ -46,6 +48,7 @@ export default function XlsxDownloadButton() {
           additionalCosts,
           conversionRate,
           totalCosts,
+          timeConsumption,
           redisSize,
           exportFormat: ExportFormat.XLSX,
         })

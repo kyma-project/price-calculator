@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useAtomValue } from 'jotai';
 import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
 import MachineTypeSelect from './UserInputs/nodes/MachineTypeSelect';
@@ -11,7 +10,6 @@ import {
   MachineType,
   VMSize,
 } from '../../state/nodes/machineSetupState';
-import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
 
 interface Props {
   machine: MachineSetup;
@@ -24,35 +22,33 @@ export default function MachineSetupForm({
   updateMachine,
   workerNode,
 }: Props) {
-  const timeConsumption = useAtomValue(timeConsumptionState);
-
   const setMachineType = useCallback(
     (machineType: MachineType) => {
       const VMSize = machineType.VMSizeOptions[0];
-      updateMachine({ ...machine, machineType, VMSize, timeConsumption });
+      updateMachine({ ...machine, machineType, VMSize });
     },
-    [machine, updateMachine, timeConsumption],
+    [machine, updateMachine],
   );
 
   const setVMSize = useCallback(
     (VMSize: VMSize) => {
-      updateMachine({ ...machine, VMSize, timeConsumption });
+      updateMachine({ ...machine, VMSize });
     },
-    [machine, updateMachine, timeConsumption],
+    [machine, updateMachine],
   );
 
   const setAutoScalerMin = useCallback(
     (minAutoscaler: number) => {
-      updateMachine({ ...machine, minAutoscaler, timeConsumption });
+      updateMachine({ ...machine, minAutoscaler });
     },
-    [machine, updateMachine, timeConsumption],
+    [machine, updateMachine],
   );
 
   const setNodeVolumeSizeGb = useCallback(
     (nodeVolumeSizeGb: number) => {
-      updateMachine({ ...machine, nodeVolumeSizeGb, timeConsumption });
+      updateMachine({ ...machine, nodeVolumeSizeGb });
     },
-    [machine, updateMachine, timeConsumption],
+    [machine, updateMachine],
   );
 
   return (

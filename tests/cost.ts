@@ -64,7 +64,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
       Storage: 0,
       TotalCost: {
         CapacityUnits: 225,
-        Currency: 238.5,
+        Currency: 225,
       },
     },
   ],

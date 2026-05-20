@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { Button, FlexBox, Icon, Title } from '@ui5/webcomponents-react';
 import './AddWorkerNodes.css';
 import {
@@ -8,15 +8,12 @@ import {
 import MachineSetupForm from './MachineSetupForm';
 import openLinks from './Functions/openLinks';
 import config from '../../config.json';
-import { timeConsumptionState } from '../../state/additionalConfig/timeConsumptionState';
 
 export default function AddWorkerNodes() {
   const [machineSetup, setMachineSetup] = useAtom(additionalMachineSetupState);
-  const timeConsumption = useAtomValue(timeConsumptionState);
 
   const addMachineSetup = () => {
     const newMachine: MachineSetup = {
-      timeConsumption: timeConsumption,
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
       minAutoscaler: config.nodeConfig.AutoScalerMin.DefaultWorkerNodes,

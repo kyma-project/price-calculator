@@ -9,6 +9,6 @@
     "test": " cypress run --browser chrome"
   },
   "devDependencies": {
-    "cypress": "^14.3.3"
+    "cypress": "^15.15.0"
   }
 }

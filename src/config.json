@@ -10,6 +10,12 @@
       "Max": 300,
       "Step": 1
     },
+    "volumeFormula": {
+      "volumeBase": 30,
+      "volumeFactor": 8,
+      "volumeMin": 80,
+      "volumeMax": 250
+    },
     "MachineTypes": [
       {
         "value": "General Purpose",
@@ -17,31 +23,45 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 8GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "vcpus": 2,
+            "memoryGib": 8
           },
           {
             "value": "4 CPU - 16GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "vcpus": 4,
+            "memoryGib": 16
           },
           {
             "value": "8 CPU - 32GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "vcpus": 8,
+            "memoryGib": 32
           },
           {
             "value": "16 CPU - 64GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "vcpus": 16,
+            "memoryGib": 64
           },
           {
             "value": "32 CPU - 128GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "vcpus": 32,
+            "memoryGib": 128
           },
           {
             "value": "48 CPU - 192GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "vcpus": 48,
+            "memoryGib": 192
           },
           {
             "value": "64 CPU - 256GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "vcpus": 64,
+            "memoryGib": 256
           }
         ]
       },
@@ -51,31 +71,45 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 4GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "vcpus": 2,
+            "memoryGib": 4
           },
           {
             "value": "4 CPU - 8GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "vcpus": 4,
+            "memoryGib": 8
           },
           {
             "value": "8 CPU - 16GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "vcpus": 8,
+            "memoryGib": 16
           },
           {
             "value": "16 CPU - 32GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "vcpus": 16,
+            "memoryGib": 32
           },
           {
             "value": "32 CPU - 64GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "vcpus": 32,
+            "memoryGib": 64
           },
           {
             "value": "48 CPU - 96GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "vcpus": 48,
+            "memoryGib": 96
           },
           {
             "value": "64 CPU - 128GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "vcpus": 64,
+            "memoryGib": 128
           }
         ]
       },
@@ -85,31 +119,45 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 16GB RAM",
-            "computeUnits": 3
+            "computeUnits": 3,
+            "vcpus": 2,
+            "memoryGib": 16
           },
           {
             "value": "4 CPU - 32GB RAM",
-            "computeUnits": 4
+            "computeUnits": 4,
+            "vcpus": 4,
+            "memoryGib": 32
           },
           {
             "value": "8 CPU - 64GB RAM",
-            "computeUnits": 8
+            "computeUnits": 8,
+            "vcpus": 8,
+            "memoryGib": 64
           },
           {
             "value": "16 CPU - 128GB RAM",
-            "computeUnits": 16
+            "computeUnits": 16,
+            "vcpus": 16,
+            "memoryGib": 128
           },
           {
             "value": "32 CPU - 256GB RAM",
-            "computeUnits": 32
+            "computeUnits": 32,
+            "vcpus": 32,
+            "memoryGib": 256
           },
           {
             "value": "48 CPU - 384GB RAM",
-            "computeUnits": 48
+            "computeUnits": 48,
+            "vcpus": 48,
+            "memoryGib": 384
           },
           {
             "value": "64 CPU - 512GB RAM",
-            "computeUnits": 64
+            "computeUnits": 64,
+            "vcpus": 64,
+            "memoryGib": 512
           }
         ]
       }

@@ -29,7 +29,7 @@ export default function NodeVolumeSizeInputField({
     <>
       <HeaderWithInfo
         header="Node Volume Size (GB)"
-        info="first 80 GB included"
+        info="first 80 GB included; extra is billed in 32 GiB blocks"
       />
       <SpinnerInput
         id="node-volume-size-input"

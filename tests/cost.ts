@@ -59,12 +59,12 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_VOLUME_SIZE_INCREASE,
     {
-      Nodes: 225,
+      Nodes: 288,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 225,
-        Currency: 225,
+        CapacityUnits: 288,
+        Currency: 288,
       },
     },
   ],

@@ -82,7 +82,9 @@ describe('calculateTotalCosts — additivity of cost components', () => {
       conversionRatio: 1.0,
     });
 
-    expect(totalCosts.CU).toBe(nodeConfigCosts + storageCosts + additionalCosts);
+    expect(totalCosts.CU).toBe(
+      nodeConfigCosts + storageCosts + additionalCosts,
+    );
   });
 
   test('nodeConfig cost contribution is isolated correctly', () => {
@@ -125,9 +127,9 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
 
     // storage: standard=1024GB, premium=1024GB, snapshot=2048GB, time=450
     // standard: 0.02 * 450 * 32 = 288
-    // premium:  3 * 0.02 * 450 * 32 = 864
+    // premium:  1 * 0.02 * 450 * 32 = 288
     // snapshot: 1 * 0.02 * 450 * 64 = 576
-    // total: 1728
+    // total: 1152
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1024,
       premiumGBQuantity: 1024,
@@ -144,8 +146,9 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       conversionRatio: 0.35,
     });
 
-    expect(totalCosts.CU).toBe(4394);
-    expect(totalCosts.CC.toFixed(2)).toBe('1537.90');
+    // CU: 2592 + 1152 + 74 = 3818;  CC: 3818 * 0.35 = 1336.30
+    expect(totalCosts.CU).toBe(3818);
+    expect(totalCosts.CC.toFixed(2)).toBe('1336.30');
   });
 });
 
@@ -162,8 +165,8 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
 
     // storage: standard=64GB (2 blocks), premium=32GB (1 block), snapshot=0, time=720
     // standard: 0.02 * 720 * 2 = 28.8
-    // premium:  3 * 0.02 * 720 * 1 = 43.2
-    // total: 72
+    // premium:  1 * 0.02 * 720 * 1 = 14.4
+    // total: 43.2
     const storageCosts = calculateStorageCosts({
       GBQuantity: 64,
       premiumGBQuantity: 32,
@@ -180,13 +183,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       conversionRatio: 1.0,
     });
 
-    // 1555.2 + 72 + 74 = 1701.2
-    expect(totalCosts.CU).toBeCloseTo(1701.2, 5);
-    expect(totalCosts.CC).toBeCloseTo(1701.2, 5);
+    // 1555.2 + 43.2 + 74 = 1672.4
+    expect(totalCosts.CU).toBeCloseTo(1672.4, 5);
+    expect(totalCosts.CC).toBeCloseTo(1672.4, 5);
   });
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
-    const commonStorage = { GBQuantity: 64, premiumGBQuantity: 0, snapshotGBQuantity: 0, timeConsumption: 720 };
+    const commonStorage = {
+      GBQuantity: 64,
+      premiumGBQuantity: 0,
+      snapshotGBQuantity: 0,
+      timeConsumption: 720,
+    };
     const storageCosts = calculateStorageCosts(commonStorage);
     const additionalCosts = calculateAdditionalCosts({ redis: 0 });
 
@@ -203,8 +211,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    const gpTotal = calculateTotalCosts({ nodeConfigCosts: gpNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
-    const miTotal = calculateTotalCosts({ nodeConfigCosts: miNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
+    const gpTotal = calculateTotalCosts({
+      nodeConfigCosts: gpNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
+    const miTotal = calculateTotalCosts({
+      nodeConfigCosts: miNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
 
     expect(miTotal.CU).toBeGreaterThan(gpTotal.CU);
     expect(miTotal.CU).toBeCloseTo(gpTotal.CU * 1.5 - storageCosts * 0.5, 5);
@@ -222,9 +240,9 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
 
     // storage: standard=128GB, premium=64GB, snapshot=128GB, time=720
     // standard: 0.02 * 720 * 4 = 57.6
-    // premium:  3 * 0.02 * 720 * 2 = 86.4
+    // premium:  1 * 0.02 * 720 * 2 = 28.8
     // snapshot: 1 * 0.02 * 720 * 4 = 57.6
-    // total: 201.6
+    // total: 144
     const storageCosts = calculateStorageCosts({
       GBQuantity: 128,
       premiumGBQuantity: 64,
@@ -241,8 +259,8 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       conversionRatio: 0.5,
     });
 
-    // CU: 6220.8 + 201.6 + 773 = 7195.4
-    expect(totalCosts.CU).toBeCloseTo(7195.4, 5);
-    expect(totalCosts.CC).toBeCloseTo(7195.4 * 0.5, 5);
+    // CU: 6220.8 + 144 + 773 = 7137.8
+    expect(totalCosts.CU).toBeCloseTo(7137.8, 5);
+    expect(totalCosts.CC).toBeCloseTo(7137.8 * 0.5, 5);
   });
 });

@@ -83,24 +83,27 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.WORKER_TYPE_CHANGE,
     {
-      Nodes: 0,
+      // Pool flips from General Purpose 2 CPU (CU=3) to Compute Optimized
+      // 2 CPU (CU=2): 1 node × (2-3) × 0.12 × 720 = -86.4
+      Nodes: -86.4,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 0,
-        Currency: 0,
+        CapacityUnits: -86.4,
+        Currency: -86.4,
       },
     },
   ],
   [
     Step.WORKER_SIZE_CHANGE,
     {
-      Nodes: 432,
+      // CO 2 CPU (CU=2) → CO 8 CPU - 16GB (CU=8): 1 × (8-2) × 0.12 × 720 = 518.4
+      Nodes: 518.4,
       Additional: 0,
       Storage: 0,
       TotalCost: {
-        CapacityUnits: 432,
-        Currency: 432,
+        CapacityUnits: 518.4,
+        Currency: 518.4,
       },
     },
   ],
@@ -131,12 +134,13 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.STORAGE_PREMIUM_GB_INCREASE,
     {
+      // multiplier is now 1, so premium 160 GB = 5 blocks × 0.02 × 720 = 72
       Nodes: 0,
       Additional: 0,
-      Storage: 216,
+      Storage: 72,
       TotalCost: {
-        CapacityUnits: 216,
-        Currency: 216,
+        CapacityUnits: 72,
+        Currency: 72,
       },
     },
   ],

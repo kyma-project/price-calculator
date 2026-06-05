@@ -4,7 +4,7 @@ import { expect, test, describe } from 'vitest';
 // Config values (from config.json)
 // Storage.PricePerUnit = 0.02
 // Storage.Step = 32
-// PremiumStorage.multiplier = 3
+// PremiumStorage.multiplier = 1
 // PremiumStorage.Step = 32
 // SnapshotStorage.multiplier = 1
 // SnapshotStorage.Step = 32
@@ -78,7 +78,7 @@ describe('calculateStorageCosts — standard storage', () => {
 
 describe('calculateStorageCosts — premium storage', () => {
   test('calculates premium storage only — 2 blocks (64 GB)', () => {
-    // 3 * 0.02 * 720 * (64 / 32) = 86.4
+    // 1 * 0.02 * 720 * (64 / 32) = 28.8
     const storageCosts = calculateStorageCosts({
       GBQuantity: 0,
       premiumGBQuantity: 64,
@@ -86,10 +86,10 @@ describe('calculateStorageCosts — premium storage', () => {
       timeConsumption: 720,
     });
 
-    expect(storageCosts).toBeCloseTo(86.4, 5);
+    expect(storageCosts).toBe(28.8);
   });
 
-  test('premium storage costs exactly 3x standard for equal GB and time', () => {
+  test('premium storage costs the same as standard for equal GB and time (multiplier = 1)', () => {
     const standard = calculateStorageCosts({
       GBQuantity: 64,
       premiumGBQuantity: 0,
@@ -103,7 +103,7 @@ describe('calculateStorageCosts — premium storage', () => {
       timeConsumption: 720,
     });
 
-    expect(premium).toBeCloseTo(standard * 3, 10);
+    expect(premium).toBe(standard);
   });
 });
 
@@ -141,9 +141,9 @@ describe('calculateStorageCosts — snapshot storage', () => {
 describe('calculateStorageCosts — combined types', () => {
   test('total storage costs with all types combined', () => {
     // standard: 0.02 * 516 * (1056/32) = 0.02 * 516 * 33 = 340.56
-    // premium:  3 * 0.02 * 516 * (1056/32) = 3 * 340.56 = 1021.68
+    // premium:  1 * 0.02 * 516 * (1056/32) = 340.56
     // snapshot: 1 * 0.02 * 516 * (2048/32) = 0.02 * 516 * 64 = 660.48
-    // total: 340.56 + 1021.68 + 660.48 = 2022.72
+    // total: 340.56 + 340.56 + 660.48 = 1341.6
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1056,
       premiumGBQuantity: 1056,
@@ -151,7 +151,7 @@ describe('calculateStorageCosts — combined types', () => {
       timeConsumption: 516,
     });
 
-    expect(storageCosts).toBe(2022.72);
+    expect(storageCosts).toBe(1341.6);
   });
 
   test('combined costs equal sum of individual components', () => {

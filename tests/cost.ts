@@ -59,8 +59,9 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
     {
-      // Additional 50 GiB rounds up to 64 GiB (2 × 32-GiB blocks) per node.
-      // With autoscaler 10 from the prior step: 64 × 0.000625 × 10 × 720 = 288
+      // Additional 64 GiB = 2 × 32-GiB blocks per node (input now steps in
+      // whole blocks). With autoscaler 10 from the prior step:
+      // 64 × 0.000625 × 10 × 720 = 288
       Nodes: 288,
       Additional: 0,
       Storage: 0,
@@ -136,13 +137,13 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.STORAGE_PREMIUM_GB_INCREASE,
     {
-      // multiplier is now 1, so premium 160 GB = 5 blocks × 0.02 × 720 = 72
+      // "NFS Storage" field, multiplier 3: premium 160 GB = 5 blocks × 3 × 0.02 × 720 = 216
       Nodes: 0,
       Additional: 0,
-      Storage: 72,
+      Storage: 216,
       TotalCost: {
-        CapacityUnits: 72,
-        Currency: 72,
+        CapacityUnits: 216,
+        Currency: 216,
       },
     },
   ],

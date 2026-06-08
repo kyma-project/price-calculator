@@ -163,9 +163,9 @@
       }
     ],
     "PricePerUnit": 0.12,
-    "NodeVolumeSize": {
-      "Default": 80,
-      "Min": 80,
+    "AdditionalNodeVolume": {
+      "Default": 0,
+      "Min": 0,
       "Max": 500,
       "Step": 10,
       "PricePerUnit": 0.000625

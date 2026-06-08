@@ -1,7 +1,7 @@
 export enum Step {
   BASE_VM_SIZE_INCREASE,
   BASE_AUTOSCALER_INCREASE,
-  BASE_VOLUME_SIZE_INCREASE,
+  BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
   WORKER_ADD_NODE,
   WORKER_TYPE_CHANGE,
   WORKER_SIZE_CHANGE,
@@ -57,8 +57,10 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    Step.BASE_VOLUME_SIZE_INCREASE,
+    Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
     {
+      // Additional 50 GiB rounds up to 64 GiB (2 × 32-GiB blocks) per node.
+      // With autoscaler 10 from the prior step: 64 × 0.000625 × 10 × 720 = 288
       Nodes: 288,
       Additional: 0,
       Storage: 0,

@@ -4,7 +4,7 @@ import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
 import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
-import calculateNodeVolumeCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeVolumeCosts';
+import calculateAdditionalNodeVolumeCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateAdditionalNodeVolumeCosts';
 import config from '../../../config.json';
 
 interface Props {
@@ -59,8 +59,8 @@ export default function exportToFile(props: Props) {
       minAutoscaler: machine.minAutoscaler,
       machineTypeFactor: machine.machineType.multiple,
     });
-    const volumeCost = calculateNodeVolumeCosts({
-      nodeVolumeSizeGb: machine.nodeVolumeSizeGb,
+    const volumeCost = calculateAdditionalNodeVolumeCosts({
+      additionalVolumeGb: machine.additionalVolumeGb,
       minAutoscaler: machine.minAutoscaler,
       timeConsumption,
     });
@@ -71,7 +71,7 @@ export default function exportToFile(props: Props) {
       ['Machine Type', machine.machineType.value],
       ['VM Size', machine.VMSize.value],
       ['Autoscaler Min', machine.minAutoscaler],
-      ['Node Volume Size', `${machine.nodeVolumeSizeGb} GB`],
+      ['Additional Volume', `${machine.additionalVolumeGb} GB`],
       ['Pool Cost', `${roundDecimals(poolCost, true)} CU`],
       [''],
     );

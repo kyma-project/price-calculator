@@ -82,7 +82,9 @@ describe('calculateTotalCosts — additivity of cost components', () => {
       conversionRatio: 1.0,
     });
 
-    expect(totalCosts.CU).toBe(nodeConfigCosts + storageCosts + additionalCosts);
+    expect(totalCosts.CU).toBe(
+      nodeConfigCosts + storageCosts + additionalCosts,
+    );
   });
 
   test('nodeConfig cost contribution is isolated correctly', () => {
@@ -144,6 +146,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       conversionRatio: 0.35,
     });
 
+    // CU: 2592 + 1728 + 74 = 4394;  CC: 4394 * 0.35 = 1537.90
     expect(totalCosts.CU).toBe(4394);
     expect(totalCosts.CC.toFixed(2)).toBe('1537.90');
   });
@@ -186,7 +189,12 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   });
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
-    const commonStorage = { GBQuantity: 64, premiumGBQuantity: 0, snapshotGBQuantity: 0, timeConsumption: 720 };
+    const commonStorage = {
+      GBQuantity: 64,
+      premiumGBQuantity: 0,
+      snapshotGBQuantity: 0,
+      timeConsumption: 720,
+    };
     const storageCosts = calculateStorageCosts(commonStorage);
     const additionalCosts = calculateAdditionalCosts({ redis: 0 });
 
@@ -203,8 +211,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    const gpTotal = calculateTotalCosts({ nodeConfigCosts: gpNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
-    const miTotal = calculateTotalCosts({ nodeConfigCosts: miNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
+    const gpTotal = calculateTotalCosts({
+      nodeConfigCosts: gpNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
+    const miTotal = calculateTotalCosts({
+      nodeConfigCosts: miNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
 
     expect(miTotal.CU).toBeGreaterThan(gpTotal.CU);
     expect(miTotal.CU).toBeCloseTo(gpTotal.CU * 1.5 - storageCosts * 0.5, 5);

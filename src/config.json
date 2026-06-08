@@ -1,6 +1,6 @@
 {
   "CurrencyCode": "€",
-  "ConversionRateCUCC": 1.00,
+  "ConversionRateCUCC": 1.0,
   "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
@@ -71,7 +71,7 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 4GB RAM",
-            "computeUnits": 3,
+            "computeUnits": 2,
             "vcpus": 2,
             "memoryGib": 4
           },
@@ -119,7 +119,7 @@
         "VMSizeOptions": [
           {
             "value": "2 CPU - 16GB RAM",
-            "computeUnits": 3,
+            "computeUnits": 2,
             "vcpus": 2,
             "memoryGib": 16
           },
@@ -162,7 +162,14 @@
         ]
       }
     ],
-    "PricePerUnit": 0.12
+    "PricePerUnit": 0.12,
+    "AdditionalNodeVolume": {
+      "Default": 0,
+      "Min": 0,
+      "Max": 512,
+      "Step": 32,
+      "PricePerUnit": 0.000625
+    }
   },
   "AdditionalConfig": {
     "Default": 0,

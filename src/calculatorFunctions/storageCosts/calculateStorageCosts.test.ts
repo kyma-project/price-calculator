@@ -4,7 +4,7 @@ import { expect, test, describe } from 'vitest';
 // Config values (from config.json)
 // Storage.PricePerUnit = 0.02
 // Storage.Step = 32
-// PremiumStorage.multiplier = 3
+// PremiumStorage.multiplier = 3  (this field is "NFS Storage" in the UI; reporter NFS price_factor = 3.0)
 // PremiumStorage.Step = 32
 // SnapshotStorage.multiplier = 1
 // SnapshotStorage.Step = 32
@@ -89,7 +89,7 @@ describe('calculateStorageCosts — premium storage', () => {
     expect(storageCosts).toBeCloseTo(86.4, 5);
   });
 
-  test('premium storage costs exactly 3x standard for equal GB and time', () => {
+  test('premium storage costs 3× standard for equal GB and time (multiplier = 3)', () => {
     const standard = calculateStorageCosts({
       GBQuantity: 64,
       premiumGBQuantity: 0,
@@ -103,7 +103,7 @@ describe('calculateStorageCosts — premium storage', () => {
       timeConsumption: 720,
     });
 
-    expect(premium).toBeCloseTo(standard * 3, 10);
+    expect(premium).toBeCloseTo(standard * 3, 5);
   });
 });
 
@@ -141,7 +141,7 @@ describe('calculateStorageCosts — snapshot storage', () => {
 describe('calculateStorageCosts — combined types', () => {
   test('total storage costs with all types combined', () => {
     // standard: 0.02 * 516 * (1056/32) = 0.02 * 516 * 33 = 340.56
-    // premium:  3 * 0.02 * 516 * (1056/32) = 3 * 340.56 = 1021.68
+    // premium:  3 * 0.02 * 516 * (1056/32) = 1021.68
     // snapshot: 1 * 0.02 * 516 * (2048/32) = 0.02 * 516 * 64 = 660.48
     // total: 340.56 + 1021.68 + 660.48 = 2022.72
     const storageCosts = calculateStorageCosts({

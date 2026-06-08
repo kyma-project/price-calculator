@@ -10,6 +10,7 @@ import { timeConsumptionState } from './additionalConfig/timeConsumptionState';
 import { applyConversionRateState } from './additionalConfig/applyConversionRateState';
 import { redisState } from './additionalConfig/redisState';
 import calculateNodeConfigCosts from '../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
+import calculateAdditionalNodeVolumeCosts from '../calculatorFunctions/nodeConfigCosts/calculateAdditionalNodeVolumeCosts';
 import calculateStorageCosts from '../calculatorFunctions/storageCosts/calculateStorageCosts';
 import calculateAdditionalCosts from '../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts, {
@@ -23,15 +24,18 @@ export const nodeConfigCostsAtom = atom<number>((get) => {
   const timeConsumption = get(timeConsumptionState);
 
   return combinedMachineSetup.reduce((total, machine) => {
-    return (
-      total +
-      calculateNodeConfigCosts({
-        timeConsumption,
-        computeUnits: machine.VMSize.computeUnits,
-        minAutoscaler: machine.minAutoscaler,
-        machineTypeFactor: machine.machineType.multiple,
-      })
-    );
+    const computeCost = calculateNodeConfigCosts({
+      timeConsumption,
+      computeUnits: machine.VMSize.computeUnits,
+      minAutoscaler: machine.minAutoscaler,
+      machineTypeFactor: machine.machineType.multiple,
+    });
+    const volumeCost = calculateAdditionalNodeVolumeCosts({
+      additionalVolumeGb: machine.additionalVolumeGb,
+      minAutoscaler: machine.minAutoscaler,
+      timeConsumption,
+    });
+    return total + computeCost + volumeCost;
   }, 0);
 });
 nodeConfigCostsAtom.debugLabel = 'nodeConfigCostsAtom';

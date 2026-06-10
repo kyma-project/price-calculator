@@ -1,6 +1,6 @@
 {
   "CurrencyCode": "€",
-  "ConversionRateCUCC": 1.00,
+  "ConversionRateCUCC": 1.0,
   "nodeConfig": {
     "AutoScalerMin": {
       "Default": 3,
@@ -173,7 +173,8 @@
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "PricePerUnit": 0.02
+    "PricePerUnit": 0.02,
+    "FreeStorageBlocks": 1
   },
   "PremiumStorage": {
     "Default": 0,

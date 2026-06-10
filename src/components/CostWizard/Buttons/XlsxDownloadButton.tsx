@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { Button, Icon } from '@ui5/webcomponents-react';
 import { GBQuantityState } from '../../../state/storage/GBQuantityState';
-import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
+import { nfsGBQuantityState } from '../../../state/storage/nfsGBQuantityState';
 import { snapshotGBQuantityState } from '../../../state/storage/snapshotGBQuantityState';
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
@@ -22,7 +22,7 @@ import {
 
 export default function XlsxDownloadButton() {
   const storageQuantity = useAtomValue(GBQuantityState);
-  const premiumStorageQuantity = useAtomValue(premiumGBQuantityState);
+  const nfsStorageQuantity = useAtomValue(nfsGBQuantityState);
   const snapshotStorageQuantity = useAtomValue(snapshotGBQuantityState);
   const baseMachineSetup = useAtomValue(baseMachineSetupState);
   const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
@@ -43,7 +43,7 @@ export default function XlsxDownloadButton() {
           nodeConfigCosts,
           storageCosts,
           storageQuantity,
-          premiumStorageQuantity,
+          nfsStorageQuantity,
           snapshotStorageQuantity,
           additionalCosts,
           conversionRate,

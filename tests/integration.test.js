@@ -43,8 +43,8 @@ context('Go through calculator', () => {
       cy.typeIntoSlider('gb-quantity-input', 160); //Value should be divided by 32
       cy.costShouldBe(Step.STORAGE_GB_INCREASE);
 
-      cy.typeIntoSlider('premium-gb-quantity-input', 160); //Value should be divided by 32
-      cy.costShouldBe(Step.STORAGE_PREMIUM_GB_INCREASE);
+      cy.typeIntoSlider('nfs-gb-quantity-input', 160); //Value should be divided by 32
+      cy.costShouldBe(Step.STORAGE_NFS_GB_INCREASE);
 
       cy.get('ui5-button').contains('Next Step').click();
     });

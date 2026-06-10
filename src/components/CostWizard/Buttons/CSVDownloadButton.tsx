@@ -8,7 +8,7 @@ import {
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
 import exportToFile, { ExportFormat } from '../Functions/exportToFile';
-import { premiumGBQuantityState } from '../../../state/storage/premiumGBQuantityState';
+import { nfsGBQuantityState } from '../../../state/storage/nfsGBQuantityState';
 import { snapshotGBQuantityState } from '../../../state/storage/snapshotGBQuantityState';
 import { redisState } from '../../../state/additionalConfig/redisState';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
@@ -24,7 +24,7 @@ export default function CSVDownloadButton() {
   const baseMachineSetup = useAtomValue(baseMachineSetupState);
   const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
   const storageQuantity = useAtomValue(GBQuantityState);
-  const premiumStorageQuantity = useAtomValue(premiumGBQuantityState);
+  const nfsStorageQuantity = useAtomValue(nfsGBQuantityState);
   const snapshotStorageQuantity = useAtomValue(snapshotGBQuantityState);
   const redisSize = useAtomValue(redisState);
   const conversionRate = useAtomValue(applyConversionRateState);
@@ -44,7 +44,7 @@ export default function CSVDownloadButton() {
           nodeConfigCosts,
           storageCosts,
           storageQuantity,
-          premiumStorageQuantity,
+          nfsStorageQuantity,
           snapshotStorageQuantity,
           additionalCosts,
           conversionRate,

@@ -11,7 +11,7 @@ interface Props {
   nodeConfigCosts: number;
   storageCosts: number;
   storageQuantity: number;
-  premiumStorageQuantity: number;
+  nfsStorageQuantity: number;
   snapshotStorageQuantity: number;
   redisSize: RedisSize;
   additionalCosts: number;
@@ -32,7 +32,7 @@ export default function exportToFile(props: Props) {
     nodeConfigCosts,
     storageCosts,
     storageQuantity,
-    premiumStorageQuantity,
+    nfsStorageQuantity,
     snapshotStorageQuantity,
     redisSize,
     additionalCosts,
@@ -76,7 +76,7 @@ export default function exportToFile(props: Props) {
   dataArray.push(
     ['Storage'],
     ['Standard Storage', `${storageQuantity} GB`],
-    ['NFS Storage', `${premiumStorageQuantity} GB`],
+    ['NFS Storage', `${nfsStorageQuantity} GB`],
     ['Snapshot Storage', `${snapshotStorageQuantity} GB`],
     [''],
   );

@@ -6,7 +6,7 @@ export enum Step {
   WORKER_SIZE_CHANGE,
   WORKER_AUTOSCALER_INCREASE,
   STORAGE_GB_INCREASE,
-  STORAGE_PREMIUM_GB_INCREASE,
+  STORAGE_NFS_GB_INCREASE,
   ADDITIONAL_REDIS_INCREASE,
 }
 
@@ -116,7 +116,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    Step.STORAGE_PREMIUM_GB_INCREASE,
+    Step.STORAGE_NFS_GB_INCREASE,
     {
       Nodes: 0,
       Additional: 0,

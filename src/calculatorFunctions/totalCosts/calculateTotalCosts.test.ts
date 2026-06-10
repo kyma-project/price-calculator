@@ -82,7 +82,9 @@ describe('calculateTotalCosts — additivity of cost components', () => {
       conversionRatio: 1.0,
     });
 
-    expect(totalCosts.CU).toBe(nodeConfigCosts + storageCosts + additionalCosts);
+    expect(totalCosts.CU).toBe(
+      nodeConfigCosts + storageCosts + additionalCosts,
+    );
   });
 
   test('nodeConfig cost contribution is isolated correctly', () => {
@@ -113,7 +115,7 @@ describe('calculateTotalCosts — additivity of cost components', () => {
 });
 
 describe('calculateTotalCosts — General Purpose full scenario', () => {
-  test('total costs with General Purpose 16 CPU, standard+premium+snapshot storage, Standard1 Redis', () => {
+  test('total costs with General Purpose 16 CPU, standard+nfs+snapshot storage, Standard1 Redis', () => {
     // nodeConfig: General Purpose, 16 CPU/64GB (CU=16), minAutoscaler=3, time=450, factor=1
     // 3 * 16 * 0.12 * 1 * 450 = 2592
     const nodeConfigCosts = calculateNodeConfigCosts({
@@ -123,14 +125,14 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       machineTypeFactor: 1,
     });
 
-    // storage: standard=1024GB, premium=1024GB, snapshot=2048GB, time=450
+    // storage: standard=1024GB, nfs=1024GB, snapshot=2048GB, time=450
     // standard: 0.02 * 450 * 32 = 288
-    // premium:  3 * 0.02 * 450 * 32 = 864
+    // nfs:  3 * 0.02 * 450 * 32 = 864
     // snapshot: 1 * 0.02 * 450 * 64 = 576
     // total: 1728
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1024,
-      premiumGBQuantity: 1024,
+      nfsGBQuantity: 1024,
       snapshotGBQuantity: 2048,
       timeConsumption: 450,
     });
@@ -150,7 +152,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
 });
 
 describe('calculateTotalCosts — Memory Intensive full scenario', () => {
-  test('total costs with Memory Intensive 4 CPU, standard+premium storage, Standard1 Redis', () => {
+  test('total costs with Memory Intensive 4 CPU, standard+nfs storage, Standard1 Redis', () => {
     // nodeConfig: Memory Intensive, 4 CPU/32GB (CU=4), minAutoscaler=3, time=720, factor=1.5
     // 3 * 4 * 0.12 * 1.5 * 720 = 1555.2
     const nodeConfigCosts = calculateNodeConfigCosts({
@@ -160,13 +162,13 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=64GB (2 blocks), premium=32GB (1 block), snapshot=0, time=720
+    // storage: standard=64GB (2 blocks), nfs=32GB (1 block), snapshot=0, time=720
     // standard: 0.02 * 720 * 2 = 28.8
-    // premium:  3 * 0.02 * 720 * 1 = 43.2
+    // nfs:  3 * 0.02 * 720 * 1 = 43.2
     // total: 72
     const storageCosts = calculateStorageCosts({
       GBQuantity: 64,
-      premiumGBQuantity: 32,
+      nfsGBQuantity: 32,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -186,7 +188,12 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   });
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
-    const commonStorage = { GBQuantity: 64, premiumGBQuantity: 0, snapshotGBQuantity: 0, timeConsumption: 720 };
+    const commonStorage = {
+      GBQuantity: 64,
+      nfsGBQuantity: 0,
+      snapshotGBQuantity: 0,
+      timeConsumption: 720,
+    };
     const storageCosts = calculateStorageCosts(commonStorage);
     const additionalCosts = calculateAdditionalCosts({ redis: 0 });
 
@@ -203,8 +210,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    const gpTotal = calculateTotalCosts({ nodeConfigCosts: gpNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
-    const miTotal = calculateTotalCosts({ nodeConfigCosts: miNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
+    const gpTotal = calculateTotalCosts({
+      nodeConfigCosts: gpNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
+    const miTotal = calculateTotalCosts({
+      nodeConfigCosts: miNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
 
     expect(miTotal.CU).toBeGreaterThan(gpTotal.CU);
     expect(miTotal.CU).toBeCloseTo(gpTotal.CU * 1.5 - storageCosts * 0.5, 5);
@@ -220,14 +237,14 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=128GB, premium=64GB, snapshot=128GB, time=720
+    // storage: standard=128GB, nfs=64GB, snapshot=128GB, time=720
     // standard: 0.02 * 720 * 4 = 57.6
-    // premium:  3 * 0.02 * 720 * 2 = 86.4
+    // nfs:  3 * 0.02 * 720 * 2 = 86.4
     // snapshot: 1 * 0.02 * 720 * 4 = 57.6
     // total: 201.6
     const storageCosts = calculateStorageCosts({
       GBQuantity: 128,
-      premiumGBQuantity: 64,
+      nfsGBQuantity: 64,
       snapshotGBQuantity: 128,
       timeConsumption: 720,
     });

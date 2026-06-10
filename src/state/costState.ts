@@ -53,7 +53,11 @@ storageCostsAtom.debugLabel = 'storageCostsAtom';
 
 export const additionalCostsAtom = atom<number>((get) => {
   const redis = get(redisState);
-  return calculateAdditionalCosts({ redis: redis.value });
+  const timeConsumption = get(timeConsumptionState);
+  return calculateAdditionalCosts({
+    redisStorageGb: redis.storageGb,
+    timeConsumption,
+  });
 });
 additionalCostsAtom.debugLabel = 'additionalCostsAtom';
 

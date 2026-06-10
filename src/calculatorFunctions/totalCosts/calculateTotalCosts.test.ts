@@ -1,6 +1,5 @@
 import calculateNodeConfigCosts from '../nodeConfigCosts/calculateNodeConfigCosts';
 import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
-import calculateAdditionalCosts from '../additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts from './calculateTotalCosts';
 
 import { expect, test, describe } from 'vitest';
@@ -82,7 +81,9 @@ describe('calculateTotalCosts — additivity of cost components', () => {
       conversionRatio: 1.0,
     });
 
-    expect(totalCosts.CU).toBe(nodeConfigCosts + storageCosts + additionalCosts);
+    expect(totalCosts.CU).toBe(
+      nodeConfigCosts + storageCosts + additionalCosts,
+    );
   });
 
   test('nodeConfig cost contribution is isolated correctly', () => {
@@ -135,7 +136,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       timeConsumption: 450,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -171,7 +172,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -186,9 +187,14 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   });
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
-    const commonStorage = { GBQuantity: 64, premiumGBQuantity: 0, snapshotGBQuantity: 0, timeConsumption: 720 };
+    const commonStorage = {
+      GBQuantity: 64,
+      premiumGBQuantity: 0,
+      snapshotGBQuantity: 0,
+      timeConsumption: 720,
+    };
     const storageCosts = calculateStorageCosts(commonStorage);
-    const additionalCosts = calculateAdditionalCosts({ redis: 0 });
+    const additionalCosts = 0;
 
     const gpNodeCosts = calculateNodeConfigCosts({
       timeConsumption: 720,
@@ -203,8 +209,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    const gpTotal = calculateTotalCosts({ nodeConfigCosts: gpNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
-    const miTotal = calculateTotalCosts({ nodeConfigCosts: miNodeCosts, storageCosts, additionalCosts, conversionRatio: 1 });
+    const gpTotal = calculateTotalCosts({
+      nodeConfigCosts: gpNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
+    const miTotal = calculateTotalCosts({
+      nodeConfigCosts: miNodeCosts,
+      storageCosts,
+      additionalCosts,
+      conversionRatio: 1,
+    });
 
     expect(miTotal.CU).toBeGreaterThan(gpTotal.CU);
     expect(miTotal.CU).toBeCloseTo(gpTotal.CU * 1.5 - storageCosts * 0.5, 5);
@@ -232,7 +248,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 773 }); // Premium1
+    const additionalCosts = 773; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,

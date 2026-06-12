@@ -104,14 +104,15 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
+    // 160 GB = 5 blocks − 1 free standard block: 0.02 * 720 * 4 = 57.6
     Step.STORAGE_GB_INCREASE,
     {
       Nodes: 0,
       Additional: 0,
-      Storage: 72,
+      Storage: 57.6,
       TotalCost: {
-        CapacityUnits: 72,
-        Currency: 72,
+        CapacityUnits: 57.6,
+        Currency: 57.6,
       },
     },
   ],

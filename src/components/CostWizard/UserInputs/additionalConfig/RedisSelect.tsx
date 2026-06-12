@@ -14,7 +14,7 @@ export default function RedisSelect() {
   }) => {
     const selection = event.detail.selectedOption.dataset;
     setRedisSize({
-      value: +(selection.value ?? '0'),
+      storageGb: +(selection.storageGb ?? '0'),
       tier: selection.key ?? '',
     });
   };
@@ -41,7 +41,11 @@ export default function RedisSelect() {
       </FlexBox>
       <Select className="redis-select" onChange={onChange} id="redis-select">
         {redisConfigOptions.map((item) => (
-          <Option key={item.key} data-key={item.key} data-value={item.value}>
+          <Option
+            key={item.key}
+            data-key={item.key}
+            data-storage-gb={item.storageGb}
+          >
             {item.key}
           </Option>
         ))}

@@ -1,6 +1,5 @@
 import calculateNodeConfigCosts from '../nodeConfigCosts/calculateNodeConfigCosts';
 import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
-import calculateAdditionalCosts from '../additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts from './calculateTotalCosts';
 
 import { expect, test, describe } from 'vitest';
@@ -137,7 +136,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       timeConsumption: 450,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -174,7 +173,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -196,7 +195,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       timeConsumption: 720,
     };
     const storageCosts = calculateStorageCosts(commonStorage);
-    const additionalCosts = calculateAdditionalCosts({ redis: 0 });
+    const additionalCosts = 0;
 
     const gpNodeCosts = calculateNodeConfigCosts({
       timeConsumption: 720,
@@ -250,7 +249,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 773 }); // Premium1
+    const additionalCosts = 773; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,

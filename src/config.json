@@ -173,7 +173,8 @@
     "Min": 0,
     "Max": 3200,
     "Step": 32,
-    "PricePerUnit": 0.02
+    "PricePerUnit": 0.02,
+    "FreeStorageBlocks": 1
   },
   "PremiumStorage": {
     "Default": 0,

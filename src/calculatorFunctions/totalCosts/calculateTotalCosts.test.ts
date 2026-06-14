@@ -125,10 +125,10 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
     });
 
     // storage: standard=1024GB, premium=1024GB, snapshot=2048GB, time=450
-    // standard: 0.02 * 450 * 32 = 288
+    // standard: 0.02 * 450 * (32 - 1 free block) = 0.02 * 450 * 31 = 279
     // premium:  3 * 0.02 * 450 * 32 = 864
     // snapshot: 1 * 0.02 * 450 * 64 = 576
-    // total: 1728
+    // total: 1719
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1024,
       premiumGBQuantity: 1024,
@@ -145,8 +145,9 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       conversionRatio: 0.35,
     });
 
-    expect(totalCosts.CU).toBe(4394);
-    expect(totalCosts.CC.toFixed(2)).toBe('1537.90');
+    // 2592 + 1719 + 74 = 4385
+    expect(totalCosts.CU).toBe(4385);
+    expect(totalCosts.CC.toFixed(2)).toBe('1534.75');
   });
 });
 
@@ -162,9 +163,9 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
     });
 
     // storage: standard=64GB (2 blocks), premium=32GB (1 block), snapshot=0, time=720
-    // standard: 0.02 * 720 * 2 = 28.8
+    // standard: 0.02 * 720 * (2 - 1 free block) = 0.02 * 720 * 1 = 14.4
     // premium:  3 * 0.02 * 720 * 1 = 43.2
-    // total: 72
+    // total: 57.6
     const storageCosts = calculateStorageCosts({
       GBQuantity: 64,
       premiumGBQuantity: 32,
@@ -181,9 +182,9 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       conversionRatio: 1.0,
     });
 
-    // 1555.2 + 72 + 74 = 1701.2
-    expect(totalCosts.CU).toBeCloseTo(1701.2, 5);
-    expect(totalCosts.CC).toBeCloseTo(1701.2, 5);
+    // 1555.2 + 57.6 + 74 = 1686.8
+    expect(totalCosts.CU).toBeCloseTo(1686.8, 5);
+    expect(totalCosts.CC).toBeCloseTo(1686.8, 5);
   });
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
@@ -237,10 +238,10 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
     });
 
     // storage: standard=128GB, premium=64GB, snapshot=128GB, time=720
-    // standard: 0.02 * 720 * 4 = 57.6
+    // standard: 0.02 * 720 * (4 - 1 free block) = 0.02 * 720 * 3 = 43.2
     // premium:  3 * 0.02 * 720 * 2 = 86.4
     // snapshot: 1 * 0.02 * 720 * 4 = 57.6
-    // total: 201.6
+    // total: 187.2
     const storageCosts = calculateStorageCosts({
       GBQuantity: 128,
       premiumGBQuantity: 64,
@@ -257,8 +258,8 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       conversionRatio: 0.5,
     });
 
-    // CU: 6220.8 + 201.6 + 773 = 7195.4
-    expect(totalCosts.CU).toBeCloseTo(7195.4, 5);
-    expect(totalCosts.CC).toBeCloseTo(7195.4 * 0.5, 5);
+    // CU: 6220.8 + 187.2 + 773 = 7181
+    expect(totalCosts.CU).toBeCloseTo(7181, 5);
+    expect(totalCosts.CC).toBeCloseTo(7181 * 0.5, 5);
   });
 });

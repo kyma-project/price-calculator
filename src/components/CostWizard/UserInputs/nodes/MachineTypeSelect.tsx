@@ -32,7 +32,7 @@ export default function MachineTypeSelect({
   };
 
   return (
-    <>
+    <div>
       <Title className="wizard-subheader" level="H5" size="H5">
         Machine Type
       </Title>
@@ -52,6 +52,6 @@ export default function MachineTypeSelect({
           </Option>
         ))}
       </Select>
-    </>
+    </div>
   );
 }

@@ -27,7 +27,7 @@ export default function MinAutoscalerInputField({
   });
 
   return (
-    <>
+    <div>
       <HeaderWithInfo
         header="Autoscaler Min"
         info="minimum number of available Virtual Machines"
@@ -49,6 +49,6 @@ export default function MinAutoscalerInputField({
         step={step}
         showTooltip
       />
-    </>
+    </div>
   );
 }

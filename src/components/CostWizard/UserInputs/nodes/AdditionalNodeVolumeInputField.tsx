@@ -31,7 +31,7 @@ export default function AdditionalNodeVolumeInputField({
     <>
       <HeaderWithInfo
         header="Additional Volume (GB)"
-        info={`machine includes ${machineDefaultVolume} GB free; extra is billed in 32 GiB blocks`}
+        info={`machine includes ${machineDefaultVolume} GB free; extra is billed in 32 GB blocks`}
       />
       <SpinnerInput
         id="additional-volume-input"

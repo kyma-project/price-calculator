@@ -59,9 +59,8 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
     {
-      // Additional 64 GiB = 2 × 32-GiB blocks per node (input now steps in
-      // whole blocks). With autoscaler 10 from the prior step:
-      // 64 × 0.000625 × 10 × 720 = 288
+      // 64 GB = 2 blocks of 32 per node, autoscaler 10 from prior step:
+      // 64 * 0.000625 * 10 * 720 = 288
       Nodes: 288,
       Additional: 0,
       Storage: 0,
@@ -86,8 +85,8 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.WORKER_TYPE_CHANGE,
     {
-      // Pool flips from General Purpose 2 CPU (CU=3) to Compute Optimized
-      // 2 CPU (CU=2): 1 node × (2-3) × 0.12 × 720 = -86.4
+      // General Purpose 2 CPU (CU=3) to Compute Optimized 2 CPU (CU=2):
+      // 1 node * (2-3) * 0.12 * 720 = -86.4
       Nodes: -86.4,
       Additional: 0,
       Storage: 0,
@@ -100,7 +99,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.WORKER_SIZE_CHANGE,
     {
-      // CO 2 CPU (CU=2) → CO 8 CPU - 16GB (CU=8): 1 × (8-2) × 0.12 × 720 = 518.4
+      // CO 2 CPU (CU=2) to CO 8 CPU 16GB (CU=8): 1 * (8-2) * 0.12 * 720 = 518.4
       Nodes: 518.4,
       Additional: 0,
       Storage: 0,
@@ -123,7 +122,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    // 160 GB = 5 blocks − 1 free standard block: 0.02 * 720 * 4 = 57.6
+    // 160 GB = 5 blocks - 1 free standard block: 0.02 * 720 * 4 = 57.6
     Step.STORAGE_GB_INCREASE,
     {
       Nodes: 0,
@@ -138,7 +137,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.STORAGE_PREMIUM_GB_INCREASE,
     {
-      // "NFS Storage" field, multiplier 3: premium 160 GB = 5 blocks × 3 × 0.02 × 720 = 216
+      // premium 160 GB = 5 blocks * 3 * 0.02 * 720 = 216
       Nodes: 0,
       Additional: 0,
       Storage: 216,

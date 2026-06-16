@@ -38,20 +38,18 @@ test('calculates correct cost for additional volume', () => {
     timeConsumption: 720,
   });
 
-  // 50 GiB → rounded up to 64 GiB (2 × 32-GiB blocks)
-  // cost = 64 * 0.000625 * 3 * 720 = 86.4
+  // 50 GB rounds up to 64 GB (2 blocks of 32): 64 * 0.000625 * 3 * 720 = 86.4
   expect(cost).toBeCloseTo(86.4, 5);
 });
 
-test('rounds additional up to the next 32-GiB block (1 GiB → 32 GiB)', () => {
+test('rounds additional up to the next 32 GB block (1 GB to 32 GB)', () => {
   const cost = calculateAdditionalNodeVolumeCosts({
     additionalVolumeGb: 1,
     minAutoscaler: 3,
     timeConsumption: 720,
   });
 
-  // 1 GiB → rounded up to 32 GiB (1 full block)
-  // cost = 32 * 0.000625 * 3 * 720 = 43.2
+  // 1 GB rounds up to 32 GB (1 block): 32 * 0.000625 * 3 * 720 = 43.2
   expect(cost).toBeCloseTo(43.2, 5);
 });
 
@@ -62,7 +60,7 @@ test('does not over-round when additional equals a block boundary', () => {
     timeConsumption: 720,
   });
 
-  // 32 GiB → exactly 1 block, no rounding up
+  // 32 GB is exactly 1 block, no rounding up
   expect(cost).toBeCloseTo(43.2, 5);
 });
 
@@ -73,8 +71,7 @@ test('advances to the next block at 1 GiB over the boundary', () => {
     timeConsumption: 720,
   });
 
-  // 33 GiB → rounded up to 64 GiB (2 blocks)
-  // cost = 64 * 0.000625 * 3 * 720 = 86.4
+  // 33 GB rounds up to 64 GB (2 blocks): 64 * 0.000625 * 3 * 720 = 86.4
   expect(cost).toBeCloseTo(86.4, 5);
 });
 
@@ -91,7 +88,6 @@ test('scales linearly with minAutoscaler', () => {
     timeConsumption: 720,
   });
 
-  // Per-node rounding: each of N nodes is billed for ceil(extra/32) blocks,
-  // so doubling N doubles total cost.
+  // Rounding is per node, so doubling the node count doubles total cost.
   expect(doubledCost).toBe(baseCost * 2);
 });

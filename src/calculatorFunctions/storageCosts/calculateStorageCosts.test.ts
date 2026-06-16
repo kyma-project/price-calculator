@@ -5,7 +5,7 @@ import { expect, test, describe } from 'vitest';
 // Storage.PricePerUnit = 0.02
 // Storage.Step = 32
 // Storage.FreeStorageBlocks = 1 (one 32-GB block is free on standard storage)
-// PremiumStorage.multiplier = 3  (this field is "NFS Storage" in the UI; reporter NFS price_factor = 3.0)
+// PremiumStorage.multiplier = 3
 // PremiumStorage.Step = 32
 // SnapshotStorage.multiplier = 1
 // SnapshotStorage.Step = 32
@@ -114,7 +114,7 @@ describe('calculateStorageCosts — premium storage', () => {
     expect(premium).toBeCloseTo(43.2, 5);
   });
 
-  test('premium storage costs 3× standard for equal billable blocks (multiplier = 3)', () => {
+  test('premium storage costs 3x standard for equal billable blocks', () => {
     // standard gets 1 free block, so 96 GB → 2 billable blocks
     const standard = calculateStorageCosts({
       GBQuantity: 96,

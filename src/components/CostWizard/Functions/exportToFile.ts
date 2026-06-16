@@ -5,6 +5,7 @@ import { RedisSize } from '../../../state/additionalConfig/redisState';
 import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
 import calculateAdditionalNodeVolumeCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateAdditionalNodeVolumeCosts';
+import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import config from '../../../config.json';
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
   nodeConfigCosts: number;
   storageCosts: number;
   storageQuantity: number;
-  premiumStorageQuantity: number;
+  nfsStorageQuantity: number;
   snapshotStorageQuantity: number;
   redisSize: RedisSize;
   additionalCosts: number;
@@ -33,7 +34,7 @@ export default function exportToFile(props: Props) {
     nodeConfigCosts,
     storageCosts,
     storageQuantity,
-    premiumStorageQuantity,
+    nfsStorageQuantity,
     snapshotStorageQuantity,
     redisSize,
     additionalCosts,
@@ -84,7 +85,7 @@ export default function exportToFile(props: Props) {
   dataArray.push(
     ['Storage'],
     ['Standard Storage', `${storageQuantity} GB`],
-    ['NFS Storage', `${premiumStorageQuantity} GB`],
+    ['NFS Storage', `${nfsStorageQuantity} GB`],
     ['Snapshot Storage', `${snapshotStorageQuantity} GB`],
     [''],
   );
@@ -93,7 +94,16 @@ export default function exportToFile(props: Props) {
   dataArray.push(
     ['Additional Configuration'],
     ['Redis Tier', redisSize.tier],
-    ['Redis Cost', `${roundDecimals(redisSize.value, true)} CU`],
+    [
+      'Redis Cost',
+      `${roundDecimals(
+        calculateAdditionalCosts({
+          redisStorageGb: redisSize.storageGb,
+          timeConsumption,
+        }),
+        true,
+      )} CU`,
+    ],
     ['Conversion Rate', conversionRate],
     [''],
   );

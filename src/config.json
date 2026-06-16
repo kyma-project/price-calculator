@@ -183,7 +183,7 @@
     "PricePerUnit": 0.02,
     "FreeStorageBlocks": 1
   },
-  "PremiumStorage": {
+  "NFSStorage": {
     "Default": 0,
     "Min": 0,
     "Max": 3200,
@@ -199,21 +199,21 @@
   },
   "RedisCosts": {
     "Tiers": [
-      { "key": "None", "value": 0 },
-      { "key": "Standard1", "value": 74 },
-      { "key": "Standard2", "value": 148 },
-      { "key": "Standard3", "value": 387 },
-      { "key": "Standard4", "value": 778 },
-      { "key": "Standard5", "value": 1541 },
-      { "key": "Standard6", "value": 3084 },
-      { "key": "Standard7", "value": 6167 },
-      { "key": "Standard8", "value": 12331 },
-      { "key": "Premium1", "value": 773 },
-      { "key": "Premium2", "value": 1555 },
-      { "key": "Premium3", "value": 3082 },
-      { "key": "Premium4", "value": 6167 },
-      { "key": "Premium5", "value": 12335 },
-      { "key": "Premium6", "value": 24661 }
+      { "key": "None", "storageGb": 0 },
+      { "key": "Standard1", "storageGb": 182 },
+      { "key": "Standard2", "storageGb": 364 },
+      { "key": "Standard3", "storageGb": 953 },
+      { "key": "Standard4", "storageGb": 1915 },
+      { "key": "Standard5", "storageGb": 3793 },
+      { "key": "Standard6", "storageGb": 7591 },
+      { "key": "Standard7", "storageGb": 15180 },
+      { "key": "Standard8", "storageGb": 30353 },
+      { "key": "Premium1", "storageGb": 1903 },
+      { "key": "Premium2", "storageGb": 3828 },
+      { "key": "Premium3", "storageGb": 7586 },
+      { "key": "Premium4", "storageGb": 15180 },
+      { "key": "Premium5", "storageGb": 30363 },
+      { "key": "Premium6", "storageGb": 60704 }
     ]
   },
   "documentationUrls": {

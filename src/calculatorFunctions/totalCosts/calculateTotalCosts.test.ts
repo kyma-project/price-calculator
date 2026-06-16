@@ -1,6 +1,5 @@
 import calculateNodeConfigCosts from '../nodeConfigCosts/calculateNodeConfigCosts';
 import calculateStorageCosts from '../storageCosts/calculateStorageCosts';
-import calculateAdditionalCosts from '../additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts from './calculateTotalCosts';
 
 import { expect, test, describe } from 'vitest';
@@ -115,7 +114,7 @@ describe('calculateTotalCosts — additivity of cost components', () => {
 });
 
 describe('calculateTotalCosts — General Purpose full scenario', () => {
-  test('total costs with General Purpose 16 CPU, standard+premium+snapshot storage, Standard1 Redis', () => {
+  test('total costs with General Purpose 16 CPU, standard+nfs+snapshot storage, Standard1 Redis', () => {
     // nodeConfig: General Purpose, 16 CPU/64GB (CU=16), minAutoscaler=3, time=450, factor=1
     // 3 * 16 * 0.12 * 1 * 450 = 2592
     const nodeConfigCosts = calculateNodeConfigCosts({
@@ -125,19 +124,19 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       machineTypeFactor: 1,
     });
 
-    // storage: standard=1024GB, premium=1024GB, snapshot=2048GB, time=450
+    // storage: standard=1024GB, nfs=1024GB, snapshot=2048GB, time=450
     // standard: 0.02 * 450 * (32 - 1 free block) = 0.02 * 450 * 31 = 279
-    // premium:  3 * 0.02 * 450 * 32 = 864
+    // nfs:  3 * 0.02 * 450 * 32 = 864
     // snapshot: 1 * 0.02 * 450 * 64 = 576
     // total: 1719
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1024,
-      premiumGBQuantity: 1024,
+      nfsGBQuantity: 1024,
       snapshotGBQuantity: 2048,
       timeConsumption: 450,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -153,7 +152,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
 });
 
 describe('calculateTotalCosts — Memory Intensive full scenario', () => {
-  test('total costs with Memory Intensive 4 CPU, standard+premium storage, Standard1 Redis', () => {
+  test('total costs with Memory Intensive 4 CPU, standard+nfs storage, Standard1 Redis', () => {
     // nodeConfig: Memory Intensive, 4 CPU/32GB (CU=4), minAutoscaler=3, time=720, factor=1.5
     // 3 * 4 * 0.12 * 1.5 * 720 = 1555.2
     const nodeConfigCosts = calculateNodeConfigCosts({
@@ -163,18 +162,18 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=64GB (2 blocks), premium=32GB (1 block), snapshot=0, time=720
+    // storage: standard=64GB (2 blocks), nfs=32GB (1 block), snapshot=0, time=720
     // standard: 0.02 * 720 * (2 - 1 free block) = 0.02 * 720 * 1 = 14.4
-    // premium:  3 * 0.02 * 720 * 1 = 43.2
+    // nfs:  3 * 0.02 * 720 * 1 = 43.2
     // total: 57.6
     const storageCosts = calculateStorageCosts({
       GBQuantity: 64,
-      premiumGBQuantity: 32,
+      nfsGBQuantity: 32,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 74 });
+    const additionalCosts = 74; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,
@@ -191,12 +190,12 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
     const commonStorage = {
       GBQuantity: 64,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     };
     const storageCosts = calculateStorageCosts(commonStorage);
-    const additionalCosts = calculateAdditionalCosts({ redis: 0 });
+    const additionalCosts = 0;
 
     const gpNodeCosts = calculateNodeConfigCosts({
       timeConsumption: 720,
@@ -238,19 +237,19 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=128GB, premium=64GB, snapshot=128GB, time=720
+    // storage: standard=128GB, nfs=64GB, snapshot=128GB, time=720
     // standard: 0.02 * 720 * (4 - 1 free block) = 0.02 * 720 * 3 = 43.2
-    // premium:  3 * 0.02 * 720 * 2 = 86.4
+    // nfs:  3 * 0.02 * 720 * 2 = 86.4
     // snapshot: 1 * 0.02 * 720 * 4 = 57.6
     // total: 187.2
     const storageCosts = calculateStorageCosts({
       GBQuantity: 128,
-      premiumGBQuantity: 64,
+      nfsGBQuantity: 64,
       snapshotGBQuantity: 128,
       timeConsumption: 720,
     });
 
-    const additionalCosts = calculateAdditionalCosts({ redis: 773 }); // Premium1
+    const additionalCosts = 773; // representative redis (additional) cost
 
     const totalCosts = calculateTotalCosts({
       nodeConfigCosts,

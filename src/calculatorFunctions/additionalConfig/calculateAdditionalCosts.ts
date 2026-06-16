@@ -1,11 +1,16 @@
+import config from '../../config.json';
+
 interface Props {
-  redis: number;
+  redisStorageGb: number;
+  timeConsumption: number;
 }
 
-// Redis costs are flat monthly CU values per tier (not hourly rates),
-// so they are not scaled by timeConsumption unlike node and storage costs.
+// Redis is billed like storage: GB are converted to 32-GiB blocks, then priced
+// at the storage block rate and scaled by time consumption.
 export default function calculateAdditionalCosts(props: Props): number {
-  const { redis } = props;
+  const { redisStorageGb, timeConsumption } = props;
 
-  return redis;
+  const redisStorageBlocks = redisStorageGb / config.Storage.Step;
+
+  return redisStorageBlocks * config.Storage.PricePerUnit * timeConsumption;
 }

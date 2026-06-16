@@ -4,7 +4,7 @@ import {
   baseMachineSetupState,
 } from './nodes/machineSetupState';
 import { GBQuantityState } from './storage/GBQuantityState';
-import { premiumGBQuantityState } from './storage/premiumGBQuantityState';
+import { nfsGBQuantityState } from './storage/nfsGBQuantityState';
 import { snapshotGBQuantityState } from './storage/snapshotGBQuantityState';
 import { timeConsumptionState } from './additionalConfig/timeConsumptionState';
 import { applyConversionRateState } from './additionalConfig/applyConversionRateState';
@@ -42,13 +42,13 @@ nodeConfigCostsAtom.debugLabel = 'nodeConfigCostsAtom';
 
 export const storageCostsAtom = atom<number>((get) => {
   const GBQuantity = get(GBQuantityState);
-  const premiumGBQuantity = get(premiumGBQuantityState);
+  const nfsGBQuantity = get(nfsGBQuantityState);
   const snapshotGBQuantity = get(snapshotGBQuantityState);
   const timeConsumption = get(timeConsumptionState);
 
   return calculateStorageCosts({
     GBQuantity,
-    premiumGBQuantity,
+    nfsGBQuantity,
     snapshotGBQuantity,
     timeConsumption,
   });
@@ -57,7 +57,11 @@ storageCostsAtom.debugLabel = 'storageCostsAtom';
 
 export const additionalCostsAtom = atom<number>((get) => {
   const redis = get(redisState);
-  return calculateAdditionalCosts({ redis: redis.value });
+  const timeConsumption = get(timeConsumptionState);
+  return calculateAdditionalCosts({
+    redisStorageGb: redis.storageGb,
+    timeConsumption,
+  });
 });
 additionalCostsAtom.debugLabel = 'additionalCostsAtom';
 

@@ -176,7 +176,7 @@
     "PricePerUnit": 0.02,
     "FreeStorageBlocks": 1
   },
-  "PremiumStorage": {
+  "NFSStorage": {
     "Default": 0,
     "Min": 0,
     "Max": 3200,

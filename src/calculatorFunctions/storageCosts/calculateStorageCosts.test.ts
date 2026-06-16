@@ -5,8 +5,8 @@ import { expect, test, describe } from 'vitest';
 // Storage.PricePerUnit = 0.02
 // Storage.Step = 32
 // Storage.FreeStorageBlocks = 1 (one 32-GB block is free on standard storage)
-// PremiumStorage.multiplier = 3
-// PremiumStorage.Step = 32
+// NFSStorage.multiplier = 3
+// NFSStorage.Step = 32
 // SnapshotStorage.multiplier = 1
 // SnapshotStorage.Step = 32
 
@@ -14,7 +14,7 @@ describe('calculateStorageCosts — zero / boundary cases', () => {
   test('returns zero when all quantities are zero', () => {
     const storageCosts = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -25,7 +25,7 @@ describe('calculateStorageCosts — zero / boundary cases', () => {
   test('returns zero when timeConsumption is zero', () => {
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1056,
-      premiumGBQuantity: 1056,
+      nfsGBQuantity: 1056,
       snapshotGBQuantity: 2048,
       timeConsumption: 0,
     });
@@ -39,7 +39,7 @@ describe('calculateStorageCosts — standard storage', () => {
     // (32/32 - 1) free block = 0 billable blocks
     const storageCosts = calculateStorageCosts({
       GBQuantity: 32,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -51,7 +51,7 @@ describe('calculateStorageCosts — standard storage', () => {
     // 0.02 * 720 * (64/32 - 1) = 0.02 * 720 * 1 = 14.4
     const storageCosts = calculateStorageCosts({
       GBQuantity: 64,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -63,7 +63,7 @@ describe('calculateStorageCosts — standard storage', () => {
     // 0.02 * 720 * (96/32 - 1) = 0.02 * 720 * 2 = 28.8
     const storageCosts = calculateStorageCosts({
       GBQuantity: 96,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -74,13 +74,13 @@ describe('calculateStorageCosts — standard storage', () => {
   test('standard storage scales linearly with timeConsumption', () => {
     const half = calculateStorageCosts({
       GBQuantity: 96,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 360,
     });
     const full = calculateStorageCosts({
       GBQuantity: 96,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -89,12 +89,12 @@ describe('calculateStorageCosts — standard storage', () => {
   });
 });
 
-describe('calculateStorageCosts — premium storage', () => {
-  test('calculates premium storage only — 2 blocks (64 GB)', () => {
+describe('calculateStorageCosts — nfs storage', () => {
+  test('calculates nfs storage only — 2 blocks (64 GB)', () => {
     // 3 * 0.02 * 720 * (64 / 32) = 86.4
     const storageCosts = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 64,
+      nfsGBQuantity: 64,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
@@ -102,35 +102,35 @@ describe('calculateStorageCosts — premium storage', () => {
     expect(storageCosts).toBeCloseTo(86.4, 5);
   });
 
-  test('premium storage is not discounted by the free standard block', () => {
-    // premium bills all blocks: 3 * 0.02 * 720 * (32/32) = 43.2
-    const premium = calculateStorageCosts({
+  test('nfs storage is not discounted by the free standard block', () => {
+    // nfs bills all blocks: 3 * 0.02 * 720 * (32/32) = 43.2
+    const nfs = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 32,
+      nfsGBQuantity: 32,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
 
-    expect(premium).toBeCloseTo(43.2, 5);
+    expect(nfs).toBeCloseTo(43.2, 5);
   });
 
-  test('premium storage costs exactly 3x standard for equal billable blocks', () => {
+  test('nfs storage costs exactly 3x standard for equal billable blocks', () => {
     // standard gets 1 free block, so 96 GB → 2 billable blocks
     const standard = calculateStorageCosts({
       GBQuantity: 96,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
-    // premium has no free block, so 64 GB → 2 billable blocks
-    const premium = calculateStorageCosts({
+    // nfs has no free block, so 64 GB → 2 billable blocks
+    const nfs = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 64,
+      nfsGBQuantity: 64,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
 
-    expect(premium).toBeCloseTo(standard * 3, 10);
+    expect(nfs).toBeCloseTo(standard * 3, 10);
   });
 });
 
@@ -139,7 +139,7 @@ describe('calculateStorageCosts — snapshot storage', () => {
     // 1 * 0.02 * 720 * (64 / 32) = 28.8
     const storageCosts = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 64,
       timeConsumption: 720,
     });
@@ -151,7 +151,7 @@ describe('calculateStorageCosts — snapshot storage', () => {
     // snapshot bills all blocks: 1 * 0.02 * 720 * (32/32) = 14.4
     const snapshot = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 32,
       timeConsumption: 720,
     });
@@ -163,14 +163,14 @@ describe('calculateStorageCosts — snapshot storage', () => {
     // standard gets 1 free block, so 96 GB → 2 billable blocks
     const standard = calculateStorageCosts({
       GBQuantity: 96,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
       timeConsumption: 720,
     });
     // snapshot has no free block, so 64 GB → 2 billable blocks
     const snapshot = calculateStorageCosts({
       GBQuantity: 0,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 64,
       timeConsumption: 720,
     });
@@ -182,12 +182,12 @@ describe('calculateStorageCosts — snapshot storage', () => {
 describe('calculateStorageCosts — combined types', () => {
   test('total storage costs with all types combined', () => {
     // standard: 0.02 * 516 * (1056/32 - 1) = 0.02 * 516 * 32 = 330.24
-    // premium:  3 * 0.02 * 516 * (1056/32) = 3 * 340.56 = 1021.68
+    // nfs:  3 * 0.02 * 516 * (1056/32) = 3 * 340.56 = 1021.68
     // snapshot: 1 * 0.02 * 516 * (2048/32) = 0.02 * 516 * 64 = 660.48
     // total: 330.24 + 1021.68 + 660.48 = 2012.4
     const storageCosts = calculateStorageCosts({
       GBQuantity: 1056,
-      premiumGBQuantity: 1056,
+      nfsGBQuantity: 1056,
       snapshotGBQuantity: 2048,
       timeConsumption: 516,
     });
@@ -198,7 +198,7 @@ describe('calculateStorageCosts — combined types', () => {
   test('combined costs equal sum of individual components', () => {
     const props = {
       GBQuantity: 96,
-      premiumGBQuantity: 64,
+      nfsGBQuantity: 64,
       snapshotGBQuantity: 128,
       timeConsumption: 720,
     };
@@ -206,10 +206,10 @@ describe('calculateStorageCosts — combined types', () => {
     const combined = calculateStorageCosts(props);
     const standardOnly = calculateStorageCosts({
       ...props,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
       snapshotGBQuantity: 0,
     });
-    const premiumOnly = calculateStorageCosts({
+    const nfsOnly = calculateStorageCosts({
       ...props,
       GBQuantity: 0,
       snapshotGBQuantity: 0,
@@ -217,9 +217,9 @@ describe('calculateStorageCosts — combined types', () => {
     const snapshotOnly = calculateStorageCosts({
       ...props,
       GBQuantity: 0,
-      premiumGBQuantity: 0,
+      nfsGBQuantity: 0,
     });
 
-    expect(combined).toBeCloseTo(standardOnly + premiumOnly + snapshotOnly, 10);
+    expect(combined).toBeCloseTo(standardOnly + nfsOnly + snapshotOnly, 10);
   });
 });

@@ -4,6 +4,7 @@ import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
 import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
+import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import config from '../../../config.json';
 
 interface Props {
@@ -85,7 +86,16 @@ export default function exportToFile(props: Props) {
   dataArray.push(
     ['Additional Configuration'],
     ['Redis Tier', redisSize.tier],
-    ['Redis Cost', `${roundDecimals(redisSize.value, true)} CU`],
+    [
+      'Redis Cost',
+      `${roundDecimals(
+        calculateAdditionalCosts({
+          redisStorageGb: redisSize.storageGb,
+          timeConsumption,
+        }),
+        true,
+      )} CU`,
+    ],
     ['Conversion Rate', conversionRate],
     [''],
   );

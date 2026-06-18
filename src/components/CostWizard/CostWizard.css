@@ -1,5 +1,5 @@
 #CostWizard {
-  height: 600px;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -22,10 +22,6 @@
 }
 
 @media (max-width: 960px) {
-  #CostWizard {
-    height: 685px;
-  }
-
   .StepContent {
     width: 100%;
   }

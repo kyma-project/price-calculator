@@ -20,7 +20,7 @@ export default function RedisSelect() {
   };
 
   return (
-    <>
+    <div>
       <FlexBox
         wrap="NoWrap"
         alignItems="Center"
@@ -50,6 +50,6 @@ export default function RedisSelect() {
           </Option>
         ))}
       </Select>
-    </>
+    </div>
   );
 }

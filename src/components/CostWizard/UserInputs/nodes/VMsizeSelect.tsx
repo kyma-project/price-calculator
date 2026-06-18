@@ -26,7 +26,7 @@ export default function VMsizeSelect({
   };
 
   return (
-    <>
+    <div>
       <Title className="wizard-subheader" level="H5" size="H5">
         Virtual Machine Size
       </Title>
@@ -49,6 +49,6 @@ export default function VMsizeSelect({
           </Option>
         ))}
       </Select>
-    </>
+    </div>
   );
 }

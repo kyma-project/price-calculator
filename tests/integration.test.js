@@ -14,6 +14,9 @@ context('Go through calculator', () => {
         cy.typeIntoSlider('autoscaler-input', 10);
         cy.costShouldBe(Step.BASE_AUTOSCALER_INCREASE);
 
+        cy.typeIntoSlider('additional-volume-input', 64);
+        cy.costShouldBe(Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE);
+
         cy.get('ui5-button').contains('Next').click();
       },
     );

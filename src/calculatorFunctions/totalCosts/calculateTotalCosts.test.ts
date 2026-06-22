@@ -145,7 +145,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       conversionRatio: 0.35,
     });
 
-    // 2592 + 1719 + 74 = 4385
+    // CU: 2592 + 1719 + 74 = 4385;  CC: 4385 * 0.35 = 1534.75
     expect(totalCosts.CU).toBe(4385);
     expect(totalCosts.CC.toFixed(2)).toBe('1534.75');
   });

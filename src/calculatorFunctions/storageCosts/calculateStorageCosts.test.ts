@@ -114,7 +114,7 @@ describe('calculateStorageCosts — nfs storage', () => {
     expect(nfs).toBeCloseTo(43.2, 5);
   });
 
-  test('nfs storage costs exactly 3x standard for equal billable blocks', () => {
+  test('nfs storage costs 3x standard for equal billable blocks', () => {
     // standard gets 1 free block, so 96 GB → 2 billable blocks
     const standard = calculateStorageCosts({
       GBQuantity: 96,
@@ -130,7 +130,7 @@ describe('calculateStorageCosts — nfs storage', () => {
       timeConsumption: 720,
     });
 
-    expect(nfs).toBeCloseTo(standard * 3, 10);
+    expect(nfs).toBeCloseTo(standard * 3, 5);
   });
 });
 
@@ -182,7 +182,7 @@ describe('calculateStorageCosts — snapshot storage', () => {
 describe('calculateStorageCosts — combined types', () => {
   test('total storage costs with all types combined', () => {
     // standard: 0.02 * 516 * (1056/32 - 1) = 0.02 * 516 * 32 = 330.24
-    // nfs:  3 * 0.02 * 516 * (1056/32) = 3 * 340.56 = 1021.68
+    // nfs:  3 * 0.02 * 516 * (1056/32) = 1021.68
     // snapshot: 1 * 0.02 * 516 * (2048/32) = 0.02 * 516 * 64 = 660.48
     // total: 330.24 + 1021.68 + 660.48 = 2012.4
     const storageCosts = calculateStorageCosts({

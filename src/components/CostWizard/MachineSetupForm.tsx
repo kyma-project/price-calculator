@@ -3,12 +3,14 @@ import { Form } from '@ui5/webcomponents-react';
 import VMsizeSelect from './UserInputs/nodes/VMsizeSelect';
 import MachineTypeSelect from './UserInputs/nodes/MachineTypeSelect';
 import MinAutoscalerInputField from './UserInputs/nodes/MinAutoscalerInputField';
+import AdditionalNodeVolumeInputField from './UserInputs/nodes/AdditionalNodeVolumeInputField';
 import './CostWizard.css';
 import {
   MachineSetup,
   MachineType,
   VMSize,
 } from '../../state/nodes/machineSetupState';
+import calculateDefaultVolumeSize from '../../calculatorFunctions/defaultVolumeSize/calculateDefaultVolumeSize';
 
 interface Props {
   machine: MachineSetup;
@@ -43,6 +45,18 @@ export default function MachineSetupForm({
     [machine, updateMachine],
   );
 
+  const setAdditionalVolumeGb = useCallback(
+    (additionalVolumeGb: number) => {
+      updateMachine({ ...machine, additionalVolumeGb });
+    },
+    [machine, updateMachine],
+  );
+
+  const machineDefaultVolume = calculateDefaultVolumeSize(
+    machine.VMSize.vcpus,
+    machine.VMSize.memoryGib,
+  );
+
   return (
     <Form>
       <MachineTypeSelect
@@ -59,6 +73,11 @@ export default function MachineSetupForm({
         autoScalerMin={machine.minAutoscaler}
         setAutoScalerMin={setAutoScalerMin}
         workerNode={workerNode}
+      />
+      <AdditionalNodeVolumeInputField
+        additionalVolumeGb={machine.additionalVolumeGb}
+        setAdditionalVolumeGb={setAdditionalVolumeGb}
+        machineDefaultVolume={machineDefaultVolume}
       />
     </Form>
   );

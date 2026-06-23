@@ -58,7 +58,7 @@ export default function MachineSetupForm({
   );
 
   return (
-    <Form>
+    <Form layout="S1 M1 L1 XL1">
       <MachineTypeSelect
         machineType={machine.machineType}
         setMachineType={setMachineType}

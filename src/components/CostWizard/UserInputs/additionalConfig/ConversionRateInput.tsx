@@ -2,26 +2,10 @@ import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import { Slider, Title } from '@ui5/webcomponents-react';
 import { applyConversionRateState } from '../../../../state/additionalConfig/applyConversionRateState';
-import InfoField from '../../common/InfoField';
 import SpinnerInput from '../common/SpinnerInput';
 
 export default function ConversionRateInput() {
   const [value, setValue] = useAtom(applyConversionRateState);
-
-  const text = (
-    <>
-      <div>
-        With the '<strong>conversion rate</strong>' you can change the amount of{' '}
-        <strong>{config.CurrencyCode}</strong> you are paying for{' '}
-        <strong>1 Capacity Unit</strong>.
-      </div>
-      <div>This will help you to calculate eventual discounts.</div>
-      <div>
-        If you are unsure about how to change the default value (
-        {config.ConversionRateCUCC.toFixed(2)}), please ask your SAP Sales Specialist.
-      </div>{' '}
-    </>
-  );
 
   const min = 0.01;
   const max = 1.2;
@@ -34,7 +18,6 @@ export default function ConversionRateInput() {
 
   return (
     <div>
-      <InfoField info={text} />
       <Title className="wizard-subheader" level="H5" size="H5">
         Conversion rate from Capacity Units to {config.CurrencyCode}
       </Title>

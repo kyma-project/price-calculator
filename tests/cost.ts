@@ -59,11 +59,11 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
     {
-      // 64 GB = 2 blocks of 32 per node, autoscaler 10 from prior step:
-      // 64 * 0.000625 * 10 * 720 = 288
-      Nodes: 288,
+      // 64 GB = 2 blocks of 32 per node, autoscaler 10 from prior step,
+      // billed as storage: 64 * 0.000625 * 10 * 720 = 288
+      Nodes: 0,
       Additional: 0,
-      Storage: 0,
+      Storage: 288,
       TotalCost: {
         CapacityUnits: 288,
         Currency: 288,

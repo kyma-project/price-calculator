@@ -1,6 +1,11 @@
+/* block, not the default inline-block whose line box adds phantom space below the fixed bar. */
+ui5-shellbar {
+  display: block;
+}
+
 ui5-shellbar::part(root) {
   padding-left: 1rem;
-  min-height: 7.5vh;
+  min-height: 3.5rem;
   border-bottom: 2.5px solid rgb(41, 114, 234);
   background-color: white;
   position: fixed;

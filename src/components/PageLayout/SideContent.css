@@ -1,12 +1,14 @@
 #SideContent {
-  margin-top: 25px;
+  position: sticky;
+  /* Matches the rest position (offset + parent's 25px padding) so it clamps without a jump.
+     Keep margin-top off a sticky element: it shifts the stuck position and causes drift. */
+  top: calc(var(--page-top-offset) + 25px);
   margin-left: -60px;
   margin-right: 5px;
   background-color: rgb(229, 243, 254);
   border: 3.5px solid rgb(165, 219, 255);
   border-radius: 10px;
   padding: 10px;
-  height: calc(100% - 25px);
 }
 
 #SideHeader {
@@ -55,6 +57,7 @@
 
 @media (max-width: 960px) {
   #SideContent {
+    position: static;
     margin: 40px 0 0;
     padding-left: 5%;
     padding-right: 5%;

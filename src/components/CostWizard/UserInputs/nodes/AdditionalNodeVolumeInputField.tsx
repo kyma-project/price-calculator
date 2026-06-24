@@ -28,7 +28,7 @@ export default function AdditionalNodeVolumeInputField({
   });
 
   return (
-    <>
+    <div>
       <HeaderWithInfo
         header="Additional Volume (GB)"
         info={`machine includes ${machineDefaultVolume} GB free; extra is billed in 32 GB blocks`}
@@ -50,6 +50,6 @@ export default function AdditionalNodeVolumeInputField({
         step={step}
         showTooltip
       />
-    </>
+    </div>
   );
 }

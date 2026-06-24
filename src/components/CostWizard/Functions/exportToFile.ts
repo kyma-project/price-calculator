@@ -4,7 +4,6 @@ import { MachineSetup } from '../../../state/nodes/machineSetupState';
 import { RedisSize } from '../../../state/additionalConfig/redisState';
 import { TotalCosts } from '../../../calculatorFunctions/totalCosts/calculateTotalCosts';
 import calculateNodeConfigCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
-import calculateAdditionalNodeVolumeCosts from '../../../calculatorFunctions/nodeConfigCosts/calculateAdditionalNodeVolumeCosts';
 import calculateAdditionalCosts from '../../../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import config from '../../../config.json';
 
@@ -54,18 +53,13 @@ export default function exportToFile(props: Props) {
     const label =
       index === 0 ? 'Base Worker Node Pool' : `Worker Node Pool ${index}`;
 
-    const computeCost = calculateNodeConfigCosts({
+    // Volume is billed under Storage, so pool cost is compute only.
+    const poolCost = calculateNodeConfigCosts({
       timeConsumption,
       computeUnits: machine.VMSize.computeUnits,
       minAutoscaler: machine.minAutoscaler,
       machineTypeFactor: machine.machineType.multiple,
     });
-    const volumeCost = calculateAdditionalNodeVolumeCosts({
-      additionalVolumeGb: machine.additionalVolumeGb,
-      minAutoscaler: machine.minAutoscaler,
-      timeConsumption,
-    });
-    const poolCost = computeCost + volumeCost;
 
     dataArray.push(
       [label],

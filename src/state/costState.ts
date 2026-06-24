@@ -10,7 +10,7 @@ import { timeConsumptionState } from './additionalConfig/timeConsumptionState';
 import { applyConversionRateState } from './additionalConfig/applyConversionRateState';
 import { redisState } from './additionalConfig/redisState';
 import calculateNodeConfigCosts from '../calculatorFunctions/nodeConfigCosts/calculateNodeConfigCosts';
-import calculateAdditionalNodeVolumeCosts from '../calculatorFunctions/nodeConfigCosts/calculateAdditionalNodeVolumeCosts';
+import calculateAdditionalNodeVolumeCosts from '../calculatorFunctions/storageCosts/calculateAdditionalNodeVolumeCosts';
 import calculateStorageCosts from '../calculatorFunctions/storageCosts/calculateStorageCosts';
 import calculateAdditionalCosts from '../calculatorFunctions/additionalConfig/calculateAdditionalCosts';
 import calculateTotalCosts, {
@@ -30,12 +30,7 @@ export const nodeConfigCostsAtom = atom<number>((get) => {
       minAutoscaler: machine.minAutoscaler,
       machineTypeFactor: machine.machineType.multiple,
     });
-    const volumeCost = calculateAdditionalNodeVolumeCosts({
-      additionalVolumeGb: machine.additionalVolumeGb,
-      minAutoscaler: machine.minAutoscaler,
-      timeConsumption,
-    });
-    return total + computeCost + volumeCost;
+    return total + computeCost;
   }, 0);
 });
 nodeConfigCostsAtom.debugLabel = 'nodeConfigCostsAtom';
@@ -46,12 +41,29 @@ export const storageCostsAtom = atom<number>((get) => {
   const snapshotGBQuantity = get(snapshotGBQuantityState);
   const timeConsumption = get(timeConsumptionState);
 
-  return calculateStorageCosts({
-    GBQuantity,
-    nfsGBQuantity,
-    snapshotGBQuantity,
-    timeConsumption,
-  });
+  // Additional node volume is billed as storage, scaled per pool by autoscaler min.
+  const baseMachineSetup = get(baseMachineSetupState);
+  const additionalMachineSetup = get(additionalMachineSetupState);
+  const combinedMachineSetup = [baseMachineSetup, ...additionalMachineSetup];
+  const additionalVolumeCost = combinedMachineSetup.reduce(
+    (total, machine) =>
+      total +
+      calculateAdditionalNodeVolumeCosts({
+        additionalVolumeGb: machine.additionalVolumeGb,
+        minAutoscaler: machine.minAutoscaler,
+        timeConsumption,
+      }),
+    0,
+  );
+
+  return (
+    calculateStorageCosts({
+      GBQuantity,
+      nfsGBQuantity,
+      snapshotGBQuantity,
+      timeConsumption,
+    }) + additionalVolumeCost
+  );
 });
 storageCostsAtom.debugLabel = 'storageCostsAtom';
 

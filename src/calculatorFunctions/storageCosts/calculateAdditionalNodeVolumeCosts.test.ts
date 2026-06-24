@@ -75,6 +75,17 @@ test('advances to the next block at 1 GiB over the boundary', () => {
   expect(cost).toBeCloseTo(86.4, 5);
 });
 
+test('bills additional volume per node (input GB x autoscaler min)', () => {
+  const cost = calculateAdditionalNodeVolumeCosts({
+    additionalVolumeGb: 32,
+    minAutoscaler: 3,
+    timeConsumption: 720,
+  });
+
+  // 32 GB x 3 nodes = 96 GB billed: 32 * 0.000625 * 3 * 720 = 43.2
+  expect(cost).toBeCloseTo(32 * 0.000625 * 3 * 720, 5);
+});
+
 test('scales linearly with minAutoscaler', () => {
   const baseCost = calculateAdditionalNodeVolumeCosts({
     additionalVolumeGb: 50,

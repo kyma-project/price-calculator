@@ -166,7 +166,7 @@
     "AdditionalNodeVolume": {
       "Default": 0,
       "Min": 0,
-      "Max": 512,
+      "Max": 128,
       "Step": 32,
       "PricePerUnit": 0.000625
     }

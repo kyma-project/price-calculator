@@ -45,9 +45,9 @@ export default function MachineSetupForm({
     [machine, updateMachine],
   );
 
-  const setAdditionalVolumeGb = useCallback(
-    (additionalVolumeGb: number) => {
-      updateMachine({ ...machine, additionalVolumeGb });
+  const setAdditionalVolumeGib = useCallback(
+    (additionalVolumeGib: number) => {
+      updateMachine({ ...machine, additionalVolumeGib });
     },
     [machine, updateMachine],
   );
@@ -75,8 +75,8 @@ export default function MachineSetupForm({
         workerNode={workerNode}
       />
       <AdditionalNodeVolumeInputField
-        additionalVolumeGb={machine.additionalVolumeGb}
-        setAdditionalVolumeGb={setAdditionalVolumeGb}
+        additionalVolumeGib={machine.additionalVolumeGib}
+        setAdditionalVolumeGib={setAdditionalVolumeGib}
         machineDefaultVolume={machineDefaultVolume}
       />
     </Form>

@@ -3,9 +3,9 @@ import {
   additionalMachineSetupState,
   baseMachineSetupState,
 } from './nodes/machineSetupState';
-import { GBQuantityState } from './storage/GBQuantityState';
-import { nfsGBQuantityState } from './storage/nfsGBQuantityState';
-import { snapshotGBQuantityState } from './storage/snapshotGBQuantityState';
+import { GiBQuantityState } from './storage/GiBQuantityState';
+import { nfsGiBQuantityState } from './storage/nfsGiBQuantityState';
+import { snapshotGiBQuantityState } from './storage/snapshotGiBQuantityState';
 import { timeConsumptionState } from './additionalConfig/timeConsumptionState';
 import { applyConversionRateState } from './additionalConfig/applyConversionRateState';
 import { redisState } from './additionalConfig/redisState';
@@ -36,9 +36,9 @@ export const nodeConfigCostsAtom = atom<number>((get) => {
 nodeConfigCostsAtom.debugLabel = 'nodeConfigCostsAtom';
 
 export const storageCostsAtom = atom<number>((get) => {
-  const GBQuantity = get(GBQuantityState);
-  const nfsGBQuantity = get(nfsGBQuantityState);
-  const snapshotGBQuantity = get(snapshotGBQuantityState);
+  const GiBQuantity = get(GiBQuantityState);
+  const nfsGiBQuantity = get(nfsGiBQuantityState);
+  const snapshotGiBQuantity = get(snapshotGiBQuantityState);
   const timeConsumption = get(timeConsumptionState);
 
   // Additional node volume is billed as storage, scaled per pool by autoscaler min.
@@ -49,7 +49,7 @@ export const storageCostsAtom = atom<number>((get) => {
     (total, machine) =>
       total +
       calculateAdditionalNodeVolumeCosts({
-        additionalVolumeGb: machine.additionalVolumeGb,
+        additionalVolumeGib: machine.additionalVolumeGib,
         minAutoscaler: machine.minAutoscaler,
         timeConsumption,
       }),
@@ -58,9 +58,9 @@ export const storageCostsAtom = atom<number>((get) => {
 
   return (
     calculateStorageCosts({
-      GBQuantity,
-      nfsGBQuantity,
-      snapshotGBQuantity,
+      GiBQuantity,
+      nfsGiBQuantity,
+      snapshotGiBQuantity,
       timeConsumption,
     }) + additionalVolumeCost
   );
@@ -71,7 +71,7 @@ export const additionalCostsAtom = atom<number>((get) => {
   const redis = get(redisState);
   const timeConsumption = get(timeConsumptionState);
   return calculateAdditionalCosts({
-    redisStorageGb: redis.storageGb,
+    redisStorageGib: redis.storageGib,
     timeConsumption,
   });
 });

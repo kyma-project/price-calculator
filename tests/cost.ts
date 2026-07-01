@@ -6,8 +6,8 @@ export enum Step {
   WORKER_TYPE_CHANGE,
   WORKER_SIZE_CHANGE,
   WORKER_AUTOSCALER_INCREASE,
-  STORAGE_GB_INCREASE,
-  STORAGE_NFS_GB_INCREASE,
+  STORAGE_GIB_INCREASE,
+  STORAGE_NFS_GIB_INCREASE,
   ADDITIONAL_REDIS_INCREASE,
 }
 
@@ -59,7 +59,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.BASE_ADDITIONAL_NODE_VOLUME_INCREASE,
     {
-      // 64 GB = 2 blocks of 32 per node, autoscaler 10 from prior step,
+      // 64 GiB = 2 blocks of 32 per node, autoscaler 10 from prior step,
       // billed as storage: 64 * 0.000625 * 10 * 720 = 288
       Nodes: 0,
       Additional: 0,
@@ -99,7 +99,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
   [
     Step.WORKER_SIZE_CHANGE,
     {
-      // CO 2 CPU (CU=2) to CO 8 CPU 16GB (CU=8): 1 * (8-2) * 0.12 * 720 = 518.4
+      // CO 2 CPU (CU=2) to CO 8 CPU 16GiB (CU=8): 1 * (8-2) * 0.12 * 720 = 518.4
       Nodes: 518.4,
       Additional: 0,
       Storage: 0,
@@ -122,8 +122,8 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    // 160 GB = 5 blocks - 1 free standard block: 0.02 * 720 * 4 = 57.6
-    Step.STORAGE_GB_INCREASE,
+    // 160 GiB = 5 blocks - 1 free standard block: 0.02 * 720 * 4 = 57.6
+    Step.STORAGE_GIB_INCREASE,
     {
       Nodes: 0,
       Additional: 0,
@@ -135,9 +135,9 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    Step.STORAGE_NFS_GB_INCREASE,
+    Step.STORAGE_NFS_GIB_INCREASE,
     {
-      // premium 160 GB = 5 blocks * 3 * 0.02 * 720 = 216
+      // premium 160 GiB = 5 blocks * 3 * 0.02 * 720 = 216
       Nodes: 0,
       Additional: 0,
       Storage: 216,
@@ -148,7 +148,7 @@ const stepsPrice: Map<Step, Price> = new Map<Step, Price>([
     },
   ],
   [
-    // Standard4 (1915 GB) at default 720h: (1915 / 32) * 0.02 * 720 = 861.75
+    // Standard4 (1915 GiB) at default 720h: (1915 / 32) * 0.02 * 720 = 861.75
     Step.ADDITIONAL_REDIS_INCREASE,
     {
       Nodes: 0,

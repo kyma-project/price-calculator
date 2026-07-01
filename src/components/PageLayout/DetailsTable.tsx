@@ -87,7 +87,7 @@ export default function DetailsTable() {
       </TableRow>
       <TableRow>
         <TableCell>
-          SAP BTP, Kyma runtime is provisioned with 32GB of storage dedicated to
+          SAP BTP, Kyma runtime is provisioned with 32GiB of storage dedicated to
           operational data, which is provided at no additional cost. However,
           certain SAP BTP, Kyma runtime's modules may require additional
           storage. In such cases, they will create extra volumes, and you will
@@ -96,8 +96,8 @@ export default function DetailsTable() {
       </TableRow>
       <TableRow>
         <TableCell>
-          Storage block are provided in slots of 32GB. It means that 2 Storage
-          Disks are required for Persistent Volume Claim from 33GB to 64GB.
+          Storage block are provided in slots of 32GiB. It means that 2 Storage
+          Disks are required for Persistent Volume Claim from 33GiB to 64GiB.
         </TableCell>
       </TableRow>
       <TableRow>

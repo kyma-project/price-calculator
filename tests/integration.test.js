@@ -31,7 +31,7 @@ context('Go through calculator', () => {
         cy.costShouldBe(Step.WORKER_TYPE_CHANGE);
 
         cy.get('#machine-setup-0').find('[id="vm-size-select"]').click();
-        cy.clickOnOption('16GB');
+        cy.clickOnOption('16GiB');
         cy.costShouldBe(Step.WORKER_SIZE_CHANGE);
 
         cy.get('#machine-setup-0').within(() => {
@@ -43,11 +43,11 @@ context('Go through calculator', () => {
     );
 
     cy.get('ui5-wizard-step[title-text="Storage"]:visible').within(() => {
-      cy.typeIntoSlider('gb-quantity-input', 160); //Value should be divided by 32
-      cy.costShouldBe(Step.STORAGE_GB_INCREASE);
+      cy.typeIntoSlider('gib-quantity-input', 160); //Value should be divided by 32
+      cy.costShouldBe(Step.STORAGE_GIB_INCREASE);
 
-      cy.typeIntoSlider('nfs-gb-quantity-input', 160); //Value should be divided by 32
-      cy.costShouldBe(Step.STORAGE_NFS_GB_INCREASE);
+      cy.typeIntoSlider('nfs-gib-quantity-input', 160); //Value should be divided by 32
+      cy.costShouldBe(Step.STORAGE_NFS_GIB_INCREASE);
 
       cy.get('ui5-button').contains('Next Step').click();
     });

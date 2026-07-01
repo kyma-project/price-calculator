@@ -19,7 +19,7 @@ export interface MachineSetup {
   machineType: MachineType;
   minAutoscaler: number;
   VMSize: VMSize;
-  additionalVolumeGb: number;
+  additionalVolumeGib: number;
 }
 
 export const baseMachineSetupState = atom<MachineSetup>({
@@ -27,7 +27,7 @@ export const baseMachineSetupState = atom<MachineSetup>({
   machineType: config.nodeConfig.MachineTypes[0],
   VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
   minAutoscaler: config.nodeConfig.AutoScalerMin.Default,
-  additionalVolumeGb: 0,
+  additionalVolumeGib: 0,
 });
 baseMachineSetupState.debugLabel = 'baseMachineSetupState';
 

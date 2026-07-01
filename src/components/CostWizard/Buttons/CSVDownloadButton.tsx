@@ -1,6 +1,6 @@
 import { Button, Icon } from '@ui5/webcomponents-react';
 import { useAtomValue } from 'jotai';
-import { GBQuantityState } from '../../../state/storage/GBQuantityState';
+import { GiBQuantityState } from '../../../state/storage/GiBQuantityState';
 import {
   additionalMachineSetupState,
   baseMachineSetupState,
@@ -8,8 +8,8 @@ import {
 import './DownloadButton.css';
 import '@ui5/webcomponents-icons/dist/download.js';
 import exportToFile, { ExportFormat } from '../Functions/exportToFile';
-import { nfsGBQuantityState } from '../../../state/storage/nfsGBQuantityState';
-import { snapshotGBQuantityState } from '../../../state/storage/snapshotGBQuantityState';
+import { nfsGiBQuantityState } from '../../../state/storage/nfsGiBQuantityState';
+import { snapshotGiBQuantityState } from '../../../state/storage/snapshotGiBQuantityState';
 import { redisState } from '../../../state/additionalConfig/redisState';
 import { applyConversionRateState } from '../../../state/additionalConfig/applyConversionRateState';
 import { timeConsumptionState } from '../../../state/additionalConfig/timeConsumptionState';
@@ -23,9 +23,9 @@ import {
 export default function CSVDownloadButton() {
   const baseMachineSetup = useAtomValue(baseMachineSetupState);
   const additionalMachineSetup = useAtomValue(additionalMachineSetupState);
-  const storageQuantity = useAtomValue(GBQuantityState);
-  const nfsStorageQuantity = useAtomValue(nfsGBQuantityState);
-  const snapshotStorageQuantity = useAtomValue(snapshotGBQuantityState);
+  const storageQuantity = useAtomValue(GiBQuantityState);
+  const nfsStorageQuantity = useAtomValue(nfsGiBQuantityState);
+  const snapshotStorageQuantity = useAtomValue(snapshotGiBQuantityState);
   const redisSize = useAtomValue(redisState);
   const conversionRate = useAtomValue(applyConversionRateState);
   const timeConsumption = useAtomValue(timeConsumptionState);

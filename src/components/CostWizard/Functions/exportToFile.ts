@@ -66,7 +66,7 @@ export default function exportToFile(props: Props) {
       ['Machine Type', machine.machineType.value],
       ['VM Size', machine.VMSize.value],
       ['Autoscaler Min', machine.minAutoscaler],
-      ['Additional Volume', `${machine.additionalVolumeGb} GB`],
+      ['Additional Volume', `${machine.additionalVolumeGib} GiB`],
       ['Pool Cost', `${roundDecimals(poolCost, true)} CU`],
       [''],
     );
@@ -78,9 +78,9 @@ export default function exportToFile(props: Props) {
   // Storage
   dataArray.push(
     ['Storage'],
-    ['Standard Storage', `${storageQuantity} GB`],
-    ['NFS Storage', `${nfsStorageQuantity} GB`],
-    ['Snapshot Storage', `${snapshotStorageQuantity} GB`],
+    ['Standard Storage', `${storageQuantity} GiB`],
+    ['NFS Storage', `${nfsStorageQuantity} GiB`],
+    ['Snapshot Storage', `${snapshotStorageQuantity} GiB`],
     [''],
   );
 
@@ -92,7 +92,7 @@ export default function exportToFile(props: Props) {
       'Redis Cost',
       `${roundDecimals(
         calculateAdditionalCosts({
-          redisStorageGb: redisSize.storageGb,
+          redisStorageGib: redisSize.storageGib,
           timeConsumption,
         }),
         true,

@@ -45,7 +45,7 @@ export default function VMsizeSelect({
             data-vcpus={item.vcpus}
             data-memory_gib={item.memoryGib}
           >
-            {`${item.value} - ${calculateDefaultVolumeSize(item.vcpus, item.memoryGib)} GB volume`}
+            {`${item.value} - ${calculateDefaultVolumeSize(item.vcpus, item.memoryGib)} GiB volume`}
           </Option>
         ))}
       </Select>

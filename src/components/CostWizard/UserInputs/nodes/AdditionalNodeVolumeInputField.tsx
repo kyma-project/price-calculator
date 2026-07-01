@@ -5,14 +5,14 @@ import useStepInputValidation from '../../hooks/useStepInputValidation';
 import SpinnerInput from '../common/SpinnerInput';
 
 interface Props {
-  additionalVolumeGb: number;
-  setAdditionalVolumeGb: (value: number) => void;
+  additionalVolumeGib: number;
+  setAdditionalVolumeGib: (value: number) => void;
   machineDefaultVolume: number;
 }
 
 export default function AdditionalNodeVolumeInputField({
-  additionalVolumeGb,
-  setAdditionalVolumeGb,
+  additionalVolumeGib,
+  setAdditionalVolumeGib,
   machineDefaultVolume,
 }: Props) {
   const configuration = config.nodeConfig.AdditionalNodeVolume;
@@ -21,7 +21,7 @@ export default function AdditionalNodeVolumeInputField({
   const step = configuration.Step;
 
   const { handleChange } = useStepInputValidation({
-    setValue: setAdditionalVolumeGb,
+    setValue: setAdditionalVolumeGib,
     min,
     max,
     step,
@@ -30,20 +30,20 @@ export default function AdditionalNodeVolumeInputField({
   return (
     <div>
       <HeaderWithInfo
-        header="Additional Volume (GB)"
-        info={`machine includes ${machineDefaultVolume} GB free; extra is billed in 32 GB blocks`}
+        header="Additional Volume (GiB)"
+        info={`machine includes ${machineDefaultVolume} GiB free; extra is billed in 32 GiB blocks`}
       />
       <SpinnerInput
         id="additional-volume-input"
-        value={additionalVolumeGb}
-        setValue={setAdditionalVolumeGb}
+        value={additionalVolumeGib}
+        setValue={setAdditionalVolumeGib}
         min={min}
         max={max}
         step={step}
-        unit="GB"
+        unit="GiB"
       />
       <Slider
-        value={additionalVolumeGb}
+        value={additionalVolumeGib}
         onInput={handleChange}
         min={min}
         max={max}

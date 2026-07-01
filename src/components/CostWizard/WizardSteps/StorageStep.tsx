@@ -1,9 +1,9 @@
-import GBQuantityInputField from '../UserInputs/storage/GBQuantityInputField';
+import GiBQuantityInputField from '../UserInputs/storage/GiBQuantityInputField';
 import { Title, WizardStep } from '@ui5/webcomponents-react';
 import PreviousStepButton from '../Buttons/PreviousStepButton';
 import NextStepButton from '../Buttons/NextStepButton';
-import NFSGBQuantityInputField from '../UserInputs/storage/NFSGBQuantityInputField';
-import SnapshotGBQuantityInputField from '../UserInputs/storage/SnapshotGBQuantityInputField';
+import NFSGiBQuantityInputField from '../UserInputs/storage/NFSGiBQuantityInputField';
+import SnapshotGiBQuantityInputField from '../UserInputs/storage/SnapshotGiBQuantityInputField';
 
 export default function StorageStep() {
   return (
@@ -12,9 +12,9 @@ export default function StorageStep() {
         3. Add storage for the cluster
       </Title>
       <div className="StepContent">
-        <GBQuantityInputField />
-        <NFSGBQuantityInputField />
-        <SnapshotGBQuantityInputField />
+        <GiBQuantityInputField />
+        <NFSGiBQuantityInputField />
+        <SnapshotGiBQuantityInputField />
       </div>
 
       <div className="ButtonContainer">

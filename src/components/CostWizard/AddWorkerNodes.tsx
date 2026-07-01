@@ -60,7 +60,7 @@ export default function AddWorkerNodes() {
       machineType: config.nodeConfig.MachineTypes[0],
       VMSize: config.nodeConfig.MachineTypes[0].VMSizeOptions[0],
       minAutoscaler: config.nodeConfig.AutoScalerMin.DefaultWorkerNodes,
-      additionalVolumeGb: 0,
+      additionalVolumeGib: 0,
     };
     setMachineSetup((prevState) => prevState.concat(newMachine));
   };

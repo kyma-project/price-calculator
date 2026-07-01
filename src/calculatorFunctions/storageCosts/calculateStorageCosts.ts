@@ -1,14 +1,14 @@
 import config from '../../config.json';
 
 export interface StorageCostProps {
-  GBQuantity: number;
-  nfsGBQuantity: number;
-  snapshotGBQuantity: number;
+  GiBQuantity: number;
+  nfsGiBQuantity: number;
+  snapshotGiBQuantity: number;
   timeConsumption: number;
 }
 
 export default function calculateStorageCosts(props: StorageCostProps): number {
-  const { GBQuantity, nfsGBQuantity, snapshotGBQuantity, timeConsumption } =
+  const { GiBQuantity, nfsGiBQuantity, snapshotGiBQuantity, timeConsumption } =
     props;
   const PPU: number = config.Storage.PricePerUnit;
   const nfsPPU: number = config.NFSStorage.multiplier;
@@ -18,15 +18,15 @@ export default function calculateStorageCosts(props: StorageCostProps): number {
   // snapshot do not.
   const billableStandardBlocks: number = Math.max(
     0,
-    GBQuantity / config.Storage.Step - config.Storage.FreeStorageBlocks,
+    GiBQuantity / config.Storage.Step - config.Storage.FreeStorageBlocks,
   );
 
   return (
     PPU * timeConsumption * billableStandardBlocks +
-    nfsPPU * PPU * timeConsumption * (nfsGBQuantity / config.NFSStorage.Step) +
+    nfsPPU * PPU * timeConsumption * (nfsGiBQuantity / config.NFSStorage.Step) +
     snapshotPPU *
       PPU *
       timeConsumption *
-      (snapshotGBQuantity / config.SnapshotStorage.Step)
+      (snapshotGiBQuantity / config.SnapshotStorage.Step)
   );
 }

@@ -14,7 +14,7 @@ export default function RedisSelect() {
   }) => {
     const selection = event.detail.selectedOption.dataset;
     setRedisSize({
-      storageGb: +(selection.storageGb ?? '0'),
+      storageGib: +(selection.storageGib ?? '0'),
       tier: selection.key ?? '',
     });
   };
@@ -44,7 +44,7 @@ export default function RedisSelect() {
           <Option
             key={item.key}
             data-key={item.key}
-            data-storage-gb={item.storageGb}
+            data-storage-gib={item.storageGib}
           >
             {item.key}
           </Option>

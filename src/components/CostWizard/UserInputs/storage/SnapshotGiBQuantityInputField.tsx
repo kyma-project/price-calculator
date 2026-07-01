@@ -1,18 +1,22 @@
-import { useAtom } from 'jotai';
 import config from '../../../../config.json';
 import { Slider, Title } from '@ui5/webcomponents-react';
-import { GBQuantityState } from '../../../../state/storage/GBQuantityState';
+import { useAtom } from 'jotai';
+import { snapshotGiBQuantityState } from '../../../../state/storage/snapshotGiBQuantityState';
 import useStepInputValidation from '../../hooks/useStepInputValidation';
 import SpinnerInput from '../common/SpinnerInput';
 
-export default function GBQuantityInputField() {
-  const configuration = config.Storage;
+export default function SnapshotGiBQuantityInputField() {
+  const configuration = config.SnapshotStorage;
   const min = configuration.Min;
   const max = configuration.Max;
   const step = configuration.Step;
-  const [GBQuantity, setGBQuantity] = useAtom(GBQuantityState);
+
+  const [snapshotGiBQuantity, setSnapshotGiBQuantity] = useAtom(
+    snapshotGiBQuantityState,
+  );
+
   const { handleChange } = useStepInputValidation({
-    setValue: setGBQuantity,
+    setValue: setSnapshotGiBQuantity,
     min,
     max,
     step,
@@ -21,19 +25,19 @@ export default function GBQuantityInputField() {
   return (
     <div>
       <Title className="wizard-subheader" level="H5" size="H5">
-        Standard Storage: number of GB
+        Cluster's Snapshot used Storage: number of GiB
       </Title>
       <SpinnerInput
-        id="gb-quantity-input"
-        value={GBQuantity}
-        setValue={setGBQuantity}
+        id="snapshot-gib-quantity-input"
+        value={snapshotGiBQuantity}
+        setValue={setSnapshotGiBQuantity}
         min={min}
         max={max}
         step={step}
-        unit={`GB`}
+        unit={`GiB`}
       />
       <Slider
-        value={GBQuantity}
+        value={snapshotGiBQuantity}
         onInput={handleChange}
         min={min}
         max={max}

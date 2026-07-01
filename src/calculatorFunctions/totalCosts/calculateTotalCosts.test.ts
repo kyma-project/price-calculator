@@ -115,7 +115,7 @@ describe('calculateTotalCosts — additivity of cost components', () => {
 
 describe('calculateTotalCosts — General Purpose full scenario', () => {
   test('total costs with General Purpose 16 CPU, standard+nfs+snapshot storage, Standard1 Redis', () => {
-    // nodeConfig: General Purpose, 16 CPU/64GB (CU=16), minAutoscaler=3, time=450, factor=1
+    // nodeConfig: General Purpose, 16 CPU/64GiB (CU=16), minAutoscaler=3, time=450, factor=1
     // 3 * 16 * 0.12 * 1 * 450 = 2592
     const nodeConfigCosts = calculateNodeConfigCosts({
       timeConsumption: 450,
@@ -124,15 +124,15 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
       machineTypeFactor: 1,
     });
 
-    // storage: standard=1024GB, nfs=1024GB, snapshot=2048GB, time=450
+    // storage: standard=1024GiB, nfs=1024GiB, snapshot=2048GiB, time=450
     // standard: 0.02 * 450 * (32 - 1 free block) = 0.02 * 450 * 31 = 279
     // nfs:  3 * 0.02 * 450 * 32 = 864
     // snapshot: 1 * 0.02 * 450 * 64 = 576
     // total: 1719
     const storageCosts = calculateStorageCosts({
-      GBQuantity: 1024,
-      nfsGBQuantity: 1024,
-      snapshotGBQuantity: 2048,
+      GiBQuantity: 1024,
+      nfsGiBQuantity: 1024,
+      snapshotGiBQuantity: 2048,
       timeConsumption: 450,
     });
 
@@ -153,7 +153,7 @@ describe('calculateTotalCosts — General Purpose full scenario', () => {
 
 describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   test('total costs with Memory Intensive 4 CPU, standard+nfs storage, Standard1 Redis', () => {
-    // nodeConfig: Memory Intensive, 4 CPU/32GB (CU=4), minAutoscaler=3, time=720, factor=1.5
+    // nodeConfig: Memory Intensive, 4 CPU/32GiB (CU=4), minAutoscaler=3, time=720, factor=1.5
     // 3 * 4 * 0.12 * 1.5 * 720 = 1555.2
     const nodeConfigCosts = calculateNodeConfigCosts({
       timeConsumption: 720,
@@ -162,14 +162,14 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=64GB (2 blocks), nfs=32GB (1 block), snapshot=0, time=720
+    // storage: standard=64GiB (2 blocks), nfs=32GiB (1 block), snapshot=0, time=720
     // standard: 0.02 * 720 * (2 - 1 free block) = 0.02 * 720 * 1 = 14.4
     // nfs:  3 * 0.02 * 720 * 1 = 43.2
     // total: 57.6
     const storageCosts = calculateStorageCosts({
-      GBQuantity: 64,
-      nfsGBQuantity: 32,
-      snapshotGBQuantity: 0,
+      GiBQuantity: 64,
+      nfsGiBQuantity: 32,
+      snapshotGiBQuantity: 0,
       timeConsumption: 720,
     });
 
@@ -189,9 +189,9 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
 
   test('Memory Intensive total costs higher than General Purpose for same config', () => {
     const commonStorage = {
-      GBQuantity: 64,
-      nfsGBQuantity: 0,
-      snapshotGBQuantity: 0,
+      GiBQuantity: 64,
+      nfsGiBQuantity: 0,
+      snapshotGiBQuantity: 0,
       timeConsumption: 720,
     };
     const storageCosts = calculateStorageCosts(commonStorage);
@@ -228,7 +228,7 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
   });
 
   test('total costs with Memory Intensive 16 CPU, all storage types, Premium1 Redis', () => {
-    // nodeConfig: Memory Intensive, 16 CPU/128GB (CU=16), minAutoscaler=3, time=720, factor=1.5
+    // nodeConfig: Memory Intensive, 16 CPU/128GiB (CU=16), minAutoscaler=3, time=720, factor=1.5
     // 3 * 16 * 0.12 * 1.5 * 720 = 6220.8
     const nodeConfigCosts = calculateNodeConfigCosts({
       timeConsumption: 720,
@@ -237,15 +237,15 @@ describe('calculateTotalCosts — Memory Intensive full scenario', () => {
       machineTypeFactor: 1.5,
     });
 
-    // storage: standard=128GB, nfs=64GB, snapshot=128GB, time=720
+    // storage: standard=128GiB, nfs=64GiB, snapshot=128GiB, time=720
     // standard: 0.02 * 720 * (4 - 1 free block) = 0.02 * 720 * 3 = 43.2
     // nfs:  3 * 0.02 * 720 * 2 = 86.4
     // snapshot: 1 * 0.02 * 720 * 4 = 57.6
     // total: 187.2
     const storageCosts = calculateStorageCosts({
-      GBQuantity: 128,
-      nfsGBQuantity: 64,
-      snapshotGBQuantity: 128,
+      GiBQuantity: 128,
+      nfsGiBQuantity: 64,
+      snapshotGiBQuantity: 128,
       timeConsumption: 720,
     });
 

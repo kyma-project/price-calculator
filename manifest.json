@@ -1,10 +1,15 @@
 {
   "short_name": "Kyma Calculator",
-  "name": "Kyma Price Calcu",
+  "name": "Kyma Price Calculator",
   "icons": [
     {
-      "src": "favicon-16x16.png",
+      "src": "favicon-glyph-16.png",
       "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-glyph-32.png",
+      "sizes": "32x32",
       "type": "image/png"
     }
   ],

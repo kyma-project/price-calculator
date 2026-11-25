@@ -9,3 +9,18 @@ updates:
     directories: ['/', '/tests'] # Location of package manifests
     schedule:
       interval: 'weekly'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+    labels:
+      - 'area/dependency'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'

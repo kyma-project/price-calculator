@@ -1,0 +1,10 @@
+title = "price-calculator gitleaks config"
+
+[extend]
+useDefault = true # keep all default secret-detection rules
+
+[allowlist]
+description = "UI5 saptrc pseudo-translation i18n bundles are build output, not secrets"
+paths = [
+  '''assets/messagebundle_.*_saptrc-.*\.js$''',
+]

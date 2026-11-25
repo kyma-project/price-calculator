@@ -8,8 +8,19 @@ const formatCost = (num) =>
   });
 
 Cypress.Commands.add('typeIntoSlider', (testID, value) => {
-  cy.get(`input#${testID}`).clear();
-  cy.get(`input#${testID}`).type(`${value}{enter}`).blur();
+  // Wait until the UI5 input is enabled before interacting; it is briefly
+  // disabled while the component (re)renders, which otherwise makes
+  // clear()/type() flake with "targeted a disabled element".
+  cy.get(`input#${testID}`).should('not.be.disabled').clear();
+  cy.get(`input#${testID}`).type(`${value}{enter}`);
+  // Pressing {enter} commits the value and the UI5 input drops focus on its
+  // own, so an unconditional .blur() flakes with "no currently focused
+  // element". Only blur when something is actually focused.
+  cy.document().then((doc) => {
+    if (doc.activeElement && doc.activeElement !== doc.body) {
+      cy.wrap(doc.activeElement).blur();
+    }
+  });
 });
 
 Cypress.Commands.add('costShouldBe', (step) => {
